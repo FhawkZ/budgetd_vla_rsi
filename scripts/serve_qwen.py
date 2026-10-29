@@ -6,14 +6,14 @@ from http.server import BaseHTTPRequestHandler,HTTPServer
 from pathlib import Path
 import torch
 from transformers import AutoProcessor,Qwen3VLForConditionalGeneration
-p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=8018);p.add_argument('--model',required=True);p.add_argument('--output',required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=8018);p.add_argument('--model',required=True);p.add_argument('--output',required=True);p.add_argument('--max-calls',type=int,required=True);a=p.parse_args();assert a.max_calls>0
 O=Path(a.output);O.mkdir(parents=True,exist_ok=True);torch.set_num_threads(4)
 processor=AutoProcessor.from_pretrained(a.model,local_files_only=True)
 model=Qwen3VLForConditionalGeneration.from_pretrained(a.model,dtype=torch.bfloat16,device_map='cuda:0',attn_implementation='sdpa',local_files_only=True).eval()
 model_name='qwen3-vl-8b-instruct'
-identity={'model':model_name,'model_path':a.model,'backend':'transformers','torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(0),'cuda_visible_devices':os.environ.get('CUDA_VISIBLE_DEVICES'),'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'max_input_tokens':32768,'max_output_tokens':1024,'started_unix':time.time()}
+identity={'model':model_name,'model_path':a.model,'backend':'transformers','torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(0),'cuda_visible_devices':os.environ.get('CUDA_VISIBLE_DEVICES'),'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'max_input_tokens':32768,'max_output_tokens':1024,'max_calls':a.max_calls,'started_unix':time.time()}
 (O/'server-identity.json').write_text(json.dumps(identity,indent=2))
-def generate(body):
+def generate(body, call_id):
  assert body.get('model')==model_name,'model identifier mismatch'
  messages=[];image_count=0
  for m in body['messages']:
@@ -41,7 +41,11 @@ def generate(body):
  max_new=min(int(body.get('max_tokens',512)),1024);assert max_new>0
  torch.manual_seed(int(body.get('seed',42)));start=time.monotonic()
  with torch.inference_mode():out=model.generate(**inputs,max_new_tokens=max_new,do_sample=False)
- ids=out[0,n:];content=processor.decode(ids,skip_special_tokens=True);msg={'role':'assistant','content':content};finish='length' if len(ids)>=max_new else 'stop'
+ ids=out[0,n:];content=processor.decode(ids,skip_special_tokens=True)
+ # Meter generated tokens before tool parsing, so invalid tool JSON cannot erase cost.
+ usage={'prompt_tokens':int(n),'completion_tokens':len(ids),'total_tokens':int(n)+len(ids)}
+ (O/f'{call_id}-generation.json').write_text(json.dumps({'usage':usage,'raw_output':content,'generation_seconds':time.monotonic()-start,'image_count':image_count}))
+ msg={'role':'assistant','content':content};finish='length' if len(ids)>=max_new else 'stop'
  # Parse the model-emitted Hermes tool envelope. Never synthesize a missing tool call.
  envelopes=re.findall(r'<tool_call>\s*(.*?)\s*</tool_call>',content,re.S)
  if envelopes and body.get('tools'):
@@ -53,6 +57,7 @@ def generate(body):
  usage={'prompt_tokens':int(n),'completion_tokens':len(ids),'total_tokens':int(n)+len(ids)}
  with open(O/'requests.jsonl','a') as f:f.write(json.dumps({'time':time.time(),'seconds':time.monotonic()-start,'usage':usage,'image_count':image_count,'request_sha256':hashlib.sha256(json.dumps(body,sort_keys=True).encode()).hexdigest()})+'\n')
  return {'id':f'local-{time.time_ns()}','object':'chat.completion','created':int(time.time()),'model':model_name,'choices':[{'index':0,'message':msg,'finish_reason':finish}],'usage':usage}
+received_calls=0
 class Handler(BaseHTTPRequestHandler):
  def send(self,status,data):
   b=json.dumps(data).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(b)));self.end_headers();self.wfile.write(b)
@@ -62,10 +67,21 @@ class Handler(BaseHTTPRequestHandler):
   else:self.send(404,{'error':'not found'})
  def do_POST(self):
   if self.path!='/v1/chat/completions':return self.send(404,{'error':'not found'})
+  global received_calls
+  if received_calls>=a.max_calls:return self.send(429,{'error':'fixed server request budget exhausted'})
+  received_calls+=1;call_id=f'{received_calls:04d}';start=time.time()
+  record={'index':received_calls,'started_unix':start,'max_calls':a.max_calls,'generated_usage_known':False}
+  (O/'request-budget.json').write_text(json.dumps({'received_calls':received_calls,'max_calls':a.max_calls}))
   try:
    n=int(self.headers.get('Content-Length',0));assert 0<n<12*1024*1024
-   body=json.loads(self.rfile.read(n));self.send(200,generate(body))
+   body=json.loads(self.rfile.read(n));(O/f'{call_id}-request.json').write_text(json.dumps(body))
+   response=generate(body,call_id);record['http_status']=200;self.send(200,response)
   except Exception as e:
-   traceback.print_exc();self.send(400,{'error':type(e).__name__+': '+str(e)})
+   record.update(http_status=400,error=type(e).__name__+': '+str(e));traceback.print_exc();self.send(400,{'error':record['error']})
+  finally:
+   generated=O/f'{call_id}-generation.json'
+   if generated.exists():record.update(generated_usage_known=True,usage=json.loads(generated.read_text())['usage'])
+   record['elapsed_seconds']=time.time()-start
+   (O/f'{call_id}-audit.json').write_text(json.dumps(record,indent=2))
 print('READY',json.dumps(identity),flush=True)
 HTTPServer(('127.0.0.1',a.port),Handler).serve_forever()

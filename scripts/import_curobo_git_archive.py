@@ -3,7 +3,7 @@ Fallback for interrupted codeload transport; no source edits or dependency chang
 """
 import argparse, fcntl, hashlib, json, os, shutil, tarfile, time
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--archive',type=Path,required=True);p.add_argument('--tree',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--archive',type=Path,required=True);p.add_argument('--tree',type=Path,required=True);p.add_argument('--exclude-bundled-assets', action='store_true');a=p.parse_args()
 root=Path(__file__).resolve().parents[1];runtime=Path(os.environ['RSI_RUNTIME_ROOT'])
 output=Path(os.environ['RSI_DEPLOY_OUTPUT']);output.mkdir(parents=True,exist_ok=True)
 spec=json.loads((root/'configs/native-sources.json').read_text())['curobo']
@@ -13,6 +13,8 @@ assert not target.exists(), 'Refuse to overwrite source'
 tree=json.loads(a.tree.read_text());assert tree['truncated'] is False
 assert tree['sha']==spec['commit'], 'API tree response must identify the exact pinned commit'
 blobs={r['path']:r for r in tree['tree'] if r['type']=='blob'}
+excluded={name:row for name,row in blobs.items() if a.exclude_bundled_assets and name.startswith('src/curobo/content/assets/')}
+blobs={name:row for name,row in blobs.items() if name not in excluded}
 assert not [r for r in tree['tree'] if r['type'] not in ('blob','tree')], 'Submodule not supported'
 stage=target.with_name(target.name+'.git-importing');stage.mkdir()
 with tarfile.open(a.archive) as tar:
@@ -34,7 +36,11 @@ h=hashlib.sha256()
 with archive.open('rb') as f:
  for block in iter(lambda:f.read(8<<20),b''):h.update(block)
 receipt={'status':'complete',**spec,'path':str(target),'archive_sha256':h.hexdigest(),
-         'archive_bytes':archive.stat().st_size,'transport':'local authenticated Git fetch/checkout and git archive; SSH file transfer',
+         'archive_bytes':archive.stat().st_size,'transport':'local authenticated Git sparse checkout and working-tree archive; SSH transfer' if a.exclude_bundled_assets else 'local authenticated Git fetch/checkout and git archive; SSH file transfer',
+         'scope':'pinned source/configuration excluding bundled assets' if a.exclude_bundled_assets else 'complete pinned Git tree',
+         'excluded_prefixes':['src/curobo/content/assets/'] if excluded else [],
+         'excluded_blob_count':len(excluded),
+         'excluded_bytes':sum(x['size'] for x in excluded.values()),
          'verified_git_blobs':len(blobs),'tree_sha256':hashlib.sha256(a.tree.read_bytes()).hexdigest(),
          'finished_unix':time.time()}
 (source/'.source-receipt.json').write_text(json.dumps(receipt,indent=2));source.rename(target);stage.rmdir()

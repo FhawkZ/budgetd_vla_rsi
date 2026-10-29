@@ -6,7 +6,7 @@
 
 先复现官方基线，再提出新方法。RoboRSI 原生多角色执行与 RPent/Harness VLA 分开配置；共同 VLA 后端适配必须另行标注。尚无通过统一评测的新方法结果。
 
-2026-10-29：Qwen固定权重已校验并完成加载检查；完整RoboTwin资产和独立原生目录已装配，两任务的URDF/规划器路径验证通过。cuRobo构建与默认持久角色会话的本地模型传输仍在部署，尚未形成新机任务成绩。`source scripts/activate.sh robotwin` 设置原生后端与RoboRSI模块路径；详情见 `docs/robotwin-deployment-notes.md`。
+2026-10-29：cuRobo已编译，堆叠/交接均通过原生reset、实际关节动作和四相机检查；保留RT shader并显式关闭不支持的OIDN。Qwen持久CLI会话完成5次在线资格调用（27559输入/377输出tokens），不是机器人任务成绩。固定LingBot的34文件/24.33GB全部哈希验证，新独立两任务VLA-only开发诊断已启动（1200动作/24推理每场景）；原生RoboRSI完整角色执行仍在接入。详情见 `docs/vla-only-pilot.md` 与 `docs/experiment-case.md`。
 
 仅在 `lzgpu201` 两张 PRO 6000 上执行。代码 `/root/autodl-tmp/budgeted-vla-rsi`；权重、虚拟环境、缓存、日志 `/root/autodl-tmp/Dex_runtime/agent-rsi`。GPU 编号是分工建议，不构成占卡；启动前查实时进程和锁。
 

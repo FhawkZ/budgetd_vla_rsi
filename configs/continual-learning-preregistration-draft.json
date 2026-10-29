@@ -1,0 +1,120 @@
+{
+  "status": "DRAFT_NOT_LAUNCHABLE",
+  "created_date": "2026-10-29",
+  "topic": "Budget-constrained RSI for VLA-harness continual learning",
+  "executed_model_calls": 0,
+  "executed_episodes": 0,
+  "closed_protocols_reused": false,
+  "host": "lzgpu201",
+  "max_idle_gpus": 2,
+  "environment_manager": "uv",
+  "hypotheses": {
+    "H1": "Evolved allocation improves all-seen-task budget-AUC relative to a strong fixed allocator, accounting for every improvement and selection cost, without excessive old-task loss.",
+    "H2": "Allocator-only transfer improves later learning on unseen task sequences from identical executor and initial evidence, with the allocator frozen during the confirmatory transfer comparison.",
+    "H3": "Risk-directed revalidation improves retention per unit cost beyond uniform revalidation, controlling candidate access and total cost."
+  },
+  "models": {
+    "qwen": "Qwen3-VL-8B-Instruct",
+    "qwen_weights_frozen": true,
+    "vla": "RLinf/LingBot-VLA-RoboTwin-EEF-ckpt1500",
+    "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+    "vla_weights_frozen": true,
+    "vla_manifest": "../rpent-qualification-20261027/lingbot-model-manifest.json",
+    "new_host_vla_deployment_status": "pending_root_agent_execution",
+    "model_endpoint_and_runtime_manifest": null
+  },
+  "environment": {
+    "suite": "RoboTwin",
+    "source_commit": "ae507381f7124a0332b60dbe3de8be62918cb035",
+    "asset_revision": "c15cc97be71e35244b6605d2d84c187f8565cc4d",
+    "task_manifest": null,
+    "state_split_manifest": null,
+    "common_action_horizon": null,
+    "tool_schema_manifest": null,
+    "scorer_hash": null
+  },
+  "conditions": {
+    "S": {"harness_editable": false, "allocator": "none"},
+    "U": {"harness_editable": true, "allocator": "fixed_uniform"},
+    "F": {"harness_editable": true, "allocator": "fixed_cost_normalized_information_value_plus_dependency_risk"},
+    "E": {"harness_editable": true, "allocator": "versioned_evolving_from_F", "self_edit_cost_charged": true}
+  },
+  "immutable": ["Qwen/VLA weights", "base tools", "budget ledger and caps", "commit gate", "success scorer", "task split", "final test access policy"],
+  "primary_contrast": "E_vs_F",
+  "primary_endpoint": "macro_task_success_normalized_AUC_vs_budget_utilization",
+  "budget_utilization": "max_j(actual_cost_j / fixed_cap_j)",
+  "also_report_separate_cost_axes": ["model_requests", "prompt_tokens", "completion_tokens", "environment_resets", "control_steps", "GPU_seconds", "wall_seconds"],
+  "all_roles_counted": ["planner", "engineer", "reviewer", "manager", "perception", "skill_selector", "retry", "session_compaction", "candidate_generation", "self_modification", "validation"],
+  "splits": {
+    "D_learn": "agent-visible adaptation and revalidation, fully budgeted",
+    "D_select": "development selection only; not final evaluation",
+    "D_curve": "sealed offline evaluation of archived snapshots after protocol freeze",
+    "D_final": "independent task/scene/sequence evaluation, inaccessible to evolving agent"
+  },
+  "strict_transfer": {
+    "transfer_only": "allocator program/configuration",
+    "reset_identically": ["task harness", "task skills", "initial evidence", "initial memory", "model versions", "permissions", "budget", "scene stream"],
+    "allocator_frozen_on_confirmatory_transfer": true,
+    "reject_exported_task_answers_or_trajectories": true,
+    "report_meta_training_and_selection_cost": true,
+    "report_deployment_and_end_to_end_efficiency_separately": true
+  },
+  "pilot_candidate_scale": {
+    "status": "DRAFT_ONLY_DO_NOT_LAUNCH",
+    "floor_screen": {"tasks_max": 6, "development_scenes_each": 3, "no_E_results_used_for_selection": true},
+    "tasks": ["stack_blocks_two", "handover_block"],
+    "conditions": ["S", "U", "F", "E"],
+    "independent_learning_runs_each": 3,
+    "adaptation_resets_per_run_max": 20,
+    "audit_checkpoints": 3,
+    "audit_scenes_per_task": 5,
+    "adaptation_episode_upper_bound": 240,
+    "audit_episode_upper_bound": 360,
+    "per_run_cap_candidates": {"model_requests": 2000, "prompt_tokens": 32000000, "completion_tokens": 2000000, "environment_resets": 20, "control_steps": "20 times common native horizon; horizon pending", "wall_seconds": 43200},
+    "budget_freeze_rule": "Calibrate once before viewing any comparative method results, freeze exact caps in a separate execution protocol with all null manifests resolved; no borrowing from prior closed protocols.",
+    "claim_limit": "Exploratory mechanism feasibility; does not establish superiority or no forgetting."
+  },
+  "main_candidate_scale": {
+    "status": "RESOURCE_PLANNING_ONLY",
+    "conditions": ["U", "F", "E"],
+    "independent_learning_runs_minimum": 6,
+    "preferred_runs_if_precision_requires": 10,
+    "meta_development_task_candidates": ["stack_blocks_two", "handover_block", "stack_bowls_two", "pick_dual_bottles", "place_container_plate", "place_dual_shoes"],
+    "transfer_task_candidates": ["handover_mic", "stack_blocks_three", "dump_bin_bigbin", "lift_pot"],
+    "main_episode_upper_bound": 5400,
+    "transfer_episode_upper_bound": 1920,
+    "task_names_verified_present_only": true,
+    "task_eligibility_pending": true,
+    "freeze_sample_size_after_pilot_precision_and_runtime_simulation": true
+  },
+  "analysis": {
+    "independent_unit": "complete learning trajectory with randomized order/seed",
+    "episode_pairing": "same initial states within trajectory condition pair",
+    "report_all_trajectories": true,
+    "single_rate_intervals": "Wilson or exact",
+    "primary_inference": "trajectory-level paired randomization and uncertainty intervals",
+    "small_cluster_warning": "Six trajectories are a fragile lower bound; do not treat hundreds of within-trajectory episodes as independent learning runs.",
+    "no_optional_stopping_on_significance": true,
+    "no_posthoc_best_checkpoint_selection_on_final": true
+  },
+  "pilot_stop_rules": [
+    "Hard budget or isolation violation stops the run immediately.",
+    "Repeated same-layer deployment failure without new evidence stops repeated generation; inspect that layer.",
+    "All methods lack actions or base competence: pause algorithm comparison and run bounded common-backend diagnostics.",
+    "No E-F mechanism difference at two-week pilot: diagnose equal candidate access and overhead before scaling; do not add unlimited modules.",
+    "Task or horizon changes require a new protocol version before comparative data collection."
+  ],
+  "plateau_definition_candidate": {
+    "consecutive_fixed_budget_intervals": 3,
+    "development_improvement_threshold_pp": 5,
+    "development_auc_threshold": 0.03,
+    "interpretation": "No material improvement observed within this model/distribution/budget; not proof of convergence.",
+    "does_not_change_final_budget": true
+  },
+  "native_reproduction_labels": {
+    "RoboRSI": "Native code/tool agent, not automatically a VLA system; common-VLA version is an explicit adaptation.",
+    "RPent": "Native RoboTwin-LingBot path with local-Qwen substitution; source fidelity and model substitution reported separately.",
+    "AdaHVLA": "Published Go2 example requires explicit manipulation adaptation.",
+    "EmbodiedRSI": "Mechanism reimplementation unless complete official runnable source is qualified."
+  }
+}

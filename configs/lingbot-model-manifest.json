@@ -1,0 +1,270 @@
+{
+  "_id": "6a6ad29e94df9b0de7c76ece",
+  "id": "RLinf/LingBot-VLA-RoboTwin-EEF-ckpt1500",
+  "private": false,
+  "pipeline_tag": "robotics",
+  "library_name": "transformers",
+  "tags": [
+    "transformers",
+    "safetensors",
+    "robotics",
+    "vla",
+    "robotwin",
+    "base_model:Qwen/Qwen2.5-VL-3B-Instruct",
+    "base_model:finetune:Qwen/Qwen2.5-VL-3B-Instruct",
+    "endpoints_compatible",
+    "region:us"
+  ],
+  "downloads": 157,
+  "likes": 0,
+  "modelId": "RLinf/LingBot-VLA-RoboTwin-EEF-ckpt1500",
+  "author": "RLinf",
+  "sha": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "lastModified": "2026-08-11T09:00:47.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {
+    "processor_config": {
+      "chat_template": "{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in messages %}{% if loop.first and message['role'] != 'system' %}<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n{% endif %}<|im_start|>{{ message['role'] }}\n{% if message['content'] is string %}{{ message['content'] }}<|im_end|>\n{% else %}{% for content in message['content'] %}{% if content['type'] == 'image' or 'image' in content or 'image_url' in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}: {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content['type'] == 'video' or 'video' in content %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{% elif 'text' in content %}{{ content['text'] }}{% endif %}{% endfor %}<|im_end|>\n{% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant\n{% endif %}"
+    },
+    "tokenizer_config": {
+      "bos_token": null,
+      "chat_template": "{% set image_count = namespace(value=0) %}{% set video_count = namespace(value=0) %}{% for message in messages %}{% if loop.first and message['role'] != 'system' %}<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n{% endif %}<|im_start|>{{ message['role'] }}\n{% if message['content'] is string %}{{ message['content'] }}<|im_end|>\n{% else %}{% for content in message['content'] %}{% if content['type'] == 'image' or 'image' in content or 'image_url' in content %}{% set image_count.value = image_count.value + 1 %}{% if add_vision_id %}Picture {{ image_count.value }}: {% endif %}<|vision_start|><|image_pad|><|vision_end|>{% elif content['type'] == 'video' or 'video' in content %}{% set video_count.value = video_count.value + 1 %}{% if add_vision_id %}Video {{ video_count.value }}: {% endif %}<|vision_start|><|video_pad|><|vision_end|>{% elif 'text' in content %}{{ content['text'] }}{% endif %}{% endfor %}<|im_end|>\n{% endif %}{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant\n{% endif %}",
+      "eos_token": "<|im_end|>",
+      "pad_token": "<|endoftext|>",
+      "unk_token": null
+    }
+  },
+  "cardData": {
+    "license_name": "qwen-research",
+    "license_link": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct/blob/main/LICENSE",
+    "library_name": "transformers",
+    "base_model": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "tags": [
+      "robotics",
+      "vla",
+      "robotwin",
+      "safetensors"
+    ]
+  },
+  "transformersInfo": {
+    "auto_model": "AutoModel"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "4d35f84a93057b8bfa81646c074b0e13c211ea4e",
+      "size": 269
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "6a5ab8af1ca08d0caacb7e071e15c19aea3e1acd",
+      "size": 1930
+    },
+    {
+      "rfilename": "added_tokens.json",
+      "blobId": "482ced4679301bf287ebb310bdd1790eb4514232",
+      "size": 605
+    },
+    {
+      "rfilename": "chat_template.json",
+      "blobId": "13303be6f396b038cf397b34a8096819d403836b",
+      "size": 1049
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "58745dc1814eb9b078cf54cf41c6f13ae6c15032",
+      "size": 1358
+    },
+    {
+      "rfilename": "configs/robot_configs/robotwin_eef.yaml",
+      "blobId": "f4fe217912bb6d2b47a7e84753093af1b15fd06d",
+      "size": 1079
+    },
+    {
+      "rfilename": "lingbotvla_cli.yaml",
+      "blobId": "ae0f22c33b8acdedeb2a984daf677a7d3184e362",
+      "size": 3133
+    },
+    {
+      "rfilename": "merges.txt",
+      "blobId": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+      "size": 1671853
+    },
+    {
+      "rfilename": "model-00001-of-00004.safetensors",
+      "blobId": "88bcd5957647088d0988f5b3d7620400eb90b842",
+      "size": 4972318304,
+      "lfs": {
+        "sha256": "8357fc6d03eec013f8094bb00dafe281c4a09e451230af967ab2e317c7a30e8a",
+        "size": 4972318304,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00002-of-00004.safetensors",
+      "blobId": "bc0decf7dd6e8aecc6b9c2df000194657dc6d375",
+      "size": 4932955392,
+      "lfs": {
+        "sha256": "c663ed67525bc5e9b6b7260a0c4c82282a3866368ccb15050b0c039149f80f8a",
+        "size": 4932955392,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00003-of-00004.safetensors",
+      "blobId": "3810e5cf71b82996293ea9f72e9edbd981be47c3",
+      "size": 4932955480,
+      "lfs": {
+        "sha256": "3b8bed464eceb590e5afdb38e05f3de021670b51dd721289f6f8a94e90b7a480",
+        "size": 4932955480,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00004-of-00004.safetensors",
+      "blobId": "480e4a485878b25cf771fbcbf5ed2259661b0ff6",
+      "size": 1951701732,
+      "lfs": {
+        "sha256": "b4e20ee81d8def61f7d5b9f7a3b263f438137f964aea7ae97c2441876c18c2bf",
+        "size": 1951701732,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model.safetensors.index.json",
+      "blobId": "95d3a000786a624e9aebd60d927d86af5bd31820",
+      "size": 180771
+    },
+    {
+      "rfilename": "norm_stats/robotwin_eef.json",
+      "blobId": "d57aedb40546332ee478025ff8dc3cea8b27478d",
+      "size": 8185
+    },
+    {
+      "rfilename": "preprocessor_config.json",
+      "blobId": "ee08cdd031dd2f138ce236b0c995b34b4b34a6a4",
+      "size": 575
+    },
+    {
+      "rfilename": "qwen_base/.msc",
+      "blobId": "238668cbcecab077f43d1e52d9fbb9b5e592545f",
+      "size": 870
+    },
+    {
+      "rfilename": "qwen_base/LICENSE",
+      "blobId": "87f48cf86671d627b4dd4b8e5189b8e32ae11dd8",
+      "size": 7387
+    },
+    {
+      "rfilename": "qwen_base/README.md",
+      "blobId": "d09bc2825f7d1dc394ee6766e2e95bcc59f47196",
+      "size": 18276
+    },
+    {
+      "rfilename": "qwen_base/chat_template.json",
+      "blobId": "732bd68bc5427d1fb6c06a59b3bf2456b2155d24",
+      "size": 1050
+    },
+    {
+      "rfilename": "qwen_base/config.json",
+      "blobId": "0ae1866f05ab0153ad293bdc92bb1b842c4d95b1",
+      "size": 1373
+    },
+    {
+      "rfilename": "qwen_base/configuration.json",
+      "blobId": "610ae87c09b4d6f13264d0c0ba1fa339e049c519",
+      "size": 78
+    },
+    {
+      "rfilename": "qwen_base/generation_config.json",
+      "blobId": "1dfafa23e24b68b694722c6211e7da36730e9917",
+      "size": 216
+    },
+    {
+      "rfilename": "qwen_base/merges.txt",
+      "blobId": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0",
+      "size": 1671839
+    },
+    {
+      "rfilename": "qwen_base/model-00001-of-00002.safetensors",
+      "blobId": "dd4783960cb71fbd0619490ca3a79c0206fd0d0f",
+      "size": 3982649232,
+      "lfs": {
+        "sha256": "41a8895c164b4d32bae6b302f4603fcbc1797f32dafa45c7e9bcda23c6755df8",
+        "size": 3982649232,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "qwen_base/model-00002-of-00002.safetensors",
+      "blobId": "44271c4ddd0b2097992bf4be145d368042329861",
+      "size": 3526688744,
+      "lfs": {
+        "sha256": "365531ff8752420e89dee707b79d021fb2d6e25abafe486f080555a4fe6972e4",
+        "size": 3526688744,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "qwen_base/model.safetensors.index.json",
+      "blobId": "7a3ec4f48662e38593f8cab48fe12a4f28003aba",
+      "size": 65448
+    },
+    {
+      "rfilename": "qwen_base/preprocessor_config.json",
+      "blobId": "7f3b746825e5eef53ed8ed57a91df9e86ee62c0a",
+      "size": 350
+    },
+    {
+      "rfilename": "qwen_base/tokenizer.json",
+      "blobId": "443909a61d429dff23010e5bddd28ff530edda00",
+      "size": 7031645
+    },
+    {
+      "rfilename": "qwen_base/tokenizer_config.json",
+      "blobId": "91684ea3dc135a7d815e2c932054ce88c1aab41f",
+      "size": 5702
+    },
+    {
+      "rfilename": "qwen_base/vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    },
+    {
+      "rfilename": "special_tokens_map.json",
+      "blobId": "ac23c0aaa2434523c494330aeb79c58395378103",
+      "size": 613
+    },
+    {
+      "rfilename": "tokenizer.json",
+      "blobId": "51ebb3ba93988c73bbd83a3c163a14343fbc5b06",
+      "size": 11421896,
+      "lfs": {
+        "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+        "size": 11421896,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "tokenizer_config.json",
+      "blobId": "5c428cd55e4353de9257cadfe570a6260045bbe8",
+      "size": 5803
+    },
+    {
+      "rfilename": "vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2026-07-30T04:27:10.000Z",
+  "safetensors": {
+    "parameters": {
+      "F32": 4197425739
+    },
+    "total": 4197425739
+  },
+  "usedStorage": 24310690780
+}

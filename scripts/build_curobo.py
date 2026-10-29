@@ -7,6 +7,7 @@ import hashlib
 import importlib.metadata as metadata
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import signal
@@ -84,7 +85,7 @@ try:
                TORCH_CUDA_ARCH_LIST='12.0', MAX_JOBS='2', CMAKE_BUILD_PARALLEL_LEVEL='2',
                OMP_NUM_THREADS='2', SETUPTOOLS_SCM_PRETEND_VERSION='0.7.8')
     env['PATH'] = state['cuda_home'] + '/bin:' + env['PATH']
-    before = {d.metadata['Name'].lower(): d.version for d in metadata.distributions()}
+    before = {re.sub(r'[-_.]+', '-', d.metadata['Name']).lower(): d.version for d in metadata.distributions()}
     state.update(status='building', source_archive_sha256=h.hexdigest(),
                  torch_version=metadata.version('torch'), build_started_unix=time.time()); save()
     with (output / 'curobo-build.log').open('w') as log:
@@ -93,7 +94,7 @@ try:
                        env=env, log=log, timeout=1800)
         bounded_run([os.environ['UV_BIN'], 'pip', 'check', '--python', str(expected_python)],
                        env=env, log=log, timeout=120)
-    after = {d.metadata['Name'].lower(): d.version for d in metadata.distributions()}
+    after = {re.sub(r'[-_.]+', '-', d.metadata['Name']).lower(): d.version for d in metadata.distributions()}
     changed = {k: [before.get(k), v] for k, v in after.items() if before.get(k) != v}
     assert set(changed) <= {'nvidia-curobo'} and after.get('nvidia-curobo') == '0.7.8', changed
     dist = metadata.distribution('nvidia-curobo')

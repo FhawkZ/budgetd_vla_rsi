@@ -1,0 +1,45 @@
+{
+  "classification": "targeted_CPU_preexecution_interface_review_with_synthetic_transport_only",
+  "created_unix": 1793275608.8613617,
+  "status": "passed",
+  "real_model_calls": 0,
+  "real_environment_steps": 0,
+  "GPU_started": false,
+  "definite_API_mismatch_found": false,
+  "runner_sha256": "d492cf92b06bb901f2041cd944f23e8f1ec14d067ec27ece8dcb817e06b87a58",
+  "draft_config_sha256": "aa310351ce98ff891b2e79942a7b6af004e32f8ab0bbe3af09b79fb5e2a27a94",
+  "confirmed": {
+    "native_daemon_names": [
+      "lingbot_vla_server",
+      "robotwin_env_server"
+    ],
+    "render_camera_default": "RGB numpy ndarray; depth=True returns RGB/depth pair",
+    "primitive_return": "native ToolResult.data",
+    "episode_status_fields": [
+      "eval_success",
+      "take_action_cnt",
+      "step_lim",
+      "actual_seed"
+    ],
+    "infer_wrapper": "actual upstream LingBotVLAClient instance override was called once by decorated RoboTwinPrimitives.lingbot_act with synthetic local transport",
+    "vla_payload": "three RGB uint8 observations, EEF16 state and unchanged native instruction",
+    "native_action_type": "ee; 50 returned actions in targeted synthetic fixture",
+    "initialization_inference": "source audit: model initialization does not forward/infer",
+    "env_cwd": "verified asset snapshot root with explicit absolute asset variables; VLA keeps RPent root",
+    "CUDA_mapping": "literal physical index assigned in child env; torch/SAPIEN cuda:0; PCI assertion"
+  },
+  "check_note": "Initial targeted check reached successful native client/primitive synthetic assertions, then failed because test expected an ast.walk daemon list order. Set comparison corrected; no runner defect or code change.",
+  "source_sha256": {
+    "robots/robotwin/robot_spec.py": "f8a5e2af68168141c966884f985004678586ba8c0b881743946848f42fd6a7db",
+    "robots/robotwin/primitives.py": "113b5ef3eb0a04e562ea41545c711e40f0b3a5c232185129840825859fa9c10e",
+    "robots/robotwin/env_server.py": "b613d835d171b0d0938835f244afd25fc5d554a38f5123e5e543aee9e6c4b2cb"
+  },
+  "not_claimed": [
+    "GPU reset or rendering",
+    "model inference",
+    "task completion",
+    "baseline reproduction"
+  ],
+  "new_scene_limitation": "Unscreened new development seeds; no expert validation; capability diagnostic only, not official benchmark success rate.",
+  "protocol_status": "DRAFT; parent must independently freeze and launch"
+}

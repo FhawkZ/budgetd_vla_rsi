@@ -1,0 +1,62 @@
+{
+  "status": "frozen",
+  "classification": "development_vla_only_capability_screen",
+  "run_id": "vla-only-dev1200-20261029-newhost",
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 2026102901
+    },
+    {
+      "task": "handover_block",
+      "seed": 2026102902
+    }
+  ],
+  "horizon": 1200,
+  "use_length": 50,
+  "max_episodes": 2,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "max_vla_inferences_total": 48,
+  "episode_wall_seconds": 1800,
+  "total_wall_seconds": 3900,
+  "stop_on_infrastructure_error": true,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "model_manifest_sha256": "3182e08e99322ebf7c373254efba48d830ce89efc2caef1aac588744eba435ad",
+  "runner_sha256": "d492cf92b06bb901f2041cd944f23e8f1ec14d067ec27ece8dcb817e06b87a58",
+  "source_sha256": {
+    "robots/robotwin/robot_spec.py": "f8a5e2af68168141c966884f985004678586ba8c0b881743946848f42fd6a7db",
+    "robots/robotwin/primitives.py": "113b5ef3eb0a04e562ea41545c711e40f0b3a5c232185129840825859fa9c10e",
+    "robots/robotwin/env_server.py": "b613d835d171b0d0938835f244afd25fc5d554a38f5123e5e543aee9e6c4b2cb",
+    "robots/robotwin/env_client.py": "83c8dfa596391f4f20d61461b536c959ae393aeeb06b615d11d8cb36b6fa7fa8",
+    "robots/robotwin/vla_client.py": "4e9328ebc93ba46cae8189eda265ea988b82d030632155c6f511f91f4c26cec2",
+    "robots/robotwin/vla_server.py": "72af6be90131eb18a4b8af51055414eb7e9aed785791579bddbcb7240173b536",
+    "robots/robotwin/rlinf_env.py": "59aaf99c605cf3bf1598cced3a01025bb53258da49194cdbad9d45295cb5c7ba"
+  },
+  "limitations": [
+    "New development-only scene per task; not a success-rate comparison or an RSI result.",
+    "1200-action horizon differs from closed600-step and10000-cap protocols; never merge their rates.",
+    "No resampling, no Qwen/planner, no handcrafted/expert action, no persistent learning.",
+    "Default check is CPU only; final protocol SHA and runner hash required before run.",
+    "Previous raster draft was never executed; current adapter preserves native RT shader, sets denoiser none, and sets env child cwd to verified asset snapshot root."
+  ],
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "frozen_unix": 1793275616.0270853,
+  "initialization": "Two predeclared raw development seeds; no expert screening or resampling. Not the expert-filtered official benchmark suite.",
+  "deployment_evidence": {
+    "model": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/lingbot-deploy-20261029/status.json",
+    "native_backend": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/native-backend-20261029-1945/qualification-summary.json"
+  }
+}
