@@ -6,6 +6,8 @@
 
 先复现官方基线，再提出新方法。RoboRSI 原生多角色执行与 RPent/Harness VLA 分开配置；共同 VLA 后端适配必须另行标注。尚无通过统一评测的新方法结果。
 
+2026-10-29：Qwen固定权重已校验并完成加载检查；完整RoboTwin资产和独立原生目录已装配，两任务的URDF/规划器路径验证通过。cuRobo构建与默认持久角色会话的本地模型传输仍在部署，尚未形成新机任务成绩。`source scripts/activate.sh robotwin` 设置原生后端与RoboRSI模块路径；详情见 `docs/robotwin-deployment-notes.md`。
+
 仅在 `lzgpu201` 两张 PRO 6000 上执行。代码 `/root/autodl-tmp/budgeted-vla-rsi`；权重、虚拟环境、缓存、日志 `/root/autodl-tmp/Dex_runtime/agent-rsi`。GPU 编号是分工建议，不构成占卡；启动前查实时进程和锁。
 
 ## uv 配置

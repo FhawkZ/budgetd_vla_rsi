@@ -8,3 +8,9 @@
 - Python3.11环境补msgpack-numpy0.4.8后原生HTTP服务模块导入成功；完整RPC与机器人任务尚未验证。
 
 下一步保留默认持久会话的语义，验证本地后端传输和预算代理；然后冻结有界在线资格。不得调用收费模型，也不得用单执行器替代完整三角色系统。
+
+## 2026-10-29 transport follow-up
+
+`command -v codex`, `node`, and `npm` found no executable in the lzgpu201 task environment. The existing Qwen server and metering proxy only expose `/v1/chat/completions`. Current official [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference) says `responses` is the only supported custom-provider wire API; [advanced configuration](https://learn.chatgpt.com/docs/config-file/config-advanced) documents local custom providers. Thus changing the model name/base URL alone does not qualify the default persistent CLI path. No CLI generation was attempted.
+
+Next transport work: pin a CLI version and qualify an explicit local Responses-to-Qwen adapter with offline fixtures for message history, image bytes, function call/output identity, SSE completion/failure and usage. Unknown tool types or context overflow must fail closed, not silently drop input. Preserve upstream role/task session IDs, resume and manager memory-roll behavior; every generation, helper and roll passes the shared budget ledger. Use isolated credentials/configuration and a local-only provider with no cloud fallback. The upstream role runner's prompt-only read restrictions and `dangerous_yolo` flag are not an adequate final-test isolation boundary: keep final test artifacts inaccessible to the role workspace and enforce write scope before autonomous execution. These are deployment/transport adaptations, not evidence of RSI or baseline task success.
