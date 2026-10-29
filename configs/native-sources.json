@@ -1,0 +1,5 @@
+{
+  "RoboTwin": {"repository": "RoboTwin-Platform/RoboTwin", "commit": "ae507381f7124a0332b60dbe3de8be62918cb035"},
+  "curobo": {"repository": "NVlabs/curobo", "commit": "d64c4b005459db10c5dd867d8b30a87d5bda9bdb"},
+  "RLinf": {"repository": "RLinf/RLinf", "commit": "2348ece3df113874671478be1360ae3115b346e3"}
+}

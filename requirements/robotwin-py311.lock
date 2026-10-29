@@ -118,6 +118,7 @@ monotonic==1.6
 mplib==0.2.1
 mpmath==1.3.0
 msgpack==1.2.3
+msgpack-numpy==0.4.8
 msgspec==0.22.0
 multidict==7.2.1
 multiprocess==0.70.15

@@ -1,3 +1,7 @@
 # RoboTwin dependency deployment
 
 2026-10-29: The original freeze included an editable RPent path on the suspended host. Removed that nonportable entry from the installable robotwin lock; original freeze remains unchanged. Fixed official RPent source is available under runtime/vendor. cuRobo and RLinf VCS builds remain separate pending steps. This environment is not yet qualified as a complete native backend.
+
+2026-10-29 14:00 update: 291 frozen runtime packages installed and checked. Added msgpack-numpy0.4.8 for upstream RoboRSI RPC (292 packages); native server module imports under Python3.11, which does not prove a complete environment. RLinf0.4.0 installed from fixed commit2348ece3df113874671478be1360ae3115b346e3 with `uv pip install --no-deps --no-build-isolation <runtime>/vendor/RLinf-<commit>`; pip check passes293 packages. Local wheel source receipt is external to Git. cuRobo build and task assets remain pending.
+
+Use `source scripts/activate.sh robotwin` then `timeout 7200 python scripts/fetch_robotwin_assets.py` to download the three pinned archives and verify SHA before native extraction. Progress is `outputs/native-backend-20261029-1400/assets-status.json`; a running status with an absent process after timeout is interrupted, not completion. Do not duplicate active jobs. `fetch_native_sources.py` uses Python3.12 (qwen/agent profile), pinned commit URLs, bounded transfers and source receipts. No GPU or model calls occur during downloads.
