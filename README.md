@@ -28,6 +28,15 @@ bash scripts/bootstrap_graphics.sh
 "$RSI_SOFTWARE_ROOT/python/cpython-3.12.15-linux-x86_64-gnu/bin/python" scripts/fetch_sources.py
 ```
 
+固定权重下载（仅CPU和网络，4个下载线程、最长2小时，逐文件验证SHA；不启动模型调用）：
+
+```bash
+source scripts/activate.sh qwen
+python scripts/fetch_qwen.py
+```
+
+进度保存在运行目录 `outputs/qwen-deploy-20261029/status.json`。只有 `status=complete` 才代表16个冻结文件全部验收；下载中不算模型就绪。
+
 `configs/sources.json` 固定提交，源码置于外部 vendor 目录，不把整套第三方仓库和大文件复制进 Git。模型另按文件 SHA 清单部署；环境导入通过不等于模型/任务通过。
 
 ## 目录

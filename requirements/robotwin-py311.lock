@@ -222,7 +222,6 @@ rich==15.0.0
 rlinf-lingbotvla==0.1.3
 rlinf-robotwin-runtime==0.1.3
 rpds-py==2026.9.1
--e file:///media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027
 rsa==4.7.2
 rtree==1.4.1
 ruff==0.17.2
