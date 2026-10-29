@@ -1,0 +1,45 @@
+"""Native ApiAgentLoop CPU integration, fake model; no Agent score or paid call."""
+import os,json,copy,hashlib
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context-contract-20261027-2120/attempt05');R.mkdir(exist_ok=False,parents=True)
+os.environ['RSI_COMPACTION_LOG']=str(R/'compactions.jsonl')
+from rpent_context_16k import install,alias_memory
+install()
+from tests.unit_tests.rpent.planner.test_api_contracts import Events,RobotToolkit,tool,finish
+from rpent.utils.logging import init_output_dir
+init_output_dir(R/'loop')
+from rpent.planner.api_loop import ApiAgentLoop
+from pydantic_ai.models.function import FunctionModel
+from pydantic_ai.messages import UserPromptPart,BinaryContent,ToolCallPart,ToolReturnPart,SystemPromptPart
+from rpent.tools import ToolResult
+E=Events();kit=RobotToolkit(E);observations=[];histories=[]
+png=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-native-execution-20261027-1116/head.png').read_bytes()
+def observe():
+ observations.append(len(observations)+1)
+ return ToolResult(data={'cached_scene':True,'observation_index':observations[-1]},images=[png])
+kit.register('observe',observe)
+kit.register('read_large_a',lambda:{'a':'evidence '*5000})
+kit.register('read_large_b',lambda:{'b':'context '*2500})
+async def stream(messages,info):
+ histories.append(copy.deepcopy(messages));i=len(histories)
+ yield [tool('observe'),tool('read_large_a'),tool('read_large_b'),tool('observe'),finish()][i-1]
+result=ApiAgentLoop(model=FunctionModel(stream_function=stream),dashboard_events=E,max_tokens=1024,timeout_s=40).solve(system_prompt='This is only an offline compaction contract check.',user_message='INITIAL_TASK_MARKER remains unchanged.',toolkit=kit,max_turns=5)
+assert result.error is None,result.error
+assert observations==[1,2]
+assert len(histories)==5
+assert len(histories[2])<len(histories[1])+2,[len(h) for h in histories]
+assert all('INITIAL_TASK_MARKER' in repr(h) for h in histories)
+for h in histories:
+ calls={p.tool_call_id for m in h for p in m.parts if isinstance(p,ToolCallPart)}
+ returns={p.tool_call_id for m in h for p in m.parts if isinstance(p,ToolReturnPart)}
+ assert calls==returns,(calls,returns)
+assert any(isinstance(i,BinaryContent) for m in histories[-1] for p in m.parts if isinstance(p,(UserPromptPart,ToolReturnPart)) and isinstance(p.content,list) for i in p.content)
+comp=[json.loads(s) for s in (R/'compactions.jsonl').read_text().splitlines()];assert any(c['after_messages']<c['before_messages'] for c in comp),comp
+# Exact-copy aliases, source files unchanged.
+import shutil
+source=Path('/media/data/liqz/Dex_runtime/datasets/agent-rsi/RPent-memory-47f301ef/robotwin')
+shutil.copytree(source,R/'prior',dirs_exist_ok=True)
+rows=[]
+for task in ['stack_blocks_two','handover_block']:rows+=alias_memory(R/'prior',task,'demo_randomized')
+report={'passed':True,'model_calls':0,'simulator_episodes':0,'synthetic_responses':5,'observation_tool_calls':2,'compactions':comp,'initial_task_preserved':True,'tool_pairs_preserved':True,'fresh_observation_after_compaction_available':True,'aliases':rows,'limitation':'deterministic fake-model integration validates capability routing, not autonomous Qwen decision to reobserve or task competence','scripts':{n:hashlib.sha256((Path(__file__).parent/n).read_bytes()).hexdigest() for n in ['rpent_context_16k.py','rpent_context_contract.py']}}
+(R/'report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

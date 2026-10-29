@@ -1,0 +1,35 @@
+"""Actual local text/vision/tool API checks; never reported as robot task success."""
+import base64,json,os,time,urllib.request,hashlib
+from pathlib import Path
+R=Path(os.environ['DEX_RUNTIME_ROOT']);O=R/'outputs/agent-rsi-20261024';D=O/os.environ.get('QWEN_SMOKE_NAME','qwen-smoke-v1');D.mkdir(exist_ok=True)
+base='http://127.0.0.1:8017/v1';model='qwen3-vl-8b-instruct'
+def call(name,messages,**kwargs):
+ body={'model':model,'messages':messages,'temperature':0,'seed':42,'max_tokens':512,**kwargs}
+ (D/(name+'.request.json')).write_text(json.dumps(body,ensure_ascii=False))
+ start=time.monotonic();req=urllib.request.Request(base+'/chat/completions',data=json.dumps(body).encode(),headers={'Content-Type':'application/json'})
+ with urllib.request.urlopen(req,timeout=180) as r:d=json.load(r)
+ (D/(name+'.response.json')).write_text(json.dumps(d,ensure_ascii=False,indent=2));return d,time.monotonic()-start
+rows=[]
+d,t=call('text',[{'role':'user','content':'Reply with exactly the string READY.'}],max_tokens=16)
+rows.append({'name':'text','passed':d['choices'][0]['message']['content'].strip()=='READY','seconds':t,'usage':d.get('usage')})
+scenes=json.loads((O/'preflight-v1/summary.json').read_text())['rows']
+for s in scenes:
+ name=s['group']+'-'+str(s['task_index']);imgs=[]
+ for camera,x in s['images'].items():
+  b=Path(x['path']).read_bytes();assert hashlib.sha256(b).hexdigest()==x['sha256']
+  imgs.extend([{'type':'text','text':'Camera '+camera},{'type':'image_url','image_url':{'url':'data:image/png;base64,'+base64.b64encode(b).decode()}}])
+ instruction='These are simultaneous robot camera views. Describe only visible objects and robot arms. Do not claim task completion, contact stability or hidden positions. Return JSON with visible_objects (array of strings), uncertainty (string), next_observation (string).'
+ d,t=call(name,[{'role':'user','content':[{'type':'text','text':instruction}]+imgs}],response_format={'type':'json_object'})
+ try:
+  j=json.loads(d['choices'][0]['message']['content']);ok=isinstance(j.get('visible_objects'),list) and isinstance(j.get('uncertainty'),str) and isinstance(j.get('next_observation'),str)
+ except Exception:ok=False
+ rows.append({'name':name,'passed':ok,'seconds':t,'usage':d.get('usage'),'note':'JSON/vision path check, semantic correctness requires separate assessment'})
+tool={'type':'function','function':{'name':'observe','description':'Acquire the requested robot camera view without moving the robot.','parameters':{'type':'object','properties':{'camera':{'type':'string','enum':['agentview','left_wrist','right_wrist']}},'required':['camera'],'additionalProperties':False}}}
+d,t=call('tool',[{'role':'user','content':'Use observe to inspect the agentview camera before planning. Do not answer in prose.'}],tools=[tool],tool_choice='auto')
+msg=d['choices'][0]['message'];calls=msg.get('tool_calls',[]);ok=False
+if len(calls)==1:
+ try:ok=calls[0]['function']['name']=='observe' and json.loads(calls[0]['function']['arguments'])=={'camera':'agentview'}
+ except Exception:pass
+rows.append({'name':'tool','passed':ok,'seconds':t,'usage':d.get('usage')})
+(D/'summary.json').write_text(json.dumps({'checks':rows,'passed':sum(r['passed'] for r in rows),'total':len(rows),'status':'passed' if all(r['passed'] for r in rows) else 'failed','model':model,'timestamp':time.time(),'role':'inference_and_schema_smoke_not_agent_performance'},indent=2))
+print((D/'summary.json').read_text())

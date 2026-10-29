@@ -1,0 +1,54 @@
+import json,hashlib,collections,datetime
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context32k-qualification-v1')
+assert json.loads((R/'status.json').read_text())['phase']=='finished'
+receipts=[json.loads(l) for l in (R/'backend-receipts.jsonl').read_text().splitlines()]
+rows=[];matched=[]
+def has_file_content(value):
+ if isinstance(value,str):
+  try:return has_file_content(json.loads(value))
+  except (ValueError,TypeError):return False
+ if isinstance(value,list):return any(has_file_content(x) for x in value)
+ if isinstance(value,dict):return 'path' in value and 'content' in value and 'error' not in value
+ return False
+
+for task in ['stack_blocks_two','handover_block']:
+ O=R/task
+ if not O.exists():continue
+ response_paths=sorted((O/'calls').glob('*-response.json'))
+ ordered=[];lengths=[];seen_paths=set();rereads=[]
+ for p in response_paths:
+  b=json.loads(p.read_text());idx=int(p.name.split('-')[0]);lengths.append(b.get('usage',{}).get('prompt_tokens',0))
+  for c in b.get('choices',[]):
+   for t in c.get('message',{}).get('tool_calls',[]):
+    fn=t['function'];args=json.loads(fn['arguments'])
+    if fn['name']=='read_text_file':
+     path=args.get('path');forward=json.loads((O/'calls'/f'{idx:03d}-forwarded.json').read_text());messages=forward['messages'];visible=[]
+     for m in messages:
+      for old in m.get('tool_calls',[]):
+       if old.get('function',{}).get('name')!='read_text_file':continue
+       try:oldpath=json.loads(old['function']['arguments']).get('path')
+       except Exception:continue
+       if oldpath==path:
+        returns=[z for z in messages if z.get('role')=='tool' and z.get('tool_call_id')==old.get('id')]
+        visible.extend(returns)
+     if path in seen_paths:rereads.append({'request':idx,'path':path,'previous_pair_visible':bool(visible),'previous_file_content_visible':any(has_file_content(z.get('content')) for z in visible),'visible_returns':len(visible),'return_excerpt':str(visible[-1].get('content'))[:160] if visible else None})
+     seen_paths.add(path)
+    ordered.append({'request':idx,'name':fn['name'],'arguments':args,'finish_reason':c.get('finish_reason')})
+  digest=hashlib.sha256(json.dumps(json.loads((O/'calls'/f'{idx:03d}-forwarded.json').read_text()),sort_keys=True).encode()).hexdigest()
+  candidates=[x for x in receipts if x.get('request_sha256')==digest]
+  audit=json.loads((O/'calls'/f'{idx:03d}-audit.json').read_text())
+  candidates=[x for x in candidates if abs(x['time']-audit['started_unix'])<180]
+  assert len(candidates)==1,(task,idx,len(candidates))
+  receipt=candidates[0];assert receipt['usage']==b['usage']
+  matched.append({'task':task,'index':idx,'receipt':receipt})
+ comps=[json.loads(l) for l in (O/'compactions.jsonl').read_text().splitlines()] if (O/'compactions.jsonl').exists() else []
+ trimmed=[i+1 for i,c in enumerate(comps) if c['after_messages']<c['before_messages']]
+ states=json.loads((O/'cli/states.json').read_text()).get('steps',[]) if (O/'cli/states.json').exists() else []
+ last=states[-1].get('state',{}) if states else {}
+ audits=[json.loads(p.read_text()) for p in (O/'calls').glob('*-audit.json')]
+ rows.append({'task':task,'responses':len(response_paths),'max_input_tokens':max(lengths,default=0),'tool_counts':dict(collections.Counter(x['name'] for x in ordered)),'ordered_tools':ordered,'native_actions':last.get('episode_status',{}).get('native_actions'),'native_eval_success':last.get('episode_status',{}).get('eval_success'),'compaction_request_indices':trimmed,'request_seconds':sum(a.get('elapsed_seconds',0) for a in audits),'request_failures':[a for a in audits if a.get('http_status')!=200],'reread_audit':rereads,'rereads_with_previous_pair_visible':sum(x['previous_pair_visible'] for x in rereads),'rereads_with_previous_file_content_visible':sum(x['previous_file_content_visible'] for x in rereads),'rereads_without_previous_pair_visible':sum(not x['previous_pair_visible'] for x in rereads),'repeated_paths':dict(collections.Counter(x['arguments'].get('path') for x in ordered if x['name']=='read_text_file')),'output_truncation_count':sum(json.loads(p.read_text())['choices'][0]['finish_reason']=='length' for p in response_paths)})
+report={'created_at':datetime.datetime.now().astimezone().isoformat(),'rows':rows,'matched_requests':len(matched),'prompt_tokens':sum(x['receipt']['usage']['prompt_tokens'] for x in matched),'completion_tokens':sum(x['receipt']['usage']['completion_tokens'] for x in matched),'server_generation_seconds':sum(x['receipt']['seconds'] for x in matched),'request_seconds':sum(r['request_seconds'] for r in rows),'accepted_updates':0,'retention_after_update':None,'strict_rsi_rounds':0,'causal_limit':'Repeated reading/compaction is observational evidence; no causal attribution or paper ranking from these two substituted-model development episodes.'}
+(R/'behavior-analysis.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+(R/'cost-reconciliation.json').write_text(json.dumps({'matched_requests':len(matched),'rows':matched},indent=2))
+print(json.dumps({k:v for k,v in report.items() if k!='rows'},indent=2));print(json.dumps([{k:v for k,v in r.items() if k not in ['ordered_tools','repeated_paths','reread_audit']} for r in rows],indent=2))

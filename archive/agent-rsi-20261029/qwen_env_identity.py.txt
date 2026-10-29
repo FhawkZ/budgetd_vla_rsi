@@ -1,0 +1,13 @@
+import importlib.metadata as m,json,sys
+from packaging.requirements import Requirement
+from packaging.utils import canonicalize_name
+roots=['torch','torchvision','transformers','accelerate','pillow','numpy','safetensors']
+seen={};queue=list(roots)
+while queue:
+ name=canonicalize_name(queue.pop())
+ if name in seen:continue
+ d=m.distribution(name);seen[name]=d.version
+ for raw in d.requires or []:
+  q=Requirement(raw)
+  if q.marker is None or q.marker.evaluate({'extra':''}):queue.append(q.name)
+print(json.dumps({'python':sys.version,'roots':roots,'packages':dict(sorted(seen.items()))},indent=2))

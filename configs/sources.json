@@ -1,0 +1,12 @@
+{
+  "RoboRSI": {
+    "url": "https://github.com/nssmd/RoboRSI.git",
+    "commit": "90c8569705bf4004a4f79e34e650c87ab7f075d4",
+    "archive_sha256": "eb6cd208f402d403bce7cb89622b4cac5892efc911aff80724948c39f1babc30"
+  },
+  "RPent": {
+    "url": "https://github.com/RLinf/RPent.git",
+    "commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+    "archive_sha256": "eb3ae97a4df7bbd9a363c38edff46050176431e568ec3372b96e83197f6fe7c4"
+  }
+}

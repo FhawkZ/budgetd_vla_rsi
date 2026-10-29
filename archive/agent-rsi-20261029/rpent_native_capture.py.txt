@@ -1,0 +1,28 @@
+"""Capture unmodified upstream RoboTwin observations for renderer qualification."""
+import os,sys,json,time,hashlib,fcntl,subprocess
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-native-execution-20261027-1116')
+R.mkdir(exist_ok=True)
+SOURCE=Path('/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027')
+gpu=int(sys.argv[1]);locks=[]
+for p in [R.parent/'robotwin-setup'/f'gpu{gpu}.lock',Path(f'/media/data/liqz/Dex_runtime/locks/native-eval-gpu{gpu}.lock')]:
+ f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+mem=int(subprocess.check_output(['nvidia-smi','-i',str(gpu),'--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,mem
+os.environ.update(CUDA_VISIBLE_DEVICES=str(gpu),ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1')
+sys.path.insert(0,str(SOURCE));os.chdir(SOURCE)
+from tests.e2e_tests.robotwin.scenario import _runtime_args,_capture_environment
+from PIL import Image
+import numpy as np
+status={'phase':'running','purpose':'unmodified upstream visual qualification, not task score','gpu':gpu,'max_resets':1,'model_calls':0,'started_unix':time.time()}
+(R/'capture-status.json').write_text(json.dumps(status,indent=2))
+try:
+ obs,info,result=_capture_environment(R/'native-capture',_runtime_args())
+ images={}
+ for name,view in obs['views'].items():
+  a=view['rgb']; dest=R/f'{name}.png';Image.fromarray(a).save(dest)
+  images[name]={'shape':list(a.shape),'min':int(a.min()),'max':int(a.max()),'std':float(a.std()),'zero_fraction':float((a==0).mean()),'sha256':hashlib.sha256(dest.read_bytes()).hexdigest()}
+ status.update(phase='captured',images=images,check=result,instruction=obs['task_language'])
+except Exception as e:
+ status.update(phase='failed',error=repr(e));raise
+finally:
+ status['finished_unix']=time.time();(R/'capture-status.json').write_text(json.dumps(status,indent=2))

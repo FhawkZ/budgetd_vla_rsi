@@ -1,0 +1,39 @@
+"""One-inference/one-action diagnostic to localize prior uninstrumented chain timeout."""
+import os,sys,json,time,signal,fcntl,subprocess
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-native-execution-20261027-1116/stage-probe');R.mkdir(exist_ok=False)
+protocol={'role':'phase timing diagnostic; not baseline success-rate episode','max_resets':1,'max_vla_inferences':1,'max_native_ee_actions':1,'qwen_calls':0,'wall_cap_seconds':480,'reason':'prior upstream scripted chain timeout stage unknown; this probe bypasses planner and measures native components individually'}
+(R/'protocol.json').write_text(json.dumps(protocol,indent=2))
+locks=[]
+for p in [R.parent.parent/'robotwin-setup/gpu3.lock',Path('/media/data/liqz/Dex_runtime/locks/native-eval-gpu3.lock')]:
+ f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+mem=int(subprocess.check_output(['nvidia-smi','-i','3','--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,mem
+S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';os.chdir(S);sys.path.insert(0,S)
+os.environ.update(CUDA_VISIBLE_DEVICES='3',ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1')
+from tests.e2e_tests.robotwin.scenario import _runtime_args
+from tests.e2e_tests.common import runtime_phase
+from robots.robotwin.robot_spec import get_robot_spec,ROBOTWIN_CAMERA_NAMES
+from rpent.utils.logging import init_output_dir
+init_output_dir(R/'runtime')
+def event(stage,**kwargs):
+ with (R/'timing.jsonl').open('a') as f:f.write(json.dumps({'time':time.time(),'stage':stage,**kwargs},default=str)+'\n')
+ print(stage,kwargs,flush=True)
+def alarm(*_):raise TimeoutError('480second diagnostic cap')
+signal.signal(signal.SIGALRM,alarm);signal.alarm(480)
+try:
+ event('startup_begin')
+ with runtime_phase(get_robot_spec(),_runtime_args(),R/'runtime',{'env','vla'}) as rt:
+  event('startup_end');env=rt['env'];model=rt['model']
+  event('reset_begin');_,info=env.reset();event('reset_end',status=info['episode_status'])
+  obs={'views':{},'robot_state':info['robot_state'],'task_language':env.get_task_language()}
+  event('views_begin')
+  for c in ROBOTWIN_CAMERA_NAMES:
+   rgb,_=env.render_camera(c,depth=True);obs['views'][c]={'rgb':rgb}
+  event('views_end');event('infer_begin');actions=model.infer(obs);event('infer_end',shape=list(actions.shape))
+  import numpy as np
+  np.save(R/'actions.npy',actions)
+  event('step_begin');_,_,terminated,truncated,info=env.step(actions[0],action_type='ee');event('step_end',status=info['episode_status'],terminated=terminated,truncated=truncated)
+ signal.alarm(0);event('complete')
+except Exception as e:
+ signal.alarm(0);event('failed',error=repr(e));raise
+finally:event('cleanup_finished')

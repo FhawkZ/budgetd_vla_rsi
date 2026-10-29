@@ -1,0 +1,20 @@
+import sys,json,dataclasses
+from pathlib import Path
+S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';sys.path.insert(0,S)
+from tests.unit_tests.rpent.planner.test_api_contracts import RobotToolkit,Events
+from rpent.tools import ToolResult
+from rpent.planner.api_loop import ApiAgentLoop
+from pydantic_ai.models.openai import OpenAIChatModel
+from pydantic_ai.providers.openai import OpenAIProvider
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-native-execution-20261027-1116')
+from rpent.utils.logging import init_output_dir
+init_output_dir(R/'qwen-smoke-loop')
+events=Events();kit=RobotToolkit(events);count=[0]
+def observe():
+ count[0]+=1
+ return ToolResult(data={'cached_scene':True,'observation_index':count[0],'cameras':['head','left_wrist','right_wrist'],'notice':'Transport qualification only. These are cached images of one unchanged simulator scene.'},images=[(R/f'{n}.png').read_bytes() for n in ['head','left_wrist','right_wrist']])
+kit.register('observe',observe)
+model=OpenAIChatModel('qwen3-vl-8b-instruct',provider=OpenAIProvider(base_url='http://127.0.0.1:18019/v1',api_key='local-only'))
+result=ApiAgentLoop(model=model,dashboard_events=events,max_tokens=1024,reasoning_effort='none',timeout_s=240).solve(system_prompt='This is a read-only multimodal transport check, not a robot task. First call observe. After receiving its result, call observe a second time. After receiving the second result, finish with a brief description of visible objects. Never claim physical task completion.',user_message='Check both sequential cached observations, then finish the transport check.',toolkit=kit,max_turns=4)
+(R/'qwen-transport-result.json').write_text(json.dumps({'result':{k:getattr(result,k) for k in ('finish_result','messages','stats','error')},'observe_calls':count[0],'tools':kit.calls,'role':'smoke only, no task score'},indent=2,default=str))
+print(json.dumps({'error':result.error,'stats':result.stats,'observe_calls':count[0]},default=str))

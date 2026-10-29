@@ -1,0 +1,71 @@
+"""Bounded localhost Transformers inference. OpenAI-shaped transport, Qwen backend only.
+No shell/code execution, no network image URLs, no policy or evaluator write tools.
+"""
+import argparse,hashlib,json,os,re,time,traceback
+from http.server import BaseHTTPRequestHandler,HTTPServer
+from pathlib import Path
+import torch
+from transformers import AutoProcessor,Qwen3VLForConditionalGeneration
+p=argparse.ArgumentParser();p.add_argument('--port',type=int,default=8018);p.add_argument('--model',required=True);p.add_argument('--output',required=True);a=p.parse_args()
+O=Path(a.output);O.mkdir(parents=True,exist_ok=True);torch.set_num_threads(4)
+processor=AutoProcessor.from_pretrained(a.model,local_files_only=True)
+model=Qwen3VLForConditionalGeneration.from_pretrained(a.model,dtype=torch.bfloat16,device_map='cuda:0',attn_implementation='sdpa',local_files_only=True).eval()
+model_name='qwen3-vl-8b-instruct'
+identity={'model':model_name,'model_path':a.model,'backend':'transformers','torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(0),'cuda_visible_devices':os.environ.get('CUDA_VISIBLE_DEVICES'),'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'max_input_tokens':32768,'max_output_tokens':1024,'started_unix':time.time()}
+(O/'server-identity.json').write_text(json.dumps(identity,indent=2))
+def generate(body):
+ assert body.get('model')==model_name,'model identifier mismatch'
+ messages=[];image_count=0
+ for m in body['messages']:
+  assert m['role'] in ['system','user','assistant','tool']
+  content=m.get('content','');copy={k:v for k,v in m.items() if k in ['role','content','tool_calls','tool_call_id','name']}
+  if isinstance(content,list):
+   converted=[]
+   for item in content:
+    if item['type']=='image_url':
+     url=item['image_url']['url'];assert url.startswith('data:image/'),'Only embedded images permitted';image_count+=1
+     converted.append({'type':'image','url':url})
+    else:assert item['type']=='text';converted.append(item)
+   copy['content']=converted
+  elif isinstance(content,str):
+   copy["content"]=[{"type":"text","text":content}]
+  elif content is None:
+   copy["content"]=[]
+  else:raise ValueError("unsupported message content")
+  messages.append(copy)
+ assert image_count<=3,'at most 3 images per request'
+ kw={'add_generation_prompt':True,'tokenize':True,'return_dict':True,'return_tensors':'pt'}
+ if body.get('tools'):kw['tools']=body['tools']
+ inputs=processor.apply_chat_template(messages,**kw).to(model.device)
+ n=inputs['input_ids'].shape[1];assert n<=32768,'input budget exceeded'
+ max_new=min(int(body.get('max_tokens',512)),1024);assert max_new>0
+ torch.manual_seed(int(body.get('seed',42)));start=time.monotonic()
+ with torch.inference_mode():out=model.generate(**inputs,max_new_tokens=max_new,do_sample=False)
+ ids=out[0,n:];content=processor.decode(ids,skip_special_tokens=True);msg={'role':'assistant','content':content};finish='length' if len(ids)>=max_new else 'stop'
+ # Parse the model-emitted Hermes tool envelope. Never synthesize a missing tool call.
+ envelopes=re.findall(r'<tool_call>\s*(.*?)\s*</tool_call>',content,re.S)
+ if envelopes and body.get('tools'):
+  tools=[];allowed={t['function']['name'] for t in body['tools']}
+  for i,e in enumerate(envelopes):
+   t=json.loads(e);assert t['name'] in allowed
+   tools.append({'id':f'call_{time.time_ns()}_{i}','type':'function','function':{'name':t['name'],'arguments':json.dumps(t.get('arguments',{}))}})
+  msg['tool_calls']=tools;msg['content']=re.sub(r'<tool_call>.*?</tool_call>','',content,flags=re.S).strip() or None;finish='tool_calls'
+ usage={'prompt_tokens':int(n),'completion_tokens':len(ids),'total_tokens':int(n)+len(ids)}
+ with open(O/'requests.jsonl','a') as f:f.write(json.dumps({'time':time.time(),'seconds':time.monotonic()-start,'usage':usage,'image_count':image_count,'request_sha256':hashlib.sha256(json.dumps(body,sort_keys=True).encode()).hexdigest()})+'\n')
+ return {'id':f'local-{time.time_ns()}','object':'chat.completion','created':int(time.time()),'model':model_name,'choices':[{'index':0,'message':msg,'finish_reason':finish}],'usage':usage}
+class Handler(BaseHTTPRequestHandler):
+ def send(self,status,data):
+  b=json.dumps(data).encode();self.send_response(status);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(b)));self.end_headers();self.wfile.write(b)
+ def do_GET(self):
+  if self.path=='/health':self.send(200,{'status':'ready','backend':'transformers','model':model_name})
+  elif self.path=='/v1/models':self.send(200,{'object':'list','data':[{'id':model_name,'object':'model','owned_by':'local'}]})
+  else:self.send(404,{'error':'not found'})
+ def do_POST(self):
+  if self.path!='/v1/chat/completions':return self.send(404,{'error':'not found'})
+  try:
+   n=int(self.headers.get('Content-Length',0));assert 0<n<12*1024*1024
+   body=json.loads(self.rfile.read(n));self.send(200,generate(body))
+  except Exception as e:
+   traceback.print_exc();self.send(400,{'error':type(e).__name__+': '+str(e)})
+print('READY',json.dumps(identity),flush=True)
+HTTPServer(('127.0.0.1',a.port),Handler).serve_forever()

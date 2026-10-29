@@ -1,0 +1,32 @@
+"""Bounded isolated service; GPU locks remain held until owned child exits."""
+import os,json,time,fcntl,subprocess,signal,hashlib,argparse
+from pathlib import Path
+p=argparse.ArgumentParser();p.add_argument('--gpu',type=int,choices=range(4),required=True);p.add_argument('--output',required=True);a=p.parse_args();gpu=str(a.gpu)
+B=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024');P=Path('/media/data/liqz/Dex_operation');O=Path(a.output);assert O.parent==B and O.name.startswith('rpent-32k-service-'), 'isolated service instance required'
+assert json.loads((B/'rpent-32k-resume-20261028-2220/processor-check.json').read_text())['passed']
+script=P/'scripts/agent_rsi/qwen_server_32k_qualification.py';assert hashlib.sha256(script.read_bytes()).hexdigest()=='0774594348a7b3b6bce5c45a26e9a98897e32a081a909e7d15905f8203dc09a2'
+O.mkdir(exist_ok=False);locks=[];child=None;st={'started_unix':time.time(),'parent_pid':os.getpid(),'gpu':gpu,'max_wall_seconds':3600,'status':'starting'}
+def save(): (O/'owner-status.json').write_text(json.dumps(st,indent=2))
+def stop(*args):raise KeyboardInterrupt
+signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGINT,stop)
+try:
+ for path in [B/f'robotwin-setup/gpu{gpu}.lock',Path(f'/media/data/liqz/Dex_runtime/locks/native-eval-gpu{gpu}.lock')]:
+  f=path.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+ inv=subprocess.check_output(['nvidia-smi','-i',gpu,'--query-gpu=uuid,memory.used','--format=csv,noheader,nounits'],text=True).strip().split(',')
+ procs=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_memory','--format=csv,noheader'],text=True)
+ assert int(inv[1])<100 and inv[0].strip() not in procs,'GPU no longer idle'
+ st['resources_before']={'gpu':inv,'processes':procs};save()
+ env=os.environ.copy();env.pop('VIRTUAL_ENV',None);env.pop('PYTHONPATH',None);env.update(CUDA_VISIBLE_DEVICES=gpu,HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1')
+ with (O/'service.log').open('w') as log:
+  child=subprocess.Popen(['/home/liqz/.local/share/dex_operation/envs/agent-rsi-qwen32k/bin/python','-u',str(script),'--model','/media/data/liqz/Dex_runtime/models/agent-rsi/Qwen3-VL-8B-Instruct-1610d9f9','--output',str(O),'--port','8018'],env=env,stdout=log,stderr=subprocess.STDOUT)
+ st.update(status='running',child_pid=child.pid,child_start=Path(f'/proc/{child.pid}/stat').read_text().split()[21]);save()
+ while child.poll() is None and time.time()-st['started_unix']<3600 and not (O/'STOP').exists():time.sleep(1)
+ st['reason']='child_exit' if child.poll() is not None else 'stop_flag_or_wall_budget'
+except BaseException as e:st['error']=repr(e)
+finally:
+ if child is not None and child.poll() is None:
+  child.terminate()
+  try:child.wait(timeout=20)
+  except subprocess.TimeoutExpired:child.kill();child.wait()
+ st.update(status='closed',finished_unix=time.time(),child_exit=None if child is None else child.returncode);save()
+ for f in locks:f.close()

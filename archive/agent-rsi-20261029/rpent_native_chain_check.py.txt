@@ -1,0 +1,13 @@
+"""Bounded official component and one scripted action-chain qualification."""
+import os,json,time,fcntl,subprocess
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-native-execution-20261027-1116');locks=[]
+for p in [R.parent/'robotwin-setup/gpu3.lock',Path('/media/data/liqz/Dex_runtime/locks/native-eval-gpu3.lock')]:
+ f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+mem=int(subprocess.check_output(['nvidia-smi','-i','3','--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,mem
+S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';E='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-robotwin'
+env=os.environ.copy();env.pop('VIRTUAL_ENV',None);env.update(PYTHONPATH='',CUDA_VISIBLE_DEVICES='3',ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',RPENT_E2E_OUTPUT_DIR=str(R/'official-chain'),HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',TORCH_EXTENSIONS_DIR='/home/liqz/.local/share/dex_operation/cache/torch_extensions/agent-rsi-rpent')
+status={'phase':'running','purpose':'official synthetic VLA component + scripted one-chunk chain; NOT autonomous Agent task score','gpu':3,'qwen_calls':0,'max_tests':2,'max_model_inference_requests':2,'max_policy_chain_action_chunks':1,'started_unix':time.time()};(R/'chain-status.json').write_text(json.dumps(status,indent=2))
+with (R/'chain.log').open('w') as log:
+ p=subprocess.run([E+'/bin/python','-m','pytest','-q','-s','tests/e2e_tests/robotwin/test_components.py::test_lingbot_component','tests/e2e_tests/robotwin/test_policy_chain.py','--timeout=600','--maxfail=1',f'--junitxml={R}/chain.xml'],cwd=S,env=env,stdout=log,stderr=subprocess.STDOUT)
+status.update(phase='completed' if p.returncode==0 else 'failed',exit_code=p.returncode,finished_unix=time.time());(R/'chain-status.json').write_text(json.dumps(status,indent=2))

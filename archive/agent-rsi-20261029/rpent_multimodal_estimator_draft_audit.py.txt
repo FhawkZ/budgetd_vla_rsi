@@ -1,0 +1,27 @@
+"""Offline source/estimator audit using the first real captured observation."""
+import json,base64,hashlib
+from pathlib import Path
+from pydantic_ai.messages import ModelRequest,ModelResponse,SystemPromptPart,UserPromptPart,ToolCallPart,ToolReturnPart,BinaryContent
+from pydantic_ai.usage import RequestUsage
+from pydantic_ai_harness.compaction._shared import estimate_context_tokens,estimate_token_count,_request_part_text
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context-pilot-20261027-2140')
+p=R/'stack_blocks_two/calls';body=json.loads((p/'002-forwarded.json').read_text());response=json.loads((p/'001-response.json').read_text());actual=json.loads((p/'002-response.json').read_text())['usage']['prompt_tokens']
+raw=body['messages'];assert [m['role'] for m in raw]==['system','user','assistant','tool','user']
+call=raw[2]['tool_calls'][0];content=json.loads(raw[3]['content']);assert isinstance(content,list)
+images=[BinaryContent(data=base64.b64decode(i['image_url']['url'].split(',')[1]),media_type='image/png') for i in raw[4]['content'] if i['type']=='image_url']
+messages=[ModelRequest(parts=[SystemPromptPart(raw[0]['content']),UserPromptPart(raw[1]['content'])]),ModelResponse(parts=[ToolCallPart(call['function']['name'],call['function']['arguments'],call['id'])],usage=RequestUsage(input_tokens=response['usage']['prompt_tokens'],output_tokens=response['usage']['completion_tokens'])),ModelRequest(parts=[ToolReturnPart(call['function']['name'],content+images,call['id'])])]
+ret=messages[-1].parts[0];segments=_request_part_text(ret)
+result={'role':'offline estimator/source diagnosis; reconstructed native ToolReturn as actual RPent adapter emits','actual_provider_input_tokens':actual,'native_context_estimate_without_tool_schemas':estimate_context_tokens(messages),'native_total_text_estimate_without_tool_schemas':estimate_token_count(messages),'binary_content_bytes':sum(len(i.data) for i in images),'tool_return_text_estimate':sum(len(s) for s in segments)//4,'binary_repr_present':any('BinaryContent' in s for s in segments),'configured_trigger_tokens':10000,'image_count':len(images),'model_calls':0,'mutated_runtime':False,'interpretation':'Installed native estimator str(ToolReturn.content) counts binary repr as text. Provider reports a much smaller context. Over-triggering can discard previously read memory on each image result; repeated reads are observed but causal attribution needs a controlled fix. Do not call generic RSI failure.','script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+from rpent_multimodal_counting import install,vision_tokens,IMAGE_CONFIG
+from pydantic_ai.messages import ModelMessagesTypeAdapter
+before=ModelMessagesTypeAdapter.dump_json(messages)
+install()
+result['patched_context_estimate_without_tool_schemas']=estimate_context_tokens(messages)
+result['image_token_counts']=[vision_tokens(i) for i in images]
+result['image_config']=IMAGE_CONFIG
+result['messages_unchanged']=before==ModelMessagesTypeAdapter.dump_json(messages)
+result['draft_only']=True
+result['interpretation']='Binary accounting correction draft, not live. Image grid and full request estimates need cross-check against frozen server processor before another pilot.'
+assert result['messages_unchanged']
+assert result['patched_context_estimate_without_tool_schemas']<16384
+(R/'multimodal-estimator-draft.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))

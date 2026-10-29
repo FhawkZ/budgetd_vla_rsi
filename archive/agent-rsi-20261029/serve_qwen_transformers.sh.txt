@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /root/autodl-tmp/qian/Dex_operation
+source scripts/reproduction/env-lzgpu301.sh
+OUT="$DEX_RUNTIME_ROOT/outputs/agent-rsi-20261024"
+mkdir -p "$OUT/locks"
+exec 9>"$OUT/locks/gpu3.lock"
+flock -n 9 || exit 2
+test -f "$OUT/qwen-download-complete.json"
+test -f "$OUT/install-transformers.complete"
+USED=$(nvidia-smi -i 3 --query-gpu=memory.used --format=csv,noheader,nounits)
+if [ "$USED" -gt 256 ]; then echo "GPU3 busy ($USED MiB), launch skipped"; exit 3; fi
+export CUDA_VISIBLE_DEVICES=3 OMP_NUM_THREADS=4 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export TORCHINDUCTOR_CACHE_DIR="$DEX_ENV_ROOT/cache/agent-rsi-torchinductor"
+export TRITON_CACHE_DIR="$DEX_ENV_ROOT/cache/agent-rsi-triton"
+exec "$DEX_ENV_ROOT/envs/agent-rsi-transformers/bin/python" scripts/agent_rsi/qwen_server.py --model "$DEX_RUNTIME_ROOT/models/agent-rsi/Qwen3-VL-8B-Instruct" --output "$OUT/server" --port 8017

@@ -1,0 +1,18 @@
+{
+  "project": "budgeted-vla-rsi",
+  "execution_host": "lzgpu201",
+  "max_gpus": 2,
+  "weights_frozen": true,
+  "runtime_root": "/root/autodl-tmp/Dex_runtime/agent-rsi",
+  "gpu_role_hints": {
+    "qwen": 0,
+    "simulation_vla": 1
+  },
+  "gpu_indices_not_reserved": true,
+  "model_id": "qwen3-vl-8b-instruct",
+  "model_revision": "1610d9f98460d59272cd9963efdf92f0cd3c8dc9",
+  "model_endpoint": "http://127.0.0.1:8018/v1",
+  "native_adapter_qualified": false,
+  "new_experiment_budget": null,
+  "requires_independent_protocol": true
+}

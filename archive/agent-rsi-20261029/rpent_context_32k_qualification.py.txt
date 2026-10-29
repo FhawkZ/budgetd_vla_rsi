@@ -1,0 +1,20 @@
+"""Explicit deployment 32K qualification configuration: calibrated Qwen counts, native trimming."""
+import json,os,time
+from pathlib import Path
+CONFIG={'max_messages':80,'max_tokens':28672,'keep_tokens':24000,'preserve_first_user_message':True}
+def install():
+ from rpent_counting_tokenized import install as counting
+ count=counting()
+ import rpent.planner.api_loop as api
+ from pydantic_ai_harness.compaction import SlidingWindowCompaction
+ from pydantic_ai_harness.compaction._shared import estimate_context_tokens
+ class Logged(SlidingWindowCompaction):
+  async def before_model_request(self,ctx,request_context):
+   before=len(request_context.messages)
+   estimate=estimate_context_tokens(request_context.messages,self.tokenizer,model_request_parameters=request_context.model_request_parameters)
+   result=await super().before_model_request(ctx,request_context)
+   target=os.environ.get('RSI_COMPACTION_LOG')
+   if target:
+    with Path(target).open('a') as f:f.write(json.dumps({'time':time.time(),'before_messages':before,'after_messages':len(result.messages),'context_estimate_before':estimate,'config':CONFIG,'reserved_margin':4096})+'\n')
+   return result
+ api.SlidingWindowCompaction=lambda **kwargs:Logged(**CONFIG,tokenizer=count)

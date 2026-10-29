@@ -1,0 +1,23 @@
+"""Native compaction accounting with frozen Qwen text tokenizer and image grids.
+Only estimate strings change; provider messages are never rewritten here.
+"""
+import re,hashlib
+from pathlib import Path
+from tokenizers import Tokenizer
+from rpent_multimodal_counting import vision_tokens
+TOKENIZER=Path('/media/data/liqz/Dex_runtime/models/agent-rsi/qwen-tokenizer-a5d85b6d/tokenizer.json')
+EXPECTED='a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7'
+def install():
+ from pydantic_ai.messages import ToolReturnPart,BinaryContent
+ from pydantic_ai_harness.compaction import _shared
+ assert hashlib.sha256(TOKENIZER.read_bytes()).hexdigest()==EXPECTED
+ tok=Tokenizer.from_file(str(TOKENIZER));old=_shared._request_part_text
+ def count(s):
+  m=re.fullmatch(r'<rsi_image_token_count:(\d+)>',s)
+  return int(m.group(1)) if m else len(tok.encode(s,add_special_tokens=False).ids)
+ def parts(part):
+  if isinstance(part,ToolReturnPart) and isinstance(part.content,list) and any(isinstance(i,BinaryContent) for i in part.content):
+   return [f'<rsi_image_token_count:{vision_tokens(i)}>' if isinstance(i,BinaryContent) else str(i) for i in part.content]
+  return old(part)
+ _shared._request_part_text=parts
+ return count

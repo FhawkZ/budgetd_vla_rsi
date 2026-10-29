@@ -1,0 +1,57 @@
+[
+  {
+    "source": "RoboRSI",
+    "path": "roborsi/embodied/sim/robotwin/adapter.py",
+    "sha256": "4ce382ca165ee7dfff68cbeee6f630510a751bf27ca0389c0e6810d81dee078c"
+  },
+  {
+    "source": "RoboRSI",
+    "path": "roborsi/embodied/sim/robotwin/server.py",
+    "sha256": "87c7bf3bd1a62bfe2a2b31b3abd4934333e6f74c518dca795389261ed9d0b880"
+  },
+  {
+    "source": "RoboRSI",
+    "path": "roborsi/embodied/agent_loop/rollout.py",
+    "sha256": "d67072db48f6862686307ffdc29ab37294749e42626628d30701a85b14885803"
+  },
+  {
+    "source": "RoboRSI",
+    "path": "roborsi/evaluation/atomic.py",
+    "sha256": "af9af5aa2e3bc3f218cc51a39222e5b1dbc04366a6deb16aad740103269e6511"
+  },
+  {
+    "source": "RoboRSI",
+    "path": "roborsi/agents/roles/manager/cycle.py",
+    "sha256": "2073386aa1044db262f9a41d0b3c384b21f233bd576548ad60745a298c5fc303"
+  },
+  {
+    "source": "RPent",
+    "path": "AGENTS.md",
+    "sha256": "3dee148c648d8669e548d6ff6d1d676470d1182300a8101f6e8f8706976241bc"
+  },
+  {
+    "source": "RPent",
+    "path": "README.md",
+    "sha256": "2a131a38bc828bfac337b2095803851746888f7b2914d095f0688076e0de80f5"
+  },
+  {
+    "source": "RPent",
+    "path": "pyproject.toml",
+    "sha256": "06efb42d68deee2983cdc2740ea3ef815efc8724b86a2e9662a45f5b173e04fb"
+  },
+  {
+    "source": "RPent",
+    "path": "robots/robotwin/robot_spec.py",
+    "sha256": "f8a5e2af68168141c966884f985004678586ba8c0b881743946848f42fd6a7db"
+  },
+  {
+    "source": "RPent",
+    "path": "robots/robotwin/vla_server.py",
+    "sha256": "72af6be90131eb18a4b8af51055414eb7e9aed785791579bddbcb7240173b536"
+  },
+  {
+    "source": "RPent",
+    "path": "robots/robotwin/guides/GUIDE_RPENT.md",
+    "sha256": "08c419b0494bd27e050496da4a0a40918e292ae3140cf539658632f39937b439"
+  }
+]

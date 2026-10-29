@@ -1,0 +1,35 @@
+"""One-shot bounded service qualification. No simulator or tool dispatch."""
+import argparse,json,hashlib,time,urllib.request,urllib.error
+from pathlib import Path
+p=argparse.ArgumentParser();p.add_argument('--endpoint',required=True);p.add_argument('--server-identity',required=True);p.add_argument('--output',required=True);a=p.parse_args()
+B=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024')
+protocol=B/'rpent-contract-audit-20261028-1230/next-qualification-protocol.json'
+assert hashlib.sha256(protocol.read_bytes()).hexdigest()=='e719bcb6f1470604131c5288d81f7447d6226a5d3ea23faaec622065c054874d'
+assert a.endpoint in ['http://127.0.0.1:8018','http://127.0.0.1:18018'],'qualified localhost32K endpoint only'
+identity_path=Path(a.server_identity);identity=json.loads(identity_path.read_text())
+assert identity['script_sha256']=='0774594348a7b3b6bce5c45a26e9a98897e32a081a909e7d15905f8203dc09a2'
+assert identity['max_input_tokens']==32768 and identity['max_output_tokens']==1024
+assert identity['model']=='qwen3-vl-8b-instruct' and identity['torch']=='2.11.0+cu128'
+M=B/'rpent-32k-staging-20261028-1720/canaries/manifest.json';manifest=json.loads(M.read_text());assert len(manifest['rows'])==2
+O=Path(a.output);assert O==B/'rpent-context32k-canaries-v1','single fixed allocation, no alternate output to replay';O.mkdir(parents=True,exist_ok=False)
+status={'status':'running','started_unix':time.time(),'attempts':[],'max_calls':2,'server_identity':identity,'manifest_sha256':hashlib.sha256(M.read_bytes()).hexdigest(),'simulator_episodes':0,'tool_actions':0,'outputs_excluded_from_agent_history':True}
+def save():
+ t=O/'status.tmp';t.write_text(json.dumps(status,indent=2));t.replace(O/'status.json')
+save()
+for idx,row in enumerate(manifest['rows'],1):
+ try:
+  source=Path(row['path']);raw=source.read_bytes();assert hashlib.sha256(raw).hexdigest()==row['sha256_raw']
+  body=json.loads(raw);assert body['max_tokens']==32 and 16384<row['input_tokens']<=32768
+  (O/f'{idx:02d}-request.json').write_bytes(raw)
+  record={'task':row['task'],'started_unix':time.time(),'request_sha256':row['sha256_canonical'],'status':'attempted'};status['attempts'].append(record);save()
+  start=time.monotonic();req=urllib.request.Request(a.endpoint+'/v1/chat/completions',data=raw,headers={'Content-Type':'application/json'})
+  with urllib.request.urlopen(req,timeout=180) as response:data=json.load(response)
+  (O/f'{idx:02d}-response.json').write_text(json.dumps(data,indent=2));record['elapsed_seconds']=time.monotonic()-start;record['usage']=data['usage']
+  assert data['usage']['prompt_tokens']==row['input_tokens'] and data['usage']['completion_tokens']<=32
+  receipts=[json.loads(l) for l in (identity_path.parent/'requests.jsonl').read_text().splitlines()]
+  matches=[r for r in receipts if r['request_sha256']==row['sha256_canonical']];assert len(matches)==1 and matches[0]['usage']==data['usage']
+  record.update(status='passed',receipt=matches[0]);save()
+ except Exception as e:
+  status.update(status='failed_closed_no_retry',error=repr(e),finished_unix=time.time());save();raise
+status.update(status='passed_closed',finished_unix=time.time(),prompt_tokens=sum(r['usage']['prompt_tokens'] for r in status['attempts']),completion_tokens=sum(r['usage']['completion_tokens'] for r in status['attempts']))
+save();print(json.dumps(status,indent=2))

@@ -1,0 +1,59 @@
+import os,time,json,fcntl,subprocess,signal,hashlib,shutil,urllib.request
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-two-task-pilot-20261027-1640');R.mkdir(exist_ok=False)
+P=Path('/media/data/liqz/Dex_operation');S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';E='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-robotwin';CORE='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-core'
+prior=Path('/media/data/liqz/Dex_runtime/datasets/agent-rsi/RPent-memory-47f301ef/robotwin')
+manifest={str(p.relative_to(prior)):hashlib.sha256(p.read_bytes()).hexdigest() for p in prior.rglob('*') if p.is_file()}
+protocol={'stage':'native algorithm/localQwen+transport+recording adaptation development pilot; not published-paper score reproduction','tasks':[{'name':'stack_blocks_two','seed':100000},{'name':'handover_block','seed':100001}],'task_config':'demo_randomized','model':'qwen3-vl-8b-instruct','vla_revision':'e727b46cd220b66981ea4d2fd9ba84adc189e2cc','source_commit':'a744bd5f128ebef3cb8c6736cf7cd98adff681f1','memory_revision':'47f301ef33bf8d0e8c770342f16b3c39c6a0e8c1','memory_sha256':manifest,'limits_per_task':{'Qwen_calls':12,'input_tokens_per_call':16384,'output_tokens_per_call':1024,'native_actions':10000,'planner_wall_seconds':900,'outer_wall_seconds':1200},'total_Qwen_call_cap':24,'updates_allowed':False,'final_test_used':False,'adaptations':['fixedQwen backbone','latest3images alltext preserved; JSONtoSSE lossless','intra-chunk video off, tool-boundaryRGBD saved; native actions/scoring unchanged'],'stop_on_input_incompatibility':True,'created_unix':time.time(),'code_sha256':{f:hashlib.sha256((P/'scripts/agent_rsi'/f).read_bytes()).hexdigest() for f in ['rpent_pilot_cli.py','rpent_two_task_pilot.py','rpent_qwen_transport.py','rpent_runtime_adaptation.py']}}
+(R/'protocol.json').write_text(json.dumps(protocol,indent=2))
+summary={'phase':'running','episodes':[],'protocol_sha256':hashlib.sha256((R/'protocol.json').read_bytes()).hexdigest()}
+def save(): (R/'status.json').write_text(json.dumps(summary,indent=2))
+save()
+for task in protocol['tasks']:
+ O=R/task['name'];O.mkdir();locks=[];proxy=None;cleanup=[]
+ try:
+  for p in [R.parent/'robotwin-setup/gpu3.lock',Path('/media/data/liqz/Dex_runtime/locks/native-eval-gpu3.lock')]:
+   f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+  mem=int(subprocess.check_output(['nvidia-smi','-i','3','--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,f'GPU3occupied:{mem}'
+  shutil.copytree(prior,O/'prior')
+  env=os.environ.copy();env.pop('VIRTUAL_ENV',None);env.update(PYTHONPATH=str(P/'scripts/agent_rsi/rpent_trace_bootstrap')+':'+S,CUDA_VISIBLE_DEVICES='3',RSI_PILOT_OUTPUT=str(O),OPENAI_API_KEY='local-only',ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',TORCH_EXTENSIONS_DIR='/home/liqz/.local/share/dex_operation/cache/torch_extensions/agent-rsi-rpent',NO_PROXY='127.0.0.1,localhost',no_proxy='127.0.0.1,localhost')
+  with (O/'proxy.log').open('w') as plog:
+   proxy=subprocess.Popen([CORE+'/bin/python','-u',str(P/'scripts/agent_rsi/rpent_qwen_transport.py'),'--upstream','http://127.0.0.1:18018','--port','18019','--output',str(O/'calls'),'--max-calls','12'],stdout=plog,stderr=subprocess.STDOUT)
+  for _ in range(30):
+   if proxy.poll() is not None:raise RuntimeError('proxy exited')
+   try:
+    with urllib.request.urlopen('http://127.0.0.1:18019/health',timeout=2) as h:json.load(h)
+    break
+   except Exception:time.sleep(.1)
+  args=['--robot','robotwin','--planner','api','--model','openai-chat:qwen3-vl-8b-instruct','--base-url','http://127.0.0.1:18019/v1','--max-turns','12','--max-tokens','1024','--reasoning-effort','none','--planner-timeout-s','900','--memory-profile','local','--memory-dir',str(O/'prior'),'--output-dir',str(O/'cli'),'--task-name',task['name'],'--seed',str(task['seed']),'--task-config','demo_randomized','--max-episode-steps','10000','--robotwin-assets-path',env['ROBOTWIN_ASSETS_PATH'],'--vla-model-path',env['LINGBOT_MODEL_PATH'],'--cuda-device','3']
+  row={'task':task,'started_unix':time.time(),'args':args};summary['active_task']=task['name'];save()
+  with (O/'run.log').open('w') as log:
+   child=subprocess.Popen([E+'/bin/python','-u',str(P/'scripts/agent_rsi/rpent_pilot_cli.py'),*args],env=env,stdout=log,stderr=subprocess.STDOUT)
+   try:row['exit_code']=child.wait(timeout=1200)
+   except subprocess.TimeoutExpired:child.kill();child.wait();row['outer_timeout']=True
+ except Exception as ex:
+  row={'task':task,'setup_error':repr(ex)}
+ finally:
+  if (O/'owned-daemons.jsonl').exists():
+   for line in (O/'owned-daemons.jsonl').read_text().splitlines():
+    d=json.loads(line);sp=Path(f"/proc/{d['pid']}/stat")
+    if sp.exists() and sp.read_text().split()[21]==d['proc_start']:
+     os.kill(d['pid'],signal.SIGTERM)
+     for _ in range(50):
+      if not sp.exists() or sp.read_text().split()[2]=='Z':break
+      time.sleep(.1)
+     if sp.exists() and sp.read_text().split()[2]!='Z':os.kill(d['pid'],signal.SIGKILL)
+    cleanup.append({'pid':d['pid'],'live':sp.exists() and sp.read_text().split()[2]!='Z'})
+  if proxy is not None:
+   proxy.terminate()
+   try:proxy.wait(timeout=5)
+   except subprocess.TimeoutExpired:proxy.kill();proxy.wait()
+  for lock in locks:lock.close()
+ row.update(cleanup=cleanup,finished_unix=time.time())
+ if (O/'calls/ledger.json').exists():row['usage']=json.loads((O/'calls/ledger.json').read_text())
+ row['transport_errors']=[json.loads(p.read_text()) for p in (O/'calls').glob('*-audit.json') if json.loads(p.read_text()).get('http_status')!=200]
+ row['prior_unchanged']=all((O/'prior'/k).exists() and hashlib.sha256((O/'prior'/k).read_bytes()).hexdigest()==h for k,h in manifest.items()) if (O/'prior').exists() else None
+ summary['episodes'].append(row);save()
+ if row.get('setup_error') or row['transport_errors']:
+  summary['stopped_reason']='setup/transport incompatibility; remaining task notrun';break
+summary.update(phase='finished',active_task=None,finished_unix=time.time());save();print(json.dumps(summary))

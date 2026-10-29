@@ -1,0 +1,36 @@
+import sys,os,time,json,signal
+from pathlib import Path
+R=Path(os.environ['RSI_TRACE_OUTPUT']);R.mkdir(exist_ok=True)
+def event(stage,**kw):
+ with (R/'phases.jsonl').open('a') as f:f.write(json.dumps({'time':time.time(),'stage':stage,**kw})+'\n')
+ print(stage,kw,flush=True)
+from rpent.utils.daemon import ProcessDaemon
+orig_start=ProcessDaemon.start
+def start(self):
+ result=orig_start(self)
+ with (R/'owned-daemons.jsonl').open('a') as f:f.write(json.dumps({'pid':self._proc.pid,'cmd':self.cmd,'proc_start':Path(f'/proc/{self._proc.pid}/stat').read_text().split()[21]})+'\n')
+ return result
+ProcessDaemon.start=start
+if os.environ.get('RSI_BOUNDARY_ONLY_VIDEO')=='1':
+ from rpent_runtime_adaptation import disable_intra_chunk_video
+ disable_intra_chunk_video()
+ event('explicit_boundary_only_video_adapter_enabled')
+from robots.robotwin.toolkit import RoboTwinToolkit
+from rpent.planner.api_loop import ApiAgentLoop
+for cls,name in [(RoboTwinToolkit,'__init__'),(ApiAgentLoop,'solve')]:
+ original=getattr(cls,name)
+ def wrapped(*args,_original=original,_label=cls.__name__+'.'+name,**kwargs):
+  event(_label+'_begin')
+  try:return _original(*args,**kwargs)
+  finally:event(_label+'_end')
+ setattr(cls,name,wrapped)
+from tests.e2e_tests.offline_planner_server import OfflinePlannerServer,ScriptedToolCall
+from rpent.cli.main import main
+script=(ScriptedToolCall('lingbot_act',{'chunks':1,'use_length':50}),ScriptedToolCall('finish',{'status':'stuck','summary':'bounded scripted diagnostic complete'}))
+def timeout(*_):raise TimeoutError('instrumented CLI diagnostic240s cap')
+signal.signal(signal.SIGALRM,timeout);signal.alarm(240)
+try:
+ with OfflinePlannerServer(script) as server:
+  sys.argv=['rpent','--robot','robotwin','--planner','api','--model','openai-chat:rpent-offline-e2e','--max-turns','2','--no-images','--memory-profile','local','--memory-dir',str(R/'empty-memory'),'--output-dir',str(R/'cli'),'--task-name','beat_block_hammer','--seed','100000','--task-config','demo_randomized','--max-episode-steps','32','--robotwin-assets-path',os.environ['ROBOTWIN_ASSETS_PATH'],'--vla-model-path',os.environ['LINGBOT_MODEL_PATH'],'--cuda-device','3','--base-url',server.base_url]
+  event('main_begin');code=main();event('main_end',code=code,offline_requests=server.request_count)
+finally:signal.alarm(0)

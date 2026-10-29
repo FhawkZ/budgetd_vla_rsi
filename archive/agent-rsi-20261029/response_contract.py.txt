@@ -1,0 +1,23 @@
+"""Bounded JSON transport normalization; no semantic repair or coercion."""
+import json,re
+def parse_json_object(content):
+ if not isinstance(content,str):raise ValueError("response content must be text")
+ text=content.strip();source="bare_json"
+ if text.startswith("```"):
+  match=re.fullmatch(r"```(?:json)?\s*\n([\s\S]*?)\n```",text)
+  if not match:raise ValueError("only one exact JSON fence is accepted")
+  text=match.group(1);source="fenced_json"
+ def reject_constant(s):raise ValueError("non-finite JSON constant: "+s)
+ obj=json.loads(text,parse_constant=reject_constant)
+ if not isinstance(obj,dict):raise ValueError("JSON object required")
+ return obj,source
+def validate_observation_report(content):
+ obj,source=parse_json_object(content)
+ required={"visible_objects","uncertain_facts","motion_verified","task_success"}
+ if set(obj)!=required:raise ValueError("observation report fields mismatch")
+ for key in ["visible_objects","uncertain_facts"]:
+  if not isinstance(obj[key],list) or not all(isinstance(x,str) for x in obj[key]):raise ValueError("expected string list: "+key)
+ if obj["motion_verified"] is not False:raise ValueError("static image cannot verify motion")
+ if obj["task_success"] is not None:raise ValueError("task success not established")
+ return obj,source
+

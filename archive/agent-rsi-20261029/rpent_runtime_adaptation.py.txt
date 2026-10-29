@@ -1,0 +1,10 @@
+"""Explicit platform diagnostic: omit per-action video frames, keep native observations.
+This is an adapted logging configuration, not an unmodified upstream reproduction.
+"""
+def disable_intra_chunk_video():
+ from robots.robotwin.primitives import RoboTwinPrimitives
+ original=RoboTwinPrimitives.start_recording
+ def boundary_only(self):
+  original(self)
+  self.stop_recording()
+ RoboTwinPrimitives.start_recording=boundary_only

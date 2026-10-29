@@ -1,0 +1,12 @@
+[project]
+name = "budgeted-vla-rsi"
+version = "0.1.0"
+description = "Budget-constrained continual learning of VLA harnesses with RSI"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[tool.uv]
+package = false
+
+# GPU and simulator dependencies are isolated using uv-managed named venvs.
+# requirements/ contains per-profile pins; scripts/bootstrap.sh is canonical.

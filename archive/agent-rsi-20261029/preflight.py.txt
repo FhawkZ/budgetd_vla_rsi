@@ -1,0 +1,34 @@
+"""Reset/render only on already-used development scenes. Not an Agent success benchmark."""
+import hashlib,importlib.util,json,os,time
+from pathlib import Path
+import h5py,numpy as np
+from PIL import Image
+import robosuite,dexmimicgen
+R=Path(os.environ['DEX_RUNTIME_ROOT']);ROOT=Path(os.environ['DEX_CODE_ROOT']);O=R/'outputs/agent-rsi-20261024/preflight-v1';O.mkdir(parents=True,exist_ok=True)
+assert robosuite.macros.IMAGE_CONVENTION=='opencv'
+spec=importlib.util.spec_from_file_location('pb',ROOT/'ref/DexMimicGen/scripts/playback_datasets.py');pb=importlib.util.module_from_spec(spec);spec.loader.exec_module(pb)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+rows=[]
+for group in ['panda_dex','gr1_dex']:
+ protocol_path=R/f'outputs/recovery-pilot-20261024/inputs/{group}/eval-protocol.json'
+ protocol=json.loads(protocol_path.read_text())
+ for t in protocol['tasks']:
+  pack=Path(protocol['pack_root'])/t['initial_state_pack'];assert sha(pack)==t['pack_sha256']
+  scene=t['scenes'][0]
+  with h5py.File(pack) as f:
+   args=json.loads(f['data'].attrs['env_args']);d=f['data'][scene['demo']]
+   initial={'states':d['states'][0],'model':d.attrs['model_file'],'ep_meta':d.attrs.get('ep_meta')}
+   expected=np.concatenate([d['obs'][k][0].reshape(-1) for k in t['state_keys']])
+  kw=dict(args['env_kwargs']);kw.pop('env_lang',None);kw.update(env_name=args['env_name'],has_renderer=False,has_offscreen_renderer=True,use_camera_obs=True,camera_names=list(t['camera_map']),camera_heights=224,camera_widths=224,ignore_done=True,render_gpu_device_id=2)
+  env=robosuite.make(**kw)
+  try:
+   np.random.seed(42);pb.reset_to(env,initial);obs=env._get_observations(force_update=True)
+   state=np.concatenate([np.asarray(obs[k]).reshape(-1) for k in t['state_keys']]);error=float(np.abs(state-expected).max());assert error<1e-6
+   dest=O/group/str(t['task_index']);dest.mkdir(parents=True,exist_ok=True);images={}
+   for c in t['camera_map']:
+    a=obs[c+'_image'];assert a.shape==(224,224,3) and a.dtype==np.uint8
+    p=dest/(c+'.png');Image.fromarray(a).save(p);images[c]={'path':str(p),'sha256':sha(p)}
+   row={'group':group,'task':args['env_name'],'task_index':t['task_index'],'scene':scene,'initial_state_max_error':error,'state_dim':len(state),'action_dim':int(env.action_dim),'images':images,'role':'reset_render_smoke_existing_development_only','protocol_sha256':sha(protocol_path),'actions_executed':0}
+   rows.append(row);print(json.dumps(row),flush=True)
+  finally:env.close()
+(O/'summary.json').write_text(json.dumps({'status':'completed','count':len(rows),'rows':rows,'script_sha256':sha(__file__),'timestamp':time.time(),'warning':'No learned-agent trials or success-rate result. Hidden state used only to verify reset and is not part of model input.'},indent=2))

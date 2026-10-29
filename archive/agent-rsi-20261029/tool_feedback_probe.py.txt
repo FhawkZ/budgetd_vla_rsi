@@ -1,0 +1,48 @@
+"""Multi-turn transport acceptance on cached development images, not an RSI trial."""
+import base64, hashlib, json, os, time, urllib.request, urllib.error, traceback
+from pathlib import Path
+R=Path(os.environ["DEX_RUNTIME_ROOT"]); O=R/"outputs/agent-rsi-20261024"
+D=O/"tool-feedback-v1";D.mkdir(exist_ok=False)
+budget={"max_calls":4,"max_generated_tokens":2048,"calls":0,"generated_tokens":0}
+def save(name,obj):
+ (D/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2))
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+save("manifest.json",{"role":"cached_image_multiturn_interface_smoke","script_sha256":sha(__file__),"model_identity":json.loads((O/"server/server-identity.json").read_text()),"budget":dict(budget),"physical_steps":0,"evolution_rounds":0,"timestamp":time.time()})
+def call(name,messages,tools):
+ assert budget["calls"]<budget["max_calls"]
+ limit=min(512,budget["max_generated_tokens"]-budget["generated_tokens"]);assert limit>0
+ body={"model":"qwen3-vl-8b-instruct","messages":messages,"tools":tools,"seed":42,"temperature":0,"max_tokens":limit}
+ save(name+".request.json",body);budget["calls"]+=1
+ req=urllib.request.Request("http://127.0.0.1:8017/v1/chat/completions",data=json.dumps(body).encode(),headers={"Content-Type":"application/json"})
+ t=time.monotonic()
+ try:
+  with urllib.request.urlopen(req,timeout=120) as f:d=json.load(f)
+ except urllib.error.HTTPError as e:
+  save(name+".error.json",{"http_status":e.code,"body":e.read().decode()});raise
+ save(name+".response.json",d)
+ budget["generated_tokens"]+=d["usage"]["completion_tokens"]
+ return d["choices"][0]["message"],{"usage":d["usage"],"seconds":time.monotonic()-t}
+rows=[]
+try:
+ for scene in json.loads((O/"preflight-v1/summary.json").read_text())["rows"]:
+  if scene["task_index"]!=2:continue
+  name=scene["group"];camera="agentview";meta=scene["images"][camera];image=Path(meta["path"]);assert sha(image)==meta["sha256"]
+  tool={"type":"function","function":{"name":"observe","description":"Return one stored camera image. Does not move a robot. This is an interface test.","parameters":{"type":"object","properties":{"camera":{"type":"string","enum":[camera]}},"required":["camera"],"additionalProperties":False}}}
+  messages=[{"role":"system","content":"Interface acceptance only. Call observe exactly once, then use the tool image to report directly visible objects. A static image cannot prove motion, successful grasp, or completion. After the tool result, return JSON with visible_objects (array of strings), uncertain_facts (array of strings), motion_verified (false), task_success (null). Do not call another tool."},{"role":"user","content":"Inspect the agentview image with observe, then report the observation."}]
+  msg,cost1=call(name+"-request-observe",messages,[tool]);calls=msg.get("tool_calls",[])
+  if len(calls)!=1:raise ValueError("expected one model-emitted tool call")
+  tc=calls[0];args=json.loads(tc["function"]["arguments"])
+  if tc["function"]["name"]!="observe" or args!={"camera":camera}:raise ValueError("invalid observe arguments")
+  messages.append(msg)
+  content=[{"type":"text","text":json.dumps({"source":"cached_development_render","camera":camera,"sha256":meta["sha256"],"physical_steps_executed":0})},{"type":"image_url","image_url":{"url":"data:image/png;base64,"+base64.b64encode(image.read_bytes()).decode()}}]
+  messages.append({"role":"tool","tool_call_id":tc["id"],"name":"observe","content":content})
+  reply,cost2=call(name+"-after-feedback",messages,[tool])
+  try:
+   obj=json.loads(reply["content"]);valid=isinstance(obj["visible_objects"],list) and isinstance(obj["uncertain_facts"],list) and obj["motion_verified"] is False and obj["task_success"] is None and not reply.get("tool_calls")
+  except Exception:valid=False
+  rows.append({"group":name,"passed":valid,"costs":[cost1,cost2],"image_sha256":meta["sha256"],"role":"schema_only_not_semantic_accuracy"})
+ save("summary.json",{"status":"passed" if all(x["passed"] for x in rows) and len(rows)==2 else "failed","rows":rows,"budget":budget,"physical_steps":0,"evolution_rounds":0})
+except Exception as e:
+ save("failure.json",{"error":repr(e),"traceback":traceback.format_exc(),"budget":budget,"rows":rows});raise
+print((D/"summary.json").read_text())
+

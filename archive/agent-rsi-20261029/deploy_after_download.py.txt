@@ -1,0 +1,31 @@
+"""One-shot bounded deployment continuation, not a recurring monitor."""
+import json,os,subprocess,time,urllib.request
+from pathlib import Path
+O=Path(os.environ['DEX_RUNTIME_ROOT'])/'outputs/agent-rsi-20261024';ROOT=Path(os.environ['DEX_CODE_ROOT'])
+def status(stage,**kw):
+ d={'stage':stage,'updated_unix':time.time(),**kw};p=O/'deployment-status.json';t=p.with_suffix('.tmp');t.write_text(json.dumps(d,indent=2));t.replace(p)
+start=time.time();status('waiting_for_verified_weights')
+while not (O/'qwen-download-complete.json').exists():
+ if (O/'qwen-download-error-parallel.json').exists():status('download_failed');raise SystemExit(1)
+ if time.time()-start>5400:status('download_wait_budget_exceeded');raise SystemExit(1)
+ time.sleep(20)
+if not(O/'install-transformers.complete').exists():status('runtime_not_ready');raise SystemExit(1)
+used=int(subprocess.check_output(['nvidia-smi','-i','3','--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True).strip())
+if used>256:status('waiting_for_gpu3',memory_used_mib=used);raise SystemExit(3)
+status('loading_model')
+cmd=f'bash {ROOT}/scripts/agent_rsi/serve_qwen_transformers.sh > {O}/logs/qwen-server.log 2>&1'
+if subprocess.run(['tmux','has-session','-t','dex-rsi-qwen'],capture_output=True).returncode==0:status('server_session_already_exists_requires_inspection');raise SystemExit(2)
+subprocess.run(['tmux','new-session','-d','-s','dex-rsi-qwen',cmd],check=True)
+ready=False
+for _ in range(60):
+ try:
+  with urllib.request.urlopen('http://127.0.0.1:8017/health',timeout=3) as r:ready=json.load(r).get('status')=='ready'
+  if ready:break
+ except Exception:pass
+ time.sleep(5)
+if not ready:status('server_start_failed');raise SystemExit(1)
+status('running_text_vision_tool_smoke')
+with open(O/'logs/qwen-smoke.log','w') as log:r=subprocess.run([os.sys.executable,str(ROOT/'scripts/agent_rsi/smoke_qwen.py')],stdout=log,stderr=subprocess.STDOUT)
+p=O/'qwen-smoke-v1/summary.json'
+if r.returncode or not p.exists():status('smoke_failed',returncode=r.returncode);raise SystemExit(1)
+s=json.loads(p.read_text());status('ready' if s['status']=='passed' else 'smoke_failed',passed=s['passed'],total=s['total'])

@@ -1,0 +1,18 @@
+import json,time,hashlib,socket
+from pathlib import Path
+from http.server import BaseHTTPRequestHandler,HTTPServer
+R=Path('/root/autodl-tmp/qian/Dex_runtime/outputs/agent-rsi-20261024/transport-echo-20261028-0220');R.mkdir(exist_ok=False)
+class H(BaseHTTPRequestHandler):
+ def do_POST(self):
+  start=time.monotonic();self.connection.settimeout(30)
+  n=int(self.headers['Content-Length']);assert 0<n<2000000
+  b=self.rfile.read(n);record={'expected':n,'received':len(b),'sha256':hashlib.sha256(b).hexdigest(),'seconds':time.monotonic()-start,'valid_json':False}
+  try:json.loads(b);record['valid_json']=True
+  except Exception as ex:record['error']=str(ex)
+  with (R/'requests.jsonl').open('a') as f:f.write(json.dumps(record)+'\n')
+  out=json.dumps(record).encode();self.send_response(200);self.send_header('Content-Length',str(len(out)));self.end_headers();self.wfile.write(out)
+s=HTTPServer(('127.0.0.1',18020),H);s.timeout=40
+(R/'protocol.json').write_text(json.dumps({'max_requests':2,'max_body_bytes':2000000,'socket_timeout':30,'accept_timeout':40,'model_calls':0,'purpose':'byte-identical upload echo, no model forwarding'}))
+print('READY',flush=True)
+for i in range(2):s.handle_request()
+s.server_close();print('COMPLETE',flush=True)

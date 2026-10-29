@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /root/autodl-tmp/qian/Dex_operation
+source scripts/reproduction/env-lzgpu301.sh
+OUT="$DEX_RUNTIME_ROOT/outputs/agent-rsi-20261024"
+ENV="$DEX_ENV_ROOT/envs/agent-rsi-transformers"
+exec > >(tee -a "$OUT/logs/install-transformers.log") 2>&1
+if [ ! -x "$ENV/bin/python" ]; then "$UV_BIN" venv --python "$VIRTUAL_ENV/bin/python" "$ENV"; fi
+# Copy, never hardlink: future experiments cannot mutate the training packages.
+cp -a --reflink=auto "$VIRTUAL_ENV/lib/python3.12/site-packages/." "$ENV/lib/python3.12/site-packages/"
+"$ENV/bin/python" -c 'import transformers, torch; from transformers import Qwen3VLForConditionalGeneration, AutoProcessor; print(transformers.__version__,torch.__version__)'
+"$UV_BIN" pip freeze --python "$ENV/bin/python" > "$OUT/qwen-transformers-freeze.txt"
+date -u +%FT%TZ > "$OUT/install-transformers.complete"

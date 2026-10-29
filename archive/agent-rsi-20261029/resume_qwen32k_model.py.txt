@@ -1,0 +1,68 @@
+import fcntl
+import concurrent.futures,hashlib,json,os,shutil,threading,time,urllib.request,urllib.parse
+from pathlib import Path
+R=Path(os.environ['DEX_RUNTIME_ROOT']);O=R/'outputs/agent-rsi-20261024/rpent-32k-resume-20261028-2220';M=R/'models/agent-rsi/Qwen3-VL-8B-Instruct-1610d9f9.staging';files=json.loads((O/'qwen-modelscope-manifest.json').read_text())['files'];lock=threading.Lock();done=0
+lease=(R/'locks/agent-rsi-qwen-model-stage.lock').open('a');fcntl.flock(lease,fcntl.LOCK_EX|fcntl.LOCK_NB)
+assert not M.with_suffix('').exists(), 'final model already exists'
+O.mkdir(exist_ok=True,parents=True)
+
+def sha(p):
+ h=hashlib.sha256()
+ with open(p,'rb') as f:
+  for b in iter(lambda:f.read(8<<20),b''):h.update(b)
+ return h.hexdigest()
+def put(p,d):
+ q=p.with_suffix('.tmp');q.write_text(json.dumps(d,indent=2)+'\n');q.replace(p)
+items=[];plans=[]
+for f in files:
+ target=M/f['Path']
+ if target.exists() and target.stat().st_size==f['Size'] and sha(target)==f['Sha256']:continue
+ prefix=target.with_suffix(target.suffix+'.part-rsi32k');partial=target.with_suffix(target.suffix+'.unusedpartial')
+ if not prefix.exists() and partial.exists():partial.rename(prefix)
+ offset=prefix.stat().st_size if prefix.exists() else 0
+ assert offset<=f['Size']
+ partdir=M/(f['Path']+'.parts');partdir.mkdir(exist_ok=True)
+ url='https://modelscope.cn/models/Qwen/Qwen3-VL-8B-Instruct/resolve/'+urllib.parse.quote(f['Revision'])+'/'+urllib.parse.quote(f['Path'])
+ chunks=[]
+ for start in range(offset,f['Size'],64<<20):
+  end=min(start+(64<<20),f['Size'])-1;p=partdir/str(start);item=(url,start,end,p)
+  items.append(item);chunks.append(p)
+ plans.append((f,target,prefix,chunks))
+print('chunks',len(items),'preserved_bytes',sum(p.stat().st_size for _,_,p,_ in plans if p.exists()),flush=True)
+def fetch(item):
+ global done
+ url,start,end,p=item;n=end-start+1
+ if not(p.exists() and p.stat().st_size==n):
+  for attempt in range(3):
+   try:
+    req=urllib.request.Request(url,headers={'Range':f'bytes={start}-{end}'})
+    with urllib.request.urlopen(req,timeout=120) as r:
+     assert (r.status==206 and r.headers.get('Content-Range','').startswith(f'bytes {start}-{end}/')) or (r.status==200 and start==0 and r.headers.get('Content-Range')==f'bytes 0-{end}/{end+1}'),(r.status,r.headers.get('Content-Range'))
+     with open(p.with_suffix('.partial'),'wb') as out:
+      for b in iter(lambda:r.read(4<<20),b''):out.write(b)
+    assert p.with_suffix('.partial').stat().st_size==n;p.with_suffix('.partial').replace(p);break
+   except Exception as e:
+    print('retry',p.parent.name,start,attempt,repr(e),flush=True)
+    if attempt==2:raise
+    time.sleep(1)
+ with lock:
+  done+=1
+  put(O/'download-progress.json',{'chunks_done':done,'chunks_total':len(items),'updated_unix':time.time()})
+  if done%16==0:print('chunks_done',done,'/',len(items),flush=True)
+try:
+ with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:list(pool.map(fetch,items))
+ for f,target,prefix,chunks in plans:
+  with open(target.with_suffix(target.suffix+'.assembling'),'wb') as out:
+   for p in ([prefix] if prefix.exists() else [])+chunks:
+    with open(p,'rb') as src:shutil.copyfileobj(src,out,8<<20)
+  p=target.with_suffix(target.suffix+'.assembling');assert p.stat().st_size==f['Size'];assert sha(p)==f['Sha256'],f['Path'];p.replace(target)
+  print('verified',f['Path'],flush=True)
+ # Verify all files, including preserved small files, before issuing completion.
+ rows=[]
+ for f in files:
+  assert sha(M/f['Path'])==f['Sha256'];rows.append({'path':f['Path'],'sha256':f['Sha256'],'bytes':f['Size'],'revision':f['Revision']})
+ index=json.loads((M/'model.safetensors.index.json').read_text());assert set(index['weight_map'].values()).issubset({r['path'] for r in rows})
+ final=M.with_suffix('');M.rename(final)
+ put(O/'qwen-download-complete.json',{'status':'complete','model_path':str(final),'files':rows,'total_bytes':sum(r['bytes'] for r in rows),'finished_unix':time.time()})
+except Exception as e:
+ put(O/'qwen-download-error-parallel.json',{'error':repr(e),'time':time.time()});raise

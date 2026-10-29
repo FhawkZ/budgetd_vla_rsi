@@ -1,0 +1,92 @@
+import os,time,json,fcntl,subprocess,signal,hashlib,shutil,urllib.request
+from pathlib import Path
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('--gpu',type=int,choices=range(4),required=True);parser.add_argument('--output',required=True);parser.add_argument('--canary-report',required=True);parser.add_argument('--server-identity',required=True);a=parser.parse_args()
+GPU=str(a.gpu)
+fixed_path=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-contract-audit-20261028-1230/next-qualification-protocol.json')
+assert hashlib.sha256(fixed_path.read_bytes()).hexdigest()=='e719bcb6f1470604131c5288d81f7447d6226a5d3ea23faaec622065c054874d'
+canary_path=Path(a.canary_report);assert canary_path==Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context32k-canaries-v1/status.json');canary=json.loads(canary_path.read_text());assert canary['status']=='passed_closed' and len(canary['attempts'])==2
+assert canary['prompt_tokens']==33923 and canary['completion_tokens']<=64
+assert canary['server_identity']['max_input_tokens']==32768
+assert canary['server_identity']['script_sha256']=='0774594348a7b3b6bce5c45a26e9a98897e32a081a909e7d15905f8203dc09a2'
+assert all(r['status']=='passed' for r in canary['attempts'])
+current_identity_path=Path(a.server_identity);current_identity=json.loads(current_identity_path.read_text())
+for key in ['model','model_path','backend','torch','cuda','gpu','script_sha256','max_input_tokens','max_output_tokens']:
+ assert current_identity[key]==canary['server_identity'][key],('qualified service configuration changed',key)
+owner=json.loads((current_identity_path.parent/'owner-status.json').read_text());assert owner['status']=='running'
+assert Path(f"/proc/{owner['child_pid']}/stat").read_text().split()[21]==owner['child_start']
+assert owner['gpu']!=GPU,'simulator must use a separate genuinely idle GPU'
+
+with urllib.request.urlopen('http://127.0.0.1:8018/v1/models',timeout=5) as h:
+ assert json.load(h)['data'][0]['id']=='qwen3-vl-8b-instruct'
+R=Path(a.output);assert R==Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context32k-qualification-v1'),'single fixed allocation, no alternate output to replay'
+R.mkdir(exist_ok=False)
+(R/'frozen-qualification-protocol.json').write_bytes(fixed_path.read_bytes())
+(R/'canary-report.json').write_bytes(canary_path.read_bytes())
+(R/'server-identity.json').write_bytes(current_identity_path.read_bytes())
+P=Path('/media/data/liqz/Dex_operation');S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';E='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-robotwin';CORE='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-core'
+prior=Path('/media/data/liqz/Dex_runtime/datasets/agent-rsi/RPent-memory-47f301ef/robotwin')
+manifest={str(p.relative_to(prior)):hashlib.sha256(p.read_bytes()).hexdigest() for p in prior.rglob('*') if p.is_file()}
+protocol={'stage':'native algorithm/localQwen+transport+recording adaptation development reproduction; source-default100turn ceiling, not published-paper score reproduction','tasks':[{'name':'stack_blocks_two','seed':100000},{'name':'handover_block','seed':100001}],'task_config':'demo_randomized','model':'qwen3-vl-8b-instruct','vla_revision':'e727b46cd220b66981ea4d2fd9ba84adc189e2cc','source_commit':'a744bd5f128ebef3cb8c6736cf7cd98adff681f1','memory_revision':'47f301ef33bf8d0e8c770342f16b3c39c6a0e8c1','memory_sha256':manifest,'limits_per_task':{'Qwen_calls':100,'input_tokens_per_call':32768,'output_tokens_per_call':1024,'native_actions':10000,'planner_wall_seconds':900,'outer_wall_seconds':1200},'total_Qwen_call_cap':200,'updates_allowed':False,'final_test_used':False,'adaptations':['fixedQwen backbone','latest3images alltext preserved; JSONtoSSE lossless','intra-chunk video off, tool-boundaryRGBD saved; native actions/scoring unchanged','native SlidingWindowCompaction max_tokens28672 keep_tokens24000; frozen Qwen tokenizer and typed image-grid accounting;4096token margin; initial user preserved; no forced reobservation','two task-prior exact-byte filename aliases, agent misspellings not remapped'],'stop_on_input_incompatibility':True,'created_unix':time.time(),'code_sha256':{f:hashlib.sha256((P/'scripts/agent_rsi'/f).read_bytes()).hexdigest() for f in ['rpent_32k_qualification_cli.py','rpent_32k_qualification_run.py','rpent_qwen_transport.py','rpent_runtime_adaptation.py','rpent_context_16k.py','rpent_context_32k_qualification.py','rpent_counting_tokenized.py','rpent_multimodal_counting.py']}}
+protocol.update(source_default_turns=100,source_default_output_tokens=8192,output_substitution=1024,total_input_token_upper_bound=6553600,total_output_token_upper_bound=204800,total_native_action_cap=20000,total_outer_wall_cap_seconds=2400,model_calls_all_roles_included=True,no_outcome_based_backfill=True,no_retry=True,independent_final_test=False,retention_after_update=None)
+(R/'protocol.json').write_text(json.dumps(protocol,indent=2))
+protocol.update(qualification_protocol_sha256=hashlib.sha256(fixed_path.read_bytes()).hexdigest(),service_canary_usage={k:canary[k] for k in ['prompt_tokens','completion_tokens']},qualification_total_calls_cap=202,hardware_change_must_be_reported=True)
+(R/'protocol.json').write_text(json.dumps(protocol,indent=2))
+summary={'phase':'running','episodes':[],'protocol_sha256':hashlib.sha256((R/'protocol.json').read_bytes()).hexdigest()}
+def save(): (R/'status.json').write_text(json.dumps(summary,indent=2))
+save()
+for task in protocol['tasks']:
+ O=R/task['name'];O.mkdir();locks=[];proxy=None;cleanup=[]
+ try:
+  for p in [R.parent/f'robotwin-setup/gpu{GPU}.lock',Path(f'/media/data/liqz/Dex_runtime/locks/native-eval-gpu{GPU}.lock')]:
+   f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+  gpu_inventory=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,memory.used,utilization.gpu','--format=csv,noheader'],text=True)
+  gpu_processes=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid,gpu_uuid,used_memory','--format=csv,noheader'],text=True)
+  (O/'resources-before.json').write_text(json.dumps({'gpus':gpu_inventory,'processes':gpu_processes,'time':time.time()},indent=2))
+  uuid0=next(line.split(',')[1].strip() for line in gpu_inventory.splitlines() if line.split(',')[0].strip()==GPU);assert uuid0 not in gpu_processes,f'GPU{GPU} has compute process'
+  mem=int(subprocess.check_output(['nvidia-smi','-i',GPU,'--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,f'GPU{GPU}occupied:{mem}'
+  shutil.copytree(prior,O/'prior')
+  from rpent_context_16k import alias_memory
+  aliases=alias_memory(O/'prior',task['name'],'demo_randomized')
+  (O/'memory-aliases.json').write_text(json.dumps(aliases,indent=2))
+  env=os.environ.copy();env.pop('VIRTUAL_ENV',None);env.update(PYTHONPATH=str(P/'scripts/agent_rsi/rpent_trace_bootstrap')+':'+S,CUDA_VISIBLE_DEVICES=GPU,RSI_PILOT_OUTPUT=str(O),RSI_COMPACTION_LOG=str(O/'compactions.jsonl'),OPENAI_API_KEY='local-only',ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',TORCH_EXTENSIONS_DIR='/home/liqz/.local/share/dex_operation/cache/torch_extensions/agent-rsi-rpent',NO_PROXY='127.0.0.1,localhost',no_proxy='127.0.0.1,localhost')
+  with (O/'proxy.log').open('w') as plog:
+   proxy=subprocess.Popen([CORE+'/bin/python','-u',str(P/'scripts/agent_rsi/rpent_qwen_transport.py'),'--upstream','http://127.0.0.1:8018','--port','18019','--output',str(O/'calls'),'--max-calls','100'],stdout=plog,stderr=subprocess.STDOUT)
+  for _ in range(30):
+   if proxy.poll() is not None:raise RuntimeError('proxy exited')
+   try:
+    with urllib.request.urlopen('http://127.0.0.1:18019/health',timeout=2) as h:json.load(h)
+    break
+   except Exception:time.sleep(.1)
+  args=['--robot','robotwin','--planner','api','--model','openai-chat:qwen3-vl-8b-instruct','--base-url','http://127.0.0.1:18019/v1','--max-turns','100','--max-tokens','1024','--reasoning-effort','none','--planner-timeout-s','900','--memory-profile','local','--memory-dir',str(O/'prior'),'--output-dir',str(O/'cli'),'--task-name',task['name'],'--seed',str(task['seed']),'--task-config','demo_randomized','--max-episode-steps','10000','--robotwin-assets-path',env['ROBOTWIN_ASSETS_PATH'],'--vla-model-path',env['LINGBOT_MODEL_PATH'],'--cuda-device','0']
+  row={'task':task,'started_unix':time.time(),'args':args};summary['active_task']=task['name'];save()
+  with (O/'run.log').open('w') as log:
+   child=subprocess.Popen([E+'/bin/python','-u',str(P/'scripts/agent_rsi/rpent_32k_qualification_cli.py'),*args],env=env,stdout=log,stderr=subprocess.STDOUT)
+   try:row['exit_code']=child.wait(timeout=1200)
+   except subprocess.TimeoutExpired:child.kill();child.wait();row['outer_timeout']=True
+ except Exception as ex:
+  row={'task':task,'setup_error':repr(ex)}
+ finally:
+  if (O/'owned-daemons.jsonl').exists():
+   for line in (O/'owned-daemons.jsonl').read_text().splitlines():
+    d=json.loads(line);sp=Path(f"/proc/{d['pid']}/stat")
+    if sp.exists() and sp.read_text().split()[21]==d['proc_start']:
+     os.kill(d['pid'],signal.SIGTERM)
+     for _ in range(50):
+      if not sp.exists() or sp.read_text().split()[2]=='Z':break
+      time.sleep(.1)
+     if sp.exists() and sp.read_text().split()[2]!='Z':os.kill(d['pid'],signal.SIGKILL)
+    cleanup.append({'pid':d['pid'],'live':sp.exists() and sp.read_text().split()[2]!='Z'})
+  if proxy is not None:
+   proxy.terminate()
+   try:proxy.wait(timeout=5)
+   except subprocess.TimeoutExpired:proxy.kill();proxy.wait()
+  for lock in locks:lock.close()
+ row.update(cleanup=cleanup,finished_unix=time.time())
+ if (O/'calls/ledger.json').exists():row['usage']=json.loads((O/'calls/ledger.json').read_text())
+ row['transport_errors']=[json.loads(p.read_text()) for p in (O/'calls').glob('*-audit.json') if json.loads(p.read_text()).get('http_status')!=200]
+ row['prior_unchanged']=all((O/'prior'/k).exists() and hashlib.sha256((O/'prior'/k).read_bytes()).hexdigest()==h for k,h in manifest.items()) if (O/'prior').exists() else None
+ summary['episodes'].append(row);save()
+ if row.get('setup_error') or row['transport_errors'] or row.get('outer_timeout') or row.get('exit_code',0)!=0:
+  summary['stopped_reason']='setup/transport incompatibility; remaining task notrun';break
+summary.update(phase='finished',active_task=None,finished_unix=time.time());save();print(json.dumps(summary))

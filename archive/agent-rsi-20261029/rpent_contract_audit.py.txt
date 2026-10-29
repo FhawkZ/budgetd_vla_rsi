@@ -1,0 +1,70 @@
+"""Read-only CPU audit; synthetic footprints are NOT rollouts or model decisions."""
+import json,hashlib,copy,itertools,datetime
+from pathlib import Path
+from tokenizers import Tokenizer
+from transformers.utils.chat_template_utils import _compile_jinja_template
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-dev100-20261028-0730')
+V=Path('/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027')
+O=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-contract-audit-20261028-1230');O.mkdir(exist_ok=False)
+T=Path('/tmp/agent-rsi-qwen-chat-template.json');raw=json.loads(T.read_text());template=_compile_jinja_template(raw['chat_template'])
+tok=Tokenizer.from_file('/media/data/liqz/Dex_runtime/models/agent-rsi/qwen-tokenizer-a5d85b6d/tokenizer.json')
+def count(d):
+ ms=copy.deepcopy(d['messages'])
+ for m in ms:
+  c=m.get('content')
+  if isinstance(c,str):m['content']=[{'type':'text','text':c}]
+  elif c is None:m['content']=[]
+  else:
+   for b in c:
+    if b.get('type')=='image_url':b.clear();b.update(type='image',url='CPU-placeholder')
+ s=template.render(messages=ms,tools=d.get('tools'),add_generation_prompt=True)
+ s=s.replace('<|image_pad|>','<|image_pad|>'*80)
+ return len(tok.encode(s,add_special_tokens=False).ids)
+def decoded(m):
+ try:
+  c=json.loads(m['content'])
+  return json.loads(c[0])
+ except (TypeError,ValueError,KeyError,IndexError):return {}
+def filepair(path,content):
+ ident='cpu_footprint_'+hashlib.sha256(path.encode()).hexdigest()[:10]
+ a={'role':'assistant','content':None,'tool_calls':[{'id':ident,'type':'function','function':{'name':'read_text_file','arguments':json.dumps({'path':path})}}]}
+ b={'role':'tool','tool_call_id':ident,'content':json.dumps([json.dumps({'path':path,'size':len(content.encode()),'content':content},indent=2)])}
+ return [a,b]
+gpath='robots/robotwin/guides/GUIDE_RPENT.md';guide=(V/gpath).read_text()
+report={'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'type':'CPU_only_saved_evidence_and_counterfactual_footprints','new_model_calls':0,'new_episodes':0,'template_sha256':hashlib.sha256(T.read_bytes()).hexdigest(),'guide_sha256':hashlib.sha256(guide.encode()).hexdigest(),'tasks':{}}
+for task in ['stack_blocks_two','handover_block']:
+ C=R/task/'calls';base=json.loads((C/'001-forwarded.json').read_text());pairs={};rows=[];sequence=[];diffs=[]
+ viewmsgs=json.loads((C/'002-forwarded.json').read_text())['messages'][2:]
+ for f in sorted(C.glob('*-forwarded.json')):
+  i=int(f.name.split('-')[0]);d=json.loads(f.read_text());resp=json.loads((C/f'{i:03d}-response.json').read_text());n=count(d);diffs.append(n-resp['usage']['prompt_tokens']);visible=[];errors=[]
+  for j,m in enumerate(d['messages']):
+   if m['role']!='tool':continue
+   obj=decoded(m)
+   if obj.get('path') and 'content' in obj:
+    visible.append(obj['path']);pairs.setdefault(obj['path'],d['messages'][j-1:j+1])
+   if obj.get('error'):errors.append(obj['error'])
+  calls=resp['choices'][0]['message'].get('tool_calls',[])
+  for c in calls:sequence.append({'request':i,'tool':c['function']['name'],'arguments':json.loads(c['function']['arguments'])})
+  rows.append({'request':i,'exact_reconstructed_tokens':n,'usage_tokens':resp['usage']['prompt_tokens'],'visible_files':visible,'visible_errors':errors})
+ assert all(x==0 for x in diffs),('tokenizer mismatch',min(diffs),max(diffs))
+ prior=R/task/'prior';taskpath=next(p for p in pairs if p.endswith('.json') and '/task-specific/' in p);recipepath=next(p for p in pairs if p.endswith('.jsonl'));indexpath=str(prior/'MEMORY.md')
+ core=filepair(gpath,guide)+viewmsgs+pairs[taskpath]+pairs[recipepath]+pairs[indexpath]
+ leaves=sorted((prior/'global').glob('*.md'));footprints=[]
+ for k in [1,2,3]:
+  for combo in itertools.combinations(leaves,k):
+   d=copy.deepcopy(base);d['messages']+=core+sum([filepair(str(p),p.read_text()) for p in combo],[])
+   footprints.append({'leaves':[p.name for p in combo],'input_tokens':count(d)})
+ d=copy.deepcopy(base);d['messages']+=core;corecount=count(d)
+ # Input-only costs of the observed full view versus removing duplicate log/state branches.
+ obs=decoded(viewmsgs[1]);minimal=copy.deepcopy(obs)
+ minimal.pop('log',None);minimal.get('state',{}).pop('log',None)
+ # This is a counterfactual representation, never applied to model inputs in this audit.
+ dd=copy.deepcopy(base);dd['messages']+=copy.deepcopy(viewmsgs);old=dd['messages'][3]['content'];arr=json.loads(old);arr[0]=json.dumps(minimal,indent=2);dd['messages'][3]['content']=json.dumps(arr)
+ requests=[s for s in sequence if s['tool']=='read_text_file'];guide_reads=[s for s in requests if s['arguments'].get('path','').endswith('GUIDE_RPENT.md')]
+ early=[s for s in requests if s['request']<11 and '/global/' in s['arguments'].get('path','')]
+ tr={'observed_requests':len(rows),'guide_read_attempts':len(guide_reads),'guide_body_in_initial_messages':guide in str(base['messages']),'first_cycle_leaf_read_attempts':early,'exact_usage_match_count':len(diffs),'base_tokens':count(base),'core_with_guide_view_task_recipe_index':corecount,'footprint_by_leaf_count':{},'observation_counterfactual_duplicate_logs_removed_token_saving':count(json.loads((C/'002-forwarded.json').read_text()))-count(dd),'rows':rows,'sequence':sequence,'all_counterfactual_footprints':footprints}
+ for k in [1,2,3]:
+  ns=[f['input_tokens'] for f in footprints if len(f['leaves'])==k];tr['footprint_by_leaf_count'][str(k)]={'min':min(ns),'max':max(ns),'combinations':len(ns),'above_14336':sum(n>14336 for n in ns),'above_16384':sum(n>16384 for n in ns)}
+ report['tasks'][task]=tr
+(O/'report.json').write_text(json.dumps(report,indent=2));(O/'chat_template.json').write_bytes(T.read_bytes());(O/'audit-script.py').write_bytes(Path(__file__).read_bytes())
+print(json.dumps({k:{a:b for a,b in v.items() if a not in ['rows','sequence','all_counterfactual_footprints']} for k,v in report['tasks'].items()},indent=2))

@@ -1,0 +1,3 @@
+import faulthandler
+faulthandler.enable()
+faulthandler.dump_traceback_later(45,repeat=True)

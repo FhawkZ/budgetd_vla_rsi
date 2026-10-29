@@ -1,0 +1,10 @@
+import json,math,time
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-vla-only-20261028-0250');rows=[]
+for name in ['stack_blocks_two','handover_block']:
+ O=R/name;s=json.loads((O/'status.json').read_text());assert s['phase']=='finished'
+ steps=json.loads((O/'cli/states.json').read_text())['steps'];a=steps[0]['state']['robot_state']['arm_qpos_real12'];b=steps[-1]['state']['robot_state']['arm_qpos_real12'];status=steps[-1]['result']['episode_status']
+ prompts=[x['result'].get('prompt') for x in steps if x.get('command',{}).get('action')=='lingbot_act'];instruction=steps[0]['state']['task_language']
+ rows.append({'task':name,'seed':s['seed'],'exit_code':s.get('exit_code'),'outer_timeout':s.get('outer_timeout',False),'native_eval_success':status['eval_success'],'native_actions':status['take_action_cnt'],'action_horizon':600,'state_records':len(steps),'initial_to_terminal_max_abs_joint_change_rad':max(abs(x-y) for x,y in zip(a,b)),'native_task_language':instruction,'all_recorded_VLA_prompts_match_native_instruction':all(p==instruction for p in prompts) if prompts else None,'recorded_prompt_count':len(prompts),'qwen_calls':0,'wall_seconds':s['finished_unix']-s['started_unix'],'cleanup':s['cleanup']})
+report={'role':'frozen LingBot VLA-only development control; current-image predicted actions; no handcrafted trajectories and no high-level Agent/RSI update','rows':rows,'qwen_calls':0,'accepted_updates':0,'strict_rsi_rounds':0,'final_tests_used':False,'budget_status':'closed2episodes; no backfill or horizon extension','comparability':'600action horizon differs from10000action-cap/12Qwencall pilot; report separately, no method ranking; one scene/task cannot support generalization claims','interpretation':'Provides real motor-policy competence evidence at a bounded horizon. Horizon failure does not show task infeasibility or policy incapability at longer horizons.'}
+(R/'report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

@@ -1,0 +1,33 @@
+import json,base64,hashlib
+from pathlib import Path
+from pydantic_ai.messages import ModelRequest,ModelResponse,SystemPromptPart,UserPromptPart,ToolCallPart,ToolReturnPart,BinaryContent,TextPart,ModelMessagesTypeAdapter
+from pydantic_ai_harness.compaction._shared import estimate_token_count
+from rpent_counting_tokenized import install
+count=install();R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-counting-calibration-20261028-0220');R.mkdir(exist_ok=True)
+rows=[]
+for dirname in ['rpent-two-task-pilot-20261027-1640','rpent-context-pilot-20261027-2140']:
+ p=R.parent/dirname/'stack_blocks_two/calls'
+ for f in sorted(p.glob('*-forwarded.json')):
+  b=json.loads(f.read_text());ms=[];idx=0;raw=b['messages']
+  while idx<len(raw):
+   m=raw[idx];c=m.get('content');role=m['role']
+   if role=='system':obj=ModelRequest(parts=[SystemPromptPart(c)])
+   elif role=='user':obj=ModelRequest(parts=[UserPromptPart(c)])
+   elif role=='assistant':obj=ModelResponse(parts=([TextPart(c)] if c else [])+[ToolCallPart(x['function']['name'],x['function']['arguments'],x['id']) for x in m.get('tool_calls',[])])
+   else:
+    try:v=json.loads(c)
+    except Exception:v=c
+    if idx+1<len(raw) and raw[idx+1]['role']=='user' and isinstance(raw[idx+1].get('content'),list):
+     user=raw[idx+1]['content'];imgs=[x for x in user if x['type']=='image_url']
+     if imgs:
+      assert isinstance(v,list)
+      v += [BinaryContent(data=base64.b64decode(x['image_url']['url'].split(',')[1]),media_type='image/png') for x in imgs];idx+=1
+    obj=ModelRequest(parts=[ToolReturnPart(m.get('name',''),v,m['tool_call_id'])])
+   ms.append(obj);idx+=1
+  before=ModelMessagesTypeAdapter.dump_json(ms)
+  est=estimate_token_count(ms,count)+count(json.dumps(b.get('tools',[])))
+  response=f.with_name(f.name.replace('forwarded','response'));usage=json.loads(response.read_text())['usage']['prompt_tokens'] if response.exists() else None
+  assert before==ModelMessagesTypeAdapter.dump_json(ms)
+  rows.append({'run':dirname,'request':int(f.name[:3]),'estimate_with_tools':est,'provider_tokens':usage,'underestimate':None if usage is None else usage-est,'images':sum(isinstance(i,BinaryContent) for m in ms for p in m.parts if isinstance(p,ToolReturnPart) and isinstance(p.content,list) for i in p.content)})
+report={'rows':rows,'max_underestimate':max(r['underestimate'] for r in rows if r['underestimate'] is not None),'model_calls':0,'messages_unchanged':True,'tokenizer_sha256':'a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7','limitations':'Provider-body reconstruction after any compaction; unanchored full estimate with serialized tool schemas, not proof of live usage-anchor hook. Preserve1024token margin and input limit; imageprocessor grid cross-check pending.'}
+(R/'report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

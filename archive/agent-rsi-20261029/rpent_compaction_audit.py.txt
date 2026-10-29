@@ -1,0 +1,40 @@
+"""Offline only: native compactor applied to captured OpenAI requests; no model calls."""
+import asyncio,base64,copy,json,hashlib
+from pathlib import Path
+from pydantic_ai.messages import ModelRequest,ModelResponse,SystemPromptPart,UserPromptPart,ToolCallPart,ToolReturnPart,TextPart,BinaryContent
+from pydantic_ai_harness.compaction import SlidingWindowCompaction
+from pydantic_ai_harness.compaction._shared import estimate_token_count
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-context-audit-20261027-1700');R.mkdir(exist_ok=True)
+P=R.parent/'rpent-two-task-pilot-20261027-1640/stack_blocks_two/calls'
+rows=[]
+for index in (1,10,11):
+ body=json.loads((P/f'{index:03d}-forwarded.json').read_text());msgs=[]
+ for m in body['messages']:
+  role=m['role'];c=m.get('content')
+  if role=='system':obj=ModelRequest(parts=[SystemPromptPart(c)])
+  elif role=='user':
+   if isinstance(c,list):
+    c=[x['text'] if x['type']=='text' else BinaryContent(data=base64.b64decode(x['image_url']['url'].split(',')[1]),media_type=x['image_url']['url'].split(';')[0][5:]) for x in c]
+   obj=ModelRequest(parts=[UserPromptPart(c)])
+  elif role=='assistant':
+   parts=([TextPart(c)] if c else [])+[ToolCallPart(x['function']['name'],x['function']['arguments'],x['id']) for x in m.get('tool_calls',[])];obj=ModelResponse(parts=parts)
+  else:obj=ModelRequest(parts=[ToolReturnPart(m.get('name',''),c,m['tool_call_id'])])
+  msgs.append(obj)
+ raw_msgs=list(msgs)
+ # Native API initial ModelRequest combines the system prompt and initial user.
+ msgs=[ModelRequest(parts=msgs[0].parts+msgs[1].parts)]+msgs[2:]
+ original=asyncio.run(SlidingWindowCompaction(max_messages=80,max_fraction=.8,keep_messages=40).compact(msgs,None))
+ # Candidate config is an offline diagnostic, not enabled in any planner.
+ candidate=asyncio.run(SlidingWindowCompaction(max_tokens=10000,keep_tokens=6000).compact(msgs,None))
+ partids={id(p) for m in candidate for p in m.parts}
+ kept=[i for i,m in enumerate(raw_msgs) if any(id(p) in partids for p in m.parts)]
+ out=copy.deepcopy(body);out['messages']=[body['messages'][i] for i in kept]
+ calls={x['id'] for m in out['messages'] for x in m.get('tool_calls',[])}
+ returns={m['tool_call_id'] for m in out['messages'] if m['role']=='tool'}
+ assert calls==returns
+ assert out['messages'][0]==body['messages'][0] and out['messages'][1]==body['messages'][1]
+ (R/f'{index:03d}-original.json').write_text(json.dumps(body))
+ (R/f'{index:03d}-compacted.json').write_text(json.dumps(out))
+ rows.append({'request':index,'native_message_estimate':estimate_token_count(msgs),'original_messages':len(msgs),'default_compact_is_noop':len(original)==len(msgs),'candidate_messages':len(candidate),'kept_original_indices':kept,'tool_pairs_preserved':True,'system_first_user_preserved':True,'candidate_image_count':sum(x.get('type')=='image_url' for m in out['messages'] if isinstance(m.get('content'),list) for x in m['content'])})
+(R/'structural-report.json').write_text(json.dumps({'rows':rows,'model_calls':0,'candidate_config':{'max_tokens':10000,'keep_tokens':6000},'status':'offline only; exact processor count pending; observation retention must be qualified','script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},indent=2))
+print(json.dumps(rows,indent=2))

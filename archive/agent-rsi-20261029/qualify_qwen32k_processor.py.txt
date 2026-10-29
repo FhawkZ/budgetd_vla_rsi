@@ -1,0 +1,20 @@
+import json,hashlib,torch
+from pathlib import Path
+from transformers import AutoProcessor
+B=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024')
+complete=json.loads((B/'rpent-32k-resume-20261028-2220/qwen-download-complete.json').read_text());assert complete['status']=='complete'
+processor=AutoProcessor.from_pretrained(complete['model_path'],local_files_only=True)
+rows=[]
+for row in json.loads((B/'rpent-32k-staging-20261028-1720/canaries/manifest.json').read_text())['rows']:
+ d=json.loads(Path(row['path']).read_text());ms=[]
+ for m in d['messages']:
+  c=m.get('content');o={k:v for k,v in m.items() if k in ['role','content','tool_calls','tool_call_id','name']}
+  if isinstance(c,str):o['content']=[{'type':'text','text':c}]
+  elif c is None:o['content']=[]
+  else:o['content']=[{'type':'image','url':x['image_url']['url']} if x['type']=='image_url' else x for x in c]
+  ms.append(o)
+ inputs=processor.apply_chat_template(ms,tools=d['tools'],add_generation_prompt=True,tokenize=True,return_dict=True,return_tensors='pt')
+ n=inputs['input_ids'].shape[1];assert n==row['input_tokens'];rows.append({'task':row['task'],'input_tokens':n,'image_grid_thw':inputs['image_grid_thw'].tolist()})
+assert not torch.cuda.is_initialized()
+report={'passed':True,'model_calls':0,'cuda_initialized':False,'rows':rows,'model_manifest_sha256':hashlib.sha256((B/'rpent-32k-resume-20261028-2220/qwen-download-complete.json').read_bytes()).hexdigest()}
+(B/'rpent-32k-resume-20261028-2220/processor-check.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

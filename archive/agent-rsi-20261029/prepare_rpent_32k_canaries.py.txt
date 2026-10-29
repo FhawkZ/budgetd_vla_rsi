@@ -1,0 +1,32 @@
+"""Generate two CPU-only long-context service probes. Never execute tools or simulate."""
+import ast,json,copy,hashlib
+from pathlib import Path
+from tokenizers import Tokenizer
+from transformers.utils.chat_template_utils import _compile_jinja_template
+P=Path('/media/data/liqz/Dex_operation/scripts/agent_rsi')
+B=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024')
+O=B/'rpent-32k-staging-20261028-1720/canaries';O.mkdir(exist_ok=False)
+T=B/'rpent-contract-audit-20261028-1230/chat_template.json'
+template=_compile_jinja_template(json.loads(T.read_text())['chat_template'])
+tok=Tokenizer.from_file('/media/data/liqz/Dex_runtime/models/agent-rsi/qwen-tokenizer-a5d85b6d/tokenizer.json')
+# Reuse audited pure helpers only; do not rerun the closed audit.
+s=P/'rpent_contract_audit.py';tree=ast.parse(s.read_text());nodes=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in ['count','decoded','filepair']]
+assert len(nodes)==3
+exec(compile(ast.Module(body=nodes,type_ignores=[]),str(s),'exec'))
+rows=[]
+for task in ['stack_blocks_two','handover_block']:
+ R=B/'rpent-dev100-20261028-0730'/task;C=R/'calls';base=json.loads((C/'001-forwarded.json').read_text());pairs={}
+ for f in sorted(C.glob('*-forwarded.json')):
+  ms=json.loads(f.read_text())['messages']
+  for j,m in enumerate(ms):
+   if m['role']=='tool':
+    obj=decoded(m)
+    if obj.get('path') and 'content' in obj:pairs.setdefault(obj['path'],ms[j-1:j+1])
+ gpath='robots/robotwin/guides/GUIDE_RPENT.md';guide=(Path('/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027')/gpath).read_text()
+ taskpath=next(p for p in pairs if p.endswith('.json') and '/task-specific/' in p);recipepath=next(p for p in pairs if p.endswith('.jsonl'));leaves=sorted((R/'prior/global').glob('*.md'))[:3]
+ base['messages']+=filepair(gpath,guide)+json.loads((C/'002-forwarded.json').read_text())['messages'][2:]+pairs[taskpath]+pairs[recipepath]+pairs[str(R/'prior/MEMORY.md')]+sum([filepair(str(p),p.read_text()) for p in leaves],[])
+ base['max_tokens']=32;base['stream']=False;tokens=count(base);assert 16384<tokens<=32768
+ output=O/(task+'.json');output.write_text(json.dumps(base))
+ rows.append({'task':task,'path':str(output),'input_tokens':tokens,'sha256_raw':hashlib.sha256(output.read_bytes()).hexdigest(),'sha256_canonical':hashlib.sha256(json.dumps(base,sort_keys=True).encode()).hexdigest(),'leaves':[p.name for p in leaves]})
+report={'status':'prepared_not_called','classification':'synthetic service capacity probe; NOT Agent episode, NOT learned experience','model_calls':0,'episodes':0,'max_canary_calls':2,'max_output_tokens_per_call':32,'must_discard_outputs_from_task_histories':True,'rows':rows,'helper_source_sha256':hashlib.sha256(s.read_bytes()).hexdigest(),'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+(O/'manifest.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

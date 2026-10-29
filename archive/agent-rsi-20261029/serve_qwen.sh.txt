@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /root/autodl-tmp/qian/Dex_operation
+source scripts/reproduction/env-lzgpu301.sh
+OUT="$DEX_RUNTIME_ROOT/outputs/agent-rsi-20261024"
+ENV="$DEX_ENV_ROOT/envs/agent-rsi-qwen"
+MODEL="$DEX_RUNTIME_ROOT/models/agent-rsi/Qwen3-VL-8B-Instruct"
+mkdir -p "$OUT/locks" "$DEX_ENV_ROOT/cache/agent-rsi-vllm"
+exec 9>"$OUT/locks/gpu3.lock"
+flock -n 9 || { echo 'Existing Agent RSI server lock'; exit 2; }
+test -f "$OUT/qwen-download-complete.json"
+test -f "$OUT/install.complete"
+USED=$(nvidia-smi -i 3 --query-gpu=memory.used --format=csv,noheader,nounits)
+if [ "$USED" -gt 256 ]; then echo "GPU3 busy: $USED MiB; do not launch"; exit 3; fi
+export CUDA_VISIBLE_DEVICES=3
+export OMP_NUM_THREADS=4
+export HF_HUB_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+export VLLM_CACHE_ROOT="$DEX_ENV_ROOT/cache/agent-rsi-vllm"
+export TORCHINDUCTOR_CACHE_DIR="$DEX_ENV_ROOT/cache/agent-rsi-torchinductor"
+export TRITON_CACHE_DIR="$DEX_ENV_ROOT/cache/agent-rsi-triton"
+exec "$ENV/bin/vllm" serve "$MODEL" --host 127.0.0.1 --port 8017 --served-model-name qwen3-vl-8b-instruct --dtype bfloat16 --max-model-len 16384 --max-num-seqs 2 --gpu-memory-utilization 0.45 --enforce-eager --enable-auto-tool-choice --tool-call-parser hermes --limit-mm-per-prompt '{"image":3,"video":0}'

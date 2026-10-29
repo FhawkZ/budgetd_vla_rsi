@@ -1,0 +1,33 @@
+"""Explicit local-16K deployment configuration; native compaction, no generated summaries."""
+import json,os,time
+from pathlib import Path
+CONFIG={'max_messages':80,'max_tokens':10000,'keep_tokens':6000,'preserve_first_user_message':True}
+def install():
+ import rpent.planner.api_loop as api
+ from pydantic_ai_harness.compaction import SlidingWindowCompaction
+ from pydantic_ai.messages import UserPromptPart,ToolReturnPart,BinaryContent
+ class LoggedCompaction(SlidingWindowCompaction):
+  async def compact(self,messages,ctx):
+   result=await super().compact(messages,ctx)
+   def images(ms):
+    return sum(isinstance(i,BinaryContent) for m in ms for p in m.parts if isinstance(p,(UserPromptPart,ToolReturnPart)) and isinstance(p.content,list) for i in p.content)
+   target=os.environ.get('RSI_COMPACTION_LOG')
+   if target:
+    with Path(target).open('a') as f:f.write(json.dumps({'time':time.time(),'before_messages':len(messages),'after_messages':len(result),'images_before':images(messages),'images_after':images(result),'config':CONFIG})+'\n')
+   return result
+ def factory(**kwargs):return LoggedCompaction(**CONFIG)
+ api.SlidingWindowCompaction=factory
+ return LoggedCompaction
+
+def alias_memory(prior,task,config):
+ """Copies only two exact released files; no alias for invented leaf filenames."""
+ import hashlib,shutil
+ prior=Path(prior);rows=[]
+ for suffix in ('.json','_recipe.jsonl'):
+  src=prior/'task-specific'/f'{task}_s0{suffix}'
+  dst=prior/'task-specific'/f'robotwin_{task}_{config}_s0{suffix}'
+  assert src.is_file() and not dst.exists(),(src,dst)
+  shutil.copyfile(src,dst)
+  a=hashlib.sha256(src.read_bytes()).hexdigest();b=hashlib.sha256(dst.read_bytes()).hexdigest();assert a==b
+  rows.append({'source':str(src),'alias':str(dst),'sha256':a,'kind':'filename-only deployment compatibility'})
+ return rows

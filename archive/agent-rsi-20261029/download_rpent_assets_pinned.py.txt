@@ -1,0 +1,27 @@
+import json,hashlib,time,fcntl,importlib.util
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-qualification-20261027')
+D=Path('/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b')
+lock=(R/'assets-download.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+state={'phase':'downloading','started_unix':time.time(),'destination':str(D),'revision':'c15cc97be71e35244b6605d2d84c187f8565cc4d','gpu_used':False}
+def save():
+ p=R/'assets-download-status.json';q=p.with_suffix('.tmp');q.write_text(json.dumps(state,indent=2));q.replace(p)
+save()
+try:
+ src=Path('/home/liqz/.local/share/dex_operation/cache/uv/archive-v0/NAQ1ExvZj6twCukD/robotwin/assets.py')
+ spec=importlib.util.spec_from_file_location('native_robotwin_assets',src);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+ manifest=json.loads((R/'robotwin-assets-manifest.json').read_text());items={x['rfilename']:x for x in manifest['siblings']}
+ original=m.snapshot_download
+ def checked_snapshot(**kwargs):
+  kwargs.update(max_workers=2,token=False);p=Path(original(**kwargs));state['phase']='verifying_archives';save()
+  for name in m.ASSET_ARCHIVES:
+   f=p/name;expected=items[name]
+   if f.stat().st_size!=expected['size'] or m._sha256(f)!=expected['lfs']['sha256']:raise ValueError('archive mismatch '+name)
+  state['phase']='extracting';save();return str(p)
+ m.snapshot_download=checked_snapshot
+ result=m.download_assets(D)
+ state.update(phase='verified',identity=result,source_sha256=hashlib.sha256(src.read_bytes()).hexdigest())
+except Exception as e:
+ state.update(phase='failed',error=type(e).__name__+': '+str(e));raise
+finally:
+ state['updated_unix']=time.time();save()

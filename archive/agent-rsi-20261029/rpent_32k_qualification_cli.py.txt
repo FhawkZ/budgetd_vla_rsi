@@ -1,0 +1,20 @@
+import os,json,signal
+from pathlib import Path
+R=Path(os.environ['RSI_PILOT_OUTPUT'])
+from rpent.utils.daemon import ProcessDaemon
+original=ProcessDaemon.start
+def start(self):
+ result=original(self)
+ with (R/'owned-daemons.jsonl').open('a') as f:f.write(json.dumps({'pid':self._proc.pid,'cmd':self.cmd,'proc_start':Path(f'/proc/{self._proc.pid}/stat').read_text().split()[21]})+'\n')
+ return result
+ProcessDaemon.start=start
+from rpent_runtime_adaptation import disable_intra_chunk_video
+disable_intra_chunk_video()
+from rpent_context_32k_qualification import install
+install()
+from rpent.cli.main import main
+def timeout(*_):raise TimeoutError('autonomous pilot1050s wall cap')
+signal.signal(signal.SIGALRM,timeout);signal.alarm(1050)
+try:code=main()
+finally:signal.alarm(0)
+raise SystemExit(code)

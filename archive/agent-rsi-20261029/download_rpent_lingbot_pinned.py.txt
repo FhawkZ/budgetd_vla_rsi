@@ -1,0 +1,31 @@
+import json,hashlib,time,fcntl
+from pathlib import Path
+from huggingface_hub import snapshot_download
+ROOT=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-qualification-20261027')
+DEST=Path('/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c')
+lock=(ROOT/'lingbot-download.lock').open('w')
+fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+state={'repo':'RLinf/LingBot-VLA-RoboTwin-EEF-ckpt1500','revision':'e727b46cd220b66981ea4d2fd9ba84adc189e2cc','destination':str(DEST),'phase':'downloading','started_unix':time.time(),'gpu_used':False}
+def save():
+ p=ROOT/'lingbot-download-status.json';t=p.with_suffix('.tmp');t.write_text(json.dumps(state,indent=2));t.replace(p)
+save()
+try:
+ snapshot_download(repo_id=state['repo'],revision=state['revision'],local_dir=str(DEST),max_workers=2,token=False)
+ state['phase']='verifying';save()
+ manifest=json.loads((ROOT/'lingbot-model-manifest.json').read_text());records=[]
+ for entry in manifest['siblings']:
+  p=DEST/entry['rfilename'];size=p.stat().st_size
+  if size!=entry['size']:raise ValueError('size mismatch: '+entry['rfilename'])
+  lfs=entry.get('lfs');h=hashlib.sha256() if lfs else hashlib.sha1()
+  if not lfs:h.update(('blob '+str(size)+'\0').encode())
+  with p.open('rb') as f:
+   for block in iter(lambda:f.read(8*1024*1024),b''):h.update(block)
+  expected=lfs['sha256'] if lfs else entry['blobId']
+  if h.hexdigest()!=expected:raise ValueError('hash mismatch: '+entry['rfilename'])
+  records.append({'path':entry['rfilename'],'bytes':size,'verified_hash':h.hexdigest()})
+ (ROOT/'lingbot-verified-files.json').write_text(json.dumps(records,indent=2))
+ state.update(phase='verified',file_count=len(records),total_bytes=sum(x['bytes'] for x in records))
+except Exception as e:
+ state.update(phase='failed',error=type(e).__name__+': '+str(e));raise
+finally:
+ state['updated_unix']=time.time();save()

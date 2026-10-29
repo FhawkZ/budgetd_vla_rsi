@@ -1,0 +1,32 @@
+[
+  {
+    "file": "libegl1_1.4.0-1_amd64.deb",
+    "sha256": "4a35c0e925e15a076e7ce11d7c76f8ecb16615fc347c2c09afa4c205a7ca8ec4",
+    "bytes": 28564
+  },
+  {
+    "file": "libgl1_1.4.0-1_amd64.deb",
+    "sha256": "4fb2bbff94bb1a59bbdb40041e7a8ab58db2a003a151f4055357af03f0b78666",
+    "bytes": 110500
+  },
+  {
+    "file": "libglvnd0_1.4.0-1_amd64.deb",
+    "sha256": "6956d8be93b160b439a043141a061adfd54561d877423a956ace84d2fb3bfb4e",
+    "bytes": 73582
+  },
+  {
+    "file": "libglx0_1.4.0-1_amd64.deb",
+    "sha256": "950068e8a3ad3905058d21a8c870c37989e48c0a537a7c57231c277af19f5395",
+    "bytes": 41024
+  },
+  {
+    "file": "libvulkan1_1.3.204.1-2_amd64.deb",
+    "sha256": "192adcff489996b3398e7e7c0012b98e9586b46fe9a9eb13fb02c0feba88548b",
+    "bytes": 128014
+  },
+  {
+    "file": "vulkan-tools_1.3.204.0+dfsg1-1_amd64.deb",
+    "sha256": "0c83c0dc652efd7f503762a79deba3e67efc8d3ec8d8a8d5f0c5acef27136bcb",
+    "bytes": 241064
+  }
+]

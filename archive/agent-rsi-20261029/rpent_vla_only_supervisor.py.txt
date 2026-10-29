@@ -1,0 +1,31 @@
+import os,time,json,fcntl,subprocess,signal,sys,hashlib
+from pathlib import Path
+task,seed=sys.argv[1:];assert task in ['stack_blocks_two','handover_block']
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-vla-only-20261028-0250')/task;R.mkdir(exist_ok=False,parents=True)
+P=Path('/media/data/liqz/Dex_operation');S='/media/data/liqz/Dex_runtime/vendor/agent-rsi/RPent-source-audit-20261027';E='/home/liqz/.local/share/dex_operation/envs/agent-rsi-rpent-robotwin'
+locks=[]
+for p in [R.parent.parent/'robotwin-setup/gpu0.lock',Path('/media/data/liqz/Dex_runtime/locks/native-eval-gpu0.lock')]:
+ f=p.open('a');fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(f)
+mem=int(subprocess.check_output(['nvidia-smi','-i','0','--query-gpu=memory.used','--format=csv,noheader,nounits'],text=True));assert mem<100,mem
+env=os.environ.copy();env.pop('VIRTUAL_ENV',None);env.update(PYTHONPATH=str(P/'scripts/agent_rsi/rpent_trace_bootstrap')+':'+S,CUDA_VISIBLE_DEVICES='0',RSI_BOUNDARY_ONLY_VIDEO='1',RSI_TRACE_OUTPUT=str(R),RSI_VLA_TASK=task,RSI_VLA_SEED=seed,OPENAI_API_KEY='offline-local',ROBOTWIN_ASSETS_PATH='/media/data/liqz/Dex_runtime/assets/agent-rsi/robotwin-c15cc97b',LINGBOT_MODEL_PATH='/media/data/liqz/Dex_runtime/models/agent-rsi/LingBot-VLA-RoboTwin-EEF-e727b46c',HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',TORCH_EXTENSIONS_DIR='/home/liqz/.local/share/dex_operation/cache/torch_extensions/agent-rsi-rpent',NO_PROXY='127.0.0.1,localhost',no_proxy='127.0.0.1,localhost')
+status={'role':'frozen LingBot VLA-only development control; predicted actions from current RGB and unchanged task language, not high-level Agent/RSI score;600nativeaction horizon not matched to prior10000-cap Agent pilot','task':task,'seed':int(seed),'max_qwen_calls':0,'max_offline_requests':13,'max_vla_inferences':12,'max_chunks':12,'max_native_actions':600,'child_wall_cap':540,'outer_wall_cap':600,'gpu':0,'started_unix':time.time(),'phase':'running'}
+status['code_sha256']={n:hashlib.sha256((P/'scripts/agent_rsi'/n).read_bytes()).hexdigest() for n in ['rpent_vla_only_cli.py','rpent_vla_only_supervisor.py','rpent_runtime_adaptation.py']}
+(R/'protocol.json').write_text(json.dumps(status,indent=2))
+try:
+ with (R/'trace.log').open('w') as log:
+  p=subprocess.Popen([E+'/bin/python','-u',str(P/'scripts/agent_rsi/rpent_vla_only_cli.py')],env=env,stdout=log,stderr=subprocess.STDOUT)
+  try:status['exit_code']=p.wait(timeout=600)
+  except subprocess.TimeoutExpired:p.kill();p.wait();status['outer_timeout']=True
+finally:
+ cleanup=[]
+ if (R/'owned-daemons.jsonl').exists():
+  for line in (R/'owned-daemons.jsonl').read_text().splitlines():
+   d=json.loads(line);pid=d['pid'];sp=Path(f'/proc/{pid}/stat')
+   if sp.exists() and sp.read_text().split()[21]==d['proc_start']:
+    os.kill(pid,signal.SIGTERM)
+    for _ in range(50):
+     if not sp.exists() or sp.read_text().split()[2]=='Z':break
+     time.sleep(.1)
+    if sp.exists() and sp.read_text().split()[2]!='Z':os.kill(pid,signal.SIGKILL)
+   cleanup.append({'pid':pid,'live':sp.exists() and sp.read_text().split()[2]!='Z'})
+ status.update(cleanup=cleanup,phase='finished',finished_unix=time.time());(R/'status.json').write_text(json.dumps(status,indent=2));print(json.dumps(status))

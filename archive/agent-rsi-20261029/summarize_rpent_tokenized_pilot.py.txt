@@ -1,0 +1,20 @@
+import json,hashlib,collections,datetime
+from pathlib import Path
+R=Path('/media/data/liqz/Dex_runtime/outputs/agent-rsi-20261024/rpent-tokenized-pilot-20261028-0240')
+s=json.loads((R/'status.json').read_text());assert s['phase']=='finished'
+rows=[]
+for row in s['episodes']:
+ O=R/row['task']['name']; trans=list((O/'cli').glob('transcript_*.json'));t=json.loads(trans[0].read_text()) if trans else {}
+ states=json.loads((O/'cli/states.json').read_text()) if (O/'cli/states.json').exists() else {}
+ audits=[json.loads(p.read_text()) for p in sorted((O/'calls').glob('*-audit.json'))]
+ calls=[]
+ for p in sorted((O/'calls').glob('*-response.json')):
+  b=json.loads(p.read_text())
+  for ch in b.get('choices',[]):
+   for tc in ch.get('message',{}).get('tool_calls',[]):calls.append({'name':tc['function']['name'],'arguments':tc['function']['arguments']})
+ final=states.get('steps',[{}])[-1]
+ comps=[json.loads(l) for l in (O/'compactions.jsonl').read_text().splitlines()] if (O/'compactions.jsonl').exists() else []
+ data={'task':row['task'],'exit_code':row.get('exit_code'),'outer_timeout':row.get('outer_timeout',False),'setup_error':row.get('setup_error'),'transport_errors':row.get('transport_errors'),'usage':row.get('usage'),'request_seconds':sum(a.get('elapsed_seconds',0) for a in audits),'transcript_error':t.get('error'),'native_environment_success':t.get('environment_success'),'finish':t.get('finish'),'tool_counts':dict(collections.Counter(c['name'] for c in calls)),'tool_calls':calls,'state_records':len(states.get('steps',[])),'final_state':final,'compactions':comps,'prior_original_files_unchanged':row.get('prior_unchanged'),'cleanup':row.get('cleanup')}
+ rows.append(data)
+report={'updated_at':datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),'protocol_sha256':s['protocol_sha256'],'role':'development pilot; local Qwen, transport, video, memory-name and context adapters; not published-paper replication','rows':rows,'stopped_reason':s.get('stopped_reason'),'accepted_updates':0,'strict_rsi_rounds':0,'final_test_used':False,'budget_status':'closed; no retries or appended calls','source_sha256':json.loads((R/'protocol.json').read_text())['code_sha256']}
+(R/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps([{k:r[k] for k in ['task','usage','transcript_error','native_environment_success','tool_counts','state_records']} for r in rows],indent=2))

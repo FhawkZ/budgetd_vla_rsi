@@ -1,0 +1,26 @@
+"""DRAFT: fix binary-as-text accounting in installed native compactor only.
+Not enabled in rp ent context pilot. Uses the frozen Qwen3VL image grid contract.
+No provider payload, policy, evaluator, or model modification.
+"""
+from io import BytesIO
+from PIL import Image
+# Frozen server preprocessor_config.json: patch16/merge2/min65536/max16777216.
+IMAGE_CONFIG={'patch_size':16,'merge_size':2,'min_pixels':65536,'max_pixels':16777216}
+def vision_tokens(content):
+ from transformers.models.qwen2_vl.image_processing_qwen2_vl import smart_resize
+ with Image.open(BytesIO(content.data)) as img:w,h=img.size
+ rh,rw=smart_resize(h,w,factor=32,min_pixels=65536,max_pixels=16777216)
+ return (rh//16)*(rw//16)//4+2
+
+def install():
+ from pydantic_ai.messages import ToolReturnPart,BinaryContent
+ from pydantic_ai_harness.compaction import _shared
+ original=_shared._request_part_text
+ def typed_tool_return(part):
+  if isinstance(part,ToolReturnPart) and isinstance(part.content,list) and any(isinstance(x,BinaryContent) for x in part.content):
+   # Installed estimator uses four chars/token; substitute exact grid-count markers
+   # ONLY for estimation. The message content passed to the provider is untouched.
+   return ['V'*(4*vision_tokens(x)) if isinstance(x,BinaryContent) else str(x) for x in part.content]
+  return original(part)
+ _shared._request_part_text=typed_tool_return
+ return original
