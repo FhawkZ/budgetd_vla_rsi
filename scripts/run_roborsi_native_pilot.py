@@ -206,6 +206,15 @@ def run(state,protocol):
     assert get(state['rpc_url']+'/healthz')['ok']
     from roborsi.agents.sessions import persistent_agent as pa
     pa._REPO=Path(state['workspace'])
+    if state.get('reviewer_contract')=='explicit-evidence-v1':
+        from reviewer_contract import install_native_contract
+        install_native_contract(state,pa)
+    if state.get('public_language_manifest'):
+        from task_language_contract import load, install
+        assert sha(state['public_language_manifest'])==state['public_language_manifest_sha256']
+        instructions=load(state['public_language_manifest'],RUNTIME/'backends/robotwin-ae507381-c15cc97b')
+        from roborsi.embodied.sim.robotwin.client import HttpRobotwinEnv
+        install(HttpRobotwinEnv,instructions)
     from roborsi.evaluation.atomic import run_atomic_attempt
     from roborsi.runtime_mode import RunMode
     r=Path(state['run_root']);report={'classification':state['classification'],'protocol_sha256':sha(protocol),'initial_ledger':ledger,'rpc_identity':rpc_id,'attempts':[],'strict_rsi_rounds':0,'vla_episodes':0}

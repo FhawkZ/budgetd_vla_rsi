@@ -1,0 +1,19 @@
+{
+  "status": "PUBLIC_LANGUAGE_BINDING_V1",
+  "online_qualified": false,
+  "scope": "Public task description, same literal text required for all common-backend methods; not a motor program",
+  "tasks": [
+    {
+      "task": "stack_blocks_two",
+      "field": "full_description",
+      "source_sha256": "0229ae6057d5304c9aa145b8925fb5ec31c358392ebbe3c26b144d096d18a498",
+      "instruction": "there are two blocks on the table, the color of the blocks is <red, green>, <move the blocks to the center of the table>, and <stack the geen block on the red block>"
+    },
+    {
+      "task": "handover_block",
+      "field": "full_description",
+      "source_sha256": "8fed548a88ebeadc164889398e20532f622509c867c0a075653e2bf35b8daa19",
+      "instruction": "use the left arm to grasp the red block on the table, handover it to the right arm and place it on the blue pad"
+    }
+  ]
+}

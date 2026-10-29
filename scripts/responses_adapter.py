@@ -52,7 +52,10 @@ def content(parts):
             raise ContractError(f"unsupported content type: {t}")
     return out
 
-def translate_request(body, max_output=1024):
+ROLE_EVIDENCE_TOOLS = frozenset("mcp__role_evidence__" + n for n in ("list_files", "read_image", "read_text", "search_text"))
+
+def translate_request(body, max_output=1024, tool_profile="original"):
+    require(tool_profile in {"original", "role-evidence"}, "unknown tool profile")
     require(body.get("model") == MODEL, "model identity mismatch")
     require(not body.get("previous_response_id"), "client must send complete history; previous_response_id is unsupported")
     require(not body.get("conversation"), "server-side conversation objects are unsupported")
@@ -90,6 +93,14 @@ def translate_request(body, max_output=1024):
             tools.append({"type": "function", "function": {"name": tool["name"], "description": desc, "parameters": {"type": "object", "properties": {"input": {"type": "string"}}, "required": ["input"], "additionalProperties": False}}})
         else:
             raise ContractError(f"unsupported tool type: {t}")
+    removed_tools = []
+    if tool_profile == "role-evidence":
+        present = {t["function"]["name"] for t in tools}
+        require(ROLE_EVIDENCE_TOOLS <= present, "required evidence tools missing")
+        removed_tools = sorted(present - ROLE_EVIDENCE_TOOLS)
+        tools = [t for t in tools if t["function"]["name"] in ROLE_EVIDENCE_TOOLS]
+        custom_names &= ROLE_EVIDENCE_TOOLS
+        namespaces = {k: v for k, v in namespaces.items() if k in ROLE_EVIDENCE_TOOLS}
     messages = []
     instructions = body.get("instructions")
     if instructions:
@@ -109,6 +120,8 @@ def translate_request(body, max_output=1024):
         elif t in {"function_call", "custom_tool_call"}:
             cid = item["call_id"]
             require(cid not in pending, "duplicate call ID")
+            if tool_profile == "role-evidence":
+                require((item["namespace"] + "__" if item.get("namespace") else "") + item["name"] in ROLE_EVIDENCE_TOOLS, "history contains excluded tool; use a fresh session")
             pending[cid] = t
             args = item.get("arguments", "") if t == "function_call" else json.dumps({"input": item["input"]})
             require(isinstance(args, str), "function arguments must retain their serialized string")
@@ -136,7 +149,7 @@ def translate_request(body, max_output=1024):
     out = {"model": MODEL, "messages": messages, "tools": tools, "stream": False, "max_tokens": cap, "seed": 42}
     if body.get("tool_choice") == "none":
         out["tools"] = []
-    return out, {"custom_names": sorted(custom_names), "namespace_map": namespaces, "schema": schema, "requested_cap": cap, "model": MODEL, "history_items": len(items), "allow_parallel": body.get("parallel_tool_calls", True), "tool_choice": body.get("tool_choice", "auto"), "tool_names": [t["function"]["name"] for t in tools], "images": sum(p.get("type") == "image_url" for m in messages if isinstance(m.get("content"), list) for p in m["content"])}
+    return out, {"tool_profile": tool_profile, "removed_tools": removed_tools, "custom_names": sorted(custom_names), "namespace_map": namespaces, "schema": schema, "requested_cap": cap, "model": MODEL, "history_items": len(items), "allow_parallel": body.get("parallel_tool_calls", True), "tool_choice": body.get("tool_choice", "auto"), "tool_names": [t["function"]["name"] for t in tools], "images": sum(p.get("type") == "image_url" for m in messages if isinstance(m.get("content"), list) for p in m["content"])}
 
 def translate_response(chat, audit):
     require(chat.get("model") == MODEL, "backend model mismatch")
@@ -211,6 +224,7 @@ def main():
     ap.add_argument("--port", type=int, default=18020)
     ap.add_argument("--output", required=True)
     ap.add_argument("--max-output", type=int, default=1024)
+    ap.add_argument("--tool-profile", choices=["original", "role-evidence"], default="original")
     a = ap.parse_args()
     upstream = local_url(a.upstream)
     require(0 < a.max_output <= 1024, "fixed output budget")
@@ -221,7 +235,7 @@ def main():
     require(type(ledger.get("max_backend_calls")) is int and ledger["max_backend_calls"] > 0 and type(ledger.get("backend_attempts")) is int, "upstream must expose a bounded shared ledger; raw model server is forbidden")
     root = Path(a.output)
     root.mkdir(parents=True, exist_ok=False)
-    identity = {"adapter_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "model": MODEL, "upstream": upstream, "max_output": a.max_output, "history": "client supplied; no truncation", "started_unix": time.time(), "initial_ledger": ledger}
+    identity = {"adapter_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "model": MODEL, "upstream": upstream, "max_output": a.max_output, "history": "client supplied; no truncation", "started_unix": time.time(), "initial_ledger": ledger, "tool_profile": a.tool_profile}
     (root / "identity.json").write_text(json.dumps(identity, indent=2))
     class Handler(BaseHTTPRequestHandler):
         def send_json(self, code, obj):
@@ -244,7 +258,7 @@ def main():
                 require(0 < n < 12 * 1024 * 1024, "request size outside contract")
                 body = json.loads(self.rfile.read(n))
                 (root / (idx + "-incoming.json")).write_text(json.dumps(body))
-                converted, contract = translate_request(body, a.max_output)
+                converted, contract = translate_request(body, a.max_output, a.tool_profile)
                 audit["contract"] = contract
                 (root / (idx + "-forwarded.json")).write_text(json.dumps(converted))
                 req = urllib.request.Request(upstream + "/v1/chat/completions", data=json.dumps(converted).encode(), headers={"Content-Type": "application/json"})

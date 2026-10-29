@@ -24,19 +24,53 @@ def child_namespace(state):
  return 0 if result['status']=='passed' else 1
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--mode',choices=['namespace','native'],required=True);p.add_argument('--output');p.add_argument('--state');p.add_argument('--namespace-receipt');p.add_argument('--child',action='store_true');a=p.parse_args()
- if a.child:return child_namespace(json.loads(Path(a.state).read_text()))
+ p=argparse.ArgumentParser();p.add_argument('--mode',choices=['namespace','native','reviewer','reviewer-scoped'],required=True);p.add_argument('--output');p.add_argument('--state');p.add_argument('--namespace-receipt');p.add_argument('--closed-evidence');p.add_argument('--reviewer-receipt');p.add_argument('--public-language-manifest');p.add_argument('--task',choices=['stack_blocks_two','handover_block'],default='stack_blocks_two');p.add_argument('--child',action='store_true');a=p.parse_args()
+ if a.child:
+  state=json.loads(Path(a.state).read_text())
+  if a.mode in ('reviewer','reviewer-scoped'):
+   from reviewer_contract import child
+   return child(state)
+  return child_namespace(state)
  if a.mode=='native':
+  if not a.public_language_manifest:raise ValueError('New native protocols require explicit public language manifest; old no-language runs are closed')
+  from task_language_contract import load
+  language_rows=load(a.public_language_manifest,RUNTIME/'backends/robotwin-ae507381-c15cc97b')
+  assert a.task in language_rows
   vision=json.loads((RUNTIME/'outputs/native-vision-qualification-20261029-2355/report.json').read_text());assert vision['status']=='passed'
   assert vision['vision_manifest_sha256']==pilot.sha(ROOT/'configs/native-vision-models.json')
-  receipt=json.loads(Path(a.namespace_receipt).read_text());assert receipt['status']=='passed'
+  receipt=json.loads(Path(a.reviewer_receipt or a.namespace_receipt).read_text());assert receipt['status']=='passed'
+  if a.reviewer_receipt:
+   assert receipt['mode']=='reviewer-scoped' and receipt['detail']['status']=='passed'
+   assert (Path(a.reviewer_receipt).parent/'CLOSE.json').exists()
   assert receipt['script_hashes']['scripts/responses_adapter.py']==pilot.sha(ROOT/'scripts/responses_adapter.py')
  state=pilot.prepare(a.output,'http://127.0.0.1:18019','http://127.0.0.1:18020','http://127.0.0.1:18021','http://127.0.0.1:8181')
- r=Path(a.output);calls=2 if a.mode=='namespace' else 64
+ r=Path(a.output);calls={'namespace':2,'reviewer':4,'reviewer-scoped':4,'native':64}[a.mode]
+ if a.mode in ('reviewer','reviewer-scoped'):
+  from reviewer_contract import prepare
+  prepare(state,a.closed_evidence)
+  state['tool_profile']='role-evidence' if a.mode=='reviewer-scoped' else 'original'
+  pilot.write(r/'state.json',state)
+ if a.mode=='native':
+  import shutil
+  shutil.copy2(a.public_language_manifest,r/'public-language.json')
+  state['public_language_manifest']=str(r/'public-language.json')
+  state['public_language_manifest_sha256']=pilot.sha(r/'public-language.json')
+  state['script_hashes']['scripts/task_language_contract.py']=pilot.sha(ROOT/'scripts/task_language_contract.py')
+  pilot.write(r/'state.json',state)
+ if a.mode=='native' and a.reviewer_receipt:
+  state['tool_profile']='role-evidence';state['reviewer_contract']='explicit-evidence-v1'
+  state['script_hashes']['scripts/reviewer_contract.py']=pilot.sha(ROOT/'scripts/reviewer_contract.py')
+  pilot.write(r/'state.json',state)
  if a.mode=='namespace':(Path(state['workspace'])/'namespace-fixture.txt').write_text('NAMESPACE-4829\n')
  protocol=json.loads((ROOT/'configs/roborsi-native-pilot-draft.json').read_text())
- protocol.update(status='FROZEN',max_model_calls=calls,state_sha256=pilot.sha(r/'state.json'),qualification_mode=a.mode,wall_seconds=360 if a.mode=='namespace' else 1800,namespace_receipt=a.namespace_receipt,owner_sha256=pilot.sha(__file__))
- if a.mode=='namespace':protocol.update(classification='namespace_transport_only',tasks=[],tool_budget=0,max_physics_steps=0)
+ protocol.update(status='FROZEN',max_model_calls=calls,state_sha256=pilot.sha(r/'state.json'),qualification_mode=a.mode,wall_seconds=360 if a.mode!='native' else 1800,namespace_receipt=a.namespace_receipt,owner_sha256=pilot.sha(__file__),tool_profile=state.get('tool_profile','original'))
+ if a.mode!='native':protocol.update(classification=a.mode+'_deployment_qualification',tasks=[],tool_budget=0,max_physics_steps=0)
+ if a.mode=='native':
+  protocol['tasks']=[{'task':a.task,'seed':42}]
+  protocol['reviewer_receipt']=a.reviewer_receipt
+  protocol['public_language_manifest_sha256']=state['public_language_manifest_sha256']
+  protocol['explicit_adaptations'] += ['Public task description pinned by source SHA, explicitly bound to HTTP environment instruction; language binding not yet online qualified. All common-backend comparisons must receive identical text.']
+  if a.reviewer_receipt:protocol['explicit_adaptations'] += ['Persistent role tools restricted to4explicit evidence readers; actual Reviewer file paths supplied; max3evidence reads requested before verdict. Not a learned update; old closed run remains failed.']
  pilot.write(r/'protocol.json',protocol)
  # Freeze ALL service/runner code before allocating GPU.
  hashes={str(x.relative_to(ROOT)):pilot.sha(x) for x in [ROOT/'scripts/serve_qwen.py',ROOT/'scripts/budget_proxy.py',ROOT/'scripts/responses_adapter.py',Path(__file__)]}
@@ -69,16 +103,16 @@ def main():
   qenv=dict(base,CUDA_VISIBLE_DEVICES='0');qpython=str(RUNTIME/'software/envs/qwen/bin/python')
   raw=start('qwen',[qpython,str(ROOT/'scripts/serve_qwen.py'),'--model',str(RUNTIME/'models/Qwen3-VL-8B-Instruct'),'--output',str(r/'server'),'--port','8018','--max-calls',str(calls)],qenv);health('http://127.0.0.1:8018/health',raw,150)
   budget=start('budget',[sys.executable,str(ROOT/'scripts/budget_proxy.py'),'--upstream','http://127.0.0.1:8018','--port','18019','--output',str(r/'ledger'),'--max-calls',str(calls)]);health(state['budget_url']+'/health',budget,15)
-  adapter=start('adapter',[sys.executable,str(ROOT/'scripts/responses_adapter.py'),'--upstream',state['budget_url'],'--port','18020','--output',str(r/'adapter')]);health(state['adapter_url']+'/health',adapter,15)
-  if a.mode=='namespace':
-   child=start('namespace',[sys.executable,str(Path(__file__).resolve()),'--mode','namespace','--state',str(r/'state.json'),'--child'])
+  adapter=start('adapter',[sys.executable,str(ROOT/'scripts/responses_adapter.py'),'--upstream',state['budget_url'],'--port','18020','--output',str(r/'adapter'),'--tool-profile',state.get('tool_profile','original')]);health(state['adapter_url']+'/health',adapter,15)
+  if a.mode!='native':
+   child=start(a.mode,[sys.executable,str(Path(__file__).resolve()),'--mode',a.mode,'--state',str(r/'state.json'),'--child'])
   else:
    cap=start('cap',[sys.executable,str(ROOT/'scripts/run_roborsi_native_pilot.py'),'cap-bridge','--state',str(r/'state.json'),'--output',str(r/'cap')]);health(state['cap_url']+'/health',cap,15)
    rpc=start('rpc',[sys.executable,str(ROOT/'scripts/run_roborsi_native_pilot.py'),'rpc','--state',str(r/'state.json'),'--protocol',str(r/'protocol.json')]);health(state['rpc_url']+'/healthz',rpc,120)
    child=start('native',[sys.executable,str(ROOT/'scripts/run_roborsi_native_pilot.py'),'run','--state',str(r/'state.json'),'--protocol',str(r/'protocol.json')])
   code=child.wait(timeout=max(1,protocol['wall_seconds']-(time.time()-started)))
   report['child_returncode']=code
-  detail=json.loads((r/('namespace-report.json' if a.mode=='namespace' else 'pilot-report.json')).read_text())
+  detail=json.loads((r/(('reviewer' if a.mode.startswith('reviewer') else a.mode)+'-report.json' if a.mode!='native' else 'pilot-report.json')).read_text())
   report['detail']=detail;report['status']='passed' if detail['status'] in ['passed','finished_bounded_attempts'] else 'failed'
  except Exception as e:report.update(status='failed',error=repr(e))
  finally:
