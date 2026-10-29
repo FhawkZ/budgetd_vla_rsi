@@ -1,4 +1,4 @@
-# budgeted-vla-rsi
+# budgetd_vla_rsi
 
 预算约束下，基于 RSI 的 VLA–Harness 持续学习。目标是研究在冻结 VLA/LLM 权重时，执行 harness 与经验选择策略如何持续改进，并在统一总预算下测量新任务泛化、旧能力保留和饱和。
 
@@ -44,8 +44,10 @@ bash scripts/bootstrap_graphics.sh
 
 旧RPent32K协议已经关闭：21次堆叠调用因工具参数错误退出，0物理动作，交接未启动；加2次早期canary共23次，179次剩余额度取消。没有技能更新或遗忘成绩，不重开这些预算。
 
-## 新远程仓库
+## GitHub 同步
 
-建议 GitHub 名称 `budgeted-vla-rsi`，描述：`Budget-constrained continual learning of VLA harnesses with recursive self-improvement.`
+正式远程仓库：https://github.com/FhawkZ/budgetd_vla_rsi ，分支 `main`。
 
-本项目使用独立 Git 历史。用户创建空远程仓库后再设置 origin 并推送；权重、数据、原始日志和凭据不进 Git。
+本机目录仍为 `/root/autodl-tmp/budgeted-vla-rsi`，Python项目名仍为 `budgeted-vla-rsi`，避免破坏已验证的环境入口。后续只在 lzgpu201 推进，统一使用 uv；每5小时检查进度并按冻结协议继续。
+
+权重、数据、原始日志、虚拟环境与凭据不进 Git。服务器没有 GitHub 写入凭据时，通过本地已有认证和 Git bundle 中转同步，不复制私钥到服务器。
