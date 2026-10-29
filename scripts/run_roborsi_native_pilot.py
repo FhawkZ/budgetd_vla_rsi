@@ -49,7 +49,10 @@ def prepare(output,budget_url,adapter_url,cap_url,rpc_url,images=()):
     image_paths=[]
     for path in images:
         p=Path(path).resolve(strict=True);dest=r/'input-images'/p.name;shutil.copy2(p,dest);image_paths.append(str(dest))
+    from qualify_native_vision import verify_models
+    vision=verify_models()
     model_env={k:ROLE_MODEL for k in ROLE_VARS}
+    model_env.update(ROBORSI_GROUNDING_DINO_MODEL=vision['dino']['directory'],ROBORSI_POINT_SAM_MODEL=vision['sam']['directory'],ROBORSI_PERCEPTION_DEVICE='cuda:0')
     model_env.update({'ROBORSI_VLM_PROVIDER':'openai','ROBORSI_OPENAI_BASE_URL':local(cap_url)+'/v1','OPENAI_BASE_URL':local(cap_url)+'/v1','ROBORSI_OPENAI_API_KEY':'local-only-no-secret','OPENAI_API_KEY':'local-only-no-secret','ROBORSI_OPENAI_TRANSPORT':'chat_completions','ROBORSI_OPENAI_MAX_OUTPUT_TOKENS':'1024','ROBORSI_ROLE_BACKEND':'codex','ROBORSI_ROLE_SESSION':'1','ROBORSI_SESSION_ROLL_CHARS':'600000','ROBORSI_HOME':str(r/'roborsi-home'),'ROBORSI_WORKSPACE':str(r/'roborsi-home'/'workspace'),'CODEX_HOME':str(r/'codex-home'),'HOME':str(r/'home'),'ROBORSI_SIM_URL':local(rpc_url),'ROBORSI_ROBOTWIN_ROOT':str(RUNTIME/'backends/robotwin-ae507381-c15cc97b'),'NO_PROXY':'127.0.0.1,localhost','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','ROBORSI_USE_GRASPGEN':'0'})
     config=f'''model = "{MODEL}"
 model_provider = "qwen_local"
@@ -95,7 +98,7 @@ tool_timeout_sec = 20
     wrapper.write_text('#!'+sys.executable+'\nimport json,os,sys\nargs=[x for x in sys.argv[1:] if x!="--dangerously-bypass-approvals-and-sandbox"]\ncmd='+repr([str(CODEX),'-c','sandbox_mode="read-only"','-c','approval_policy="never"'])+'+args\nwith open('+repr(str(r/'cli-launches.jsonl'))+',"a") as f:f.write(json.dumps({"incoming":sys.argv[1:],"outgoing":cmd})+"\\n")\nos.execv(cmd[0],cmd)\n');wrapper.chmod(0o755)
     files={str(p.relative_to(source)):sha(p) for p in sorted(source.rglob('*')) if p.is_file() and '.git' not in p.parts}
     write(r/'source-manifest.json',files)
-    state={'status':'PREPARED_NOT_AUTHORIZED_TO_GENERATE','classification':'full native RoboRSI frozen-eval development qualification; local Qwen/tool transport adaptation; NOT VLA or faithful backbone reproduction','run_root':str(r),'source':str(source),'workspace':str(work),'images':image_paths,'source_manifest_sha256':sha(r/'source-manifest.json'),'upstream_commit':'90c8569705bf4004a4f79e34e650c87ab7f075d4','budget_url':local(budget_url),'adapter_url':local(adapter_url),'cap_url':local(cap_url),'rpc_url':local(rpc_url),'environment':model_env,'model':MODEL,'max_output_tokens':1024,'max_physics_steps':20000,'wall_seconds':1800,'native_vision_manifest':str(ROOT/'configs/native-vision-models.json'),'tool_surface':'native Engineer skills unchanged; Planner/Reviewer shell/view_image replaced by scoped read/list/search/image MCP; persistent sessions kept','isolation_limit':'Native exec_python uses same-process Python+NumPy; this is NOT a strong FS/network sandbox. No D_final/D_curve exists or is mounted. Qualification development files only.','script_hashes':{str(p.relative_to(ROOT)):sha(p) for p in (Path(__file__),ROOT/'scripts/responses_adapter.py',ROOT/'scripts/readonly_role_mcp.py',ROOT/'scripts/roborsi_rpc_compat.py')}}
+    state={'status':'PREPARED_NOT_AUTHORIZED_TO_GENERATE','classification':'full native RoboRSI frozen-eval development qualification; local Qwen/tool transport adaptation; NOT VLA or faithful backbone reproduction','run_root':str(r),'source':str(source),'workspace':str(work),'images':image_paths,'source_manifest_sha256':sha(r/'source-manifest.json'),'upstream_commit':'90c8569705bf4004a4f79e34e650c87ab7f075d4','budget_url':local(budget_url),'adapter_url':local(adapter_url),'cap_url':local(cap_url),'rpc_url':local(rpc_url),'environment':model_env,'model':MODEL,'max_output_tokens':1024,'max_physics_steps':20000,'wall_seconds':1800,'native_vision_manifest':str(ROOT/'configs/native-vision-models.json'),'native_vision_manifest_sha256':sha(ROOT/'configs/native-vision-models.json'),'verified_native_vision':vision,'tool_surface':'native Engineer skills unchanged; Planner/Reviewer shell/view_image replaced by scoped read/list/search/image MCP; persistent sessions kept','isolation_limit':'Native exec_python uses same-process Python+NumPy; this is NOT a strong FS/network sandbox. No D_final/D_curve exists or is mounted. Qualification development files only.','script_hashes':{str(p.relative_to(ROOT)):sha(p) for p in (Path(__file__),ROOT/'scripts/responses_adapter.py',ROOT/'scripts/readonly_role_mcp.py',ROOT/'scripts/roborsi_rpc_compat.py',ROOT/'scripts/qualify_native_vision.py')}}
     write(r/'state.json',state);return state
 
 def cap_request(body):
@@ -149,9 +152,34 @@ def rpc(state,protocol):
     frozen=json.loads(Path(protocol).read_text())
     assert frozen['status']=='FROZEN' and frozen['state_sha256']==sha(Path(state['run_root'])/'state.json')
     assert 0<frozen['max_physics_steps']<=state['max_physics_steps'] and 0<frozen['wall_seconds']<=state['wall_seconds']
+    from qualify_native_vision import verify_models
+    assert sha(state['native_vision_manifest'])==state['native_vision_manifest_sha256']
+    assert verify_models()==state['verified_native_vision']
     clean_environment(state);routes=route_health(state)
     from roborsi_rpc_compat import install_runtime
     runtime_identity=install_runtime(root=Path(os.environ['ROBORSI_ROBOTWIN_ROOT']),gpu=1,max_physics_steps=frozen['max_physics_steps'],audit_path=Path(state['run_root'])/'rpc-runtime.json')
+    # Read-only native vision compute accounting; preserve outputs/exceptions/cache.
+    import importlib
+    vision_module=importlib.import_module('roborsi.embodied.skills.base.detect_object.robotwin.policy')
+    original_load=vision_module._load
+    vision_cost={'loads':0,'load_seconds':0.0,'dino_calls':0,'sam_calls':0,'forward_seconds':0.0,'failed_forwards':0}
+    def save_vision():write(Path(state['run_root'])/'vision-cost.json',dict(vision_cost,cache_stats=vision_module.cache_stats()))
+    def metered_load():
+        if getattr(vision_module,'_rsi_metered',False):return original_load()
+        start=time.monotonic()
+        values=original_load();vision_cost['loads']+=1;vision_cost['load_seconds']+=time.monotonic()-start
+        for name,model in [('dino',values[1]),('sam',values[3])]:
+            original_forward=model.forward
+            def forward(*args,_fn=original_forward,_name=name,**kwargs):
+                import torch
+                start=time.monotonic();vision_cost[_name+'_calls']+=1
+                try:return _fn(*args,**kwargs)
+                except Exception:vision_cost['failed_forwards']+=1;raise
+                finally:
+                    torch.cuda.synchronize();vision_cost['forward_seconds']+=time.monotonic()-start;save_vision()
+            model.forward=forward
+        vision_module._rsi_metered=True;save_vision();return values
+    vision_module._load=metered_load;save_vision()
     from roborsi.embodied.sim.robotwin.server import app
     @app.get('/rsi-qualification')
     def identity():
