@@ -6,7 +6,7 @@
 
 先复现官方基线，再提出新方法。RoboRSI 原生多角色执行与 RPent/Harness VLA 分开配置；共同 VLA 后端适配必须另行标注。尚无通过统一评测的新方法结果。
 
-2026-10-29：cuRobo已编译，堆叠/交接均通过原生reset、实际关节动作和四相机检查；保留RT shader并显式关闭不支持的OIDN。Qwen持久CLI会话完成5次在线资格调用（27559输入/377输出tokens），不是机器人任务成绩。固定LingBot的34文件/24.33GB全部哈希验证，新独立两任务VLA-only开发诊断已启动（1200动作/24推理每场景）；原生RoboRSI完整角色执行仍在接入。详情见 `docs/vla-only-pilot.md` 与 `docs/experiment-case.md`。
+2026-10-29：cuRobo已编译，堆叠/交接均通过原生reset、实际关节动作和四相机检查；保留RT shader并显式关闭不支持的OIDN。Qwen持久CLI会话完成5次在线资格调用（27559输入/377输出tokens），不是机器人任务成绩。固定LingBot的34文件/24.33GB全部哈希验证，独立两任务VLA-only开发诊断已完成：交接267动作/6推理原生成功，堆叠1200动作/24推理未成功；每项仅一个未筛选开发场景，不能估计稳定成功率；原生RoboRSI完整角色执行仍在接入。详情见 `docs/vla-only-pilot.md` 与 `docs/experiment-case.md`。
 
 仅在 `lzgpu201` 两张 PRO 6000 上执行。代码 `/root/autodl-tmp/budgeted-vla-rsi`；权重、虚拟环境、缓存、日志 `/root/autodl-tmp/Dex_runtime/agent-rsi`。GPU 编号是分工建议，不构成占卡；启动前查实时进程和锁。
 
@@ -62,3 +62,5 @@ python scripts/fetch_qwen.py
 本机目录仍为 `/root/autodl-tmp/budgeted-vla-rsi`，Python项目名仍为 `budgeted-vla-rsi`，避免破坏已验证的环境入口。后续只在 lzgpu201 推进，统一使用 uv；每5小时检查进度并按冻结协议继续。
 
 权重、数据、原始日志、虚拟环境与凭据不进 Git。服务器没有 GitHub 写入凭据时，通过本地已有认证和 Git bundle 中转同步，不复制私钥到服务器。
+
+2026-10-29：lzgpu301旧RSI Qwen已按用户要求停止，后续只在lzgpu201运行。完整RoboRSI所需原生DINO/SAM按固定提交和文件哈希部署中；所有角色LLM走本地Qwen，固定视觉工具另记计算成本。无新方法收益、持久更新或遗忘结论。
