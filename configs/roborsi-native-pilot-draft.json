@@ -1,0 +1,46 @@
+{
+  "status": "DRAFT_NOT_AUTHORIZED_TO_GENERATE",
+  "classification": "native_roborsi_development_qualification",
+  "mode": "eval",
+  "agent_mode": "roborsi",
+  "tasks": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 42
+    }
+  ],
+  "tool_budget": 40,
+  "max_model_calls": null,
+  "max_input_tokens": 32768,
+  "max_output_tokens": 1024,
+  "state_sha256": null,
+  "model": "Qwen3-VL-8B-Instruct",
+  "weight_updates": false,
+  "prerequisites": [
+    "Parent freezes exact call cap, state hash and code hashes in a NEW protocol",
+    "Current namespace+MCP adapter version is separately qualified; never resume closed 12-call transport budget",
+    "Exact processor count of initial native prompts with real reset images fits 32768",
+    "Native RPC reset and loop imports pass; GPU processes/locks checked before launch",
+    "RPC and client route identity proves same local ledger, fixed model and 1024 output cap",
+    "Dedicated development source/home/workspace; no final/curve test data exists",
+    "Pinned native DINO/SAM manifest and weight receipts verified; online HF download disabled"
+  ],
+  "explicit_adaptations": [
+    "Official frozen eval full Planner-Engineer-Reviewer path with ROLE_SESSION=1",
+    "All roles and LLM helper requests use fixed local Qwen; original frozen DINO/SAM visual modules are pinned separately",
+    "Native Chat requests for 2048/16384 tokens explicitly reduced to <=1024 via audited cap bridge",
+    "Fixed latest-three-image transport inherited and recorded",
+    "Planner/Reviewer shell and builtin view_image replaced by scoped read/list/search/image MCP; yolo removed and read-only/never enforced",
+    "Optional unconfigured GraspGen disabled explicitly; original native visual model paths remain local"
+  ],
+  "not_claimed": [
+    "VLA baseline",
+    "faithful original model/tool reproduction",
+    "strict RSI",
+    "strong sandbox for native exec_python",
+    "independent final-test success rate"
+  ],
+  "stopping": "Stop after bounded task or incomplete infra/model route failure; all retries count; cancel unused allowance. No automatic parameter changes.",
+  "max_physics_steps": 20000,
+  "wall_seconds": 1800
+}
