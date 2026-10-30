@@ -16,3 +16,10 @@
 旧owner-report的passed仅表示调度返回，不能当作任务通过；新launcher区分完整终态completed与incomplete失败。原始报告保留不覆盖。
 
 新共同语言VLA-only两任务协议见configs/vla-publiclang-dev2-20261030-frozen.json。最终结果保存在运行目录相应report.json；下一步设计见docs/common-backend-next.md。当前接受更新0、遗忘未测、严格RSI收益未证实。
+
+
+## 已关闭的共同语言 VLA-only 开发试验
+
+vla-publiclang-dev2-20261030-1040：堆叠seed2026103011与交接seed2026103012各1200原生动作、24次LingBot推理，均未成功；合计48推理、2400动作，GPU1分配746.376265秒，Qwen调用0。所有推理接收相应固定公共语言，图像/状态/动作哈希已保存，未重采样、未改评分。两任务各一个场景，不估计稳定成功率，不与旧有不同seed/语言结果混表。两GPU及锁已释放。
+
+下一步先离线核实动作归一化/坐标/执行频率以及官方语言的适用性；如需要在线辨别，另冻有限的配对诊断，不能因看到失败而修改已关闭协议。语言影响与seed差异尚未被分离。随后推进相同低层接口的固定harness与论文适配harness，不在底层能力不明时启动600episode方案。
