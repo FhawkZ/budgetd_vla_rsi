@@ -24,6 +24,11 @@ def adapt(body):
  out.pop('max_completion_tokens',None);out['max_tokens']=requested;out['seed']=42
  return out,{'images_before':len(positions),'images_after':min(3,len(positions)),'omitted_image_sha256':removed,'requested_output_cap':requested,'rule':'retain latest3images across full request; retain all text/tools; no text truncation'}
 
+def account_usage(state,usage):
+ if not isinstance(usage,dict) or any(type(usage.get(k)) is not int or usage[k]<0 for k in ('prompt_tokens','completion_tokens')):
+  raise ValueError('missing or invalid token accounting')
+ state['prompt_tokens']+=usage['prompt_tokens'];state['completion_tokens']+=usage['completion_tokens']
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--upstream',required=True);p.add_argument('--port',type=int,default=18019);p.add_argument('--output',required=True);p.add_argument('--max-calls',type=int,required=True);p.add_argument('--resume',action='store_true');a=p.parse_args()
  R=Path(a.output);R.mkdir(exist_ok=a.resume,parents=True)
@@ -60,9 +65,17 @@ def main():
     req=urllib.request.Request(a.upstream+'/v1/chat/completions',data=json.dumps(out).encode(),headers={'Content-Type':'application/json'})
     with urllib.request.urlopen(req,timeout=180) as f:response=json.load(f)
     (R/f'{idx:03d}-response.json').write_text(json.dumps(response));usage=response.get('usage',{})
-    state['prompt_tokens']+=usage.get('prompt_tokens',0);state['completion_tokens']+=usage.get('completion_tokens',0);record.update(http_status=200,usage=usage);self.send_completion(response,stream=bool(body.get('stream')))
+    account_usage(state,usage);record.update(http_status=200,usage=usage);self.send_completion(response,stream=bool(body.get('stream')))
    except urllib.error.HTTPError as e:
-    raw=e.read().decode();record.update(http_status=e.code,error=raw);self.send(400,{'error':raw})
+    raw=e.read().decode();record.update(http_status=e.code,error=raw)
+    try:payload=json.loads(raw)
+    except ValueError:payload={}
+    usage=payload.get('usage') if isinstance(payload,dict) else None
+    if usage is not None:
+     try:account_usage(state,usage);record.update(usage=usage,failed_generation_usage_accounted=True)
+     except ValueError as invalid:record['usage_accounting_error']=str(invalid)
+    else:record['usage_status']='unknown or no generation; consult server audit, never assume zero'
+    self.send(400,{'error':raw,**({'usage':usage} if usage is not None else {})})
    except Exception as e:
     record.update(http_status=400,error=repr(e));self.send(400,{'error':repr(e)})
    finally:

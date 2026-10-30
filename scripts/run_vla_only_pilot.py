@@ -76,6 +76,13 @@ def validate(cfg):
 def preflight(cfg, strict=False):
     runtime = Path(os.environ["RSI_RUNTIME_ROOT"]).resolve()
     source = runtime / "vendor" / ("RPent-" + RPENT_COMMIT)
+    if cfg.get("public_language_manifest"):
+        from task_language_contract import load
+        language_file=ROOT/cfg["public_language_manifest"]
+        assert digest(language_file)==cfg["public_language_manifest_sha256"]
+        assert digest(ROOT/"scripts/task_language_contract.py")==cfg["language_binding_sha256"]
+        languages=load(language_file,runtime/"backends/robotwin-ae507381-c15cc97b")
+        assert cfg["policy_task_instructions"]=={x["task"]:languages[x["task"]] for x in cfg["cases"]}
     for rel, sha in cfg["source_sha256"].items():
         assert digest(source / rel) == sha, f"Changed pinned source: {rel}"
     manifest = json.loads((ROOT / "configs/lingbot-model-manifest.json").read_text())
@@ -263,6 +270,11 @@ def worker(cfg, index, out):
         assert not status["eval_success"], "Initial state is already successful; invalid screening case"
         instruction = env.get_task_language()
         report["native_task_language"] = instruction
+        if cfg.get("public_language_manifest"):
+            instruction=cfg["policy_task_instructions"][report["task"]]
+            env.get_task_language=lambda: instruction
+            report["language_adaptation"]="Client public task language binding; same frozen text required for every comparison arm. Original environment language retained above; no observation/score/action modification."
+        report["policy_task_language"] = instruction
         report["initial_robot_state"] = env.last_info["robot_state"]
         original_infer = model.infer
         def traced_infer(observation):

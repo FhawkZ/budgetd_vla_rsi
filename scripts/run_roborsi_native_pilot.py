@@ -155,7 +155,11 @@ def rpc(state,protocol):
     from qualify_native_vision import verify_models
     assert sha(state['native_vision_manifest'])==state['native_vision_manifest_sha256']
     assert verify_models()==state['verified_native_vision']
-    clean_environment(state);routes=route_health(state)
+    clean_environment(state)
+    if state.get('capability_contract'):
+        from native_contracts import install_capabilities
+        install_capabilities(Path(state['run_root'])/'capabilities-rpc.json')
+    routes=route_health(state)
     from roborsi_rpc_compat import install_runtime
     runtime_identity=install_runtime(root=Path(os.environ['ROBORSI_ROBOTWIN_ROOT']),gpu=1,max_physics_steps=frozen['max_physics_steps'],audit_path=Path(state['run_root'])/'rpc-runtime.json')
     # Read-only native vision compute accounting; preserve outputs/exceptions/cache.
@@ -197,7 +201,11 @@ def run(state,protocol):
     assert frozen['max_output_tokens']==1024 and frozen['max_input_tokens']==32768
     assert 0<frozen['max_physics_steps']<=state['max_physics_steps'] and 0<frozen['wall_seconds']<=state['wall_seconds']
     for path,h in state['script_hashes'].items():assert sha(ROOT/path)==h,'code changed after preparation'
-    clean_environment(state);routes=route_health(state)
+    clean_environment(state)
+    if state.get('capability_contract'):
+        from native_contracts import install_capabilities
+        install_capabilities(Path(state['run_root'])/'capabilities-client.json')
+    routes=route_health(state)
     ledger=routes['budget']['ledger'];assert ledger['backend_attempts']==0 and ledger['max_backend_calls']==frozen['max_model_calls']
     rpc_id=get(state['rpc_url']+'/rsi-qualification')
     assert rpc_id['state_sha256']==sha(Path(state['run_root'])/'state.json')
@@ -215,6 +223,8 @@ def run(state,protocol):
         instructions=load(state['public_language_manifest'],RUNTIME/'backends/robotwin-ae507381-c15cc97b')
         from roborsi.embodied.sim.robotwin.client import HttpRobotwinEnv
         install(HttpRobotwinEnv,instructions)
+        from native_contracts import install_role_audit
+        install_role_audit(instructions,Path(state['run_root'])/'role-language-audit.jsonl',lambda:get(state['budget_url']+'/health')['ledger']['backend_attempts'])
     from roborsi.evaluation.atomic import run_atomic_attempt
     from roborsi.runtime_mode import RunMode
     r=Path(state['run_root']);report={'classification':state['classification'],'protocol_sha256':sha(protocol),'initial_ledger':ledger,'rpc_identity':rpc_id,'attempts':[],'strict_rsi_rounds':0,'vla_episodes':0}

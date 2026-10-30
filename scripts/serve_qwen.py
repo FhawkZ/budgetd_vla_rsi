@@ -51,7 +51,8 @@ def generate(body, call_id):
  if envelopes and body.get('tools'):
   tools=[];allowed={t['function']['name'] for t in body['tools']}
   for i,e in enumerate(envelopes):
-   t=json.loads(e);assert t['name'] in allowed
+   t=json.loads(e)
+   if t.get('name') not in allowed:raise ValueError('Model emitted undeclared tool: '+str(t.get('name')))
    tools.append({'id':f'call_{time.time_ns()}_{i}','type':'function','function':{'name':t['name'],'arguments':json.dumps(t.get('arguments',{}))}})
   msg['tool_calls']=tools;msg['content']=re.sub(r'<tool_call>.*?</tool_call>','',content,flags=re.S).strip() or None;finish='tool_calls'
  usage={'prompt_tokens':int(n),'completion_tokens':len(ids),'total_tokens':int(n)+len(ids)}
@@ -77,7 +78,11 @@ class Handler(BaseHTTPRequestHandler):
    body=json.loads(self.rfile.read(n));(O/f'{call_id}-request.json').write_text(json.dumps(body))
    response=generate(body,call_id);record['http_status']=200;self.send(200,response)
   except Exception as e:
-   record.update(http_status=400,error=type(e).__name__+': '+str(e));traceback.print_exc();self.send(400,{'error':record['error']})
+   record.update(http_status=400,error=type(e).__name__+': '+str(e));traceback.print_exc()
+   failure={'error':record['error']}
+   generated=O/f'{call_id}-generation.json'
+   if generated.exists():failure['usage']=json.loads(generated.read_text())['usage']
+   self.send(400,failure)
   finally:
    generated=O/f'{call_id}-generation.json'
    if generated.exists():record.update(generated_usage_known=True,usage=json.loads(generated.read_text())['usage'])
