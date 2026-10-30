@@ -1,0 +1,42 @@
+{
+  "status": "frozen",
+  "classification": "structured_decoder_qualification_not_task_score",
+  "run_id": "structured-qual3-20261031-0130",
+  "execution_host": "autodl-container-d31b4587e3-6f171098",
+  "max_calls": 3,
+  "input_tokens_limit": 32768,
+  "output_tokens_limit": 1024,
+  "wall_seconds": 600,
+  "inputs": [
+    {
+      "kind": "historical_schema_boundary",
+      "path": "outputs/rpent-common-native-dev64-20261030-2040/stack_blocks_two/ledger/020-forwarded.json",
+      "sha256": "0efd56654bd4f91ef94c8158fb89e5bb216f602f9a1c19aedbc7b7595cbf1ed5"
+    },
+    {
+      "kind": "historical_schema_boundary",
+      "path": "outputs/rpent-common-native-dev64-20261030-2040/handover_block/ledger/020-forwarded.json",
+      "sha256": "29259b91a87cf2436de2277407c16fd6d3c3a7b94f0c5d588c05925569898c27"
+    },
+    {
+      "kind": "optional_tool_plain_text",
+      "path": "outputs/structured-decoding-20261031-0110/plain-canary.json",
+      "sha256": "4fb59287d5d72a169cb44f39abb35c60a545a51fdded68950414ad5aab51ac74"
+    }
+  ],
+  "cpu_receipt": "outputs/structured-decoding-20261031-0110/cpu-audit.json",
+  "cpu_receipt_sha256": "865f925d785dfc5de5350551a513fe5b609841e9dc65fa73032239e33167c202",
+  "code_sha256": {
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32",
+    "scripts/serve_qwen_structured.py": "9bacf15e53ae75273a9936723e4529a7a5e81f7b0e10051b07f2e4e7bbf0763e",
+    "scripts/qualify_structured_qwen.py": "75a7ff1eb54e2c6b00c0c937be6631a2124ee291cb5dd6f994e4f9fbdae0bc39",
+    "scripts/budget_proxy.py": "aad8ccce983e6ebbac5d9324063d1231537ed5e9a0fbd7f8cc2bd0383bddd1ee",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb"
+  },
+  "tool_execution_allowed": false,
+  "posthoc_argument_repair": false,
+  "stop_on_any_failed_case": true,
+  "unused_allowance": "cancel",
+  "model_weights": "frozen Qwen3-VL-8B-Instruct; same local16files",
+  "protocol_scope": "2historical development generation inputs plus plain-text optional tool canary; fourth proxy request must be rejected before generation; no robot"
+}
