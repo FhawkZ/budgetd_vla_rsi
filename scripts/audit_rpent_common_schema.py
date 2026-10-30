@@ -22,6 +22,6 @@ def main():
     issues=list(Draft202012Validator(schema).iter_errors(args))
     if issues:errors.append(dict(task=task,request=forwarded.name,tool=name,raw_arguments=args,errors=[e.message for e in issues],raw_matches_transport=True,raw_generation_sha256=hashlib.sha256(server[0].with_name(server[0].name.replace('-request','-generation')).read_bytes()).hexdigest()))
    matches.append(dict(task=task,request=forwarded.name,request_sha256=sha,server=server[0].name,raw_arguments_unchanged=True))
- result=dict(classification='offline exact original-generation versus transport audit',model_calls=0,simulator_episodes=0,request_pairs=len(matches),schema_violations=errors,all_raw_tool_arguments_preserved=True,request_matches=matches,conclusion='Invalid flat pixel arrays originate in generated output; no evidence of transport flattening. No repaired calls or additional execution.')
+ result=dict(classification='offline exact original-generation versus transport audit',model_calls=0,simulator_episodes=0,request_pairs=len(matches),schema_violations=errors,all_raw_tool_arguments_preserved=True,request_matches=matches,conclusion=('Schema violations were present in raw generated arguments; transport did not rewrite them.' if errors else 'No original-schema violations detected; raw and transported tool arguments match. This does not establish semantic correctness or task success.'))
  (root/'schema-audit.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k!='request_matches'},indent=2))
 if __name__=='__main__':main()

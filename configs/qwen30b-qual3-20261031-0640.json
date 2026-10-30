@@ -1,0 +1,55 @@
+{
+  "status": "frozen",
+  "classification": "new_30B_backend_qualification_not_task_score",
+  "run_id": "qwen30b-qual3-20261031-0640",
+  "execution_host": "autodl-container-d31b4587e3-6f171098",
+  "max_calls": 3,
+  "input_tokens_limit": 32768,
+  "output_tokens_limit": 1024,
+  "wall_seconds": 600,
+  "inputs": [
+    {
+      "kind": "historical_schema_boundary",
+      "path": "outputs/qwen30b-qualification-prepare-20261031-0630/boundary-1.json",
+      "sha256": "3b0013f4d32b863e9904640b2cd961edcfd0569af8f1e2d52eab5b8c0820cba7",
+      "source_sha256": "0efd56654bd4f91ef94c8158fb89e5bb216f602f9a1c19aedbc7b7595cbf1ed5",
+      "change": "model identifier only",
+      "exact_input_tokens": 19258
+    },
+    {
+      "kind": "historical_schema_boundary",
+      "path": "outputs/qwen30b-qualification-prepare-20261031-0630/boundary-2.json",
+      "sha256": "f149e272061883ebc055dc1d94cec16c9cb1f7bf7c0c566ea6cf5dea53080a28",
+      "source_sha256": "29259b91a87cf2436de2277407c16fd6d3c3a7b94f0c5d588c05925569898c27",
+      "change": "model identifier only",
+      "exact_input_tokens": 19438
+    },
+    {
+      "kind": "context_capacity_plain_text",
+      "path": "outputs/qwen30b-qualification-prepare-20261031-0630/context-canary.json",
+      "sha256": "82d931e4356f30221ee459830f9e329625cadcef7a37c30d4683c04902f354c5",
+      "exact_input_tokens": 31744,
+      "output_cap": 1024,
+      "combined_reserved_tokens": 32768
+    }
+  ],
+  "cpu_receipt": "outputs/structured-decoding-20261031-0110/cpu-audit.json",
+  "cpu_receipt_sha256": "865f925d785dfc5de5350551a513fe5b609841e9dc65fa73032239e33167c202",
+  "code_sha256": {
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/qualify_qwen30b.py": "d94096d25eaa1c7cd7a54447188585e66df6483f0f821c7c3d4b48b0c700cf8d",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb"
+  },
+  "tool_execution_allowed": false,
+  "posthoc_argument_repair": false,
+  "stop_on_any_failed_case": true,
+  "unused_allowance": "cancel",
+  "model_weights": "Qwen3-VL-30B-A3B-Instruct immutable candidate manifest; separate from8B",
+  "protocol_scope": "Two historical image/tool boundary requests with only model-id changed, plus exact31744-input-token text canary under1024output cap. No robot tools. Fourth proxy request must be refused. No retry after any failed case.",
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "model_class": "Qwen3VLMoeForConditionalGeneration",
+  "asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db"
+}

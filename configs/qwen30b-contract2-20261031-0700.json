@@ -1,0 +1,51 @@
+{
+  "status": "frozen",
+  "classification": "explicit_serialization_and_capacity_qualification_not_autonomous_score",
+  "run_id": "qwen30b-contract2-20261031-0700",
+  "execution_host": "autodl-container-d31b4587e3-6f171098",
+  "max_calls": 2,
+  "input_tokens_limit": 32768,
+  "output_tokens_limit": 1024,
+  "wall_seconds": 600,
+  "inputs": [
+    {
+      "kind": "context_capacity_plain_text",
+      "path": "outputs/qwen30b-qualification-prepare-20261031-0630/context-canary.json",
+      "sha256": "82d931e4356f30221ee459830f9e329625cadcef7a37c30d4683c04902f354c5",
+      "exact_input_tokens": 31744,
+      "output_cap": 1024,
+      "combined_reserved_tokens": 32768
+    },
+    {
+      "kind": "historical_schema_boundary",
+      "path": "outputs/qwen30b-contract2-prepare-20261031-0650/nested-array.json",
+      "sha256": "13d3510099c91730804946f96918cb42f4297bf08ed104ba9e400d17c4b09078",
+      "classification": "explicit synthetic argument serialization; not historical autonomous input"
+    }
+  ],
+  "cpu_receipt": "outputs/structured-decoding-20261031-0110/cpu-audit.json",
+  "cpu_receipt_sha256": "865f925d785dfc5de5350551a513fe5b609841e9dc65fa73032239e33167c202",
+  "code_sha256": {
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb",
+    "scripts/qualify_qwen30b_contract2.py": "0f86805bdda6fd6facdd2cad565094a9156112bf4bd70facb8b0c04441875fbc"
+  },
+  "tool_execution_allowed": false,
+  "posthoc_argument_repair": false,
+  "stop_on_any_failed_case": true,
+  "unused_allowance": "cancel",
+  "model_weights": "Qwen3-VL-30B-A3B-Instruct immutable candidate manifest; separate from8B",
+  "protocol_scope": "Independent2call budget:31744input-token canary, then explicit synthetic nested-array serialization using original14tool schemas. All tools remain auto-selected, zero executed. Thirdrequest rejected. Stop after first failure; no prompt tuning.",
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "model_class": "Qwen3VLMoeForConditionalGeneration",
+  "asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "closed_predecessor": "qwen30b-qual3-20261031-0640",
+  "canceled_predecessor_allowance_not_reused": true,
+  "prelaunch_amendment": {
+    "previous_protocol_sha256": "e3dc5f0785a2d3ba19c124341c39b781cfb0a1b8fd0235d56486b09a0b08901b",
+    "reason": "Accept schema-valid optional/default arguments while requiring supplied view/pixels; no generation or launch before this amendment."
+  }
+}
