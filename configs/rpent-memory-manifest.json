@@ -1,0 +1,648 @@
+{
+  "repo": "RLinf/RPent-memory",
+  "revision": "47f301ef33bf8d0e8c770342f16b3c39c6a0e8c1",
+  "files": [
+    {
+      "path": "robotwin/MEMORY.md",
+      "size": 1764,
+      "git_blob_sha1": "e3c23865d053ccb339e633a2574b0946b65cd25e",
+      "sha256": "66761bad2aecba7e9eee09578411f056d52549cdd09e7784402910f2a86f9573"
+    },
+    {
+      "path": "robotwin/global/bimanual_and_multi_object.md",
+      "size": 4840,
+      "git_blob_sha1": "f6dc5a15de20efacee44609ea10cbc3f7b7109c8",
+      "sha256": "c84c4b32a103d6724b8dfd5f0b46a89c7c48805cb8cef820ddf45c4af305e530"
+    },
+    {
+      "path": "robotwin/global/grasp_and_hold.md",
+      "size": 4170,
+      "git_blob_sha1": "d140b2a74977ace87fe675bbcf0994e73e8d03b8",
+      "sha256": "b77cd6e9de78573da9203ab88657479fc9ab20f28d01a374909eb42f29f6910a"
+    },
+    {
+      "path": "robotwin/global/perception_and_verification.md",
+      "size": 5178,
+      "git_blob_sha1": "a538dfdf75ad2c6f580f5d49f298b49d04818860",
+      "sha256": "c302a8e8b69349813a7d7128e8408f4a12799d7360822eb565329d755bec8943"
+    },
+    {
+      "path": "robotwin/global/recovery_and_budget.md",
+      "size": 4711,
+      "git_blob_sha1": "e6410243f29340f549ed33c25337373e1d156690",
+      "sha256": "d0ace4ac03baab83b988f686efb89322104073e9580f49288122bcb0a99d0456"
+    },
+    {
+      "path": "robotwin/global/transport_place_release.md",
+      "size": 5507,
+      "git_blob_sha1": "cd5a5cc9683341c4d03cd6a43172b459ac9a6b3d",
+      "sha256": "7794590d8ad1a604235e1b27f4ba98ecd660b29488843af4053631cd6c34cff3"
+    },
+    {
+      "path": "robotwin/global/vla_chunk_and_primitive_selection.md",
+      "size": 5844,
+      "git_blob_sha1": "2fc15e74c0ea3fcc7d2e341df0966a53705613bb",
+      "sha256": "e442493c9fe4feb85b9b88f75f36502d287d726ba4e11c39e2d60bf8cf76d334"
+    },
+    {
+      "path": "robotwin/task-specific/adjust_bottle_s0.json",
+      "size": 2042,
+      "git_blob_sha1": "cef510528bea8b66ebab0d7d7a80b4f9ad63a19e",
+      "sha256": "dddab09a5555cda323cf469e3d253c700892433816eadbb637e86daef2926942"
+    },
+    {
+      "path": "robotwin/task-specific/adjust_bottle_s0_recipe.jsonl",
+      "size": 131,
+      "git_blob_sha1": "808aa6a09e65cd97487686f22addbe36b0cf0b97",
+      "sha256": "0ed68ed7e7cb6b70d3b62eb650ff6d106017df00a2a9dca89797565a8f6ed734"
+    },
+    {
+      "path": "robotwin/task-specific/beat_block_hammer_s0.json",
+      "size": 3089,
+      "git_blob_sha1": "76ff0df5d2b552043f4174f38e16ec9b3162ee38",
+      "sha256": "8f6ca64cdd06b87d91ca3bbdbcb01ed48b886c54ff22a0315727caf820c22bf2"
+    },
+    {
+      "path": "robotwin/task-specific/beat_block_hammer_s0_recipe.jsonl",
+      "size": 503,
+      "git_blob_sha1": "0c68ac469535f52af35cadd6219382c7eb56bea8",
+      "sha256": "61662e1d333a2bdbde516ca1d017b71fd03325de0d1165b5207b7a548350b32f"
+    },
+    {
+      "path": "robotwin/task-specific/blocks_ranking_rgb_s0.json",
+      "size": 2567,
+      "git_blob_sha1": "99836e273528fb7eae6a5021edb68168b1f56051",
+      "sha256": "7cb0f21bbb171cc602289e250533c6b90ffbdd00a917b448d36e373aa7915bd1"
+    },
+    {
+      "path": "robotwin/task-specific/blocks_ranking_rgb_s0_recipe.jsonl",
+      "size": 1377,
+      "git_blob_sha1": "643e6e9747c8cca3b4135b702f42970cff00d345",
+      "sha256": "6f4c6b41af0bbb36a555dc2569dda83e2150bbadbacc4497db57cd732b20c267"
+    },
+    {
+      "path": "robotwin/task-specific/blocks_ranking_size_s0.json",
+      "size": 4421,
+      "git_blob_sha1": "c945d710b7c2932a5d582453067b469f0b29ede4",
+      "sha256": "578f2d20e78794f54ecbd6b05744579196fe2fe6a390e8f663a066bdf0e2f49b"
+    },
+    {
+      "path": "robotwin/task-specific/blocks_ranking_size_s0_recipe.jsonl",
+      "size": 1092,
+      "git_blob_sha1": "31b7abb3d9f14bc9405877183d071cfa69642df7",
+      "sha256": "41fd60a1daa2b6b9b70b52d68ed0cca4b3fecabdce5a706a110f8f44f7fdf75f"
+    },
+    {
+      "path": "robotwin/task-specific/click_alarmclock_s0.json",
+      "size": 1415,
+      "git_blob_sha1": "7febb0c64473e9abd22424bdaef4c7413e75c338",
+      "sha256": "6045be36f947b633e58d9fa8526cdd4b2f42bdf136cf5beebd38ad9a52d9cb83"
+    },
+    {
+      "path": "robotwin/task-specific/click_alarmclock_s0_recipe.jsonl",
+      "size": 139,
+      "git_blob_sha1": "68aacac9bc9711c224a0be137f770e3edf6185af",
+      "sha256": "23d672345b928ca047847d3dbb8b50b80def57e6a2f9b5478d27903f7b8a468b"
+    },
+    {
+      "path": "robotwin/task-specific/click_bell_s0.json",
+      "size": 1384,
+      "git_blob_sha1": "548cfe3e56d66123885f474e7aa9c63d15b39254",
+      "sha256": "d500d2062b9bf225e8d935ba983bd1280d126014524b4ff3223d1450f5f137e6"
+    },
+    {
+      "path": "robotwin/task-specific/click_bell_s0_recipe.jsonl",
+      "size": 117,
+      "git_blob_sha1": "1bd105734a870ce1bb8254630f1adeb2e2a4f185",
+      "sha256": "5f3fb3d352404cda991723e38750a9ee5ddaaa3514f593eb1d36e2249225422a"
+    },
+    {
+      "path": "robotwin/task-specific/dump_bin_bigbin_s0.json",
+      "size": 2687,
+      "git_blob_sha1": "beb4e648077074aca4ebeea27035c8257b742266",
+      "sha256": "e526e2623270024c4101e8f249c3b8b02024caedbe281babdc88f3c0231c76e0"
+    },
+    {
+      "path": "robotwin/task-specific/dump_bin_bigbin_s0_recipe.jsonl",
+      "size": 1427,
+      "git_blob_sha1": "93f5756a835bb5ec91fb3be734228a4ca31f87cc",
+      "sha256": "a8d3211e3d519dc6df04c73479e92d2c53424858d355ef84bef3a6f0068b06d4"
+    },
+    {
+      "path": "robotwin/task-specific/grab_roller_s0.json",
+      "size": 2039,
+      "git_blob_sha1": "a5469b6fc6e91cb3004f2e3af88d254a696c79c2",
+      "sha256": "0e3d22eaaed5b04a0dc9c6e2851b105f16f625b2abaf6b71cbe8460abf407294"
+    },
+    {
+      "path": "robotwin/task-specific/grab_roller_s0_recipe.jsonl",
+      "size": 688,
+      "git_blob_sha1": "f5af2f2c72d3ccfc56bd7eb239e17f31f28bd451",
+      "sha256": "fe332a0f002e5b1bd020c296746c71c94a93bd38a0e91f4d2d1a1d6f298010a7"
+    },
+    {
+      "path": "robotwin/task-specific/handover_block_s0.json",
+      "size": 2798,
+      "git_blob_sha1": "fbed3b7d7199bc25d34536f36c4d66ba42e69118",
+      "sha256": "56a0cdf10d8611633db236f21d1ddeeef3ecf55f83b9ca4eece5951c09ead497"
+    },
+    {
+      "path": "robotwin/task-specific/handover_block_s0_recipe.jsonl",
+      "size": 350,
+      "git_blob_sha1": "a31db07b2e78951191200c9136e98f9402c03494",
+      "sha256": "6e06ab5b0aa77e9f3c8e80b63ac27a7b9e4f37c3ef31c6bfb7555c9993592200"
+    },
+    {
+      "path": "robotwin/task-specific/handover_mic_s0.json",
+      "size": 1854,
+      "git_blob_sha1": "8c0104b1a5d2c1015c7fbd65c56eef6dd1765a6e",
+      "sha256": "37d8b6af92531f50f004ac830c3cc3c3ad2d76fbce432365f2c394448a213381"
+    },
+    {
+      "path": "robotwin/task-specific/handover_mic_s0_recipe.jsonl",
+      "size": 276,
+      "git_blob_sha1": "78bc36e51fe8fe20c906a0e0af1c3bd94d061f3c",
+      "sha256": "0155b003187184536f69bf507d745b2cd798e824381dc952548d98c23d2ae6a5"
+    },
+    {
+      "path": "robotwin/task-specific/hanging_mug_s0.json",
+      "size": 11658,
+      "git_blob_sha1": "cca87e5bc547544479dafc71c2e918659ee5074d",
+      "sha256": "64f97ae8acc6c1d5d751e51a2cea6e996d182b1d5f07337c385e12167b8ad80a"
+    },
+    {
+      "path": "robotwin/task-specific/hanging_mug_s0_recipe.jsonl",
+      "size": 2410,
+      "git_blob_sha1": "54ecf56a6e7b4a795b798d6ea2f588312143c670",
+      "sha256": "4b6da4eb6198b69d8320383442546536081d4dd9855de6b0d402de6ed543ed8d"
+    },
+    {
+      "path": "robotwin/task-specific/lift_pot_s0.json",
+      "size": 1582,
+      "git_blob_sha1": "9fe3fcc2b0bf7f7f02a75415ecd57991d07c64fb",
+      "sha256": "502b4307db6aac9db5e8f61843d9ba40cead1291352c67ea799040a69b0c456d"
+    },
+    {
+      "path": "robotwin/task-specific/lift_pot_s0_recipe.jsonl",
+      "size": 250,
+      "git_blob_sha1": "8a10e2a0a632e8ec48fb07ddd9e60f250df95d3b",
+      "sha256": "cf547623390947e80a69bf938bf22ace7a6cdaf7dd2d999e0b98ba6a5a95d822"
+    },
+    {
+      "path": "robotwin/task-specific/move_can_pot_s0.json",
+      "size": 2619,
+      "git_blob_sha1": "87169425d3a6aa0ec4f74f93d760f5424171280b",
+      "sha256": "3ef3d79c9589d36b7c10d7e35416c52ef9b4f6e69e4875fa40b5464310f2c330"
+    },
+    {
+      "path": "robotwin/task-specific/move_can_pot_s0_recipe.jsonl",
+      "size": 316,
+      "git_blob_sha1": "a80ef438352f5252d8c8209276cd896d76a6fdd3",
+      "sha256": "763665d646a14bc89fd867f129812ca2983df7dfdaebccdaf35a679e5c3545b0"
+    },
+    {
+      "path": "robotwin/task-specific/move_pillbottle_pad_s0.json",
+      "size": 1645,
+      "git_blob_sha1": "8b8c7d84e7400ed3456101acfceb6c2193fc078e",
+      "sha256": "1b04b2cfe2ca319bbb86025ea2566682e783bb72ad326100546647a8fa2f01db"
+    },
+    {
+      "path": "robotwin/task-specific/move_pillbottle_pad_s0_recipe.jsonl",
+      "size": 316,
+      "git_blob_sha1": "99e04c0adb488362d831f51ac3636846cec96b20",
+      "sha256": "3c9ea56494470567f547aa3bb3c7ed7bab4452e3df729d97714e2ed001a13126"
+    },
+    {
+      "path": "robotwin/task-specific/move_playingcard_away_s0.json",
+      "size": 1469,
+      "git_blob_sha1": "b0bc6b2ec1bd1d122683f145240b5df279f6e37b",
+      "sha256": "f131f47ccf48541b7678d8b77d0022466e31e7a156e6679e18526655b11b482b"
+    },
+    {
+      "path": "robotwin/task-specific/move_playingcard_away_s0_recipe.jsonl",
+      "size": 260,
+      "git_blob_sha1": "8ec0511379b3bd9101dab5f7f4e88a9452deef8c",
+      "sha256": "71c532ff5075ec5494ec8721a3d36ab14d9703fa0ec5dfbbb3f6700a818f9696"
+    },
+    {
+      "path": "robotwin/task-specific/move_stapler_pad_s0.json",
+      "size": 2969,
+      "git_blob_sha1": "529cf7a3c3cd381c7181c1ec7f29c924888bf695",
+      "sha256": "d4b027e4a252ba32a93c08c84235387c39c100df5c8e4923bb74eb3bb24ca851"
+    },
+    {
+      "path": "robotwin/task-specific/move_stapler_pad_s0_recipe.jsonl",
+      "size": 1449,
+      "git_blob_sha1": "2a3eb52f98d16cde7ae085f485cf4f452902b614",
+      "sha256": "34f2111a9ee6f800000f94e0d102cc14be14cdd2732519951b4fdc38b2ec2e3d"
+    },
+    {
+      "path": "robotwin/task-specific/open_laptop_s0.json",
+      "size": 1599,
+      "git_blob_sha1": "801b43680fc85e2076ffc59fe49d38429435e857",
+      "sha256": "14396c3022ec091425b323121ee4c2b6296ae256ec0adf6fe8475735da0c6bc5"
+    },
+    {
+      "path": "robotwin/task-specific/open_laptop_s0_recipe.jsonl",
+      "size": 121,
+      "git_blob_sha1": "b04963de1be830edf27b8847ed07c1f108af3c42",
+      "sha256": "7a2f307682b7717e76a30000f1887288e5559369539eeb2561c7f6e72fab6ec6"
+    },
+    {
+      "path": "robotwin/task-specific/open_microwave_s0.json",
+      "size": 1484,
+      "git_blob_sha1": "956395177eb59446972639684a1f74a03787b6a0",
+      "sha256": "df72817de55ca9ff7fe4e5a20be9392026fdb0d2bef5d616f06cd890e21d0db9"
+    },
+    {
+      "path": "robotwin/task-specific/open_microwave_s0_recipe.jsonl",
+      "size": 229,
+      "git_blob_sha1": "0f61ae3570e82b2584b546f3a8f9a8185a8372fd",
+      "sha256": "a86e4d3c4adf6afd2cb8ba566d093592b30ea351a64dca6bf42d1bc7b74ebbcb"
+    },
+    {
+      "path": "robotwin/task-specific/pick_diverse_bottles_s0.json",
+      "size": 1849,
+      "git_blob_sha1": "67eeeeae34695ce05f749e73069c6ac73a2b9b84",
+      "sha256": "6cc8f053af3567e6964f9d1dcbee13e134d12d049ae19428b533dd559f542ec6"
+    },
+    {
+      "path": "robotwin/task-specific/pick_diverse_bottles_s0_recipe.jsonl",
+      "size": 159,
+      "git_blob_sha1": "1154c947a3ff40fe0479b9560163fc31bbcf1157",
+      "sha256": "982d671288f0776f582cf6f1d6e9c18c5c085f4e121611b0a1b323acc1cbb619"
+    },
+    {
+      "path": "robotwin/task-specific/pick_dual_bottles_s0.json",
+      "size": 1642,
+      "git_blob_sha1": "93fb9218589abbc0ee1cd0732510aefe2f57e5da",
+      "sha256": "e0e17c66e0b47a5876fe05f4326b08d19c9d0742983c19b31e4b25a7410083c0"
+    },
+    {
+      "path": "robotwin/task-specific/pick_dual_bottles_s0_recipe.jsonl",
+      "size": 147,
+      "git_blob_sha1": "87abb85a855a15800b7dbb25b7e5d70534c24ab7",
+      "sha256": "f36c44c1104b9fa4fd66e0515c5a92ab4713d84ac994a96c16766160dfed18e3"
+    },
+    {
+      "path": "robotwin/task-specific/place_a2b_left_s0.json",
+      "size": 2010,
+      "git_blob_sha1": "3b0d13b99b0602216e26e31a025a2c8a4de1b2e7",
+      "sha256": "b964d6f2844887bfdd65dd2cd85ecb63e98d0cc6850c4d0cd591b8c26a438ac0"
+    },
+    {
+      "path": "robotwin/task-specific/place_a2b_left_s0_recipe.jsonl",
+      "size": 386,
+      "git_blob_sha1": "6f0c393e0812754d78f43fa3468a9324fad7b2a2",
+      "sha256": "1363954c8d8cca7ac3a3f90846203bc53912cfad2cb8c77e96a5e3165d375a88"
+    },
+    {
+      "path": "robotwin/task-specific/place_a2b_right_s0.json",
+      "size": 1881,
+      "git_blob_sha1": "6faa0ab988d20404c47442f231b20f13435482cb",
+      "sha256": "227518a963efeaee8d72b81886eb366f819c0ef32c9185185e948eea6c0e95f1"
+    },
+    {
+      "path": "robotwin/task-specific/place_a2b_right_s0_recipe.jsonl",
+      "size": 394,
+      "git_blob_sha1": "79c9c66644865f963094b9891f992c9ade8f411f",
+      "sha256": "04cde80162cd2a7ca2336511287af7955cee3d5256da666566262a17581b3bf3"
+    },
+    {
+      "path": "robotwin/task-specific/place_bread_basket_s0.json",
+      "size": 1591,
+      "git_blob_sha1": "b80b3bafc232b4c07f83beb79cc868142189225d",
+      "sha256": "59a2a95a04adc3b7d81b95a2fbacad5d5b55bc483d9fbf7e8a54de9d7bf1589b"
+    },
+    {
+      "path": "robotwin/task-specific/place_bread_basket_s0_recipe.jsonl",
+      "size": 162,
+      "git_blob_sha1": "c001c98753a6bdebfb30790e9da4d046a8cde2e9",
+      "sha256": "95f6b4509c031d64794f85b1a2568b8f64b7771722ce08f6f993e4c4ee057cca"
+    },
+    {
+      "path": "robotwin/task-specific/place_bread_skillet_s0.json",
+      "size": 1617,
+      "git_blob_sha1": "d62ec9ee58ab069075f9b66d643fc0e2b1157e10",
+      "sha256": "0dbfdcd156f421dae06093981262ce7ae8cfcd2c898c7bee901e5c204bf86161"
+    },
+    {
+      "path": "robotwin/task-specific/place_bread_skillet_s0_recipe.jsonl",
+      "size": 280,
+      "git_blob_sha1": "0d90e8fc8298c75dc05dbd7b8cdaddcb8e476bc7",
+      "sha256": "9b1b1d6a3eaee2635891004eb45962a2e6de7a2a8f29f68a5110d3517832a53c"
+    },
+    {
+      "path": "robotwin/task-specific/place_burger_fries_s0.json",
+      "size": 1878,
+      "git_blob_sha1": "f85a9f1de325a6e909180a67e8197ec578fc405e",
+      "sha256": "07314d0540994f5f7ee99ff215f6111decb4068bae298f9efb9830df7c409671"
+    },
+    {
+      "path": "robotwin/task-specific/place_burger_fries_s0_recipe.jsonl",
+      "size": 386,
+      "git_blob_sha1": "28a5eae6e07377bba353df67fa8b437d9b3a01c1",
+      "sha256": "7e8287d0b46fa072a2c2c0f242e4bf0999957c703043dcc96b48597e6a4279ef"
+    },
+    {
+      "path": "robotwin/task-specific/place_can_basket_s0.json",
+      "size": 2016,
+      "git_blob_sha1": "92d2ce5832c05a7e744405b0984802dc1a10269a",
+      "sha256": "bdd83debc03cc44b6829b0346513a57f3ad56ce3a3b95ad27df6bd4787e02ddf"
+    },
+    {
+      "path": "robotwin/task-specific/place_can_basket_s0_recipe.jsonl",
+      "size": 591,
+      "git_blob_sha1": "3ceef918447ce270e6f59a372eab10c289cd1220",
+      "sha256": "1f7c6fcfcb1e7b4c6c6f76317e711f7655cd666322e3d08c146cbe6312a487fd"
+    },
+    {
+      "path": "robotwin/task-specific/place_cans_plasticbox_s0.json",
+      "size": 2832,
+      "git_blob_sha1": "6986fc559fc619933cb0dc687a927ed94e009ecb",
+      "sha256": "1b16c9cd9a79131e29ce51bfa2f9ce86d5815675d39195d2c6a1fd4cdd2c6249"
+    },
+    {
+      "path": "robotwin/task-specific/place_cans_plasticbox_s0_recipe.jsonl",
+      "size": 404,
+      "git_blob_sha1": "944df780fa0e37b5ff81134fa29e2e0402ed4339",
+      "sha256": "298dda69fcf48fafd4b94ee6232483bc83f5dc0edc8045c31a211e83fd305f16"
+    },
+    {
+      "path": "robotwin/task-specific/place_container_plate_s0.json",
+      "size": 1434,
+      "git_blob_sha1": "4d6f939ed55fc361d9d7ad1926c1fdca6c33dbb4",
+      "sha256": "8ee92c627a0b258a7071375cdd1f6b39c8c953a0ad651ed7c0b215db7a2f4cad"
+    },
+    {
+      "path": "robotwin/task-specific/place_container_plate_s0_recipe.jsonl",
+      "size": 152,
+      "git_blob_sha1": "11d9dfa42b2a92144bdcb5ece1e640d353272349",
+      "sha256": "5bdff28bcaae418c27315a60d6a6ac7367052cea2ae35b5c05568abad5e60ab4"
+    },
+    {
+      "path": "robotwin/task-specific/place_dual_shoes_s0.json",
+      "size": 2159,
+      "git_blob_sha1": "47cd922607ff3252749012aa9bc7f6bd5d62d53b",
+      "sha256": "abcfb8321b9409415be6aacb5817928fc8537807071a571baafb65f2fd0eec11"
+    },
+    {
+      "path": "robotwin/task-specific/place_dual_shoes_s0_recipe.jsonl",
+      "size": 455,
+      "git_blob_sha1": "c5c6f576df6f1b5307fd2e73f7dad7ea79071a0a",
+      "sha256": "4f0f6d9907fbfc8241afd49dcaca1c7d5a7f8c1744d03e5b6536f6d5c30bae6b"
+    },
+    {
+      "path": "robotwin/task-specific/place_empty_cup_s0.json",
+      "size": 1588,
+      "git_blob_sha1": "c4602228c7bded1182c27c655957bfaf72f6d3f6",
+      "sha256": "0fede71e9b7ad7a03ca44ba16fa883eddc47803c8fa4fe3aa8d7929e416bf9f0"
+    },
+    {
+      "path": "robotwin/task-specific/place_empty_cup_s0_recipe.jsonl",
+      "size": 284,
+      "git_blob_sha1": "e5c423df5787d60a36b708978fd692618b572543",
+      "sha256": "d50680bd39271b0d6f3adf5fa82bc821393761c47c7a9c6db169780a61d7b5bc"
+    },
+    {
+      "path": "robotwin/task-specific/place_fan_s0.json",
+      "size": 1901,
+      "git_blob_sha1": "53d41b72f85c48a5c8bf714a7c5fb861335c9470",
+      "sha256": "22823b8b7145e458f9c3c488305b627d30324cb21336153efd85e091871a3fc0"
+    },
+    {
+      "path": "robotwin/task-specific/place_fan_s0_recipe.jsonl",
+      "size": 334,
+      "git_blob_sha1": "28b0937fda87c0657b5573deee9e79930e5ee616",
+      "sha256": "a07fa2c9010bbe211b3672fb4e98c7e23ef81f02e6497caeb6d9d0c260437549"
+    },
+    {
+      "path": "robotwin/task-specific/place_mouse_pad_s0.json",
+      "size": 1902,
+      "git_blob_sha1": "d4dbfe2b10481b47e892755193f1d793582c7517",
+      "sha256": "5242b39354eeda570bebcacc7a49902bae7ba347692480310475a21a4249cb10"
+    },
+    {
+      "path": "robotwin/task-specific/place_mouse_pad_s0_recipe.jsonl",
+      "size": 282,
+      "git_blob_sha1": "3aa10ad3e6b4bffca846b9c49afe2f4b063ac4e3",
+      "sha256": "e020ff2a55d615ebb992048e7f21b24109e9316aeea642bf2a495223ce1c158f"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_basket_s0.json",
+      "size": 1836,
+      "git_blob_sha1": "649cc9174ea30b3ddd5118b01824c626516d2443",
+      "sha256": "1984aff80f5f3632274dcbf70070157ddbec1000713bdd53cd8bf848fc02d225"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_basket_s0_recipe.jsonl",
+      "size": 316,
+      "git_blob_sha1": "467c29013fdcca1463433cbd5e4ec900b8775ede",
+      "sha256": "d7c233637f5bd8172178396162720079f435d09a813f302d938b98ea899ecf14"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_scale_s0.json",
+      "size": 4652,
+      "git_blob_sha1": "84f63f81785567df1f32f92b48327d8f9ceaa39c",
+      "sha256": "08b23fc1133c3783a6e38a2d75ba574f4ad5d05e16dfa90075c99fb792376ad7"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_scale_s0_recipe.jsonl",
+      "size": 1001,
+      "git_blob_sha1": "1b3a2f1bcd443fd150f6e838d56a2499a2622e4e",
+      "sha256": "8c1766c5b1fd6f53e9006608656e25506ba8f48f6f2ddf389a306a6066fca9d5"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_stand_s0.json",
+      "size": 1620,
+      "git_blob_sha1": "4795e70953cd6ed09d11fef65273e27d9a74ca42",
+      "sha256": "6442add7aa054c64669d09801d284e2e24f163404f54c9beafe343cab2b55828"
+    },
+    {
+      "path": "robotwin/task-specific/place_object_stand_s0_recipe.jsonl",
+      "size": 175,
+      "git_blob_sha1": "a064cda798570adc01e29b6e04cd0616aff28334",
+      "sha256": "563478a2b03bce1089e465eaff3dd2c29883ec01864468247b060f515a68579e"
+    },
+    {
+      "path": "robotwin/task-specific/place_phone_stand_s0.json",
+      "size": 1601,
+      "git_blob_sha1": "d20dc641bd3632a12c3e408c079046c8cc403181",
+      "sha256": "df64c7ba0955ddd251b79b948e9cfc3191c2db6442bd981087edc3a51be1be21"
+    },
+    {
+      "path": "robotwin/task-specific/place_phone_stand_s0_recipe.jsonl",
+      "size": 276,
+      "git_blob_sha1": "0bf5c274ea98d4701b371f4a0d7c07fb0a491fb6",
+      "sha256": "afc8eb564f240a7080fbc1fcd3d33f2913d827c21cdd83dd8f6f641134a3f27b"
+    },
+    {
+      "path": "robotwin/task-specific/place_shoe_s0.json",
+      "size": 1418,
+      "git_blob_sha1": "503783120805aa4cce653c63c6cf33ee82586463",
+      "sha256": "d32b5bc23c5f87fbd78863ac5ba359581f5a7ec18fe3ea39ec99145d9f93a6d3"
+    },
+    {
+      "path": "robotwin/task-specific/place_shoe_s0_recipe.jsonl",
+      "size": 326,
+      "git_blob_sha1": "ba61df0b73c4837cfda1b7710ef30136be875004",
+      "sha256": "f82c8817ac0d78c7fcd02402c20bd6c453f6cc3fe5bb37c0f4970465dd8fc159"
+    },
+    {
+      "path": "robotwin/task-specific/press_stapler_s0.json",
+      "size": 1419,
+      "git_blob_sha1": "fe157ac9a858874bc1da0f22f09be80a75ed179b",
+      "sha256": "c9a5d413c30035a3a15fdcbf296f6215d95ac6ce56d791f96e0a6886d874d9a9"
+    },
+    {
+      "path": "robotwin/task-specific/press_stapler_s0_recipe.jsonl",
+      "size": 242,
+      "git_blob_sha1": "0ad977ba2306c2c1f8123be8c58672291210a346",
+      "sha256": "e8e7deb854a300809737ade39f546a8c2a4396f9a69f76c82c041581d89fcdb7"
+    },
+    {
+      "path": "robotwin/task-specific/put_bottles_dustbin_s0.json",
+      "size": 2940,
+      "git_blob_sha1": "fef410014d4e36da9682669c834c955a6e188c55",
+      "sha256": "6f31f033dd1f83d69a2e16a2eb266fb387f18d9216a20923979dc3e471daf833"
+    },
+    {
+      "path": "robotwin/task-specific/put_bottles_dustbin_s0_recipe.jsonl",
+      "size": 2640,
+      "git_blob_sha1": "5332fe473e251d68b0fd4494178fb43f76a492ea",
+      "sha256": "c7b85960d42355cf431347283141bb7f1e1f1fa2d56d81d7c6e49afe76f37fbf"
+    },
+    {
+      "path": "robotwin/task-specific/put_object_cabinet_s0.json",
+      "size": 1692,
+      "git_blob_sha1": "35416177fb6649269c94e8b8a961f6dd9bf6af2c",
+      "sha256": "88e9999d06851286a585935d02745c4562e83cb324adec3f5fb730ec3e2c6319"
+    },
+    {
+      "path": "robotwin/task-specific/put_object_cabinet_s0_recipe.jsonl",
+      "size": 326,
+      "git_blob_sha1": "4800b762460d74c69aa7ea6eed7918b47928e676",
+      "sha256": "c55c974a482995ca984f3f3eb797772f43c76af17909767b86db2b8b4743f3a8"
+    },
+    {
+      "path": "robotwin/task-specific/rotate_qrcode_s0.json",
+      "size": 2396,
+      "git_blob_sha1": "946541dd355ace90da924515e4b097a8523b20c1",
+      "sha256": "39c58c90b0af2120ddacbcb33673557238b304975ac563a82c7acbcba7d116bc"
+    },
+    {
+      "path": "robotwin/task-specific/rotate_qrcode_s0_recipe.jsonl",
+      "size": 450,
+      "git_blob_sha1": "bbe33e8056d099382f838d30cbc2907c2bc32de9",
+      "sha256": "d11ef2ee519f070c2047e3f196f15f5f58c6b7c5848c04daded8624c2834bdc3"
+    },
+    {
+      "path": "robotwin/task-specific/scan_object_s0.json",
+      "size": 2198,
+      "git_blob_sha1": "0242b2c0d8bc7708183491dc018f20c81a6a7f0c",
+      "sha256": "f50aaed7582f26fa73153788785e1881214d024d9b8be428be5a2729ce042047"
+    },
+    {
+      "path": "robotwin/task-specific/scan_object_s0_recipe.jsonl",
+      "size": 362,
+      "git_blob_sha1": "323bc88fc1631e0e1cedbc82f48c80061f399797",
+      "sha256": "9a8207e167d3f027ef26f386c688ed9d877a5a3a9ff218c275b70782f7a6d268"
+    },
+    {
+      "path": "robotwin/task-specific/shake_bottle_horizontally_s0.json",
+      "size": 1431,
+      "git_blob_sha1": "b645753c5ca3ac0f8060bf19ee97b794a8a43f96",
+      "sha256": "99ecd15a3abf8c118766299bf8edcc997aa8b59ac17126f123cb41f00808dfd6"
+    },
+    {
+      "path": "robotwin/task-specific/shake_bottle_horizontally_s0_recipe.jsonl",
+      "size": 141,
+      "git_blob_sha1": "af9768ebd55aab8279a4c803ec1d0e17a342a0b1",
+      "sha256": "062f51dde92bdae6a1656da09bf5e8b237c653cf80e8bfc504de2ee8ef58ec78"
+    },
+    {
+      "path": "robotwin/task-specific/shake_bottle_s0.json",
+      "size": 1363,
+      "git_blob_sha1": "a8a0b035697a4c5033b6471434ee4f46ba715333",
+      "sha256": "9cd9e92f70d6d2b4e34e9f69f02aca9694e33bb0f86c268e418354fe725ab023"
+    },
+    {
+      "path": "robotwin/task-specific/shake_bottle_s0_recipe.jsonl",
+      "size": 128,
+      "git_blob_sha1": "d057c79779b0c430a22785c533cb1d2902d3d96c",
+      "sha256": "1361d2fd91d723c382f2573938c22de508870cfb5d41096c808046c73a5afdd1"
+    },
+    {
+      "path": "robotwin/task-specific/stack_blocks_three_s0.json",
+      "size": 2892,
+      "git_blob_sha1": "a04b2d42b1865e036830266be297d0a7fdeea4ab",
+      "sha256": "dcc10803ace0c19d9e90bb8216eef47970eaa0c899ea3dc1196bb016629801f5"
+    },
+    {
+      "path": "robotwin/task-specific/stack_blocks_three_s0_recipe.jsonl",
+      "size": 2471,
+      "git_blob_sha1": "d8acdbd180457a4c4e073279f27d69f3c4e7d669",
+      "sha256": "5d106c44f81f2a95a7cc554ca16afbd7fad2504795c5735ce903ebc609d947c1"
+    },
+    {
+      "path": "robotwin/task-specific/stack_blocks_two_s0.json",
+      "size": 1840,
+      "git_blob_sha1": "b52a7318ab838625cc473a669bf5771a7e296b3d",
+      "sha256": "2c404850bca38f0739b5d08cf7ecd6d9ddbdc4fa941b02b6f91be8c2290dd017"
+    },
+    {
+      "path": "robotwin/task-specific/stack_blocks_two_s0_recipe.jsonl",
+      "size": 435,
+      "git_blob_sha1": "d4cb243803c0afceaaaf2c98196ef5ac64d5f08a",
+      "sha256": "b689af09dcd720de11f6dd45a5228dbb1d3b531decb7b2f784b4038b7ac4aaee"
+    },
+    {
+      "path": "robotwin/task-specific/stack_bowls_three_s0.json",
+      "size": 2148,
+      "git_blob_sha1": "c297f063ff224d7c0c8d8334f458675319f614d5",
+      "sha256": "265c28824fbe2eadf6e9432693f9339fdc5493d3bf450c80fc8541e7c0e40a59"
+    },
+    {
+      "path": "robotwin/task-specific/stack_bowls_three_s0_recipe.jsonl",
+      "size": 488,
+      "git_blob_sha1": "ecab18c2331cd3a6481c81b7cc25722f06e4fd18",
+      "sha256": "6df2f6d615ce646c3a749bc877cd128ba4868d0a46ce518362d41462e89de575"
+    },
+    {
+      "path": "robotwin/task-specific/stack_bowls_two_s0.json",
+      "size": 1637,
+      "git_blob_sha1": "6a5c0c07ce80b1abbed9889e01367c9cfedec07d",
+      "sha256": "9f63af53f5de4bdc3ef55cde398f6e349fbd7bce4d2be7a0596992377b892760"
+    },
+    {
+      "path": "robotwin/task-specific/stack_bowls_two_s0_recipe.jsonl",
+      "size": 346,
+      "git_blob_sha1": "2803919f2c0ff3952b63a9a275ce34b9e97ced12",
+      "sha256": "0b3af223cbaa1f8a34365b5a0bf745c07c43d2cba014979edc28023d5e4dbf51"
+    },
+    {
+      "path": "robotwin/task-specific/stamp_seal_s0.json",
+      "size": 1793,
+      "git_blob_sha1": "9f069306b483cdcd2f6140b6aeeb2c8b5bcf0cbf",
+      "sha256": "83372c63cff451ed46ef3bce232cab418d7b8498794ca0947be6d2013a29225a"
+    },
+    {
+      "path": "robotwin/task-specific/stamp_seal_s0_recipe.jsonl",
+      "size": 378,
+      "git_blob_sha1": "330295bb18c4104a0374bdcd6d46be76db9230f8",
+      "sha256": "f1e00416690d057cff7930cb2b7cf9b469d55a2247df2aadd0a4c713d1856929"
+    },
+    {
+      "path": "robotwin/task-specific/turn_switch_s0.json",
+      "size": 1705,
+      "git_blob_sha1": "d39562b01935169a6dc6c05ac7ad6d0b2fd30392",
+      "sha256": "c3c4a33f70b6b0a6307af5b672fce33769ab7204ad9e1bdd4a24596c009aafc4"
+    },
+    {
+      "path": "robotwin/task-specific/turn_switch_s0_recipe.jsonl",
+      "size": 396,
+      "git_blob_sha1": "4fe378dac99df17179fa9742e223c58a4e25c07c",
+      "sha256": "75dfb3fe5834d01fdc69f109a3e945fc0e2a4cfde1ab5682b479646a87e04e5b"
+    }
+  ]
+}
