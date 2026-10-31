@@ -9,3 +9,5 @@
 - No external messages, paid model fallback, unattended real robot, or purchases.
 
 - User requires uv for all Python version/environment/dependency management. Use uv python, uv venv, uv pip; no Conda environment creation. Exact versions and resolved manifests are part of provenance.
+
+- Storage retention (user2026-11-01): at every5hour check and before long jobs, inspect disk/inodes and projected growth. Preserve at least max(100GiB,20%capacity) free plus expected job outputs. Delete only verified inactive temporary files, redundant download archives and unreferenced intermediate training checkpoints; retain active/best/latest resumable and protocol-referenced versions, model/assets/data and raw evidence. Record exact deletions. See docs/storage-retention.md. records/checkpoint-* are provenance, not training-weight garbage. No broad recursive deletion or other-project cleanup.

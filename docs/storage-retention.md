@@ -1,0 +1,11 @@
+# Storage retention
+
+User instruction (2026-11-01, Asia/Shanghai): remove temporary checkpoints and redundant files so experiments do not fill the disk.
+
+Before every long job and at every five-hour progress check, record disk usage, inode availability and expected output growth. Keep free space above the larger of100GiB and20%of filesystem capacity, plus the next job's estimated output. If the estimate is unknown or space is insufficient, bound the job's outputs or defer the new launch and report the bottleneck. Never terminate another project to reclaim storage.
+
+For future weight training, retain the active/best checkpoint, latest complete resumable checkpoint (including optimizer/scheduler state where needed), and any frozen checkpoint referenced by a protocol, comparison, promotion or rollback. Other intermediate checkpoints may be removed only after identifying their run, confirming that no live process uses them, and checking that no preserved experiment/candidate references require them. Keep a deletion receipt listing exact paths, sizes, retained references and reason. Do not delete using an unqualified recursive checkpoint glob. A records/checkpoint-* directory is a provenance snapshot, not disposable training weights.
+
+Remove abandoned partial downloads, temporary exports and duplicate archives after verification, when no downloader/writer has them open. For extracted asset archives, retain source revision/hash manifests and verify extracted contents before removing the archive. Original models, runtime assets, datasets, source inputs, raw experiment outputs, costs, candidates/rejections, final evaluation evidence and reproducibility hashes remain protected. Compact regenerable derivatives before touching evidence. uv cache cleanup must use uv-supported operations only after checking environment links and active installs; never blindly remove cache directories used by virtualenvs.
+
+The current phase freezes Qwen/VLA weights and is performing inference/simulation, so it creates no new optimizer checkpoints. Expensive pinned8B/30B/VLA base weights are not redundant training snapshots. Cleanup is scoped to this RSI runtime onlzgpu201; other projects and hosts are out of scope.
