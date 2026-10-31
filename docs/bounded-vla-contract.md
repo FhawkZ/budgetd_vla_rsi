@@ -16,7 +16,7 @@ Six CPU tests cover prefix binding, next-observation changes,50behavior, stop/ob
 
 Each case has a48inference cap and1200seconds; the total cap is192inferences/4800seconds. Prefix50 ordinarily reaches the horizon within24calls, while prefix25may need48. Equal caps/horizons do not imply equal consumed compute. This is an execution-binding and scheduling diagnosis, not an equal-cost method ranking. Report both outcome and actual cost. All unused allowance is canceled; infrastructure/initial-state failure stops the remaining cases without retries or replacement seeds.
 
-The owner uses only an idle GPU1 after a live occupancy/lock check. Qwen is not loaded. Every inference records language, images, state, output array and latency; each executed prefix is separately saved/hashed. Initial actions, first predicted arrays and next-inference states are compared offline. Model/physics nondeterminism must be reported if matching inputs yield different outputs; don't attribute every trajectory difference to scheduling. Native counts are not exact physics ticks or successful planning counts.
+The owner uses only an idle GPU1 after a live occupancy/lock check. Qwen is not loaded. Every inference records language, images, state, output array and latency; each submitted prefix is separately saved/hashed (the native environment may terminate within that prefix). Initial actions, first predicted arrays and next-inference states are compared offline. Model/physics nondeterminism must be reported if matching inputs yield different outputs; don't attribute every trajectory difference to scheduling. Native counts are not exact physics ticks or successful planning counts.
 
 ## Interpretation and next gate
 
