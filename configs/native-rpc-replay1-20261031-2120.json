@@ -1,0 +1,106 @@
+{
+  "run_id": "native-rpc-replay1-20261031-2120",
+  "classification": "independent infrastructure replay of cached predictions; no Agent/model score",
+  "hostname": "autodl-container-d31b4587e3-6f171098",
+  "max_replays": 1,
+  "max_chunks": 11,
+  "wall_seconds": 900,
+  "task": "handover_block",
+  "seed": 2026103012,
+  "instruction": "Move the red block from the left hand to the pad.",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "source_relative_path": "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "source_sha256": {
+    "robots/robotwin/robot_spec.py": "f8a5e2af68168141c966884f985004678586ba8c0b881743946848f42fd6a7db",
+    "robots/robotwin/primitives.py": "113b5ef3eb0a04e562ea41545c711e40f0b3a5c232185129840825859fa9c10e",
+    "robots/robotwin/env_server.py": "b613d835d171b0d0938835f244afd25fc5d554a38f5123e5e543aee9e6c4b2cb",
+    "robots/robotwin/env_client.py": "83c8dfa596391f4f20d61461b536c959ae393aeeb06b615d11d8cb36b6fa7fa8",
+    "robots/robotwin/vla_client.py": "4e9328ebc93ba46cae8189eda265ea988b82d030632155c6f511f91f4c26cec2",
+    "robots/robotwin/vla_server.py": "72af6be90131eb18a4b8af51055414eb7e9aed785791579bddbcb7240173b536",
+    "robots/robotwin/rlinf_env.py": "59aaf99c605cf3bf1598cced3a01025bb53258da49194cdbad9d45295cb5c7ba"
+  },
+  "native_task_relative_path": "lib/python3.11/site-packages/robotwin/envs/_base_task.py",
+  "native_task_sha256": "855433c0694ece459773d76ef76e4fe268b16e1349021c6314be59c8502965c9",
+  "code_sha256": {
+    "scripts/run_native_rpc_diagnostic.py": "f76032e71141bbec2c55ed5fd4873b8d4d5b80a44dd300d1a340635db1e0e7cc",
+    "scripts/native_phase_trace.py": "2a71d86a2e15d0041309b7113440eb54f5b140bd4e01ced7f0ffdf32dea27134",
+    "scripts/run_bounded_vla_pilot.py": "e10ac3f634650d78f61cfbacb3ff58f7aab8fa443b5e1010827ec7cba8fed98a"
+  },
+  "inputs": [
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-001.npy",
+      "sha256": "8213fab0e8b1d4809678d54db3bc263f446860fc008fc828a7e58fab12acd595",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-001.json",
+      "observation_sha256": "06896b1d5253b8c83db394b07274e71845a6a3ed754d5b6f192923be0c0da2f7"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-002.npy",
+      "sha256": "c2f122d98e4eda797136c2e8fc8c11765de2e00bc74f280c2e9af2a242dd8359",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-002.json",
+      "observation_sha256": "894103901c24e16153aa57411b90223779a4060ffbf58a2eea4207cd0d0e0c5a"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-003.npy",
+      "sha256": "35743f082ce8377ce8655d3b571d430ef428a11459d99b6979682749b090b097",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-003.json",
+      "observation_sha256": "69ce28bf58b3f035d9c4fce8e9b0f94fd018fb55f48d759ddc2e006a2b8ef313"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-004.npy",
+      "sha256": "27fc8687eb75c9813f64b6c764bdb38adcf606d30a36ad04632eb2eb0bb3882a",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-004.json",
+      "observation_sha256": "a28cc89e67f8fdcb4c255f7b3195b5cd63daf01e1235bea6b1086748f16d782b"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-005.npy",
+      "sha256": "26fec2cfb9d05e2f48b03a7033a52e09f990894971ef4a76dc6fad57572b21a4",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-005.json",
+      "observation_sha256": "8a24b039bd339ac14b5d0c6abb246e91e866f2b14cc54f2daf2f0b31a3c5733b"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-006.npy",
+      "sha256": "33bdbd0880a9a482d68e697648c636ec1dba240da2ce978cb0d680cf134bc216",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-006.json",
+      "observation_sha256": "6eca4b64172462d4f279239fdf7535a9bafe71028b9f3abacac33bf0f4c35792"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-007.npy",
+      "sha256": "9ecf2840f06a705af8cf2772b59e25e718af79a22bd2fa03cbb5a3f1413aa628",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-007.json",
+      "observation_sha256": "202af4c0a3b90ae71f7d4039823c487d0835c7bac6c9775fffa7ac0c6295b296"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-008.npy",
+      "sha256": "32ad15d4b0bc64e2ea3b4d360ab7cc6a7daf403f7cf3b541ddd031c7d83e0e4f",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-008.json",
+      "observation_sha256": "1e999d86d5f81b2a495040c2fc2aaba8e0de6c6c4c950db5c9e9bf24a5c60691"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-009.npy",
+      "sha256": "15adc4fac2469c2d4c8e18eb534f6c15aeb3d54905c2fe4c3c7fefa6ea86a721",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-009.json",
+      "observation_sha256": "605283e06388e77c9240fdaabbac456faa3ac92b9e769ab0f5d0b432011509b4"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-010.npy",
+      "sha256": "2e3f6fb16a5223b8c5951fd5bd27b3d3fc55600c419703919c2aac1bb3f7a94e",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-010.json",
+      "observation_sha256": "64c1fe2f4b12c60c061483be9e49d887a8cff92969d9400729cf3ec38286e190"
+    },
+    {
+      "path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-011.npy",
+      "sha256": "854945b25c6d03e169e2a102a264b9804f0a239e2d011212f871530bde699f6c",
+      "observation_path": "outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012/inference-011.json",
+      "observation_sha256": "4392718e5854225810badbb35e312f81ba66bed314f2dd083053b424a99b0248"
+    }
+  ],
+  "model_generations": 0,
+  "vla_inferences": 0,
+  "original_closed_protocol_not_reopened": true,
+  "changes": "Read-only method events +45second repeated Python stack dumps; cached first25 actions of11savedpredictions; noQwen/VLA services. Same native source/scorer/renderadapter/reset/seed/horizon. Diagnostic timing/resource footprint differs from original; no finaltest or improvement inference.",
+  "stop": "No resampling/retries. Stop on first RPC/initial-contract failure or at11chunks/900seconds. No terminal image request after failure; cleanup own environment only.",
+  "prelaunch_amendment": {
+    "previous_sha": "bb8a5968f722e230f0ed2145590ad78b07b544c4f6c6c49a710ee858df1d066c",
+    "reason": "Freeze cached observation metadata hashes as well as predictions; zero launches before amendment"
+  }
+}

@@ -1,0 +1,20 @@
+from pathlib import Path
+import json,os,sys,socket,hashlib,ast,functools
+root=Path('/root/autodl-tmp/budgeted-vla-rsi');r=Path(os.environ['RSI_RUNTIME_ROOT']);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();base=json.loads((root/'configs/bounded-vla-pair4-20261031-1130.json').read_text());source=r/'vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1';out=r/'outputs/native-rpc-prepare-20261031-2110';out.mkdir(exist_ok=True)
+# Execute exact AST of pinned language lookup/reset with a fake environment: no GPU.
+file=source/'robots/robotwin/env_server.py';tree=ast.parse(file.read_text());lookup=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='_evaluation_language');cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='RoboTwinEnvFacade');reset=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name=='reset');from typing import Any;ns={'Any':Any,'lru_cache':functools.lru_cache,'Path':Path,'json':json,'__file__':str(file)};exec(compile(ast.Module(body=[lookup,reset],type_ignores=[]),str(file),'exec'),ns)
+class Env:
+ def reset(self,env_idx,env_seeds):return {},{'episode_status':{'actual_seed':env_seeds[0]}}
+ def set_task_language(self,text,env_id):self.language=text
+ def get_task_language(self,i):return getattr(self,'language','native-fallback')
+class Facade:
+ def _strip_single_env_observation(self,obs):return obs
+suite=json.loads((source/'robots/robotwin/eval/demo_randomized.json').read_text());rows=[]
+for task in ['stack_blocks_two','handover_block']:
+ for case in suite['tasks'][task]:
+  f=Facade();f._env=Env();f._metadata=dict(seed=case['seed'],task_name=task,task_config='demo_randomized');_,info=ns['reset'](f);assert info['instruction']==case['task_language'] and info['instruction_source']=='evaluation_seed_table';rows.append(dict(task=task,seed=case['seed'],source=info['instruction_source'],language_equal=True))
+f=Facade();f._env=Env();f._metadata=dict(seed=2026103012,task_name='handover_block',task_config='demo_randomized');_,info=ns['reset'](f);assert info['instruction']=='native-fallback' and info['instruction_source']=='native'
+(out/'language-contract.json').write_text(json.dumps(dict(classification='exact pinned AST CPU fake-env contract; not native physics or score',rows=rows,nonstandard_seed_fallback=True,source_sha256=sha(file),generations=0,episodes=0),indent=2)+'\n')
+prior=r/'outputs/bounded-controller-dev64-20261031-1700/01-handover_block-s2026103012';native=Path(sys.prefix)/'lib/python3.11/site-packages/robotwin/envs/_base_task.py'
+cfg=dict(run_id='native-rpc-replay1-20261031-2120',classification='independent infrastructure replay of cached predictions; no Agent/model score',hostname=socket.gethostname(),max_replays=1,max_chunks=11,wall_seconds=900,task='handover_block',seed=2026103012,instruction='Move the red block from the left hand to the pad.',assets_relative_path=base['assets_relative_path'],source_relative_path=str(source.relative_to(r)),source_sha256=base['source_sha256'],native_task_relative_path=str(native.relative_to(Path(sys.prefix))),native_task_sha256=sha(native),code_sha256={rel:sha(root/rel) for rel in ['scripts/run_native_rpc_diagnostic.py','scripts/native_phase_trace.py','scripts/run_bounded_vla_pilot.py']},inputs=[dict(path=str((prior/f'inference-{i:03d}.npy').relative_to(r)),sha256=sha(prior/f'inference-{i:03d}.npy'),observation_path=str((prior/f'inference-{i:03d}.json').relative_to(r))) for i in range(1,12)],model_generations=0,vla_inferences=0,original_closed_protocol_not_reopened=True,changes='Read-only method events +45second repeated Python stack dumps; cached first25 actions of11savedpredictions; noQwen/VLA services. Same native source/scorer/renderadapter/reset/seed/horizon. Diagnostic timing/resource footprint differs from original; no finaltest or improvement inference.',stop='No resampling/retries. Stop on first RPC/initial-contract failure or at11chunks/900seconds. No terminal image request after failure; cleanup own environment only.')
+p=root/'configs/native-rpc-replay1-20261031-2120.json';assert not p.exists();p.write_text(json.dumps(cfg,indent=2)+'\n');print('SHA',sha(p))
