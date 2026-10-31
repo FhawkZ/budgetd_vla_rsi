@@ -1,0 +1,43 @@
+{
+  "run_id": "owner-lifecycle-qual2-20261101-0240",
+  "classification": "independent deployment qualification; no replay or Agent score",
+  "hostname": "autodl-container-d31b4587e3-6f171098",
+  "task": "stack_blocks_two",
+  "seed": 100000,
+  "instruction": "Grab red block, set it in the center, then stack green block over it.",
+  "max_resets": 2,
+  "model_calls": 0,
+  "vla_inferences": 0,
+  "policy_actions": 0,
+  "per_worker_wall_seconds": 360,
+  "source": "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "rlinf": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets": "assets/robotwin-c15cc97b",
+  "source_sha256": {
+    "software/envs/robotwin/lib/python3.11/site-packages/robotwin/envs/vector_env.py": "4305a50bbd715ed4e61c9adf03b04cdb3deeb01d588abff5ac68bb64672a7dac",
+    "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1/robots/robotwin/env_server.py": "b613d835d171b0d0938835f244afd25fc5d554a38f5123e5e543aee9e6c4b2cb",
+    "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1/robots/robotwin/rlinf_env.py": "59aaf99c605cf3bf1598cced3a01025bb53258da49194cdbad9d45295cb5c7ba",
+    "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1/rpent/utils/rpc/rpc_facade.py": "f6696b2e45d4b56bdbc5cf8a14c7d4ea0807a5c563f42c297b1b75a397a72d58",
+    "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1/rpent/utils/rpc/main_thread_serve.py": "52c7cf23e886cfe4e42cb8eeba13b1f50254f1531f16618445064f089317aa8f",
+    "vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1/rpent/utils/rpc/http_rpc.py": "c37b3d1a82d39b0ef5f4170e30924cdb0b794a7265d2fe0fad58245462ca9550",
+    "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3/rlinf/envs/sim/robotwin/robotwin_env.py": "78d668553392527a5642889c917c55bf9fb083979e03bd963c2f1501c1aa9dc0",
+    "software/envs/robotwin/lib/python3.11/site-packages/robotwin/envs/_base_task.py": "855433c0694ece459773d76ef76e4fe268b16e1349021c6314be59c8502965c9",
+    "software/envs/robotwin/lib/python3.11/site-packages/robotwin/envs/stack_blocks_two.py": "781fdf0f99ed2fde61243f2e6134c2f29ee17c851ce9e5a37506a91fbbcd51da"
+  },
+  "code_sha256": {
+    "scripts/owner_thread_adapter.py": "fcc05bc3aff823781e115dff7ff8ce5c2e1de09e6cfe930862d6ecc4f3491e15",
+    "scripts/run_owner_env_server.py": "9bfe473449570861fbc759fe262ea9f0e1120715b39e0ce33b8d4082f5c4e647",
+    "scripts/run_owner_lifecycle_qualification.py": "4f47cee3b1d9917442a14676742e107ac3d00d14907612d8adcad5e6597084c5",
+    "scripts/run_bounded_vla_pilot.py": "e10ac3f634650d78f61cfbacb3ff58f7aab8fa443b5e1010827ec7cba8fed98a"
+  },
+  "criteria": [
+    "native and owner reset once, read three RGB views, exact paired state/image/native language equality",
+    "owner native create/getobs/render/close must stay on main thread; no take_action",
+    "both child exits captured before cleanup; clean exit0 required",
+    "no timer stack observer; no actions/VLA/Qwen; stop at first failure with no retry"
+  ],
+  "limitations": [
+    "reset/render qualification does not establish action-path stability or original stall cause",
+    "simulator initialization physics cost counted in allocation walltime; no exact tick count"
+  ]
+}
