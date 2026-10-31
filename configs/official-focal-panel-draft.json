@@ -1,0 +1,75 @@
+{
+  "classification": "CPU source audit only; no runtime eligibility or task scores",
+  "suite_sha256": "c7c6ee4847d8b39838af281be6de3517d039c76451bb78bb454f52f81470b306",
+  "source_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "suite_tasks": 50,
+  "suite_episodes": 250,
+  "source_cli_recommends_official_task_seeds": true,
+  "source_cli_default_action_budget": 10000,
+  "our_development_horizon": 1200,
+  "historical_development_seeds": {
+    "stack_blocks_two": 2026103011,
+    "handover_block": 2026103012
+  },
+  "historical_seeds_in_official_panel": {
+    "stack_blocks_two": false,
+    "handover_block": false
+  },
+  "selected_official_focal_panel": {
+    "stack_blocks_two": [
+      {
+        "seed": 100000,
+        "task_language": "Grab red block, set it in the center, then stack green block over it."
+      },
+      {
+        "seed": 100001,
+        "task_language": "Relocate red block and green block to the center, then layer green block over red block."
+      },
+      {
+        "seed": 100002,
+        "task_language": "Place red block and green block together at the center, then stack green block on top."
+      },
+      {
+        "seed": 100003,
+        "task_language": "Move red block and green block to the center, then stack green block above red block."
+      },
+      {
+        "seed": 100004,
+        "task_language": "Move red block and green block to the center, using the right arm and the left arm, and stack green block on top of red block."
+      }
+    ],
+    "handover_block": [
+      {
+        "seed": 100001,
+        "task_language": "With the left arm grab the red block, hand it to the right arm, then position it onto the blue pad."
+      },
+      {
+        "seed": 100002,
+        "task_language": "Grab the red block and transfer to the right."
+      },
+      {
+        "seed": 100003,
+        "task_language": "Use left arm to grab the block and hand it to the right."
+      },
+      {
+        "seed": 100004,
+        "task_language": "Grab the red block and transfer to the right."
+      },
+      {
+        "seed": 100005,
+        "task_language": "Pick the red block with the left arm and transfer to the right."
+      }
+    ]
+  },
+  "selection_rule": "All five published cases for each already fixed focal task, in published order; no success/outcome screening, backfill or resampling",
+  "status": "draft_not_launched",
+  "remaining_contracts": [
+    "Check runtime native language equals published text before accepting a common benchmark label; if mismatch stop and diagnose without silently replacing task language",
+    "Check local embodiment/asset/runtime compatibility against pinned source; cannot infer from matching task names",
+    "Freeze separate fixed50 panel protocol and total budgets;1200 differs from native RPent10000 default and must be labeled budget-limited adaptation",
+    "All ten cases are development only, some official seeds occurred in historical zero-action pilots; exclude from independent final test",
+    "Preserve every failed result; if fixed50 has no handover competence across this panel, stop prefix/prompt tuning and reassess executor/checkpoint compatibility"
+  ],
+  "gpu_calls": 0,
+  "model_calls": 0
+}
