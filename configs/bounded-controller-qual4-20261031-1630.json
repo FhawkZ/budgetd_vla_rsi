@@ -1,0 +1,121 @@
+{
+  "status": "frozen",
+  "classification": "reduced_controller_cached_transport_qualification_not_autonomous_task_score",
+  "run_id": "bounded-controller-qual4-20261031-1630",
+  "execution_host": "autodl-container-d31b4587e3-6f171098",
+  "max_calls": 4,
+  "input_tokens_limit": 32768,
+  "output_tokens_limit": 1024,
+  "wall_seconds": 600,
+  "inputs": [],
+  "cpu_receipt": "outputs/structured-decoding-20261031-0110/cpu-audit.json",
+  "cpu_receipt_sha256": "865f925d785dfc5de5350551a513fe5b609841e9dc65fa73032239e33167c202",
+  "code_sha256": {
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb",
+    "scripts/bounded_controller.py": "bfc9589a8d0f864cc83446ffe2c1696852244c9e347edfdc39584ebd741c23d8",
+    "scripts/qualify_bounded_controller.py": "defa46f59044bfb89a23a3fe61bdbc828a622b1fc3ecac16c4e1fa275402c729",
+    "configs/bounded-vla-interface-v1.json": "c23ea4c0d4c851be38fd96f73c564003a28134d43866a1c39c7ec03baa80069b"
+  },
+  "tool_execution_allowed": false,
+  "posthoc_argument_repair": false,
+  "stop_on_any_failed_case": true,
+  "unused_allowance": "cancel",
+  "model_weights": "Qwen3-VL-30B-A3B-Instruct immutable candidate manifest; separate from8B",
+  "protocol_scope": "Independent4call cached initial free choice, prescribed observe branch then image feedback free choice, zero execution budget stop. Fifthrequest hardrefused; no robot action; stop on failed qualification.",
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "model_class": "Qwen3VLMoeForConditionalGeneration",
+  "asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "closed_predecessor": null,
+  "canceled_predecessor_allowance_not_reused": true,
+  "cached_observation": {
+    "task_language": "the left arm grabs red block, places it in the center, the left arm stacks green block on red block.",
+    "robot_state": {
+      "left_eef_pose": [
+        -0.2979237139225006,
+        -0.31380388140678406,
+        0.9419986009597778,
+        0.7000007075698663,
+        -7.093281273444641e-06,
+        -3.7938358494749025e-06,
+        0.714142149251099
+      ],
+      "right_eef_pose": [
+        0.30643314123153687,
+        -0.31279975175857544,
+        0.940998375415802,
+        0.7035625829175198,
+        -7.077809104143358e-06,
+        -3.793729455803252e-06,
+        0.7106333033667505
+      ],
+      "left_tcp_pose": [
+        -0.3003234757280238,
+        -0.1938278794829461,
+        0.9419980225781791,
+        0.7000007075698663,
+        -7.093281273444641e-06,
+        -3.7938358494749025e-06,
+        0.714142149251099
+      ],
+      "right_tcp_pose": [
+        0.30523320942415433,
+        -0.19280574546870868,
+        0.9409978088715331,
+        0.7035625829175198,
+        -7.077809104143358e-06,
+        -3.793729455803252e-06,
+        0.7106333033667505
+      ],
+      "left_gripper": 1.0,
+      "right_gripper": 1.0,
+      "qpos_target14": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "arm_qpos_real12": [
+        -3.016615224282759e-08,
+        -5.666987590302597e-07,
+        -4.835828804061748e-06,
+        7.701128623693876e-08,
+        4.63164752773082e-07,
+        -8.158995683515968e-07,
+        -3.258066882949606e-08,
+        -5.65274206110189e-07,
+        -4.838918357563671e-06,
+        7.693390813301448e-08,
+        4.6469963876916154e-07,
+        -8.163781899384048e-07
+      ]
+    },
+    "images": {
+      "head": {
+        "path": "outputs/bounded-vla-pair4-20261031-1130/00-stack_blocks_two-s2026103011/inference-001-head.png",
+        "sha256": "24a7b75850a126695ca539caa45a92e2b16b80d63ef2fbbecdd6659b6bb20cb0"
+      },
+      "left_wrist": {
+        "path": "outputs/bounded-vla-pair4-20261031-1130/00-stack_blocks_two-s2026103011/inference-001-left_wrist.png",
+        "sha256": "70d87c7585d7b30a5649d8f1516e7e1767bc8d6dfd355839c946ed945e89abc6"
+      },
+      "right_wrist": {
+        "path": "outputs/bounded-vla-pair4-20261031-1130/00-stack_blocks_two-s2026103011/inference-001-right_wrist.png",
+        "sha256": "bf18da125f9ddc238e3d3300726c23aa5e663ea99b0c66fab34b7e300e8b93aa"
+      }
+    }
+  }
+}
