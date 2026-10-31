@@ -1,0 +1,13 @@
+{
+  "version": "bounded-vla-v1",
+  "classification": "common executor adapter; no learning or paper-baseline claim",
+  "tools": [
+    {"type":"function","function":{"name":"execute_vla_chunk","description":"Run one frozen VLA inference on fresh native RGB/state/language and execute its first25or50absoluteEEF waypoints. Does not edit predicted poses. Prefix25is an explicit common-backend adaptation.","parameters":{"type":"object","properties":{"use_length":{"type":"integer","enum":[25,50]}},"required":["use_length"],"additionalProperties":false}}},
+    {"type":"function","function":{"name":"observe","description":"Read fresh native RGB/state/language without model inference or motion. Charged to observation/request budgets.","parameters":{"type":"object","properties":{},"additionalProperties":false}}},
+    {"type":"function","function":{"name":"stop","description":"End this execution without additional motion or model inference.","parameters":{"type":"object","properties":{},"additionalProperties":false}}}
+  ],
+  "binding": "Tool name is dispatch.action; parameters are copied unchanged. No argument repair, motion fallback or forced action.",
+  "frozen_fields": ["VLA weights", "native task language", "RGB/state builder", "native scorer", "task split"],
+  "model_controlled_transport_qualified": false,
+  "note": "This schema is a future common tool surface. Current physical diagnostic calls the Python interface deterministically; no Qwen-controlled execution has been claimed."
+}

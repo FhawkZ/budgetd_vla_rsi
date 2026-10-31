@@ -81,3 +81,11 @@ GitHub保存代码、uv依赖清单、固定模型/资产版本及哈希、实�
 2026-10-30：原生DINO/SAM离线感知资格通过，新namespace/MCP工具链2次真实Qwen调用通过。完整RoboRSI本地适配的首个堆叠开发试跑已关闭：64次模型调用、27条原生工具轨迹记录；实际抓取执行后，10次相同移动目标均被规划器拒绝，任务未完成。Reviewer27次调用读取不存在的帧路径并耗尽预算，没有有效Reviewer结论。外部统一账本1,311,512输入/7,425输出tokens，与64条服务端请求逐项一致；上游角色汇总只记31次，不能用作总成本。该试跑不是成功基线、VLA比较或严格RSI结果。下一步先诊断原生证据路径与读图契约，不重跑或追加该预算。
 
 2026-10-30 后续：独立 Reviewer 证据验收发现，显式正确路径仍会被通用 MCP 资源工具误用；限制为四个注册证据工具后，2次调用完成3次读图和JSON诊断。预算为零仍返回 continue，故仅读图/输出结构合格，不能称完整判断能力合格。详见 [部署契约](docs/reviewer-deployment-contract.md)。独立交接开发试跑使用新64调用协议，不复用任何关闭额度。
+
+## Common bounded VLA execution
+
+The new executor and fixed-control descriptor are documented in [docs/bounded-vla-contract.md](docs/bounded-vla-contract.md). Prefix25is an explicit shared-backend adaptation; upstream lingbot_act remains fixed50. This is not a learned update or a nativeRPent planner result.
+
+The four-case development protocol `bounded-vla-pair4-20261031-1130` has already been launched. Inspect its runtime report/CLOSE/summary before any next action; never rerun or refill it. Its one-shot CPUfinalizer only summarizes an existing closed run and never launches episodes. Model-controlled tool transport is still unqualified.
+
+For CPU regression tests after `source scripts/activate.sh robotwin`, use `CUDA_VISIBLE_DEVICES="" PYTHONPATH="$RSI_RUNTIME_ROOT/vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1:$PWD/scripts" python -m unittest discover -s tests -p "test_*.py"`. This explicit source path is needed for the existingRPent compactor test; it does not change the global environment.

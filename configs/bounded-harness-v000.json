@@ -1,0 +1,15 @@
+{
+  "version": "v000",
+  "classification": "frozen fixed control, not an Agent-learned or accepted update",
+  "policy": {
+    "action": "execute_vla_chunk",
+    "use_length": 50
+  },
+  "interface": "bounded-vla-v1",
+  "interface_sha256": "2c7dda852a1c672e4dffea666424f2a4a1544c4ae44f0a67eecdd16377f4decd",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "horizon": 1200,
+  "max_inferences": 48,
+  "task_language": "native env.get_task_language",
+  "learned_updates": 0
+}

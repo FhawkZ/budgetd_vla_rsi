@@ -1,0 +1,390 @@
+{
+  "status": "frozen",
+  "classification": "common_bounded_vla_schedule_diagnostic",
+  "run_id": "bounded-vla-pair4-20261031-1130",
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 2026103011,
+      "use_length": 50,
+      "instruction": "the left arm grabs red block, places it in the center, the left arm stacks green block on red block.",
+      "initial_image_sha256": {
+        "head": "24a7b75850a126695ca539caa45a92e2b16b80d63ef2fbbecdd6659b6bb20cb0",
+        "left_wrist": "70d87c7585d7b30a5649d8f1516e7e1767bc8d6dfd355839c946ed945e89abc6",
+        "right_wrist": "bf18da125f9ddc238e3d3300726c23aa5e663ea99b0c66fab34b7e300e8b93aa"
+      },
+      "initial_robot_state": {
+        "left_eef_pose": [
+          -0.2979237139225006,
+          -0.31380388140678406,
+          0.9419986009597778,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_eef_pose": [
+          0.30643314123153687,
+          -0.31279975175857544,
+          0.940998375415802,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_tcp_pose": [
+          -0.3003234757280238,
+          -0.1938278794829461,
+          0.9419980225781791,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_tcp_pose": [
+          0.30523320942415433,
+          -0.19280574546870868,
+          0.9409978088715331,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_gripper": 1.0,
+        "right_gripper": 1.0,
+        "qpos_target14": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "arm_qpos_real12": [
+          -3.016615224282759e-08,
+          -5.666987590302597e-07,
+          -4.835828804061748e-06,
+          7.701128623693876e-08,
+          4.63164752773082e-07,
+          -8.158995683515968e-07,
+          -3.258066882949606e-08,
+          -5.65274206110189e-07,
+          -4.838918357563671e-06,
+          7.693390813301448e-08,
+          4.6469963876916154e-07,
+          -8.163781899384048e-07
+        ]
+      }
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 2026103011,
+      "use_length": 25,
+      "instruction": "the left arm grabs red block, places it in the center, the left arm stacks green block on red block.",
+      "initial_image_sha256": {
+        "head": "24a7b75850a126695ca539caa45a92e2b16b80d63ef2fbbecdd6659b6bb20cb0",
+        "left_wrist": "70d87c7585d7b30a5649d8f1516e7e1767bc8d6dfd355839c946ed945e89abc6",
+        "right_wrist": "bf18da125f9ddc238e3d3300726c23aa5e663ea99b0c66fab34b7e300e8b93aa"
+      },
+      "initial_robot_state": {
+        "left_eef_pose": [
+          -0.2979237139225006,
+          -0.31380388140678406,
+          0.9419986009597778,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_eef_pose": [
+          0.30643314123153687,
+          -0.31279975175857544,
+          0.940998375415802,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_tcp_pose": [
+          -0.3003234757280238,
+          -0.1938278794829461,
+          0.9419980225781791,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_tcp_pose": [
+          0.30523320942415433,
+          -0.19280574546870868,
+          0.9409978088715331,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_gripper": 1.0,
+        "right_gripper": 1.0,
+        "qpos_target14": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "arm_qpos_real12": [
+          -3.016615224282759e-08,
+          -5.666987590302597e-07,
+          -4.835828804061748e-06,
+          7.701128623693876e-08,
+          4.63164752773082e-07,
+          -8.158995683515968e-07,
+          -3.258066882949606e-08,
+          -5.65274206110189e-07,
+          -4.838918357563671e-06,
+          7.693390813301448e-08,
+          4.6469963876916154e-07,
+          -8.163781899384048e-07
+        ]
+      }
+    },
+    {
+      "task": "handover_block",
+      "seed": 2026103012,
+      "use_length": 50,
+      "instruction": "Move the red block from the left hand to the pad.",
+      "initial_image_sha256": {
+        "head": "43030987afe0f8cc08c2635f71efe28222a481907d100346023ef1f109df8405",
+        "left_wrist": "0cb7b322749efa5d587934df8c79ecb1ed7c351e0a974f738b5593555cae9328",
+        "right_wrist": "5cbe3e63ce892d4a77fd94bba1567c14d9d92958429be34afc3b4e8fba3620c5"
+      },
+      "initial_robot_state": {
+        "left_eef_pose": [
+          -0.2979237139225006,
+          -0.31380388140678406,
+          0.9419986009597778,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_eef_pose": [
+          0.30643314123153687,
+          -0.31279975175857544,
+          0.940998375415802,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_tcp_pose": [
+          -0.3003234757280238,
+          -0.1938278794829461,
+          0.9419980225781791,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_tcp_pose": [
+          0.30523320942415433,
+          -0.19280574546870868,
+          0.9409978088715331,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_gripper": 1.0,
+        "right_gripper": 1.0,
+        "qpos_target14": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "arm_qpos_real12": [
+          -3.016615224282759e-08,
+          -5.666987590302597e-07,
+          -4.835828804061748e-06,
+          7.701128623693876e-08,
+          4.63164752773082e-07,
+          -8.158995683515968e-07,
+          -3.258066882949606e-08,
+          -5.65274206110189e-07,
+          -4.838918357563671e-06,
+          7.693390813301448e-08,
+          4.6469963876916154e-07,
+          -8.163781899384048e-07
+        ]
+      }
+    },
+    {
+      "task": "handover_block",
+      "seed": 2026103012,
+      "use_length": 25,
+      "instruction": "Move the red block from the left hand to the pad.",
+      "initial_image_sha256": {
+        "head": "43030987afe0f8cc08c2635f71efe28222a481907d100346023ef1f109df8405",
+        "left_wrist": "0cb7b322749efa5d587934df8c79ecb1ed7c351e0a974f738b5593555cae9328",
+        "right_wrist": "5cbe3e63ce892d4a77fd94bba1567c14d9d92958429be34afc3b4e8fba3620c5"
+      },
+      "initial_robot_state": {
+        "left_eef_pose": [
+          -0.2979237139225006,
+          -0.31380388140678406,
+          0.9419986009597778,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_eef_pose": [
+          0.30643314123153687,
+          -0.31279975175857544,
+          0.940998375415802,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_tcp_pose": [
+          -0.3003234757280238,
+          -0.1938278794829461,
+          0.9419980225781791,
+          0.7000007075698663,
+          -7.093281273444641e-06,
+          -3.7938358494749025e-06,
+          0.714142149251099
+        ],
+        "right_tcp_pose": [
+          0.30523320942415433,
+          -0.19280574546870868,
+          0.9409978088715331,
+          0.7035625829175198,
+          -7.077809104143358e-06,
+          -3.793729455803252e-06,
+          0.7106333033667505
+        ],
+        "left_gripper": 1.0,
+        "right_gripper": 1.0,
+        "qpos_target14": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "arm_qpos_real12": [
+          -3.016615224282759e-08,
+          -5.666987590302597e-07,
+          -4.835828804061748e-06,
+          7.701128623693876e-08,
+          4.63164752773082e-07,
+          -8.158995683515968e-07,
+          -3.258066882949606e-08,
+          -5.65274206110189e-07,
+          -4.838918357563671e-06,
+          7.693390813301448e-08,
+          4.6469963876916154e-07,
+          -8.163781899384048e-07
+        ]
+      }
+    }
+  ],
+  "horizon": 1200,
+  "max_episodes": 4,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 48,
+  "max_vla_inferences_total": 192,
+  "episode_wall_seconds": 1200,
+  "total_wall_seconds": 4800,
+  "stop_on_infrastructure_error": true,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "model_manifest_sha256": "3182e08e99322ebf7c373254efba48d830ce89efc2caef1aac588744eba435ad",
+  "runner_sha256": "e10ac3f634650d78f61cfbacb3ff58f7aab8fa443b5e1010827ec7cba8fed98a",
+  "source_sha256": {
+    "robots/robotwin/robot_spec.py": "f8a5e2af68168141c966884f985004678586ba8c0b881743946848f42fd6a7db",
+    "robots/robotwin/primitives.py": "113b5ef3eb0a04e562ea41545c711e40f0b3a5c232185129840825859fa9c10e",
+    "robots/robotwin/env_server.py": "b613d835d171b0d0938835f244afd25fc5d554a38f5123e5e543aee9e6c4b2cb",
+    "robots/robotwin/env_client.py": "83c8dfa596391f4f20d61461b536c959ae393aeeb06b615d11d8cb36b6fa7fa8",
+    "robots/robotwin/vla_client.py": "4e9328ebc93ba46cae8189eda265ea988b82d030632155c6f511f91f4c26cec2",
+    "robots/robotwin/vla_server.py": "72af6be90131eb18a4b8af51055414eb7e9aed785791579bddbcb7240173b536",
+    "robots/robotwin/rlinf_env.py": "59aaf99c605cf3bf1598cced3a01025bb53258da49194cdbad9d45295cb5c7ba"
+  },
+  "limitations": [
+    "Four paired development episodes on two already-used seeds, not final test or stable success rates.",
+    "Prefix50reproduces native dispatch; prefix25is explicit common-executor adaptation: unchanged model observation/action prediction but execute shorter prefix before fresh inference. Original tool/schema remains unchanged.",
+    "Equal1200native-actionhorizon and48inferencecaps percase; actualcost can differ. Not equal-cost method superiority; report success and actualcost jointly.",
+    "No Qwen/no learned high-level policy/no update/no RSI. Fixed-harness execution only; no manual/expert action, forced model action or episode replay.",
+    "No automatic retry or resampling; initialization or infrastructure error cancels remainder. All unusedallocation canceled.",
+    "Native action counter not exactphysicsticks or successfulplanning count. Retention is not measured without realsharedupdate."
+  ],
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "frozen_unix": 1793425662.1017947,
+  "initialization": "Two predeclared raw development seeds; no expert screening or resampling. Not the expert-filtered official benchmark suite.",
+  "deployment_evidence": {
+    "model": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/lingbot-deploy-20261029/status.json",
+    "native_backend": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/native-backend-20261029-1945/qualification-summary.json"
+  },
+  "diagnostic_only": true,
+  "paired_closed_reference": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/vla-publiclang-dev2-20261030-1040",
+  "paired_reference_protocol_sha256": "b3dfa0e6cf16cfd7d997b51cae2cd2e4edb583eb67c9f73942d91e20df1f90c8",
+  "contrast": "Native environment language only versus prior public full_description; same seeds and unchanged runner/control/weights. Posthoc development diagnosis, not method score.",
+  "matching_rule": "Compare exact first RGB PNG hashes and canonical initial robot state before interpretation; mismatch invalidates language-only causal attribution.",
+  "no_old_budget_reopened": true,
+  "interface_sha256": "2c7dda852a1c672e4dffea666424f2a4a1544c4ae44f0a67eecdd16377f4decd",
+  "cpu_receipt": "outputs/bounded-vla-prepare-20261031-1120/cpu-native-equivalence.json",
+  "cpu_receipt_sha256": "c3dae5bde1777f4b751f33cbf16b6111a4af13194e98928cd2d04aed45e4ec7d",
+  "cpu_unit_tests": 6,
+  "independent_new_budget": true,
+  "old_protocols_remain_closed": true
+}
