@@ -1,0 +1,105 @@
+{
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "horizon": 1200,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "status": "frozen",
+  "classification": "typed_shared_candidate_development",
+  "run_id": "feedback-patch-dev10-20261101-1220",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "instruction": "Grab red block, set it in the center, then stack green block over it.",
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100001,
+      "instruction": "Relocate red block and green block to the center, then layer green block over red block.",
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100002,
+      "instruction": "Place red block and green block together at the center, then stack green block on top.",
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100003,
+      "instruction": "Move red block and green block to the center, then stack green block above red block.",
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100004,
+      "instruction": "Move red block and green block to the center, using the right arm and the left arm, and stack green block on top of red block.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "instruction": "With the left arm grab the red block, hand it to the right arm, then position it onto the blue pad.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100002,
+      "instruction": "Grab the red block and transfer to the right.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100003,
+      "instruction": "Use left arm to grab the block and hand it to the right.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100004,
+      "instruction": "Grab the red block and transfer to the right.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100005,
+      "instruction": "Pick the red block with the left arm and transfer to the right.",
+      "use_length": 50
+    }
+  ],
+  "max_episodes": 10,
+  "max_vla_inferences_total": 240,
+  "episode_wall_seconds": 1200,
+  "total_wall_seconds": 6000,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "stop_on_infrastructure_error": true,
+  "base_protocol": "configs/official-owner-fixed50-dev10-20261101-0300.json",
+  "base_protocol_sha256": "8dd38f6cfa550af2b88ff3744c5c4796701d95e081f88e94ec1485bb3405ae2e",
+  "patch_path": "outputs/feedback-patch-proposals3-20261101-1210/candidate.json",
+  "patch_sha256": "d68609375886b07c613cf622b851ccebe195761327e5010ac4e4c6b9d0d3c7de",
+  "input_references": "outputs/official-panel-audit-20261101-0710/paired-input-references.json",
+  "expected_output_max_bytes": 536870912,
+  "scope": "One first valid feedback-conditioned model candidate, full ten existing officialdevelopment cases in same order. No resampling/backfill; stop first infrastructure failure. Native skills+unchangedfixed50 share1200horizon.0Qwen duringepisodes. No acceptance on development alone. Rule may merely hold an already closed gripper: record measured state and cost; do not infer effectiveness from syntactic validity.",
+  "new_code_sha256": {
+    "scripts/run_typed_skill_panel.py": "b2c0bc3fd992ced7c1df6b099b84d235c6db642d736efb9223785b0f907490cb",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2"
+  },
+  "runner_sha256": "b2c0bc3fd992ced7c1df6b099b84d235c6db642d736efb9223785b0f907490cb",
+  "typed_qualification_report": "outputs/typed-skill-arrayfix-qual2-20261101/report.json",
+  "typed_qualification_report_sha256": "24721403738b63e36ed78630066e6e5f6a3ed0cfea0340fe552dc602798ebc49",
+  "proposal_protocol_sha256": "49dda8e56448df1e321aab6a76c1e4259731d9cdd323c16e023bcfffa4445e2f",
+  "comparison": "Matched historical fixed50 initialstate/RGB/language; same frozenVLA and owner deployment. Need behavior audit and fulltaskretention; taskoutcomesnotyetknown."
+}

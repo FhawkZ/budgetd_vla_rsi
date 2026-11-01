@@ -1,0 +1,77 @@
+{
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "qualification_report": "outputs/bounded-controller-qual4-20261031-1630/report.json",
+  "qualification_report_sha256": "00b85dece0044a758ee1d9361ec54372a94422adc2620718ff6dd5f619f79c7f",
+  "qwen_asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "qwen_asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "context": 32768,
+  "output_limit": 1024,
+  "expected_output_max_bytes": 52428800,
+  "status": "frozen",
+  "run_id": "feedback-patch-proposals3-20261101-1210",
+  "max_qwen_calls_total": 3,
+  "wall_seconds": 900,
+  "classification": "independent finite candidate-feasibility batch; no task score or RSI",
+  "prior_autonomous_proposals_consumed": 1,
+  "total_autonomous_proposal_ceiling": 4,
+  "stop": "first valid candidate, explicit abstention, infrastructure error, or three generated rejections; unused canceled; no retries",
+  "instruction": "Propose at most four one-shot rules applied identically to stack_blocks_two and handover_block. The incumbent is frozen LingBot-VLA with unmodified native instructions, RGB and robot state, predicting50 EEF waypoints per call; max24calls/1200 native actions. Published10case development panel stack2/5 and handover1/5, no current accepted shared update. Do not repeat prefix search or modify VLA prompts/actions. Each rule is checked before a VLA call, fires at most once when min_vla_calls and the selected arm normalized gripper range hold. At most one rule fires per cycle; evaluation then continues with fixed50. Relative movement uses current observed end-effector XYZ plus your bounded delta, same orientation/gripper; native planner, at most10waypoints. set_gripper uses10native actions, delta must be[0,0,0]. Max offset peraxis0.08m and Euclidean norm0.10m. No object truth poses or arbitrary world targets. All native skill actions share the1200horizon and failures count; there is no automatic repair/retry. A closed gripper is NOT proof of a held object. Task-specific branching, stored trajectories and scene coordinates are forbidden. You may abstain with an empty rules list if evidence cannot justify a reusable candidate. Otherwise choose ONE plausible shared patch based on the supplied measured development execution observations. This is a finite exploratory proposal, not a claim of success. The earlier initial-observation-only proposal returned two zero-displacement move rules and was rejected as no-op. This batch adds feedback from ALL ten fixed cases. Three labeled image sheets contain first/middle/last policy-input head views; index/order follows the JSON. These are pre-inference observations, not necessarily terminal. No task-specific branching is allowed. You may abstain if this action space cannot express a justified improvement. Submit with submit_patch. No prose or extra tool needed.",
+  "evidence_inputs": [
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/feedback.json",
+      "sha256": "be7ac7847d49a351795a327baf8a436e9a981c1442d3e8487c0164621fe661ba",
+      "label": "feedback.json"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage0.png",
+      "sha256": "2c547a4f734de68f91365009ae431163aafaa548d7d1aa7632966e56fc580f8a",
+      "label": "stage0.png"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage1.png",
+      "sha256": "d7f5fcdc31768ef110c0951d446c14a531c76c7e2fd3a86f82734f63ffb27d49",
+      "label": "stage1.png"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage2.png",
+      "sha256": "0949f270f4750630ba1a3071efe38785ba062c7466eb988377efe3ca6db51686",
+      "label": "stage2.png"
+    }
+  ],
+  "controller_code_sha256": {
+    "scripts/propose_feedback_batch.py": "1e81afc1a17e0abf23d4627a77582d3b39f54710b7da7812350de143c20fcaf4",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2",
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32"
+  },
+  "conditional_development_plan": {
+    "status": "not_launched; requires separate hashed candidate-bound config",
+    "panel": "all ten fixed official cases in original order",
+    "max_candidates_evaluated": 1,
+    "max_episodes": 10,
+    "max_vla": 240,
+    "horizon": 1200,
+    "old_task": "stack_blocks_two",
+    "new_task": "handover_block",
+    "acceptance": "no promotion on development alone",
+    "reserved_validation_seeds": {
+      "stack_blocks_two": [
+        100006,
+        100007,
+        100008,
+        100009,
+        100010
+      ],
+      "handover_block": [
+        100006,
+        100007,
+        100008,
+        100009,
+        100010
+      ]
+    },
+    "validation_status": "reserved before candidate results; historical exposure audit and separate protocol required before launch; not final test"
+  }
+}
