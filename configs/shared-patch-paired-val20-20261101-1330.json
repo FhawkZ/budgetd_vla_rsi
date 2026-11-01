@@ -1,0 +1,222 @@
+{
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "horizon": 1200,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "status": "frozen",
+  "classification": "independent_paired_validation",
+  "run_id": "shared-patch-paired-val20-20261101-1330",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 100006,
+      "role": "baseline",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100006,
+      "role": "candidate",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100007,
+      "role": "candidate",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100007,
+      "role": "baseline",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100008,
+      "role": "baseline",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100008,
+      "role": "candidate",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100009,
+      "role": "candidate",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100009,
+      "role": "baseline",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100010,
+      "role": "baseline",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100010,
+      "role": "candidate",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100006,
+      "role": "candidate",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100006,
+      "role": "baseline",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100007,
+      "role": "baseline",
+      "pair_index": 6,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100007,
+      "role": "candidate",
+      "pair_index": 6,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100008,
+      "role": "candidate",
+      "pair_index": 7,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100008,
+      "role": "baseline",
+      "pair_index": 7,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100009,
+      "role": "baseline",
+      "pair_index": 8,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100009,
+      "role": "candidate",
+      "pair_index": 8,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100010,
+      "role": "candidate",
+      "pair_index": 9,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100010,
+      "role": "baseline",
+      "pair_index": 9,
+      "instruction": null,
+      "use_length": 50
+    }
+  ],
+  "max_episodes": 20,
+  "max_vla_inferences_total": 480,
+  "episode_wall_seconds": 1200,
+  "total_wall_seconds": 12000,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "stop_on_infrastructure_error": true,
+  "base_protocol": "configs/official-owner-fixed50-dev10-20261101-0300.json",
+  "base_protocol_sha256": "8dd38f6cfa550af2b88ff3744c5c4796701d95e081f88e94ec1485bb3405ae2e",
+  "expected_output_max_bytes": 1073741824,
+  "scope": "Exactly ten previously reserved task+seed pairs, each fixed50 vs unchanged candidate. Alternate pair member order deterministically, sameGPU1. Native language from env at reset, exact input-only pairedreference beforeactions, no language override. No newQwen/candidate changes. Stop firstinfraerror,cancelremainder,no resampling.Independent validation, not final test. Counter is native waypoints not physics ticks.",
+  "new_code_sha256": {
+    "scripts/run_paired_patch_validation.py": "1f08bc92cdec2b138a40d9c544e9a282310437167d340d2e90e719fe786fc5ab",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2"
+  },
+  "runner_sha256": "1f08bc92cdec2b138a40d9c544e9a282310437167d340d2e90e719fe786fc5ab",
+  "proposal_protocol_sha256": "49dda8e56448df1e321aab6a76c1e4259731d9cdd323c16e023bcfffa4445e2f",
+  "development_audit": "outputs/shared-patch-audit-20261101/report.json",
+  "development_audit_sha256": "8b00aa4f1e6a5bad8f137389d51aec3ae018eb481986bd1cd97c2a512e98a727",
+  "role_patches": {
+    "baseline": {
+      "path": "outputs/paired-validation-prepare-20261101-1330/baseline-empty-patch.json",
+      "sha256": "edc1771f53635ad1b4e70ca6c83eb12e817cec9f84507496d4e2eed64d88202d"
+    },
+    "candidate": {
+      "path": "outputs/feedback-patch-proposals3-20261101-1210/candidate.json",
+      "sha256": "d68609375886b07c613cf622b851ccebe195761327e5010ac4e4c6b9d0d3c7de"
+    }
+  },
+  "decision_rule": {
+    "candidate_eligible_for_persistence": "Full20completion, allpairedinputs equal; native handover successes strictly greater than baseline; no loss on any previouslysuccessfulstackcase. Gate read-only selection only; evidence/provenance saved before any separate deployment.",
+    "failure_or_tie": "rejectcandidate; no additionalQwen calls/repeats/prefixsearch",
+    "claims": "tinyvalidation fractions only; no statisticalsignificance/strictRSI/causalcontactmechanism claim",
+    "minimum_old_baseline_successes": 1
+  },
+  "language_contract": "native env.get_task_language; instruction=null means unknown untilreset, second member mustexactlymatch first; no modelfeedback fromvalidation",
+  "prelaunch_amendment": {
+    "original_sha256": "31d8d79113d964448ec237549c5c4eab9dff3c5a0a72a1dd3dc1a4628a633596",
+    "reason": "Require at least one old-task baseline success in independent validation so retention is not vacuous. No validation launch/result existed before this amendment."
+  }
+}
