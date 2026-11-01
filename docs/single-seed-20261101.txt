@@ -1,0 +1,73 @@
+2026-11-01 single-seed initialization and one fresh validation panel
+
+Implemented a new opt-in adapter covering BOTH native SubEnv.setup_task and
+reset. It preserves successful setup arguments, native language and cleanup;
+each method attempts the requested seed once. Partial-task failures are closed
+and the original exception propagates. A two-attempt process cap and durable
+attempt receipts prevent hidden alternate seeds. Original installed native
+source, scorer, frozen old launchers and model weights were not modified.
+Eight new CPU tests compare exact pinned native success behavior and injected
+unstable/generic failure behavior. A separate censoring test rejects timeouts,
+post-policy errors, changed seeds and crashed processes. Full CPU suite:61passed
+and6subtests. These fake-task checks are not robotic episode scores.
+
+single-seed-init-qual1-20261101-2230 is CLOSED and passed initialization only.
+Protocol SHA389fe628f090bc94bafd41343b6566b4650b1661e3d61c48e0e1eb7e3698230c.
+One reset, exactlytwo native setup entries, zero VLA/Qwen/policy actions,
+40.993672GPU1allocation seconds. Historical stack100006 robot state, three RGB
+hashes and native language match exactly; the child exited0 and resources were
+released. It qualifies one valid scene's initialization, not arbitrary scene
+stability, action-path reliability, or the original RPC timeout cause. No physical
+replay of the invalid seed100009 was used to hunt for a favorable initialization.
+
+single-seed-paired-val20-20261101-2300 is a separately frozen fresh panel.
+Protocol SHAe18760cfa6e045e313243ef5ba93412ddc693f672706212378a533c156dd8159.
+Exactly stack_blocks_two and handover_block seeds100011..100015, both fixed50 and
+unchanged candidate, alternating pair-member order onGPU1. No known exposure was
+found in48runtime episode records or exact local seed-label searches; this cannot
+rule out unlogged external experiments. All ten task-seeds are now excluded from
+final testing. Maximum20attempted episodes/480VLA/12000wallseconds, each at most
+24VLA/1200combined native action counts/one public reset/two setup attempts.
+Zero Qwen calls or new proposals. Initialization and failed attempts are charged.
+Keep initial state, views, native language, checkpoint, scoring and candidate
+permissions identical across methods. Fixed gripper candidate SHA remains
+d68609375886b07c613cf622b851ccebe195761327e5010ac4e4c6b9d0d3c7de.
+
+Native UnStableError is distinguishable only with fixed-server attempt receipts,
+before policy execution, exact requested seed, and exited owned processes. Such
+an episode has success=null and scene_invalid, then the predetermined next case
+is attempted. No replacement or retry. Other infrastructure failure stops the
+whole protocol and cancels the remainder. This explicit change avoids silently
+switching scenes or starving all later cases while preserving invalid outcomes.
+Both planned members are attempted; a valid member of an invalid pair is not a
+complete pair. Report planned/attempted/completed/invalid/unstarted and pair
+coverage separately, never label invalid construction a policy failure.
+
+Promotion still requires all20policy episodes complete, all10paired inputs equal,
+strict handover gain, no lost old baseline success, and at leastone old baseline
+success. Secondary descriptive coverage minimum3complete pairs per task cannot
+override that gate. If incomplete, no promotion and stop this finite pilot; if
+complete but tied/regressed, reject the candidate and stop this candidate space.
+Do not add rounds/seeds/prompts/prefixes/model capacity to rescue it. If positive,
+save an engineering candidate before separately designing a bounded causal
+control. Simple gripper closure, holding time and allocation are not established
+novel RA-L contributions. No automatic deployment is implemented.
+
+Previous val20 remains CLOSED:6completed/1scene-constructioncensored/13unstarted,
+three stack pairs both1/3, no handover outcome,108VLA5407native1664.533GPU1seconds,
+372allowances canceled. It is inconclusive, not proof of ineffectiveness. Those
+results and budgets are not merged into this new protocol. Development2/5->2/5
+stack and1/5->2/5handover remain a one-case descriptive signal. No accepted
+common-backend update, post-update forgetting result, strict RSI result or full
+paper numerical reproduction currently exists. All candidate generation and
+selection costs remain linked in prior records, not omitted from future totals.
+
+Operational notes
+Onlylzgpu201, uv, two idle GPUs at most. No other project/paused host is touched.
+The new panel ownsGPU1 only; first inspect its live PID/identity and report/CLOSE,
+never relaunch from stale runningJSON. Model/asset/raw evidence remain outside
+Git. Disk reserve is max100GiB/20%capacity plus1GiB expected panel output. Two tiny
+old partial downloads remain retained under the prior incomplete FD inspection;
+zero new deletion claimed. One prelaunch shell-quoting error prevented a temporary
+configuration-generation script from executing; corrected by copying a literal
+script file before freezing. No robot/model call or protocol rerun resulted.
