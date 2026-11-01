@@ -1,0 +1,91 @@
+2026-11-01 — Independent validation stopped by scene initialization
+
+Scientific decision
+The shared gripper candidate remains frozen and is NOT promoted. Validation is
+inconclusive, not a demonstrated efficacy failure: no handover case was reached.
+The development signal (stack 2/5 -> 2/5, handover 1/5 -> 2/5) remains descriptive.
+No accepted common-backend learning update, post-update forgetting result, strict
+RSI result, or full paper numerical reproduction has been established.
+
+Closed protocol
+shared-patch-paired-val20-20261101-1330, SHA
+b8947a8203958228f39e110ea4b16d53e4e8cbafca1cec47d07a243d78ecbcbc.
+Six episodes completed, one scene-construction error, thirteen unstarted. The
+three complete stack pairs (100006, 100007, 100008) were success/success,
+failure/failure, failure/failure. Thus both roles are 1/3 on this partial panel.
+This is not the planned five-case retention estimate. No handover validation
+outcome exists. The seventh episode requested stack seed 100009; a native
+UnStableError named clutter object 001_bottle, then the runtime initialized seed
+100010. The exact-seed guard correctly rejected this before a VLA call or policy
+action. Do not count this as a policy failure, use the replacement scene, drop it
+to manufacture a complete panel, or reopen the closed allocation.
+
+Measured cost and audit
+108 VLA inferences, 5407 native action counts (60 are typed-skill counts),
+1664.533048 GPU1 allocation seconds, zero Qwen generations. 372 remaining VLA
+allowances canceled. Baseline/candidate each used 54 VLA calls. Their native
+counts were 2693/2714; inference RPC time 25.188005/25.121269 seconds. GPU time
+includes initialization and failed construction, not just inference. Native
+counts are not physical simulation ticks. Seven reset RPCs corresponded to 16
+native initialization-method entries including preflight and fallback; never
+label these as sixteen Agent episodes or seven single setup attempts.
+All three paired initial states, three-view RGB hashes, native language and
+first predictions match. 108 prediction prefixes, 324 inference images, 749 raw
+files and fourteen daemon exits were audited. The partial panel is rejected by
+the HCL receipt adapter before its commit selection. No terminal stability test.
+
+Source diagnosis (CPU only)
+Installed robotwin/envs/vector_env.py SHA:
+4305a50bbd715ed4e61c9adf03b04cdb3deeb01d588abff5ac68bb64672a7dac.
+SubEnv.setup_task catches all setup exceptions and increments trial_seed.
+SubEnv.reset increments trial_seed on UnStableError; other errors propagate.
+Six probes execute the exact extracted methods with fake tasks, including the
+public facade's seed guard. They verify these semantics without physics or model
+calls. Original upstream source, frozen execution code, scorer and candidate
+remain unchanged. This is not a diagnosis of the bottle's physical instability
+or a proof of scene infeasibility. It is unrelated to the older RPC timeout.
+
+Next bounded work, in order
+1. Add a new, opt-in single-seed initialization adapter covering BOTH setup_task
+   and reset. Each method may make at most one setup attempt at the requested
+   seed; preserve successful-path language, arguments and cleanup, propagate
+   failure with exact attempt receipts. Do not edit installed upstream or closed
+   launchers. Compare exact native success behavior and injected-failure behavior
+   on CPU. Do not disable the native stability check or randomization.
+2. Only after those checks, freeze one separate deployment qualification with at
+   most one public reset, two construction entries, zero VLA/Qwen/policy actions,
+   and a finite wall limit. Reuse the already-observed valid stack100006 only as
+   an initialization fixture and compare recorded initial state/RGB/language.
+   No new task score, no reset replay of 100009 to search for a lucky outcome.
+   The qualification protocol does not exist yet and is NOT authorized by this
+   document to launch as if frozen.
+3. If qualified, draft one independent finite task panel with explicit scene
+   validity rules BEFORE observing policy outcomes. Distinguish native invalid
+   construction from transport crashes; retain invalid/censored cases and all
+   costs, require exact paired inputs, never replace seeds. Predeclare coverage
+   minimum and stop rule. This is a fresh protocol, not continuation of val20.
+   Keep the gripper candidate unchanged; no new Qwen proposal, prefix sweep or
+   manual rescue. All reserved val20 task-seeds stay excluded from final test,
+   including stack100010 actually initialized by the hidden fallback.
+4. Do not start allocator/600-episode comparisons or contact/holding mechanism
+   experiments now. A useful independent shared effect must first be shown;
+   incomplete validation is neither support for that effect nor a null result.
+   If a later fully specified comparison ties/regresses, stop this candidate
+   space. Repeated initialization qualification failure is also a stop, not a
+   reason for unlimited deployment repair or model calls.
+
+Baseline interpretation
+Fixed50 remains the competent incumbent. HCL gate/sampling adaptation is not a
+full HCL numerical reproduction, and its official main plasticity profiles must
+not be conflated with balanced cheap screening. RPent/RoboRSI native local-model
+failures remain separately reported, not sole weak competitors. The generic
+self-evolving allocator is still not an established RA-L core contribution.
+
+Execution and storage
+Only lzgpu201, uv-managed environments, frozen weights and raw evidence retained.
+Both GPUs and locks were released. About342GiB is free. Two old incomplete cuRobo
+downloads totaling13,562,827bytes were inventoried but not deleted:11 process FD
+directories could not be inspected, so inactivity could not be fully verified.
+Zero bytes deleted this turn; receipt records exact paths, hashes and reason.
+No user action is needed for this small retained amount. Do not confuse progress
+records/checkpoint-* with disposable training weights or touch other projects.
