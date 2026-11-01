@@ -1,0 +1,47 @@
+{
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "qualification_report": "outputs/bounded-controller-qual4-20261031-1630/report.json",
+  "qualification_report_sha256": "00b85dece0044a758ee1d9361ec54372a94422adc2620718ff6dd5f619f79c7f",
+  "qwen_asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "qwen_asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "status": "frozen",
+  "run_id": "typed-patch-proposal2-20261101",
+  "max_qwen_calls_total": 2,
+  "wall_seconds": 600,
+  "context": 32768,
+  "output_limit": 1024,
+  "classification": "one synthetic schema qualification plus one autonomous shared patch proposal; not performance",
+  "new_budget": true,
+  "old_protocols_closed": true,
+  "expected_output_max_bytes": 52428800,
+  "controller_code_sha256": {
+    "scripts/propose_typed_patch.py": "0891c6c46845d05546105fa7e868c6ee074dbbdc44c4a9ae68e3298bef80edcc",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2",
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32"
+  },
+  "proposal_instruction": "Propose at most four one-shot rules applied identically to stack_blocks_two and handover_block. The incumbent is frozen LingBot-VLA with unmodified native instructions, RGB and robot state, predicting50 EEF waypoints per call; max24calls/1200 native actions. Published10case development panel stack2/5 and handover1/5, no current accepted shared update. Do not repeat prefix search or modify VLA prompts/actions. Each rule is checked before a VLA call, fires at most once when min_vla_calls and the selected arm normalized gripper range hold. At most one rule fires per cycle; evaluation then continues with fixed50. Relative movement uses current observed end-effector XYZ plus your bounded delta, same orientation/gripper; native planner, at most10waypoints. set_gripper uses10native actions, delta must be[0,0,0]. Max offset peraxis0.08m and Euclidean norm0.10m. No object truth poses or arbitrary world targets. All native skill actions share the1200horizon and failures count; there is no automatic repair/retry. A closed gripper is NOT proof of a held object. Task-specific branching, stored trajectories and scene coordinates are forbidden. You may abstain with an empty rules list if evidence cannot justify a reusable candidate. Otherwise choose ONE plausible shared patch based on the supplied allowed initial observations. This is a finite exploratory proposal, not a claim of success. Submit with submit_patch. No prose or extra tool needed.",
+  "evidence_inputs": [
+    {
+      "path": "outputs/official-owner-fixed50-dev10-20261101-0300/00-stack_blocks_two-s100000/inference-001-head.png",
+      "sha256": "24de1bbef8f99e8e2cff8b088df48fe30fbf55bdb5f272db26b2d96046b9702c",
+      "label": "00-stack_blocks_two-s100000 initial head RGB"
+    },
+    {
+      "path": "outputs/official-owner-fixed50-dev10-20261101-0300/05-handover_block-s100001/inference-001-head.png",
+      "sha256": "4ce9daf0c0293d6796e7f3fa233064f51235f04bca266e1a08c7082adcd37c8b",
+      "label": "05-handover_block-s100001 initial head RGB"
+    },
+    {
+      "path": "outputs/official-panel-audit-20261101-0710/paired-input-references.json",
+      "sha256": "362811dca8fb272fcfff31747090cf5866723ac4b15f479c46471a5f30247420",
+      "label": "development native instructions and initial proprioception"
+    }
+  ],
+  "prelaunch_amendment": {
+    "previous_sha256": "eb19bd2ffd35ed910e30c00c4c282b3b345362616799e0f7dee3782282f228e7",
+    "reason": "Count actual server generations rather than capped attempted requests; no launch before amendment"
+  }
+}

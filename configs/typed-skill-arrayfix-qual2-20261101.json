@@ -1,0 +1,54 @@
+{
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "horizon": 1200,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "status": "frozen",
+  "classification": "typed_skill_fixture_qualification",
+  "run_id": "typed-skill-arrayfix-qual2-20261101",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "instruction": "Grab red block, set it in the center, then stack green block over it.",
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "instruction": "With the left arm grab the red block, hand it to the right arm, then position it onto the blue pad.",
+      "use_length": 50
+    }
+  ],
+  "max_episodes": 2,
+  "max_vla_inferences_total": 0,
+  "episode_wall_seconds": 300,
+  "total_wall_seconds": 900,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "stop_on_infrastructure_error": true,
+  "base_protocol": "configs/official-owner-fixed50-dev10-20261101-0300.json",
+  "base_protocol_sha256": "8dd38f6cfa550af2b88ff3744c5c4796701d95e081f88e94ec1485bb3405ae2e",
+  "patch_path": "outputs/typed-skill-qual2-prepare-20261101/synthetic-fixture.json",
+  "patch_sha256": "3bd5a494c987e4644d002c2e9d8256a039cb1691dc7d2553d47ca8c7d26cd74d",
+  "input_references": "outputs/official-panel-audit-20261101-0710/paired-input-references.json",
+  "expected_output_max_bytes": 104857600,
+  "scope": "Exactly2one-reset fixtures with one observed-EEF-relative10waypoint move each.0Qwen/0VLAinferences. Stop first error/no measured change; no task score, update or RSI; all unused canceled.",
+  "new_code_sha256": {
+    "scripts/run_typed_skill_panel.py": "b2c0bc3fd992ced7c1df6b099b84d235c6db642d736efb9223785b0f907490cb",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2"
+  },
+  "runner_sha256": "b2c0bc3fd992ced7c1df6b099b84d235c6db642d736efb9223785b0f907490cb",
+  "prior_failure": "typed-skill-qual2-20261101 closed before any native action: ndarray equality raised; remaining canceled. This independent contract-only qualification changes exact array/list comparison, not action fixture or budget."
+}

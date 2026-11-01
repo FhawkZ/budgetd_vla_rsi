@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/RL-MIND/Harness-Continual-Learning",
+  "branch_at_audit": "V1",
+  "commit": "a6e5a01536ac8d42ca28f0a82efa223869c8c48d",
+  "archive_url": "https://codeload.github.com/RL-MIND/Harness-Continual-Learning/tar.gz/a6e5a01536ac8d42ca28f0a82efa223869c8c48d",
+  "archive_sha256": "0ba17a01a8d1055f7579b7207c6f3ffb3b1316e81d5140975a0c5da34626f89c",
+  "archive_bytes": 4560634,
+  "runtime_vendor_relative": "vendor/Harness-Continual-Learning-a6e5a01536ac8d42ca28f0a82efa223869c8c48d",
+  "evidence_relative": "outputs/hcl-source-qualification-20261101/source-manifest.json",
+  "scope": "Officialsource/coreunit qualification; not paper result reproduction. Preserve official cheap screening and coverage when adapting."
+}
