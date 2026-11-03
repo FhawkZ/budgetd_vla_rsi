@@ -102,3 +102,9 @@ The new executor and fixed-control descriptor are documented in [docs/bounded-vl
 The four-case development protocol `bounded-vla-pair4-20261031-1130` has already been launched. Inspect its runtime report/CLOSE/summary before any next action; never rerun or refill it. Its one-shot CPUfinalizer only summarizes an existing closed run and never launches episodes. Model-controlled tool transport is still unqualified.
 
 For CPU regression tests after `source scripts/activate.sh robotwin`, use `CUDA_VISIBLE_DEVICES="" PYTHONPATH="$RSI_RUNTIME_ROOT/vendor/RPent-a744bd5f128ebef3cb8c6736cf7cd98adff681f1:$PWD/scripts" python -m unittest discover -s tests -p "test_*.py"`. This explicit source path is needed for the existingRPent compactor test; it does not change the global environment.
+
+## Skill-RSI frozen-skill backend
+
+Use `source scripts/activate.sh skillrsi` for the isolated CLIP overlay. `bash scripts/bootstrap.sh skillrsi` expects the existing uv robotwin parent and pinned external OpenAI CLIP source d05afc436d78f1c48dc0dbf8e5980a9d471f35f6. It leaves parent packages unchanged and adds only CLIP1.0/ftfy6.3.1. The interpreter resolves inherited requirements through a .pth; uv's local-only pip check does not follow this parent. Pin and verify the recorded parent freeze and effective import metadata when migrating. No model weight/data belongs in Git.
+
+Historical frozen protocols cannot be relaunched. See docs/skill-rsi-native-dev4-20261104.md and the latest native closure note before execution. Native Skill-RSI code-only, local VLA adaptation, public-ledger reconstruction and new author learning are separate evidence levels.

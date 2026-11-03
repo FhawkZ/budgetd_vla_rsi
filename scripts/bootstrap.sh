@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(dirname "$0")/env.sh"
-profile="${1:?usage: bootstrap.sh qwen|agent|rpent|sim|robotwin}"
+profile="${1:?usage: bootstrap.sh qwen|agent|rpent|sim|robotwin|skillrsi}"
+if test "$profile" = skillrsi; then exec bash "$(dirname "$0")/bootstrap_skillrsi.sh"; fi
 mkdir -p "$TMPDIR" "$UV_CACHE_DIR" "$RSI_SOFTWARE_ROOT/envs"
 case "$profile" in
  qwen) py=3.12.15; lock=qwen-cu128-py312.lock ;;

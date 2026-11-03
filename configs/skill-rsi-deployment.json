@@ -1,0 +1,49 @@
+{
+  "clip_revision": "d05afc436d78f1c48dc0dbf8e5980a9d471f35f6",
+  "clip_tar_sha256": "553c80a6364ac7350dd7800f535531175f22c11fa742bda1b50b62121eb5f40f",
+  "native_commit": "6dde57155eafa3e4ebf6ad1f93a7cf7d5d41a755",
+  "native_archive_sha256": "e07f85c80d37661a7886d78d1c06d6fbe170e4401804ef7ee7b94634f660401a",
+  "asset_manifest_sha256": "f72bf1c4bf468c14b8afaf335e1be946489dba565ea80566f85407a2ee6d2e3c",
+  "profile": "skillrsi",
+  "parent": "robotwin",
+  "parent_freeze_sha256": "0896f3c5eb675db9b05da48bddeb09b43e21b145226d1ef0d404500aad97538c",
+  "direct_dependency_check": [
+    {
+      "package": "clip",
+      "requires": "ftfy",
+      "found": "6.3.1"
+    },
+    {
+      "package": "clip",
+      "requires": "packaging",
+      "found": "26.3"
+    },
+    {
+      "package": "clip",
+      "requires": "regex",
+      "found": "2026.9.29"
+    },
+    {
+      "package": "clip",
+      "requires": "tqdm",
+      "found": "4.70.1"
+    },
+    {
+      "package": "clip",
+      "requires": "torch",
+      "found": "2.8.0"
+    },
+    {
+      "package": "clip",
+      "requires": "torchvision",
+      "found": "0.23.0"
+    },
+    {
+      "package": "ftfy",
+      "requires": "wcwidth",
+      "found": "0.9.4"
+    }
+  ],
+  "pip_check_limitation": "uv pip check reads only overlay local packages; does not follow custom parent .pth; interpreter metadata resolves all dependencies",
+  "CPU_import_limitation": "cuRobo import allocates default GPU Pose; CUDA-disabled import fails as recorded; no repeated GPU qualification"
+}

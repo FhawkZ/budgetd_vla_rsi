@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
-profile="${1:?usage: source scripts/activate.sh qwen|agent|rpent|sim|robotwin}"
-case "$profile" in qwen|agent|rpent|sim|robotwin) ;; *) echo "Unknown profile" >&2; return 2 ;; esac
+profile="${1:?usage: source scripts/activate.sh qwen|agent|rpent|sim|robotwin|skillrsi}"
+case "$profile" in qwen|agent|rpent|sim|robotwin|skillrsi) ;; *) echo "Unknown profile" >&2; return 2 ;; esac
 source "$RSI_SOFTWARE_ROOT/envs/$profile/bin/activate"
 export ROBORSI_HOME="$RSI_RUNTIME_ROOT/roborsi-home"
 export ROBORSI_WORKSPACE="$ROBORSI_HOME/workspace"

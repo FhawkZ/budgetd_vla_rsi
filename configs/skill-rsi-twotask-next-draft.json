@@ -1,0 +1,45 @@
+{
+  "id": "skill-rsi-frozen-twotask-dev4-next",
+  "status": "DRAFT_NOT_RUNNABLE",
+  "purpose": "finish two-task native frozen-skill baseline with the now functioning shared no-denoiser deployment; not repeat successful seed or refill closed pilot",
+  "tasks": [
+    {
+      "task": "move_can_pot",
+      "skill": "move_can_pot_d885e5",
+      "seed": 671334
+    },
+    {
+      "task": "move_can_pot",
+      "skill": "move_can_pot_d885e5",
+      "seed": 607912
+    },
+    {
+      "task": "stack_bowls_two",
+      "skill": "stack_bowls_two_79dfa1",
+      "seed": 317359
+    },
+    {
+      "task": "stack_bowls_two",
+      "skill": "stack_bowls_two_79dfa1",
+      "seed": 266244
+    }
+  ],
+  "maximum_attempts": 4,
+  "per_attempt": {
+    "setup": 1,
+    "primitive_calls": 90,
+    "sim_seconds": 90,
+    "wall_seconds": 240,
+    "settle_seconds": 2,
+    "process_wall_seconds": 300
+  },
+  "total_process_wall_seconds": 1320,
+  "Qwen": 0,
+  "VLA": 0,
+  "no_new_qualification": "14CPU guards passed and one real skill succeeded; do not repeat interface-only qualification",
+  "stop": "first rendering/initialization/infrastructure error cancels all remaining; no seed replacement or retry",
+  "exclusion_sha256": "7e9df4e3582f5b166f4111c6a955bb7c48ebe17425df271d079fe39f7a03e011",
+  "same_deployment_all_methods": true,
+  "proposals_authorized_by_this_draft": 0,
+  "after_completion": "only valid development observations/proprioception/call returns may support one independently bounded author revision; raw invalid render cases and sealed validation excluded; require actual mechanism and all methods share released library/API/candidate budget"
+}
