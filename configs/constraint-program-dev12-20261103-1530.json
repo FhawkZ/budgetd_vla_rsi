@@ -1,0 +1,173 @@
+{
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "horizon": 1200,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "status": "frozen",
+  "classification": "constraint_program_paired_development",
+  "run_id": "constraint-program-dev12-20261103-1530",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "role": "baseline",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "role": "candidate",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100001,
+      "role": "candidate",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100001,
+      "role": "baseline",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100002,
+      "role": "baseline",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100002,
+      "role": "candidate",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "role": "candidate",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "role": "baseline",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100002,
+      "role": "baseline",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100002,
+      "role": "candidate",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100003,
+      "role": "candidate",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100003,
+      "role": "baseline",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    }
+  ],
+  "max_episodes": 12,
+  "max_vla_inferences_total": 288,
+  "episode_wall_seconds": 1200,
+  "total_wall_seconds": 7200,
+  "qwen_calls": 0,
+  "skill_updates": 0,
+  "max_native_setup_attempts_per_episode": 2,
+  "max_injected_xyz_velocity_m": 0.01,
+  "expected_output_max_bytes": 2147483648,
+  "reference_config": "configs/official-owner-fixed50-dev10-20261101-0300.json",
+  "reference_config_sha256": "8dd38f6cfa550af2b88ff3744c5c4796701d95e081f88e94ec1485bb3405ae2e",
+  "proposal_report": "outputs/constraint-program-proposals2-20261103-1510/report.json",
+  "proposal_report_sha256": "0768441af714f594fb1dbacc1db616f98626bac92fac69b639ee9b0e2e15dfa4",
+  "programs": {
+    "baseline": {
+      "path": "outputs/physical-harness-prepare-20261103/empty-program.json",
+      "sha256": "b8d99e7a759f2bdad31e13ba3f4b60c516be5826c49df8ae50b1fc799446a4ba"
+    },
+    "candidate": {
+      "path": "outputs/constraint-program-proposals2-20261103-1510/programs/0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6.json",
+      "sha256": "0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6"
+    }
+  },
+  "selection": "First3 task-seeds in each ORIGINAL official development panel order, not chosen by success or proposal activity. All six used for proposal development, NOT independent validation. Twelve paired rollout budget fits declared planning ceiling; no backfill. Only handover100003 had an offline active gradient among these declared cases; unknown online behavior does not justify adding cases.",
+  "intervention": "One immutable autonomous program reused across candidate episodes with newly measured EEF XYZ each call, empty program under SAME wrapper for baseline. All are fixed50. No native typed skill/close-on-command patch; no online Qwen; no VLA weight/language/scorer modification.",
+  "adaptation": "VLS-inspired first-order clean-estimate reward-gradient injection through exact native affine inverse, 0.01m physical velocity cap per arm. No grounding/fkd/full original VLS claim; no final-action or safety guarantee; per-step and final-channel changes audited.",
+  "comparison": "Exploratory task-level feasibility versus strong fixed50, no method superiority or strictRSI claim. Partial or complete tie/no benefit closes this measured-EEF program subvariant; proceed to B harness composition, no scale/prompt/seed retry. If any matched pair gains with no old baseline success loss, prepare separate independent validation before accepting an update; a new success on already successful retained task alone does not establish new-task benefit. Incomplete panel cannot promote.",
+  "invalid_scene_rule": "Only source-receipted pre-policy UnStableError with unchanged seed<=2setup,0VLA0action and no remaining child can be censored and continue; keep both planned roles. Other error ortimeout stops all and cancels unused. No final render after RPCfailure.",
+  "baseline_paper_status": "Learned frozen LingBot policy with common deployment and bounded1200horizon, not HarnessVLA paper numeric reproduction.",
+  "frozen_unix": 1793687470.476423,
+  "role_patches": {
+    "baseline": {
+      "path": "outputs/physical-harness-prepare-20261103/empty-program.json",
+      "sha256": "b8d99e7a759f2bdad31e13ba3f4b60c516be5826c49df8ae50b1fc799446a4ba"
+    },
+    "candidate": {
+      "path": "outputs/constraint-program-proposals2-20261103-1510/programs/0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6.json",
+      "sha256": "0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6"
+    }
+  },
+  "code_sha256": {
+    "scripts/run_constraint_panel.py": "5d9a81fbc6e6505e072802911a4c45656c55e18f71b3de6159ecd9c695695763",
+    "scripts/run_constraint_vla_server.py": "fe4a91996c2ec11f75d9877488ad69921fae7a344913fc2f14652706f1eba9aa",
+    "scripts/physical_constraint_harness.py": "f7ca944f30c22cf270cfad254ebd44d8f16d6aa65c46c8547d06f535a1290993",
+    "scripts/run_single_seed_panel.py": "7f668a1ffb7b784429986045fc2b2d5e74d28e2cd290cce8f6795bf4348eeb96",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2",
+    "scripts/run_official_owner_panel.py": "8c90982b293e274d1394c5882e1a6fc4ce483d69bb4125deedc9dfc3682bb910",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb",
+    "scripts/bounded_vla.py": "2c7dda852a1c672e4dffea666424f2a4a1544c4ae44f0a67eecdd16377f4decd",
+    "scripts/single_seed_adapter.py": "3fe119f3b6d802581617b0cef5dfaa800e4fc2592b9873eb4485b88c26b67115",
+    "scripts/run_single_seed_env_server.py": "8d8003e9743998849f3e9b2eaf625840069b49877c7d2666403670e01c39ffc5",
+    "scripts/owner_thread_adapter.py": "fcc05bc3aff823781e115dff7ff8ce5c2e1de09e6cfe930862d6ecc4f3491e15",
+    "scripts/scene_validity.py": "9441ad8e4aad062ca244fe21c12e565706a6497503b13de34f968ebc38b3f8d7"
+  },
+  "runner_sha256": "5d9a81fbc6e6505e072802911a4c45656c55e18f71b3de6159ecd9c695695763"
+}

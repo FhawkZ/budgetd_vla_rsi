@@ -1,0 +1,68 @@
+{
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "qualification_report": "outputs/bounded-controller-qual4-20261031-1630/report.json",
+  "qualification_report_sha256": "00b85dece0044a758ee1d9361ec54372a94422adc2620718ff6dd5f619f79c7f",
+  "qwen_asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "qwen_asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "context": 32768,
+  "output_limit": 1024,
+  "evidence_inputs": [
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/feedback.json",
+      "sha256": "be7ac7847d49a351795a327baf8a436e9a981c1442d3e8487c0164621fe661ba",
+      "label": "feedback.json"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage0.png",
+      "sha256": "2c547a4f734de68f91365009ae431163aafaa548d7d1aa7632966e56fc580f8a",
+      "label": "stage0.png"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage1.png",
+      "sha256": "d7f5fcdc31768ef110c0951d446c14a531c76c7e2fd3a86f82734f63ffb27d49",
+      "label": "stage1.png"
+    },
+    {
+      "path": "outputs/hcl-feedback-prepare-20261101-1200/stage2.png",
+      "sha256": "0949f270f4750630ba1a3071efe38785ba062c7466eb988377efe3ca6db51686",
+      "label": "stage2.png"
+    }
+  ],
+  "status": "frozen",
+  "run_id": "constraint-program-proposals2-20261103-1510",
+  "classification": "independent typed persistent harness program proposals; offline development applicability only",
+  "execution_host": "lzgpu201",
+  "hostname": "autodl-container-d31b4587e3-6f171098",
+  "max_qwen_calls_total": 2,
+  "max_vla_calls": 0,
+  "max_robot_episodes": 0,
+  "wall_seconds": 900,
+  "expected_output_max_bytes": 104857600,
+  "stop": "first legal nonzero-applicability candidate, explicit abstention, two rejected generations, or any service failure; unused allowance canceled, no retry; no accepted update",
+  "development_case_directories": [
+    "outputs/official-owner-fixed50-dev10-20261101-0300/00-stack_blocks_two-s100000",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/01-stack_blocks_two-s100001",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/02-stack_blocks_two-s100002",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/03-stack_blocks_two-s100003",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/04-stack_blocks_two-s100004",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/05-handover_block-s100001",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/06-handover_block-s100002",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/07-handover_block-s100003",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/08-handover_block-s100004",
+    "outputs/official-owner-fixed50-dev10-20261101-0300/09-handover_block-s100005"
+  ],
+  "instruction": "Propose one persistent shared spatial-constraint program for a frozen LingBot-VLA harness, or abstain with empty rules. This is an independent NEW action space, not the closed gripper-command patch: no gripper closure, prefix edits or prompt edits. Use all ten attached DEVELOPMENT cases and first/middle/last observations; no validation records are present. The same program will be reused across task episodes. The only qualified spatial bindings for this first subspace are freshly MEASURED left_eef and right_eef XYZ in the same world frame, in meters. landmarks must be []. Rules compare predicted subject-minus-reference XYZ along x/y/z, or predicted Euclidean separation for distance. at_least/at_most/equal apply a squared hinge with tolerance_m. A rule is active only when CURRENT measured subject-reference distance <= activation_distance_m. Multiple active rules sum. Candidate variables are limited by the schema; no task-specific branches, hidden object poses, scorer queries or arbitrary code. The program gently steers predicted physical XYZ via a fixed common adapter; orientations/gripper values are not directly changed by its injected gradient, but later model predictions may couple channels. It cannot assert contact or object grasp, hold a gripper, select a subtask or change VLA language. Native gripper observations in the evidence are command targets, NOT measured openings or contact. Do NOT assume that two close end effectors imply a handover. Choose a non-vacuous, reusable constraint only if the evidence supports a plausible benefit and acknowledge its limitation in rationale. No guarantee a candidate will improve. Generic motion toward the other hand may harm stacking. Do not invent an object location from robot-state numbers. If this limited measured-state space cannot express a justified improvement, explicitly abstain; this will trigger another harness route, not extra calls. Submit only via submit_program. A legal candidate will undergo a deterministic offline nonzero-gradient check on all186 original development predictions, then a separately frozen paired task pilot; offline activity is not task success.",
+  "limits": "No parameter updates, no new VLA or simulator execution; proposal storage is unaccepted. Part of route-A planned8proposal ceiling: allocates2 new calls; remaining6 remain unfrozen, not automatically runnable.",
+  "frozen_unix": 1793687082.3641455,
+  "controller_code_sha256": {
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32"
+  },
+  "new_code_sha256": {
+    "scripts/propose_constraint_program.py": "65ca86722729e5eb6ab1ea4de3ceeddb33cf03c91fc95fdba1f6813e06ccc024",
+    "scripts/physical_constraint_harness.py": "f7ca944f30c22cf270cfad254ebd44d8f16d6aa65c46c8547d06f535a1290993",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb"
+  }
+}
