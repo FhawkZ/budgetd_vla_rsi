@@ -1,0 +1,55 @@
+{
+  "status": "frozen",
+  "classification": "cached_development_controllability_fixture",
+  "run_id": "program-guidance-probe6-20261103",
+  "execution_host": "lzgpu201",
+  "expected_hostname": "autodl-container-d31b4587e3-6f171098",
+  "gpu": 1,
+  "max_vla_calls": 6,
+  "qwen_calls": 0,
+  "simulation_episodes": 0,
+  "policy_actions": 0,
+  "max_wall_seconds": 900,
+  "expected_output_bytes": 104857600,
+  "model_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "model_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "qwen_base": "qwen_base",
+  "guide_scale": 0.2,
+  "synthetic_z_offset_m": 0.01,
+  "internal_xyz_indices": [
+    0,
+    1,
+    2,
+    7,
+    8,
+    9
+  ],
+  "cases": [
+    {
+      "directory": "outputs/official-owner-fixed50-dev10-20261101-0300/00-stack_blocks_two-s100000",
+      "input_sha256": "94c19c57f11282af653dd96839c2c5fe2788625970a98a4e2f2cd71a70cef68f"
+    },
+    {
+      "directory": "outputs/official-owner-fixed50-dev10-20261101-0300/05-handover_block-s100001",
+      "input_sha256": "d69dd6f7936add1dd5fccc7fe22b9461a1a9027df0daf7e3ac5830f83ff64953"
+    }
+  ],
+  "code_sha256": {
+    "scripts/program_guidance.py": "4a452be76930876e7fedc5b8f8e6ee7a57173dabd58cd0df4b96e3b8d255ac39",
+    "scripts/probe_program_guidance.py": "849c120b3721e37488f21998663fc3bbd85f945cec975aca65d60571f10fc842"
+  },
+  "runtime_source_sha256": {
+    "software/envs/robotwin/lib/python3.11/site-packages/deploy/lingbot_vla_policy.py": "84f9939dc942fa20ffb5fd95c2614e2f135df9fe03aefb1c8c5468404bea248c",
+    "software/envs/robotwin/lib/python3.11/site-packages/lingbotvla/models/vla/pi0/modeling_lingbot_vla.py": "ecc5d9b995053ea63880956430754e45673d04e474c93f3c49cfd1ac7c08b385",
+    "software/envs/robotwin/lib/python3.11/site-packages/lingbotvla/data/vla_data/utils.py": "daa0fc4403cd08f2d2add71ccee4e049fe86eacdf65d88816412b0064e873cfa"
+  },
+  "selection": "lexicographically first DEVELOPMENT initial observation of each focal task; not chosen by outcome; validation data not accessed",
+  "frozen_unix": 1793681721.3214672,
+  "limitations": [
+    "Synthetic +1cm Z target is a controllability fixture, not object grounding, autonomous robot achievement or a proposed task skill.",
+    "VLS-inspired gradient hook only; not original VLS full algorithm: grounding, staging, diversity and particle resampling are not reproduced here.",
+    "Zero-hook exact equality, nonzero gradient and decreased target error are effect checks, not task success improvement.",
+    "No simulator replay, parameter update, Qwen proposal or accepted persistent update. All six fresh forward calls, including failures, count.",
+    "Failure closes protocol; no scale/output/context escalation or retries. Task experiments require a separate grounded mechanism and frozen protocol."
+  ]
+}

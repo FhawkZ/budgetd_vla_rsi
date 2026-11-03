@@ -1,0 +1,351 @@
+{
+  "commit": "b6e87edc217a2a7682caadba285677fc79eb6f81",
+  "repository": "https://github.com/Vision-Language-Steering/code",
+  "archive_bytes": 129505,
+  "archive_sha256": "10d96b34961d85f2a35b15cceefa26ff31a163fb75e0869c9e7ebd61a0b575f8",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 1040,
+      "git_blob": "fb00f30a85dc7f4b8258093b809bfb68f31d0c65",
+      "sha256": "89cbd0dd5416e3af09cc8c02f00256d0131f3ac3495545769e1955c5a02c2eb0"
+    },
+    {
+      "path": ".gitmodules",
+      "bytes": 425,
+      "git_blob": "081434b0479bf6344841ab779d23ca2d197f2a5e",
+      "sha256": "e1228cca7eb9755aa0ddbcef1ea703f154aef13ce1f0c2fcaddf56b421529e81"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1065,
+      "git_blob": "c3c03bf41b17a03132b35a5add0aeb8b9634eecc",
+      "sha256": "3c7eaa3aa3598a6eda245fe2986d77cbd98a00efc96320211f9e40eacd030e34"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9739,
+      "git_blob": "cfec644788708b0b818ca64959f2f468192f2909",
+      "sha256": "75ecf8de40e4bcbcbec4ed071746d7447c071e7dadfebf18eaf5b2b8ee44bcc4"
+    },
+    {
+      "path": "ablations/door_left_k10.yaml",
+      "bytes": 5125,
+      "git_blob": "a460aff08fbd26c179c6d49f98817d24991a31c3",
+      "sha256": "9121ce21a34450f99cae66a140c4a7c501c8e0cb9db04ca87104d0ae7a1f35dc"
+    },
+    {
+      "path": "ablations/door_left_no_fkd.yaml",
+      "bytes": 5130,
+      "git_blob": "c6342f54676bb0c537c756c2e24d9144a06354ba",
+      "sha256": "5f87e15d5003da28055c555ec8f505441ef78ea2a4c62d27ec83e27a8b047a32"
+    },
+    {
+      "path": "ablations/door_left_no_gradient.yaml",
+      "bytes": 5133,
+      "git_blob": "27e1e946b7ec70f62b90855e021e13bbb2794a47",
+      "sha256": "a410e09fedc1d162dd8218de48a9a6688a1640eecca554bbe5c4f7005a135c8d"
+    },
+    {
+      "path": "ablations/door_left_no_rbf.yaml",
+      "bytes": 5128,
+      "git_blob": "301c124bb5d6d7326e9c475ef896027afe87a801",
+      "sha256": "cecbae79dfb684c2b5f5724aa761284b92773a4f9795f68206e60c475baab0f8"
+    },
+    {
+      "path": "configs/backend/calvin.yaml",
+      "bytes": 3208,
+      "git_blob": "57cd5e2b8dcd2c05e02d1bd573e9602dda7744d5",
+      "sha256": "b3ff4c7c2dcda4bb3a5b2aeaf1dbba724740983fff62fdf650329da00af6770f"
+    },
+    {
+      "path": "configs/backend/libero.yaml",
+      "bytes": 1297,
+      "git_blob": "674e3fb8285901614bcf84f4d3f965e15b9fff12",
+      "sha256": "a0afb632a4f4e938db3096f345b3d9d259bb1262c36c60c1866ac748a14c1154"
+    },
+    {
+      "path": "configs/config.yaml",
+      "bytes": 2268,
+      "git_blob": "5d1dbf516a879302cf853357e202a657b99ba16d",
+      "sha256": "af43edc56b66110d8e636cdf6007ef50c43df61d8d545983012d4f43108ef392"
+    },
+    {
+      "path": "configs/perception.yaml",
+      "bytes": 2171,
+      "git_blob": "bc685de0f977502c973a0bf20b3c06e9de45f42c",
+      "sha256": "f9ee7918e7067697bf513c61b9b09149738f44bfb06ea80de90a8c2c3b705810"
+    },
+    {
+      "path": "configs/policy.yaml",
+      "bytes": 907,
+      "git_blob": "dae54d37bf6d87a995050a42996db9cff5060bdf",
+      "sha256": "087e87f81490b35e93fd503d4f0636b5d63438f64d6653c9c1f1e70a90de6c19"
+    },
+    {
+      "path": "configs/task/calvin/button_off.yaml",
+      "bytes": 421,
+      "git_blob": "c8552c2a6ff301cadfd15e2a9c0ad8d917e824a2",
+      "sha256": "fe79a6925887d401c4dda61cae6c6ac13c02389ae0ea9d4d24e72fda36c7fe40"
+    },
+    {
+      "path": "configs/task/calvin/button_on.yaml",
+      "bytes": 417,
+      "git_blob": "980f12953e19ae822c85b60f0a004ac9f3b70b25",
+      "sha256": "4fd77723a61c7948b7f80ede28e57926a3e2629b6642701615328f03abb8c9e1"
+    },
+    {
+      "path": "configs/task/calvin/door_left.yaml",
+      "bytes": 406,
+      "git_blob": "1fb90f49b02bdcee98f2d53db1e18ae2b7ff94bd",
+      "sha256": "9165e2871beed7d47ccb3de111ebc0327dccdbdfbc1909206d56185b0bfdef6e"
+    },
+    {
+      "path": "configs/task/calvin/door_right.yaml",
+      "bytes": 412,
+      "git_blob": "77847f15d208259bfbce2f15c4b0ce37a9dda72d",
+      "sha256": "3266aabf73e33e0a7ded04379040e57964114b5b40caa9568da10e39c1a2642b"
+    },
+    {
+      "path": "configs/task/calvin/drawer_close.yaml",
+      "bytes": 399,
+      "git_blob": "24cdfde31d3001231327c6ac44ceb1d9b9ac0dc8",
+      "sha256": "346e4d70188455e0d2ffc4bc4bf35f36b6ee26bd8aedc2c927990523f94abe73"
+    },
+    {
+      "path": "configs/task/calvin/drawer_open.yaml",
+      "bytes": 397,
+      "git_blob": "587260b9184b0e6f443761d2f4ffd3b8fe7d284c",
+      "sha256": "aa178953f0b70686befbf24ef046dd356ff8e744272f862dfbc032b4fb860d9e"
+    },
+    {
+      "path": "configs/task/calvin/push_blue.yaml",
+      "bytes": 211,
+      "git_blob": "1bea116eff9d9a314a9bea07e72c2ea6ef8da964",
+      "sha256": "54219c9c44176166ba10dc8c4f61d3f1842e500666fc291b23b09d79df090816"
+    },
+    {
+      "path": "core/__init__.py",
+      "bytes": 1235,
+      "git_blob": "14a176269b0f1e70dd2b9293ec330982528e1054",
+      "sha256": "d57ac2778e20492a40f02e8adbbad0f4af70e7df15562940dbad301a723a7583"
+    },
+    {
+      "path": "core/diffusion_policy_steer.py",
+      "bytes": 22706,
+      "git_blob": "d251156344f88827ab48b63c0231181e86c99bf5",
+      "sha256": "97f0ee3b9159461e15f6b58ea2bd95119a5514872025b4c99594ec6b71815eaa"
+    },
+    {
+      "path": "core/env_adapters/__init__.py",
+      "bytes": 2596,
+      "git_blob": "3aca4d4ad5281e079090d32805da1ec521ea4d74",
+      "sha256": "2f9f917ff2a3bb061b6f4a5345bf5d5550f5d7583db52d95d08211eb1b9d42b6"
+    },
+    {
+      "path": "core/env_adapters/base_adapter.py",
+      "bytes": 17605,
+      "git_blob": "cd79818cd99a688dd76b04c99c02ec8c0b809bcb",
+      "sha256": "c1c33adeaaf83d0f20c83b26a20c312a2e27124b462e7d63235470ca523d4eef"
+    },
+    {
+      "path": "core/env_adapters/calvin_adapter.py",
+      "bytes": 33084,
+      "git_blob": "6d059c72ca80cc80166c137cf28b130b6e9cda15",
+      "sha256": "cfdfa1f29402f11efea7b4e495a7c6038a4f86ef6314893310331955e6afd943"
+    },
+    {
+      "path": "core/env_adapters/libero_adapter.py",
+      "bytes": 61103,
+      "git_blob": "8f7a80cd78ec3bc3f06a6252986eb37d94850209",
+      "sha256": "d459ac12d3aa90f017e7f5b7a8bec11b96fa57ded8a1667bfb14ec04acae51c9"
+    },
+    {
+      "path": "core/fkd_class.py",
+      "bytes": 13029,
+      "git_blob": "e8fb9e4918339cb293e295cc58e7ddde6d8a28a0",
+      "sha256": "26ccfa9cf4837ce92baf0a5538ac3339d5c55a4f4f7b8f577366a0dd2a408412"
+    },
+    {
+      "path": "core/gemini_grounder.py",
+      "bytes": 12697,
+      "git_blob": "daf16bbacf55e92c076c9d83af29976cfa14b9bf",
+      "sha256": "bf2987023c33db32e729360ac137bdaff73eb9bb0b135738f0a449bce058ed25"
+    },
+    {
+      "path": "core/keypoint_detector.py",
+      "bytes": 27612,
+      "git_blob": "3be710583cd4b17eb1d4c9c53235b31cd9c2fe70",
+      "sha256": "ee969c0490d92704d2ef71ee61a7ad8d19436547d0217538f4fd5ae6b65260df"
+    },
+    {
+      "path": "core/keypoint_tracker.py",
+      "bytes": 8747,
+      "git_blob": "4e24b7e71eff010a1e157fde12737fe18e772169",
+      "sha256": "292d63964b90405769118bda0e1acc9666f8ae076f41abbb7df8e5bf8abc6f45"
+    },
+    {
+      "path": "core/pi05_steer.py",
+      "bytes": 17910,
+      "git_blob": "1cfbe7a3422de3ff36b25b841f3a83dc197b2d48",
+      "sha256": "2821ef4087ac8ea83ea81d2b9aedfcfe7e20cefd6d47b0b0afadf5ceaefb55cc"
+    },
+    {
+      "path": "core/sam3_segmenter.py",
+      "bytes": 11141,
+      "git_blob": "e76b85ad1964162407a56235b9fca212f9213690",
+      "sha256": "e3f3cdd5a970b738ffcf17c7fd765041195d1b9f40a1d2b3809c1459cb5dce81"
+    },
+    {
+      "path": "core/sam_refiner.py",
+      "bytes": 15252,
+      "git_blob": "1e5c42cbe402bca6b7959a248a6bd8dd15c33edd",
+      "sha256": "fbe8a642294895773a3aad1a5e4a9dd21b2af1ad0b09e6d89cecb94b171ad909"
+    },
+    {
+      "path": "core/sam_segmenter.py",
+      "bytes": 19075,
+      "git_blob": "73c262dfbe38cce1b09f2c2f822fa26faa5539c0",
+      "sha256": "c4e243d22adf3becfaa1f94f33e9ff05c1e2962899de4e11a656d2ffb16cb8bf"
+    },
+    {
+      "path": "environment.yml",
+      "bytes": 8658,
+      "git_blob": "d5d1e7fc2fc2f765ca1ad940d002c9fb298e26cd",
+      "sha256": "566346e602eb57d18415ed9c8c9fd757ee3c352855c6c08cff10931047490ea6"
+    },
+    {
+      "path": "main.py",
+      "bytes": 37144,
+      "git_blob": "6566bfa36033be373450c13d81cbcb9616cd51d5",
+      "sha256": "384cb5c4db30bff051067902b74ae8886582495697e7ec87494fc3827ab65693"
+    },
+    {
+      "path": "patches/__init__.py",
+      "bytes": 42,
+      "git_blob": "67a8c18921e9b0caff72903c4aeb897c0e944da1",
+      "sha256": "583bf9a8fb64e662a760603f65b5a9110dd99533e130cb3701b15712ea703a63"
+    },
+    {
+      "path": "patches/light.py",
+      "bytes": 1549,
+      "git_blob": "b7df62d6a54213817c245bbfecd5711207bc65a8",
+      "sha256": "d6662fc3a8abda3f4e0fe647fabf8a5f7c84f8119787addfb3cae09a5f07b4ee"
+    },
+    {
+      "path": "pi05plot.py",
+      "bytes": 5972,
+      "git_blob": "d267e9a16308e8af9c3e619e71b634225e0f4edd",
+      "sha256": "18c63c3ca66bb850c3fe9baa9b246c3ed6e8e582d8d9450ba1f279bf83834389"
+    },
+    {
+      "path": "plot_combined.py",
+      "bytes": 8509,
+      "git_blob": "a623d2f02787d998caf5767315267aa83501e8c3",
+      "sha256": "bf263f396eba5771bee5544b88143656e258335718b44debb5069838e5b06237"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 5198,
+      "git_blob": "70fee06c5104fec4befc35af7912f7ddeee737f8",
+      "sha256": "e4d0e90f4ee5fe081dac7e2e1418e8aba067b9bbc188ae5e953ff6811e9e8f10"
+    },
+    {
+      "path": "scripts/run_libero_suites.sh",
+      "bytes": 3895,
+      "git_blob": "9b6d382d427dee37cebf25ed20debe7aac8facd9",
+      "sha256": "46cf6c559b4df9fa5c1946f3bd64dfb21241b2bab2fcf883edc98f67d90a8d87"
+    },
+    {
+      "path": "utils/__init__.py",
+      "bytes": 481,
+      "git_blob": "76969a977dce0a7c539dc665a8c8e84c9a2be472",
+      "sha256": "debd228bdc6164ea3f2fc49e0ef8aa891754e7748fe91ac21e8ef74b6a72a49f"
+    },
+    {
+      "path": "utils/config_utils.py",
+      "bytes": 3177,
+      "git_blob": "190ef6b72e3cfe27c8b9c3f0126b57d2b5bbed6e",
+      "sha256": "d9f2a7665db2ee15f882be442eed791c0300607d2b62c12dfbe8651253c18af5"
+    },
+    {
+      "path": "utils/guidance_utils.py",
+      "bytes": 11449,
+      "git_blob": "fbd7454657f13841c1fb729ea1349175d217611f",
+      "sha256": "d3cd461459e43302336ace80e60c63148d70f3d01f87fa324cf041df6189a886"
+    },
+    {
+      "path": "utils/hydra_plugins/__init__.py",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "utils/hydra_plugins/task_searchpath.py",
+      "bytes": 1273,
+      "git_blob": "818ec019262d3b560895be698f1e66192c29dacd",
+      "sha256": "32aa364739836f11f48299bd3e49a59a89a1baa4512f3a6f0bc962496739d218"
+    },
+    {
+      "path": "utils/keypoint_utils.py",
+      "bytes": 9396,
+      "git_blob": "5c7e95962da366769febe46ccabc8f3b4d38838b",
+      "sha256": "fb7730f5dbe6ba72584f9d7204d2578be225dc69655c7c26006a8be9a92d3c1f"
+    },
+    {
+      "path": "utils/logging_utils.py",
+      "bytes": 4236,
+      "git_blob": "2d746c4a715588372d8eec98b9bd16cdb38de9e7",
+      "sha256": "ad614d71030403937d8699544f9985f1909c8cc4402c43e2c9b16b39f263c2c3"
+    },
+    {
+      "path": "utils/plot_results.py",
+      "bytes": 11634,
+      "git_blob": "9afdf8baf71fe9ca8d206ff70b3474847a91f5f8",
+      "sha256": "3c8c26e719aa8742a07a134875b3dfcf0d0b2c1dedc277a8e694de0945787c90"
+    },
+    {
+      "path": "utils/vis_utils.py",
+      "bytes": 31179,
+      "git_blob": "de4f8f7cd3bc1d09e01aa2350663860b42119e4a",
+      "sha256": "6e256ca29aabcb8ffeb852e56c732ec56885394bb8e4e8ca2fd0957e989289b8"
+    },
+    {
+      "path": "vlm_query/guidance_template.txt",
+      "bytes": 8266,
+      "git_blob": "dd7ffc18d823bf6e92b74b187960f890310649e7",
+      "sha256": "ac7a53e64f82e735b295682347cc4775da7c611715798e0d79f8a6fe34cb11c5"
+    },
+    {
+      "path": "vlm_query/guidance_template_calvin.txt",
+      "bytes": 23426,
+      "git_blob": "cea2c79466938b4ca69b5ad96d2e6787bbc86308",
+      "sha256": "b29b7554b27207269f572a40a4d51f7498d36e3eca4effb94349e32ebce8caee"
+    },
+    {
+      "path": "vlm_query/guidance_template_libero.txt",
+      "bytes": 3441,
+      "git_blob": "06f4540c1588f98c781635c306c6050f997e64cd",
+      "sha256": "0a11498ed5317170bff8e8cd3909c508ea810e4fa9f006555ef37a50f4459c54"
+    },
+    {
+      "path": "vlm_query/segmentation_planning_template.txt",
+      "bytes": 1589,
+      "git_blob": "148ba87f6cc2929677a177133a566613a3242d20",
+      "sha256": "975e6905b66e749e351f2282a73e5f30eeee6735643622f74808b2379a938d30"
+    },
+    {
+      "path": "vlm_query/stage_template.txt",
+      "bytes": 3655,
+      "git_blob": "6bd108bbef0a18a58115c71c85f4524811c6c9d4",
+      "sha256": "758d71a441496074410428b005a068a18b6d92273b9278c1181334cf9e67005b"
+    },
+    {
+      "path": "vlm_query/vlm_agent.py",
+      "bytes": 17939,
+      "git_blob": "1ad10c125830adecce49be32fff890adfcd7b2aa",
+      "sha256": "508d7f57aeb3ec0acc64fe704dd6088f0f715313aa164c73a2a2fdf1edebb727"
+    }
+  ],
+  "gitlinks": []
+}
