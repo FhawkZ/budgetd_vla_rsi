@@ -27,3 +27,7 @@ Immediate queue:
 No stage-candidate feedback is sealed validation, but no historical held-out trajectories are supplied to a new author. All two-task100006..100015 remain excluded from final tests. The generic budget allocator and600episode comparison remain deferred. FrozenQwen30B32K1024/LingBot remain the current VLA path. Skill-RSI code-only results, when available, belong in a separate table until matched backend/data/permissions exist.
 
 Sources: [SERA](https://arxiv.org/html/2610.29560v1), [DynaHarness](https://arxiv.org/html/2609.40306v1), [Bi-KVIL](https://h2t.iar.kit.edu/pdf/Gao2024.pdf). This was a bounded source check, not a full novelty survey. No new GPU inference or simulation was run during closure/public-data reconstruction.
+
+## Asset preparation completed
+
+CLIP ViT-B/32 now exists only at runtime/models/CLIP-ViT-B-32/ViT-B-32.pt:353976522bytes, full official SHA40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af. First180s transfer and separate90s range timed out; a final20s-cap request for the last540874bytes completed. Three receipts retained, no model load/forward or simulator action; temporary file atomically renamed, no second weight copy. CLIP source/package is still to be installed via isolated uv management. All download jobs closed; no background job remains.
