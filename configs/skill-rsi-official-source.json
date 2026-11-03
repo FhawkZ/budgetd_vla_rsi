@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/Orillusion/embodied-skill-rsi",
+  "revision": "3483ea128ba432730f135aac326da1b768b671e4",
+  "release": "v1.0",
+  "vendor_relative_path": "vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4",
+  "file_count": 673,
+  "bytes": 119219289,
+  "tree_api": "https://api.github.com/repos/Orillusion/embodied-skill-rsi/git/trees/3483ea128ba432730f135aac326da1b768b671e4?recursive=1",
+  "archive_sha256": "1d6d472f827e69ef3249f783391e9102ce2780be296215eeeca91bc93983bb7b",
+  "manifest_relative_path": "outputs/skill-rsi-public-reproduction-20261104-0030/source-manifest.json",
+  "evidence_classification": "official public-ledger reconstruction and package checks only; no independent rollout",
+  "native_robotwin_archive": {
+    "runtime_path": "records/skill-rsi-robotwin-official-6dde571.tar.gz",
+    "sha256": "e07f85c80d37661a7886d78d1c06d6fbe170e4401804ef7ee7b94634f660401a"
+  },
+  "clip_weight_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+}
