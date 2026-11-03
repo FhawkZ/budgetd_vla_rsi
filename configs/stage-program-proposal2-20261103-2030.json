@@ -1,0 +1,171 @@
+{
+  "controller_code_sha256": {
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32"
+  },
+  "qualification_report": "outputs/bounded-controller-qual4-20261031-1630/report.json",
+  "qualification_report_sha256": "00b85dece0044a758ee1d9361ec54372a94422adc2620718ff6dd5f619f79c7f",
+  "qwen_asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "qwen_asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "status": "frozen",
+  "run_id": "stage-program-proposal2-20261103-2030",
+  "classification": "stage_program_development_proposal_not_task_performance",
+  "hostname": "autodl-container-d31b4587e3-6f171098",
+  "execution_host": "lzgpu201",
+  "max_qwen_calls_total": 2,
+  "max_vla_calls": 0,
+  "max_robot_episodes": 0,
+  "expected_output_max_bytes": 104857600,
+  "total_wall_seconds": 900,
+  "allowed_evidence_cases": [
+    "00-stack_blocks_two-s100000",
+    "03-stack_blocks_two-s100001",
+    "04-stack_blocks_two-s100002",
+    "07-handover_block-s100001",
+    "08-handover_block-s100002",
+    "11-handover_block-s100003"
+  ],
+  "native_goals": {
+    "stack_blocks_two": [
+      "Grab red block, set it in the center, then stack green block over it.",
+      "Relocate red block and green block to the center, then layer green block over red block.",
+      "Place red block and green block together at the center, then stack green block on top."
+    ],
+    "handover_block": [
+      "With the left arm grab the red block, hand it to the right arm, then position it onto the blue pad.",
+      "Grab the red block and transfer to the right.",
+      "Use left arm to grab the block and hand it to the right."
+    ]
+  },
+  "evidence_inputs": [
+    {
+      "path": "outputs/stage-program-prepare-20261103/00-stack_blocks_two-s100000.json",
+      "sha256": "d679b0caf7db91b42f16180f58ca875bfb6ea6703291625773a8acd6121eaaf5",
+      "label": "00-stack_blocks_two-s100000 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/00-stack_blocks_two-s100000/inference-001-head.png",
+      "sha256": "24de1bbef8f99e8e2cff8b088df48fe30fbf55bdb5f272db26b2d96046b9702c",
+      "label": "00-stack_blocks_two-s100000 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/00-stack_blocks_two-s100000/inference-012-head.png",
+      "sha256": "232023baa09abf7c9cc0a711723d838e2c02ec9f066649c216452faeccb2ffc5",
+      "label": "00-stack_blocks_two-s100000 pre-VLA frame 12"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/00-stack_blocks_two-s100000/inference-024-head.png",
+      "sha256": "ab7c2787e9109e207700e4b68bd89b8ae0ea92d24e15b3be122c1aff45b13fa7",
+      "label": "00-stack_blocks_two-s100000 pre-VLA frame 24"
+    },
+    {
+      "path": "outputs/stage-program-prepare-20261103/03-stack_blocks_two-s100001.json",
+      "sha256": "6bcea60c27c16ea3be87c24eac0ae27d01f48fcc33cc0d78b8b6ad813f210dcd",
+      "label": "03-stack_blocks_two-s100001 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/03-stack_blocks_two-s100001/inference-001-head.png",
+      "sha256": "184c35977ff0ae325d9296bc3ba1489f28e5f34aaa375059d2813bfe1ee99c61",
+      "label": "03-stack_blocks_two-s100001 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/03-stack_blocks_two-s100001/inference-003-head.png",
+      "sha256": "f75ddb33311d3e0e8f079b8843245642090c9e74369ba8677b8f100f06d1fdc5",
+      "label": "03-stack_blocks_two-s100001 pre-VLA frame 3"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/03-stack_blocks_two-s100001/inference-006-head.png",
+      "sha256": "5be69d622f4f44f8cc2cdc8b0b20a1027ed7084c6a9d0fee4043c41036c672c1",
+      "label": "03-stack_blocks_two-s100001 pre-VLA frame 6"
+    },
+    {
+      "path": "outputs/stage-program-prepare-20261103/04-stack_blocks_two-s100002.json",
+      "sha256": "eae91ef23f1a0daf230b3687352e3eb38e02d4155f89d6d1871b6c1bde1081f1",
+      "label": "04-stack_blocks_two-s100002 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/04-stack_blocks_two-s100002/inference-001-head.png",
+      "sha256": "60dcc02d3ebb57f64edd8547a10f2ee1108bd48326dd3050ec578cf1f498684c",
+      "label": "04-stack_blocks_two-s100002 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/04-stack_blocks_two-s100002/inference-003-head.png",
+      "sha256": "67ce64d2845e1aec9961f8b75129d278d73e690a1287f063e6c742b042b34edc",
+      "label": "04-stack_blocks_two-s100002 pre-VLA frame 3"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/04-stack_blocks_two-s100002/inference-006-head.png",
+      "sha256": "1ca48c393e6657d2f6384838f9acc2d5bf727e6e36d7e4e754572b560d5e50f4",
+      "label": "04-stack_blocks_two-s100002 pre-VLA frame 6"
+    },
+    {
+      "path": "outputs/stage-program-prepare-20261103/07-handover_block-s100001.json",
+      "sha256": "11c34b4c029b663f7122d35637ecc6f53b713f324c9d17f6ddd3221f9a3a81ec",
+      "label": "07-handover_block-s100001 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/07-handover_block-s100001/inference-001-head.png",
+      "sha256": "4ce9daf0c0293d6796e7f3fa233064f51235f04bca266e1a08c7082adcd37c8b",
+      "label": "07-handover_block-s100001 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/07-handover_block-s100001/inference-003-head.png",
+      "sha256": "6b591f97c38f90188c336356bb5c11b22219a885edfeeadc743b2f3d9aa99fa1",
+      "label": "07-handover_block-s100001 pre-VLA frame 3"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/07-handover_block-s100001/inference-006-head.png",
+      "sha256": "9b50ac34927b0adb3a4a6459aeb887f6f5294e322ea43093b8013cc364be6a48",
+      "label": "07-handover_block-s100001 pre-VLA frame 6"
+    },
+    {
+      "path": "outputs/stage-program-prepare-20261103/08-handover_block-s100002.json",
+      "sha256": "562253c224e8935ed8041ad840d65c639263a9f9af646854e05f12172584cb11",
+      "label": "08-handover_block-s100002 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/08-handover_block-s100002/inference-001-head.png",
+      "sha256": "7793854f22b771789ab52c35d501fb504e192faf5c9abfb9de7b4226855448b1",
+      "label": "08-handover_block-s100002 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/08-handover_block-s100002/inference-004-head.png",
+      "sha256": "bf0c0b4bb33a67413dbc4307b38169695adfece7a53856369e6c8b816228d8f4",
+      "label": "08-handover_block-s100002 pre-VLA frame 4"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/08-handover_block-s100002/inference-008-head.png",
+      "sha256": "779eb9fba8637fffa66b22b8159c45ac2bb0bd37ae40f565738bb9db33642069",
+      "label": "08-handover_block-s100002 pre-VLA frame 8"
+    },
+    {
+      "path": "outputs/stage-program-prepare-20261103/11-handover_block-s100003.json",
+      "sha256": "71e8b6531d7c797f80763b7e93554febc83234d910dce1672ec7fd9573ac6ca0",
+      "label": "11-handover_block-s100003 development summary"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/11-handover_block-s100003/inference-001-head.png",
+      "sha256": "1905fb00410d4d184612c3f96ec39a83a658d89ead5c0088cecd91427004cf36",
+      "label": "11-handover_block-s100003 pre-VLA frame 1"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/11-handover_block-s100003/inference-012-head.png",
+      "sha256": "f10beb2920351aa2091dc12604b9dfffb62483f175ea99f57fa02fda4e338028",
+      "label": "11-handover_block-s100003 pre-VLA frame 12"
+    },
+    {
+      "path": "outputs/constraint-program-dev12-20261103-1530/11-handover_block-s100003/inference-024-head.png",
+      "sha256": "a0722e13035d1368d5a34f43f6359e88b7dce4387cb063d32a58863fc2990a8d",
+      "label": "11-handover_block-s100003 pre-VLA frame 24"
+    }
+  ],
+  "instruction": "Propose at most3 ordered subgoal stages for each of stack_blocks_two and handover_block, reusable across the supplied development scenes. Investigate whether a skill can appear complete yet leave a state unsuitable for its successor. Give a falsifiable boundary hypothesis grounded in one exact evidence_case per route; snapshots may be insufficient, so do not invent observed transitions. Each stage has a short focus instruction appended to the unchanged native goal, a visually checkable done_when, and a visually checkable next_ready_when. Keep focus <=24words and combined native goal+focus <=72tokens. No world coordinates, seed-specific branches, score access, motion code, gripper-command contact assumptions, low-level action editing, or guidance parameters. Distinguish an object visible between grippers from proven stable contact. Last stage continues until external native termination; it cannot declare task success. The program will be persisted unchanged and reused; all stages use the same frozen LingBot and RGB/EEF. All6cases are DEVELOPMENT. This proposes a test, not a validated mechanism or RSI success. If no defensible staged program exists, return routes=[]; otherwise include both task routes. Do not seek feedback from sealed validation.",
+  "new_code_sha256": {
+    "scripts/stage_program.py": "e707041dd00c7e98c3c75826f963cd0e77ccafdb43ec111351e2d2febf33d9b4",
+    "scripts/propose_stage_program.py": "15e20531edfd450f307b1f38e16762ac011baa5458add632e9ab0eefda6a488e"
+  },
+  "frozen_unix": 1793705477.5556755
+}

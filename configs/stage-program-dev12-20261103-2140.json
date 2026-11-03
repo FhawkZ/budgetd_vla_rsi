@@ -1,0 +1,193 @@
+{
+  "execution_host": "lzgpu201",
+  "gpu": 1,
+  "weights_frozen": true,
+  "rpent_commit": "a744bd5f128ebef3cb8c6736cf7cd98adff681f1",
+  "vla_revision": "e727b46cd220b66981ea4d2fd9ba84adc189e2cc",
+  "model_relative_path": "models/LingBot-VLA-RoboTwin-EEF-e727b46c",
+  "rlinf_relative_path": "vendor/RLinf-2348ece3df113874671478be1360ae3115b346e3",
+  "assets_relative_path": "assets/robotwin-c15cc97b",
+  "task_config": "demo_randomized",
+  "horizon": 1200,
+  "max_environment_reset_rpc_per_episode": 1,
+  "max_vla_inferences_per_episode": 24,
+  "renderer_adapter": "explicit_device_native_rt_no_denoiser",
+  "execution_hostname": "autodl-container-d31b4587e3-6f171098",
+  "env_working_directory": "asset_snapshot_root",
+  "status": "frozen",
+  "classification": "stage_program_paired_development",
+  "run_id": "stage-program-dev12-20261103-2140",
+  "cases": [
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "role": "baseline",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100000,
+      "role": "candidate",
+      "pair_index": 0,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100001,
+      "role": "candidate",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100001,
+      "role": "baseline",
+      "pair_index": 1,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100002,
+      "role": "baseline",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "stack_blocks_two",
+      "seed": 100002,
+      "role": "candidate",
+      "pair_index": 2,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "role": "candidate",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100001,
+      "role": "baseline",
+      "pair_index": 3,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100002,
+      "role": "baseline",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100002,
+      "role": "candidate",
+      "pair_index": 4,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100003,
+      "role": "candidate",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    },
+    {
+      "task": "handover_block",
+      "seed": 100003,
+      "role": "baseline",
+      "pair_index": 5,
+      "instruction": null,
+      "use_length": 50
+    }
+  ],
+  "max_episodes": 12,
+  "max_vla_inferences_total": 288,
+  "episode_wall_seconds": 1200,
+  "total_wall_seconds": 7200,
+  "qwen_calls": "variable; maximum67 including1cachedfixture and66taskboundaries",
+  "skill_updates": 0,
+  "max_native_setup_attempts_per_episode": 2,
+  "expected_output_max_bytes": 2147483648,
+  "reference_config": "configs/official-owner-fixed50-dev10-20261101-0300.json",
+  "reference_config_sha256": "8dd38f6cfa550af2b88ff3744c5c4796701d95e081f88e94ec1485bb3405ae2e",
+  "selection": "Same first3 original development seeds per task, all6 supplied to proposer. Fixed order and alternating roles; no selection from success or activity. Not independent validation/final test. Original constraints candidate is CLOSED and not used.",
+  "invalid_scene_rule": "Only source-receipted pre-policy UnStableError with unchanged seed<=2setup,0VLA0action and no remaining child can be censored and continue; keep both planned roles. Other error ortimeout stops all and cancels unused. No final render after RPCfailure.",
+  "baseline_paper_status": "Learned frozen LingBot policy with common deployment and bounded1200horizon, not HarnessVLA paper numeric reproduction.",
+  "role_patches": {
+    "baseline": {
+      "path": "outputs/physical-harness-prepare-20261103/empty-program.json",
+      "sha256": "b8d99e7a759f2bdad31e13ba3f4b60c516be5826c49df8ae50b1fc799446a4ba"
+    },
+    "candidate": {
+      "path": "outputs/constraint-program-proposals2-20261103-1510/programs/0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6.json",
+      "sha256": "0b5438a9f738fd744fec57db91e357a4e33cdde613a92062cbfc3914cb8a27a6"
+    }
+  },
+  "max_qwen_calls_total": 67,
+  "max_boundary_calls_per_candidate_episode": 11,
+  "cache_fixture_calls": 1,
+  "stage_program": {
+    "path": "outputs/stage-program-proposal2-20261103-2030/programs/31b21d82ed67659d1463336ce0dd329bf436e085ae3bee2dcf9b58f153ca82a1.json",
+    "sha256": "31b21d82ed67659d1463336ce0dd329bf436e085ae3bee2dcf9b58f153ca82a1"
+  },
+  "proposal_report": "outputs/stage-program-proposal2-20261103-2030/report.json",
+  "proposal_report_sha256": "96dce14ede46b3e414881351b9a54603a917f218209109c0f39ff93c7f036125",
+  "frozen_unix": 1793706419.9051876,
+  "controller_code_sha256": {
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/serve_qwen_structured30b.py": "8ef5cb869b3eaf3ec12e00cea7658597edb83945f6e33791d298a2d1f4e8d139",
+    "scripts/budget_proxy30b.py": "dcecc21451f5cd32de201e66844658b3c38b608398476de508c53f1669757ef3",
+    "scripts/structured_qwen.py": "561551bd7ff13150b4d3cdad25d8873e964b220ee573d15b12eca2bc5badcd32"
+  },
+  "qualification_report": "outputs/bounded-controller-qual4-20261031-1630/report.json",
+  "qualification_report_sha256": "00b85dece0044a758ee1d9361ec54372a94422adc2620718ff6dd5f619f79c7f",
+  "qwen_asset_receipt": "outputs/qwen30b-qualification-prepare-20261031-0630/assets.json",
+  "qwen_asset_receipt_sha256": "0fce950d1c30a64a331223fb016e47d6f81b53863a3440b1b62b571b2569c6db",
+  "model_id": "qwen3-vl-30b-a3b-instruct",
+  "cached_observation": {
+    "path": "outputs/constraint-program-dev12-20261103-1530/07-handover_block-s100001/inference-001.json",
+    "sha256": "605c9e546d0611c8161ac49438eb80a4dd99e90fe4933825ca30439d3d1967cd"
+  },
+  "intervention": "Frozen Qwen-generated stage program reused across candidate episodes. Native task goal preserved; actual LingBot client payload task is native_goal+Currentstage+focus. Fixed50 unchanged predictions submitted. New images+measuredEEF every2completedVLA calls can advance one stage when current completion AND successor readiness bothyes. Unknown/no holds. Final stage continues to native termination. Baseline same client adapter in native mode. No arbitrarycode/native skills/guidance or scorer access toQwen.",
+  "adaptation": "Common language-and-stage interface inspired by existing HarnessVLA staging/RoboRSI postconditions; NOT full reproduction or novel-method claim. Existing common native language immutable in environment; explicit effective VLA language audited separately. Model weights unchanged.",
+  "comparison": "Feasibility only. Before runs1cached image/tool structural qualification under parent budget. All12complete and candidate newtask gains without oldsuccessloss/oldbaselinezero can justify independent validation, not acceptance. No gains/decline/semantically inert or unsupported boundaryprogram closes this first Bcandidate without call/prompt/seed/threshold sweeps. Outcome partial cannot promote. Fixed50 is strong control; subsequent positive mechanism test must include postcondition-only and fixedprogram controls, same models/permission/cost budgets.",
+  "known_program_limitations": [
+    "single-image stability/contact claims unverified; unknown required",
+    "final focus Continueuntil externaltermination lacks explicit placement, but unchanged fullgoal remains in actualVLA language",
+    "no proof boundarybottleneck from sparse development frames",
+    "program is proposed_unaccepted, not accepted learning update"
+  ],
+  "task_wall_budget": 7200,
+  "service_startup_bound_seconds": 360,
+  "code_sha256": {
+    "scripts/run_stage_panel.py": "d0931a2b3cfbefca9761613e4c96fa9016444cd2433fa3138b01f3f8860a80ff",
+    "scripts/stage_client_adapter.py": "85ebd47b301c63e17cfec9a5f6e89baddb8a7bf3825d34f568e75d254f1b08a4",
+    "scripts/stage_program.py": "e707041dd00c7e98c3c75826f963cd0e77ccafdb43ec111351e2d2febf33d9b4",
+    "scripts/qwen_service_owner.py": "302f2987a795af228906b482ee40694d455a7b74729e5f056b07777d9f339624",
+    "scripts/run_single_seed_panel.py": "7f668a1ffb7b784429986045fc2b2d5e74d28e2cd290cce8f6795bf4348eeb96",
+    "scripts/run_official_owner_panel.py": "8c90982b293e274d1394c5882e1a6fc4ce483d69bb4125deedc9dfc3682bb910",
+    "scripts/run_vla_only_pilot.py": "adadd5f0755b5dd191c8ff0575860299a14407f61f53600b64bee62e80bfb5cb",
+    "scripts/bounded_vla.py": "2c7dda852a1c672e4dffea666424f2a4a1544c4ae44f0a67eecdd16377f4decd",
+    "scripts/typed_skill_patch.py": "fc454ba45a6b42f70f0a07ebfd6bbc1fa0e28ef0da87e777c88a5d3128537db2",
+    "scripts/single_seed_adapter.py": "3fe119f3b6d802581617b0cef5dfaa800e4fc2592b9873eb4485b88c26b67115",
+    "scripts/run_single_seed_env_server.py": "8d8003e9743998849f3e9b2eaf625840069b49877c7d2666403670e01c39ffc5",
+    "scripts/owner_thread_adapter.py": "fcc05bc3aff823781e115dff7ff8ce5c2e1de09e6cfe930862d6ecc4f3491e15",
+    "scripts/scene_validity.py": "9441ad8e4aad062ca244fe21c12e565706a6497503b13de34f968ebc38b3f8d7"
+  },
+  "runner_sha256": "d0931a2b3cfbefca9761613e4c96fa9016444cd2433fa3138b01f3f8860a80ff"
+}
