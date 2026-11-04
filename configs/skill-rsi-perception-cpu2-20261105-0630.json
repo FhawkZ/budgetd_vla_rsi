@@ -1,0 +1,52 @@
+{
+  "id": "skill-rsi-perception-cpu2-20261105-0630",
+  "status": "FROZEN",
+  "classification": "CPU_DEPLOYMENT_EQUIVALENCE_NOT_POLICY_OR_LEARNING",
+  "upstream": "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/runtime",
+  "cases": [
+    {
+      "task": "move_can_pot",
+      "source": "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/move_can_pot_d885e5/perception.py",
+      "packet": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/feedback.json",
+      "rgb": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/rgb.png",
+      "depth": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/depth_mm.npy",
+      "calibration": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/calibration.json"
+    },
+    {
+      "task": "stack_bowls_two",
+      "source": "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/stack_bowls_two_79dfa1/perception.py",
+      "packet": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/feedback.json",
+      "rgb": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/rgb.png",
+      "depth": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/depth_mm.npy",
+      "calibration": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/calibration.json"
+    }
+  ],
+  "files": {
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/run_skill_rsi_perception_cpu.py": "2f1e931ed980a9a40109616699d01a8581fca52056768121a87830c632ab2c09",
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/skill_rsi_perception_worker.py": "44835255bcf7363a7d183573c5fc28707d18dc8efac3fff269911f284607365f",
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/skill_rsi_perception_ipc.py": "4c1269afe6aa3e6d7fa1bb8cd352c864d5ffd71f34ff7da97082bae6308781c8",
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/skill_rsi_skill_worker.py": "5f4d75fbf5e553259c4af954bc46f0161c7e340f870d39ae86ab6ac57898dbd4",
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/skill_rsi_skill_ipc.py": "5556b2afde3e2b522b8d6dc50168ac5be4aca54c3e5ff704a8c9f9760b26062e",
+    "/root/autodl-tmp/budgeted-vla-rsi/scripts/skill_rsi_caller_bridge.py": "3fc6a019c9ecf3cb2a96c99bdd549c61887a7899f4359386d19c1f46f4119819",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/runtime/validate.py": "20e80e06e64491ebf6f5848036762fdf61a2538a670bcbaefd62c65989bbbb72",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/runtime/perception_frozen.py": "9abe18dc27816dd8217626f0ad0c7c1980bcdeba30a03847b24808012f81ea1f",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/move_can_pot_d885e5/perception.py": "72d962b585a1e2df4c4beadb4d91d9c405c6532d06854fb8d2f4d2aee437f8d0",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/feedback.json": "975dd71ad858294516df7e676eaea89f7a4e28fd3e2ec275928a6cdbd2e47002",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/rgb.png": "261fbea1de1c65254b028e786606033af19147276af88c35737a2a44b85a2435",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/depth_mm.npy": "4f032a00bf248c757b5284a055829d5223c696b10615da187193fb31840e6090",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-twotask-dev4-20261104-1515/observation_00/calibration.json": "433d7d45747f78a78566a0b814bce70178262c5575359ef74312e21e00461f87",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/vendor/Skill-RSI-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/stack_bowls_two_79dfa1/perception.py": "f30e469ab5a78b31f9784dc32273561305bc90078f15583436093f556fea954a",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/feedback.json": "9d27996a27677326b3670b28bf6e9def0c700916e4f55f4a8a0bc8a85097249e",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/rgb.png": "63f6da362c745307a5fb354c4fe22a795176791a92cb74dee5ea0d159f99918b",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/depth_mm.npy": "7a13caedd92a1527d7aa415ab1b0fd90b99f5446e8a44174a68461acaa9c9f25",
+    "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-twotask-prepare-20261104-1515/author-input-staging/skill-rsi-no-denoiser-dev1-20261104-0610/observation_00/calibration.json": "433d7d45747f78a78566a0b814bce70178262c5575359ef74312e21e00461f87"
+  },
+  "detect_calls_max": 4,
+  "total_wall_seconds": 120,
+  "qwen_max": 0,
+  "vla_max": 0,
+  "clip_max": 0,
+  "new_rollouts_max": 0,
+  "stop": "first output mismatch or infrastructure error cancels remainder; no repeat",
+  "output": "/root/autodl-tmp/Dex_runtime/agent-rsi/outputs/skill-rsi-perception-cpu2-20261105-0630"
+}
