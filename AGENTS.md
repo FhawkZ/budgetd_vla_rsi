@@ -35,3 +35,7 @@
 - Latest2026-11-05 API supervisor: read docs/skill-rsi-api-supervisor-20261105.md.8newCPUtests+1blockingfakeintegration pass; explicit native BaseException mapping, timeout unknown/no retry, ownedchild cleanup. No actual simulator/author execution or complete sandbox claim. Callerdev2 unchanged/unlaunched, bothGPUs busy. Next idle run frozen caller once; ifbusy integrate trusted native factory/lifecycle/remainingbudget with CPU fakes, not repeat checks.
 
 - User2026-11-05 fallback authorization supersedes earlier only201/no-connect restrictions FOR RSI: 2026-liqz and lzgpu301 may be used when201 unavailable. Live idle GPUs/storage/locks required, no displaced jobs or silent8B/model swap/closedbudget reopening. Other project pause/jobs unchanged. See runtime records/checkpoint-fallback-hosts-20261105/fallback-hosts-20261105/report.json. 2026-liqz noexec data requires executable uv/software under home. Old301 service/budget not auto-resumed.
+
+- Deployment301 current: read docs/deploy-lzgpu301-20261105.md. OnlyGPU2/3 are candidates;0/1busy. Originalcaller main hardcodes0/1, DO NOT run it on301. Newwrapper/draft notrunnable untilmigrationfreeze. Downloadsactive, no model/robotcall.
+
+- User Nov5 explicitly approved approximately11GiB temporary executable environment on301 while migration frees disk. Models/assets stage on tmpfs, never sole evidence. See docs/deploy-lzgpu301-20261105.md.
