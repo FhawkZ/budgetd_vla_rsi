@@ -11,6 +11,12 @@ class EvidenceTest(unittest.TestCase):
    self.assertEqual((p/'case'/'receipt').read_text(),'two')
    with self.assertRaises(AssertionError):
     with persistent_trial(r,p,'case'):pass
+ def test_official_link_is_recorded_not_followed(self):
+  with tempfile.TemporaryDirectory() as d:
+   a=Path(d)/'a';a.mkdir();v=Path(d)/'vendor';v.mkdir();(v/'secret').write_text('not copied');(a/'official').symlink_to(v)
+   snapshot(a,Path(d)/'b',allowed_targets=(str(v),))
+   self.assertTrue((Path(d)/'b/official.symlink.json').exists())
+   self.assertFalse((Path(d)/'b/official').exists())
  def test_symlink_rejected(self):
   with tempfile.TemporaryDirectory() as d:
    a=Path(d)/'a';a.mkdir();(a/'link').symlink_to('/etc/passwd')

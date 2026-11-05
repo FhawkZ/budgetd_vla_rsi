@@ -2,11 +2,17 @@
 import contextlib,shutil,threading,time,os
 from pathlib import Path
 
-def snapshot(source,destination):
+def snapshot(source,destination,allowed_targets=()):
     source,destination=Path(source),Path(destination)
     destination.mkdir(parents=True,exist_ok=True)
     for p in source.rglob('*'):
-        if p.is_symlink():raise ValueError('evidence symlink refused: '+str(p))
+        if p.is_symlink():
+            target=str(p.resolve())
+            if target not in allowed_targets:raise ValueError('evidence symlink refused: '+str(p))
+            import json
+            q=destination/p.relative_to(source);q.parent.mkdir(parents=True,exist_ok=True)
+            q.with_name(q.name+'.symlink.json').write_text(json.dumps({'source_link':str(p),'target':target,'copied_target':False}))
+            continue
         if not p.is_file():continue
         rel=p.relative_to(source);q=destination/rel;q.parent.mkdir(parents=True,exist_ok=True)
         stat=p.stat()
@@ -28,7 +34,7 @@ def persistent_trial(runtime,destination,run_id):
     def copy():
         for suffix in ['', '-qwen']:
             src=runtime/'outputs'/(run_id+suffix)
-            if src.exists():snapshot(src,destination/(run_id+suffix))
+            if src.exists():snapshot(src,destination/(run_id+suffix),allowed_targets=(str((runtime/'vendor/robotwin-official-6dde571').resolve()),))
         src=runtime/'outputs'/(run_id+'-resource-checks.jsonl')
         if src.exists():shutil.copy2(src,destination/src.name)
     def work():
