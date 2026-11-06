@@ -1,0 +1,132 @@
+{
+  "status": "PINNED_DEPLOYMENT_PLAN_NOT_RUNNABLE",
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "source": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct",
+  "architecture": "Qwen2ForCausalLM",
+  "files": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "LICENSE",
+      "blobId": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+      "size": 11343
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "0d7fe07895cdde3f41e154ad17a8212719ceb005",
+      "size": 6397
+    },
+    {
+      "rfilename": "config.json",
+      "blobId": "a8fa5a907f7430a47d831eb28dbd69e6f6fd061d",
+      "size": 663
+    },
+    {
+      "rfilename": "generation_config.json",
+      "blobId": "c28f9c697cbc09f047434efec57556505af31111",
+      "size": 243
+    },
+    {
+      "rfilename": "merges.txt",
+      "blobId": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0",
+      "size": 1671839
+    },
+    {
+      "rfilename": "model-00001-of-00006.safetensors",
+      "blobId": "ec9b13bea179a0a8e37f08df0af4c54885814a3a",
+      "size": 4986211280,
+      "lfs": {
+        "sha256": "b14a60aa35c07e58da61cbe6c8b2819e60a043dd98001f14736045c6062e79a0",
+        "size": 4986211280,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00002-of-00006.safetensors",
+      "blobId": "4144932b3ea94a0b9ddf815c43b5afa06772fd9e",
+      "size": 4954847344,
+      "lfs": {
+        "sha256": "03b8de22c48a523646ac0a38aa36471529e22cdd1238ce43b44bf5014d64098a",
+        "size": 4954847344,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00003-of-00006.safetensors",
+      "blobId": "8b584e5085b953a5dcc22c73dd6de023655ea3a5",
+      "size": 4954847392,
+      "lfs": {
+        "sha256": "97587f9d511af15bce6295a15b10c43f504b16fcddf22db9c87356df17ffff3f",
+        "size": 4954847392,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00004-of-00006.safetensors",
+      "blobId": "b074d0785522f2e86f2b7cb020bddda3646b7dd0",
+      "size": 4954847392,
+      "lfs": {
+        "sha256": "ed34a72606341f8774d21661ad8ec9e59deffad8c63ceebd2f6db86f163bee7d",
+        "size": 4954847392,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00005-of-00006.safetensors",
+      "blobId": "b245338c6e7001c2e75445215014eb1d4b442953",
+      "size": 4954847392,
+      "lfs": {
+        "sha256": "657a6388cfe547498159dfb6507b9c1ead09a6fbab154c22942bbf963aef4208",
+        "size": 4954847392,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model-00006-of-00006.safetensors",
+      "blobId": "cbae0a94f048d9836d3b50a010a5b65093e891bc",
+      "size": 4734533160,
+      "lfs": {
+        "sha256": "3dbbc07addfc989662fd6bf88798970b278c98630f88eed5d23256fc99365dae",
+        "size": 4734533160,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "model.safetensors.index.json",
+      "blobId": "0e9b53532550dfddbf42730aeeb499a3bb7a707f",
+      "size": 47472
+    },
+    {
+      "rfilename": "tokenizer.json",
+      "blobId": "443909a61d429dff23010e5bddd28ff530edda00",
+      "size": 7031645
+    },
+    {
+      "rfilename": "tokenizer_config.json",
+      "blobId": "acee076f49bf3c0298e15de0909d1da7b392f0c3",
+      "size": 7305
+    },
+    {
+      "rfilename": "vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    }
+  ],
+  "weight_bytes": 29540133960,
+  "deployment": {
+    "host": "lzgpu301",
+    "target": "/dev/shm/agent-rsi-lzgpu301-20261105/runtime/models/Qwen2.5-Coder-14B-Instruct",
+    "profile": "new uv coder overlay; freeze package versions before installation",
+    "context_max": 32768,
+    "download_started": false,
+    "generation_budget": null,
+    "weights_unfrozen": false,
+    "disk_weights_forbidden_below_retention": true,
+    "memory_note": "BF16weights only27.5GiB, not measured peak. Need KV/activation headroom check before load; never overwrite VL environment."
+  },
+  "experiment_gate": "Fresh task and matched original/fromscratch/inheritance controls plus fullartifact cost must be fixed before any generation. Old threebowl pilot stays closed."
+}
