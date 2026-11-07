@@ -1,0 +1,45 @@
+{
+  "id": "phone-coherent-pair4-design-20261107",
+  "status": "DRAFT_NOT_RUNNABLE",
+  "purpose": "native published-package baseline comparison, not isolated-owner qualification or learned method",
+  "task": "place_phone_stand",
+  "variants": [
+    "place_phone_stand_10bbaf",
+    "place_phone_stand_4161b3"
+  ],
+  "planned_attempts_max": 4,
+  "pairs_max": 2,
+  "seed_manifest": null,
+  "selection": "Before launch derive two fresh seeds from future protocol SHA/ID; exclude public compilation/reuse, local used/canceled and sealed seeds; no outcome selection. Order pair1A/B,pair2B/A. No old successfulseed or canceled tail.",
+  "budgets_design_only": {
+    "Qwen": 0,
+    "VLA": 0,
+    "CLIP": "native calls all charged",
+    "setup_per_attempt": 1,
+    "primitives_per_attempt": 90,
+    "sim_seconds_per_attempt": 90,
+    "active_wall_seconds": 240,
+    "settle_seconds": 2,
+    "outer_process_seconds": 300,
+    "panel_seconds": 1320,
+    "expected_output_bytes": 268435456
+  },
+  "matched": "native task+seed+rawinitialRGBD/proprio/language/API/score/horizon/model; each native perception and skills stay paired as a complete version treatment; intermediate detector outputs intentionally differ",
+  "scoring": "external unchanged native scorer; policy self-report not score; raw/source hashes and exits; initialize failure censored not policy failure",
+  "stop": "First init/render/transport/other infrastructure error closes whole pilot and cancels remainder; no replacing or continuing canceled slots. No repeated qualification protocol.",
+  "permissions": "fixed official Python only in existing successful native worker path; no generated Python/no isolated-owner claim",
+  "freeze_gates": [
+    "exact official21file archive verified; now only2packages deployed on301: two phone packages need versioned copy+hash, not asset/model download",
+    "check native task/API card compatibility and sourcepins; same common wrapper projection; no scorer source to model",
+    "fresh seeds/ordering/full configSHA and source set fixed before launch",
+    "resource/durableoutput and reserve checks; no pi0 interference",
+    "original code-only worker accepts newtask and source selection; any runner edits via scoped Claude then independent review"
+  ],
+  "future_learning_gates": [
+    "Actual natural discrepancy with source-grounded cause; no manufactured mixed-frame failure",
+    "all methods same coherent libraries and observations with detector costs counted",
+    "best fixed whole package, each published fallback, and per-episode knowledgeable caller are strong controls",
+    "fixed/inherit-only/feedback-revised H with identical edits and full cost only after an executable candidate exists",
+    "no positive update from offline fixture or different seed success"
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "source_revision": "3483ea128ba432730f135aac326da1b768b671e4",
+  "packages": [
+    {
+      "package": "move_can_pot_5a37ce",
+      "task": "move_can_pot",
+      "atoms": [
+        "locate_can",
+        "grasp_can",
+        "place_can",
+        "retreat_arm",
+        "open_grippers"
+      ],
+      "observation_contract": "can+pot, pot at fixed origin; side-band can",
+      "argument_contract": "can_x/can_y; target_x/target_y; yaw/tilt internal radians",
+      "actual_source_effect": "pick computes wrist from grasp centre; place explicitly lifts/replans; is_held has measured=None=>True fallback",
+      "assessment": "same-task only; no basket/phone/bowl representation",
+      "source_refs": [
+        "frozen_skills/move_can_pot_5a37ce/skills.py:95",
+        "frozen_skills/move_can_pot_5a37ce/skills.py:122",
+        "frozen_skills/move_can_pot_5a37ce/skills.py:162",
+        "frozen_skills/move_can_pot_5a37ce/perception.py:20"
+      ],
+      "file_sha256": {
+        "SKILL.md": "01de379fa20300f46b43e6190b68ef58ff102e5e62aaa66b100afbcad61138a1",
+        "skills.py": "56dd93b47b21ad82eb351474b854f476d9f71c0d3f66a6b8c1c6842e5fa2e3eb",
+        "perception.py": "3a02bea6779dfa061dac4338aebf5f246464508da633e4e76a81cd9ef6625a1a"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "move_can_pot_85b558",
+      "task": "move_can_pot",
+      "atoms": [
+        "observe_scene",
+        "grasp_can",
+        "place_can_beside_pot",
+        "open_grippers"
+      ],
+      "observation_contract": "can+pot plus front_h approach corridor and pot_half_width",
+      "argument_contract": "can_x/can_y; approach_pitch radians; grasp returns can_dy/can_dz/pitch consumed by place",
+      "actual_source_effect": "object-to-EEF offsets affect placing target; cannot discard grasp outputs",
+      "assessment": "alternative can policy, not a new task; coherent full-package control required",
+      "source_refs": [
+        "frozen_skills/move_can_pot_85b558/skills.py:50",
+        "frozen_skills/move_can_pot_85b558/skills.py:79",
+        "frozen_skills/move_can_pot_85b558/skills.py:126",
+        "frozen_skills/move_can_pot_85b558/perception.py:33"
+      ],
+      "file_sha256": {
+        "SKILL.md": "d8a5dd50c6cdc901f2e07068c50e1b0cbf971b2243c963ae79afe12d228db72a",
+        "skills.py": "9b3f029f68fbe4adcf34ad3cc7138bb4ada2d39b8a46f85fbdf842ea9a8a6042",
+        "perception.py": "25080e954c3422d647fdfafce919d5331d1fa1111b02bca464b435a1e68478cc"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "move_can_pot_d885e5",
+      "task": "move_can_pot",
+      "atoms": [
+        "locate_can",
+        "grasp_can",
+        "place_can",
+        "release_and_retreat"
+      ],
+      "observation_contract": "can+pot, score/radius/side bands, fixed pot target",
+      "argument_contract": "grasp/place x/y in metres; tilt_deg degrees; different from older can_x/can_y interface",
+      "actual_source_effect": "place returns lifted/lowered independently from ok; releases even after some move failure; inherited ok is not external success",
+      "assessment": "local caller works on one development seed; no evidence of missing recovery to repair",
+      "source_refs": [
+        "frozen_skills/move_can_pot_d885e5/skills.py:87",
+        "frozen_skills/move_can_pot_d885e5/skills.py:112",
+        "frozen_skills/move_can_pot_d885e5/skills.py:156",
+        "frozen_skills/move_can_pot_d885e5/perception.py:23"
+      ],
+      "file_sha256": {
+        "SKILL.md": "668252bb9e47635117e29e6ca4cac778453f6e08fdd41f4582bc75cb9d2ecb1a",
+        "skills.py": "b433f9bed65023d53857530ef2e2a78c96f1de06b49c1a23451f7c054cfe6e7c",
+        "perception.py": "72d962b585a1e2df4c4beadb4d91d9c405c6532d06854fb8d2f4d2aee437f8d0"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "place_burger_fries_d3b046",
+      "task": "place_burger_fries",
+      "atoms": [
+        "locate",
+        "pick",
+        "place",
+        "retreat",
+        "finish"
+      ],
+      "observation_contract": "slot0 tray/slot1 hamburg/slot2 frenchfries, fixed spatial regions",
+      "argument_contract": "object names bound to fixed arms; per-object x/y/grip_axis; CACHE plus tray target",
+      "actual_source_effect": "two objects, per-object retry already in pick_and_place; complete fallback handles both sequentially",
+      "assessment": "complete original task supported in source; no cross-task generalized object API",
+      "source_refs": [
+        "frozen_skills/place_burger_fries_d3b046/skills.py:71",
+        "frozen_skills/place_burger_fries_d3b046/skills.py:108",
+        "frozen_skills/place_burger_fries_d3b046/skills.py:163",
+        "frozen_skills/place_burger_fries_d3b046/perception.py:30"
+      ],
+      "file_sha256": {
+        "SKILL.md": "178b8588c68603a4949cb2f5610e78bf5c22e80bcf487edae3d91020361ea148",
+        "skills.py": "55c9b0e28782e67a5f7c34d978a070a5e1d9b468fafd738ae0e492351dc833d7",
+        "perception.py": "5ed7b3b6ef8f76864d30dbb2547c9c6c6497a883b28843447740549273192ec5"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "place_phone_stand_10bbaf",
+      "task": "place_phone_stand",
+      "atoms": [
+        "locate",
+        "grasp_phone",
+        "place_on_stand",
+        "release_and_retreat"
+      ],
+      "observation_contract": "phone/stand valid/is_phone; phone yaw measured from world+y; stand x_mid/y_min/height",
+      "argument_contract": "phone_yaw centred near0; stand_tall bool; table_z; calibrated stand position offsets",
+      "actual_source_effect": "grasp clamps yaw[-1.2,1.2]; placement lifts then fixed Q_PLACE, retries and held checks",
+      "assessment": "new local baseline candidate only as coherent full package",
+      "source_refs": [
+        "frozen_skills/place_phone_stand_10bbaf/skills.py:66",
+        "frozen_skills/place_phone_stand_10bbaf/skills.py:91",
+        "frozen_skills/place_phone_stand_10bbaf/skills.py:125",
+        "frozen_skills/place_phone_stand_10bbaf/perception.py:104"
+      ],
+      "file_sha256": {
+        "SKILL.md": "3337287b87ca1d7758b004989afb0fc70c57247246e2ae9e20791ee584ccee41",
+        "skills.py": "2204825ec3c6ebd62b763e0f1ce693da50100fca6ba83314a8f85ec3f993bd57",
+        "perception.py": "21a36d2fa213b70c40fc1ce8aa4c1277f505770e3d88363ee52475b05c0891f1"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "place_phone_stand_4161b3",
+      "task": "place_phone_stand",
+      "atoms": [
+        "locate_objects",
+        "grasp_phone",
+        "place_phone",
+        "release",
+        "retreat"
+      ],
+      "observation_contract": "kind0 phone/kind1or2 stand; yaw in(0,pi) per publicSKILL; shape scores",
+      "argument_contract": "stand_kind int; stand origin x/y; transit_steps parameter already public",
+      "actual_source_effect": "grasp topdown_quat(yaw); place interpolates poses; fallback retries and checks displaced phone",
+      "assessment": "paired coherent-package baseline; no forced cross-version field conversion",
+      "source_refs": [
+        "frozen_skills/place_phone_stand_4161b3/skills.py:75",
+        "frozen_skills/place_phone_stand_4161b3/skills.py:101",
+        "frozen_skills/place_phone_stand_4161b3/skills.py:130",
+        "frozen_skills/place_phone_stand_4161b3/perception.py:124"
+      ],
+      "file_sha256": {
+        "SKILL.md": "8fd364779e40af0c3d7e49b82eb7c9d037b712c30844a378a48e62c6d7bcc87e",
+        "skills.py": "c64b61be19160fe2aacde2de0940bfd859a1fd2addb0070ea84efd9e4d709882",
+        "perception.py": "dfa4d797cd9eb7c4dcbfeec23351cd7071877c9f6d34ef0f42ea411e6bdbec04"
+      },
+      "physical_effect_validated_this_cycle": false
+    },
+    {
+      "package": "stack_bowls_two_79dfa1",
+      "task": "stack_bowls_two",
+      "atoms": [
+        "locate_bowls",
+        "pick_bowl",
+        "place_bowl",
+        "retreat_arm",
+        "release_all",
+        "stack_bowls"
+      ],
+      "observation_contract": "blue bowl seeds/rim fit; detector returns out[:2]",
+      "argument_contract": "two bowl coordinates; public plan with arm/pick/place/on_bowl",
+      "actual_source_effect": "make_plan already chooses same-side vs cross-side staging; full fallback reobserves and retries",
+      "assessment": "two-bowl source contract; three-bowl author pilot remains closed",
+      "source_refs": [
+        "frozen_skills/stack_bowls_two_79dfa1/skills.py:51",
+        "frozen_skills/stack_bowls_two_79dfa1/skills.py:111",
+        "frozen_skills/stack_bowls_two_79dfa1/skills.py:142",
+        "frozen_skills/stack_bowls_two_79dfa1/perception.py:35"
+      ],
+      "file_sha256": {
+        "SKILL.md": "9dd35fb312ba8d6d1b1b7cbdffdb11b801e0c31aefe2d72dc57e24d345105b86",
+        "skills.py": "19677c6ad2ec85a05c6f2df48a2dc0e2aa5a03196a24808a09c831e4c2c8f325",
+        "perception.py": "f30e469ab5a78b31f9784dc32273561305bc90078f15583436093f556fea954a"
+      },
+      "physical_effect_validated_this_cycle": false
+    }
+  ],
+  "package_count": 7,
+  "task_count": 4,
+  "atom_count": 33,
+  "method": "stdlib AST evidence plus Codex source review; no import/execution of skills",
+  "no_performance_inference": true,
+  "shared_assumptions": [
+    "RGBD+calibration via native observe, measured robot feedback where API provides it; no evaluator-only layout or scorer input",
+    "ATOMS names alone do not define interchangeability",
+    "returned ok/held are program claims, not native task success",
+    "Some public SKILL/docs contain original task criteria and source constants; not claimed criterion-free"
+  ]
+}
