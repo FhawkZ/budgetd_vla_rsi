@@ -1,0 +1,39 @@
+{
+  "public_task_template_sha256": "e5e24c0fbf4a5a20cc84e9ab489bf5f6075d436cbf33c1572072b00dc1865076",
+  "observation_source": {
+    "task-spec.json": {
+      "bytes": 180,
+      "sha256": "65ab32b0566b663abdf23f32469a8f9b2cea11da47f3cbe96f8bdc08e067bc4a"
+    },
+    "initial-proprioception.json": {
+      "bytes": 652,
+      "sha256": "9c065090b172823bdfa8cd7daed14162a7312391dcc1630fa757989671652b91"
+    },
+    "calls.jsonl": {
+      "bytes": 2453,
+      "sha256": "7b4b30a5b388641dbdd7af52d3f657d4cbb47b8950ea1a16c08b12c6b5dc6534"
+    },
+    "observation_00/calibration.json": {
+      "bytes": 851,
+      "sha256": "433d7d45747f78a78566a0b814bce70178262c5575359ef74312e21e00461f87"
+    }
+  },
+  "api_doc_sha256": "cf8774e60c14c674ea01d1f32e2f19cdd13054ccc416455dd9f6248c2424267c",
+  "inherited_files": {
+    "SKILL.md": {
+      "path": "place_phone_stand_10bbaf/SKILL.md",
+      "bytes": 7347,
+      "sha256": "3337287b87ca1d7758b004989afb0fc70c57247246e2ae9e20791ee584ccee41"
+    },
+    "skills.py": {
+      "path": "place_phone_stand_10bbaf/skills.py",
+      "bytes": 8714,
+      "sha256": "2204825ec3c6ebd62b763e0f1ce693da50100fca6ba83314a8f85ec3f993bd57"
+    },
+    "perception.py": {
+      "path": "place_phone_stand_10bbaf/perception.py",
+      "bytes": 6905,
+      "sha256": "21a36d2fa213b70c40fc1ce8aa4c1277f505770e3d88363ee52475b05c0891f1"
+    }
+  }
+}

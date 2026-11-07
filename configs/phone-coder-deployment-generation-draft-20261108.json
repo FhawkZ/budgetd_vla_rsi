@@ -1,0 +1,106 @@
+{
+  "status": "PREPARATION_NOT_RUNNABLE",
+  "task": "place_phone_stand",
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "conditions": [
+    "from_scratch",
+    "inheritance"
+  ],
+  "inheritance_package": "place_phone_stand_10bbaf",
+  "package_selection": "lexicographic first of the two public phone packages, not chosen from measured cost/success",
+  "common_input": "only first action-before observe of phone24831345 A, public instruction/API, initial measured proprioception and calibration; no task scores or later actions",
+  "initialization_treatment": "empty four files versus exact3 published files+rationale empty; input information deliberately differs",
+  "budgets": {
+    "model_responses_total": 2,
+    "per_condition": 1,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 8192,
+    "context_tokens": 32768,
+    "sampling": "do_sample=False; fixed seed42",
+    "model_loading_wall_seconds": 360,
+    "per_generation_wall_seconds": 600,
+    "owner_total_wall_seconds": 1800,
+    "static_validation_wall_seconds": 30,
+    "robot_episodes": 0,
+    "VLA_calls": 0,
+    "CLIP_calls": 0,
+    "retry": 0,
+    "repair": 0,
+    "canary_generations": 0
+  },
+  "stop": {
+    "infra": "first loader/OOM/transport/deadline error ends and cancels remaining allocation",
+    "artifact": "invalid or truncated response is retained rejected without repair; next independent predeclared condition may proceed if infrastructure healthy",
+    "input": "tokenize both fixed prompts before GPU load, refuse all if any exceeds24000; no truncation/prompt editing"
+  },
+  "deployment": {
+    "host": "lzgpu301",
+    "physical_gpu": 3,
+    "weights_location": "/dev/shm/agent-rsi-lzgpu301-20261105/runtime/models/Qwen2.5-Coder-14B-Instruct",
+    "weights_bytes": 29540133960,
+    "overlay": "new uv venv coder14b inheriting pinned qwen parent through explicit pth; no parent package changes",
+    "trust_remote_code": false,
+    "weights_dtype": "bfloat16",
+    "attention": "sdpa, actual compatibility remains untested",
+    "cuda_allocator_fraction_limit": 0.8,
+    "required_gpu_free_bytes": 85899345920,
+    "GPU_guard": "no compute processes, utilization0, memory<128MiB; same GPU UUID held by RSI lock throughout",
+    "tmpfs_and_host_memory": "each must have >=64GiB available immediately before bounded download and before load; no swapping/displacement",
+    "disk_reserve": "max100GiB,20%capacity plus32MiB raw output",
+    "fetch_plan": {
+      "total_wall_seconds": 1800,
+      "per_file_requests": 1,
+      "automatic_retry": 0,
+      "verify": "fixed official LFS SHA/bytes and gitblob manifest; no alternative revision or extra model",
+      "partial": "preserve incomplete files/receipt, no background continuation outside bound"
+    },
+    "peak_note": "27.5GiB weights do not prove worst-case VRAM; enforce runtime measured peaks and owner deadline, no added qualification calls",
+    "parent_environment": {
+      "path": "/home/lzgpu301/.local/share/budgeted-vla-rsi/envs/qwen",
+      "python": "3.12.15",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.5.4",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.22.2",
+      "evidence": "activate-lzgpu301.sh qwen explicitly sources this path; skillrsi remains separate Python3.11 environment; no parent modified",
+      "metadata_sha256": "ba28f7458758273da1bac60084d544d5931b23a0cdf5b149e407ed848c6b03af"
+    }
+  },
+  "output": {
+    "durable_root": "/root/autodl-tmp/qian/Dex_runtime/agent-rsi-migration-20261105/outputs",
+    "expected_bytes": 33554432,
+    "raw": "all prompts/generated token IDs/text/usage/timings/rejections/hashes, before static extraction; candidate files never imported",
+    "validation": "pinned original AST syntax/atom/SKILL contracts with owner four-file digest, no generated code execution"
+  },
+  "fairness": "identical common evidence/API/editor/output/limits; initial source is intentional factor; sequential order fixed, shared loading cost separately reported, no rate inference from2responses",
+  "strong_controls": [
+    "complete published phone10bbaf",
+    "complete published phone4161b3",
+    "same-library per-episode caller"
+  ],
+  "execution_authorized": false,
+  "download_authorized": false,
+  "model_loading_authorized": false,
+  "rollout_authorized": false,
+  "blocking_gates": [
+    "review/source-pin standalone bounded fetch/generation owner and static adapter",
+    "freeze independent protocol with prepared-input hashes and exact tokenizer preflight",
+    "recheck live resource/reserve/locks immediately before bounded fetch/load"
+  ],
+  "scope": "adapted offline author baseline feasibility, not full native author privileges or RSI gain",
+  "prepared_inputs": {
+    "output": "/root/autodl-tmp/qian/Dex_runtime/agent-rsi-migration-20261105/outputs/phone-author-inputs-20261108-0600",
+    "manifest_sha256": "f3cdee80c57863e427436202457aa49c7110b0110e4fb977aa73f8f9741572d4",
+    "conditions_messages_sha256": {
+      "from_scratch": "b39411e5209d0d7a1a9d58c12f6d61320fd570c74a9b1b6315d54e7782054885",
+      "inheritance": "1855c26d0a15eb81410106dd67ce59f6624b43adedc1bb8219def440d86fad46"
+    },
+    "conditions_messages_bytes": {
+      "from_scratch": 11141,
+      "inheritance": 36909
+    },
+    "tokenizer_check": "pending, not inferred from bytes"
+  }
+}
