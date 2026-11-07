@@ -1,0 +1,2174 @@
+{
+  "id": "skill-rsi-deepseek-paired6-20261108",
+  "selected": [
+    905570,
+    105562,
+    116201
+  ],
+  "formula": "100000+int(SHA256(id+\":\"+counter)[:12],16)%900000; reject prior/public numeric metadata collisions before outcomes",
+  "public_archive_sha256": "1d6d472f827e69ef3249f783391e9102ce2780be296215eeeca91bc93983bb7b",
+  "metadata_files": [
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/20260926T073808Z_hanging_mug-randomized_claude_code_2893e3.jsonl",
+      "sha256": "e197b8448e7259c7a4d59f046fae987cd9b0d3ccb7ef8d96508486a0cf9c6b12"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/20260926T173447Z_hanging_mug-appearance_claude_code_463f0b.jsonl",
+      "sha256": "673789c343b53b7792929326563a29a3ed9c827c7606ec5c8321f2b7ea4452d3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/20260927T080134Z_hanging_mug-appearance_claude_code_93a73d.jsonl",
+      "sha256": "1513497c1de06f904fac4237dd9003df32d5044bd618a89b19ce40e42ff972ec"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f02_settle_probe.jsonl",
+      "sha256": "ff1790c5fed94feb8966f529b4808d486401501122f554829cd63de7b60f59ed"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f04_safety.jsonl",
+      "sha256": "595159aa8fe80c2ae1cef32448ac655b0b8770624b1c191a7cab37b3478bd835"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f05_ablation.jsonl",
+      "sha256": "b319c79c2484b82bba1a96b62ad7a586be00415d4403f389e740e1b44460bd59"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f05_insession.jsonl",
+      "sha256": "ca046d8d7dd436e30baebafc766c4e975f7995e41ed77c8da6c1e7275640ae02"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f05_writeonce.jsonl",
+      "sha256": "58f8ba7e2ac7237de5d1c2de23ec2cf058c8d56255b6e5caf30faa29f0b8e160"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f06_heldout.jsonl",
+      "sha256": "521aab7dca38c7992f895b966e18d8183eb2be67ec7032cfdf11693cb82a21fd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f06_mechanism.jsonl",
+      "sha256": "188529dc0750980e3bfc0ee7c9f815d4fd217cc258d434a4f3f89414e754443a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f06_repair.jsonl",
+      "sha256": "5ad1258bcdef8c12f99f00c7c11bae903f4681b2be6b48b5ad069af34f92c992"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f07_reuse.jsonl",
+      "sha256": "82ee45788f50d526d8af2cfc7e25947df4cdf1eac3041e6ba2f893e26732ee30"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f08_inherit.jsonl",
+      "sha256": "7a1affe5174bb8f42558bcec05e976d5a50d8ee02815221f8c40ed6f9fc100b3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/f09_reference.json",
+      "sha256": "825da0ea627aa7ba51f1a49ee1564a356e7d80779b31d631c6968fe4aa1d3982"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/gpt6_formal.jsonl",
+      "sha256": "c8d3804ffe7c6238051077c141ee7e7d24c595b6aebe8591743e7eee7300b751"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/isolation_audit.jsonl",
+      "sha256": "19e137f1ee3e08a02320b276dcc57ce3901cd05d0531e99847a6bab97fedaaeb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/isolation_events.jsonl",
+      "sha256": "09bb6416c79ec2ecbb900036fcdef66b565f2c318f1330e4be61d92c5be7024f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/pilots_5.4.jsonl",
+      "sha256": "7612a25adccb1c60f255010713225bed2fc3b6b1cfe1486820900591a0d3916f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/screening/screen_clean_A.jsonl",
+      "sha256": "1fd1459f0b16a31af69f8a56501be2185770164bf3aa702b86b196564e63e96e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/screening/screen_clean_B.jsonl",
+      "sha256": "c9639631bc2cf85632c4c2db77b07fdec2947135bd6b4e3f2fac206f0896e100"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/screening/screen_clutter_A.jsonl",
+      "sha256": "f381a32777aa8d4d6da0ce58089f1c9daa18a2218cdbfc08ff5bbea9b686bd09"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/screening/screen_clutter_B.jsonl",
+      "sha256": "c644687cc47df44d4b47ec46cf92de7a85a820241c7560586bfa92e56879837e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/v55_extra_eval.jsonl",
+      "sha256": "94db5a67d95ba8db46000fcb6f547332fcbc67827150b96d97ce77abf7f2ff5b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/data/v55_formal.jsonl",
+      "sha256": "31cfcd1a2c1d7d709b99901b2a72584f5ed7babe9ad9ea563ddeb207704084a1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/excluded_campaigns.json",
+      "sha256": "a1e1d3426e7682712399fc2a28706387c228efa47ac67906dda1ec72d05b8102"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/amortized.csv",
+      "sha256": "01aa531a4d842c29fe774f1416c4fd48d18d79391fba1d102a8f0b9d194511d1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/exam_vs_baseline.csv",
+      "sha256": "9118a63688ea610248d7416759c0b173e371347055db648da0476394050b9564"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/f08_heldout.csv",
+      "sha256": "d2a2456cb26d08cdd1d39b8c79d4ca515579aeded99a7c3debdb7e26b1adc218"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/heldout_pairs.csv",
+      "sha256": "3216b5213e7b01d85f85f574757f82a18f5d17f2a825c7b251b578d7aa366dbd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/results_check.json",
+      "sha256": "23c761e7ea46ae3f844ad15492c7e9e2b5fff4be45c9c11c708be83a28603d63"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/reuse_arms.csv",
+      "sha256": "62648fcf1695c9f4f1711f51d4a586568b1a7e22521f17b8bdb9c60743ca3409"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/analysis/paper/expected/reuse_points.csv",
+      "sha256": "e947b216f69590ed69889679c51458d3e456f752aaa8fe097ee9c3b45eb6d73a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/INDEX.jsonl",
+      "sha256": "a747adeedd22474a78dfc339c4a903ae1a4e74511019c97f5a92046c1ffbbcd8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/FrozenSkill/place_phone_stand/MANIFEST.json",
+      "sha256": "c04ed706c099aa6eb63f029daea9a8c0031b8405dfa05b92a8703de29d68d82c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/campaign.json",
+      "sha256": "2932126e40da22ec6ae5ee26fb34d163b5620776ff40ca5dbd1322e7f917d9c7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/final_report.json",
+      "sha256": "1986b2e7c22db67baaa81c0e76c9687d579285bc48e376c9a755d47ab7977d77"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/phase0_summary.json",
+      "sha256": "b35fef0e611b921a6b8f4bdac46d5b6bc870597a28c472786e108b05afb7a164"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/results/caller_check.json",
+      "sha256": "382d044118a4bbb0cf9cc66b1f0e6bdf90d63670199ab36b6cfe0d7bf27b3dda"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/results/episodes.jsonl",
+      "sha256": "d1a41a291066341990bc261f92266b1fe5da5ad723df0a1b20a09b0706ed1d6b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/results/measurement_draws.jsonl",
+      "sha256": "73e50411a83e8df4037d5d1dc6ad35ab68ffcac76dc2082b12835517ea13162d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/results/measurement_replacements.jsonl",
+      "sha256": "4287d7a9eef38e1c7fa0a362eb328a4cd4a73d94106ec319a633e632338d1203"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/results/r2_gate_spec.json",
+      "sha256": "850c1e7f1a1cdd53e11eebc043353213feecef8531c232af3a20f4aa5b053cee"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/state.json",
+      "sha256": "2741e0dae5cac8c87d9992e439bd445a31726f05860f377801f2eb0215922819"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T130127Z_place_phone_stand-clutter_claude_code_10bbaf/summary.json",
+      "sha256": "db063907ea03e1c1f6359c3d92a31c4f52e80c9335ccf4bf80529a5d0d198451"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/FrozenSkill/stack_bowls_two/MANIFEST.json",
+      "sha256": "ac65dd1ec3aa60aaef3ac7cfef351ee764db8bbcaf4202fe20ad3f665ee8e03d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/campaign.json",
+      "sha256": "e16491764389a17fec443c7e29c46fe4a2159eea906b3d1e25bb3a6f6e635263"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/final_report.json",
+      "sha256": "419e2c29fc47abc2629ad5663dd9d582733ffb369b625ff3941baef2573774bd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/phase0_summary.json",
+      "sha256": "8408615b4fdc66417678df364db3bbd590918f384dae363abe5ce856583f3b70"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/results/caller_check.json",
+      "sha256": "85ce8ef86de65a41ae80d5217bf792542af2b1dff1779857a55e054dd6755b1c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/results/episodes.jsonl",
+      "sha256": "3ef0eaccaf5d9f4dc5502ae47f97abb4c15310601e199c789a7a55eaa6d595fa"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/results/measurement_draws.jsonl",
+      "sha256": "a77536e91a4ccbe451f116dda590e42ce09bac0a492c9f63b5b13cba0d4908b6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/results/measurement_replacements.jsonl",
+      "sha256": "ac968ed12fc339c83f605ed579fcdf1e96984dd3ea6d71ed719783069e4827af"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/results/r2_gate_spec.json",
+      "sha256": "431632bda5627438dcb0472eaa73ee7131bd2cc464580d80f4397fa8a764e8c7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/state.json",
+      "sha256": "61f3195a6dc8ec0f1559a43495c9d0560ce9703b34638d0798ca72a259db2a0e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222506Z_stack_bowls_two-clutter_claude_code_79dfa1/summary.json",
+      "sha256": "51bd4546f3f47c3a9f630b11958d4631d810e2aa464e19cd7ea4d3ce345743b0"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/FrozenSkill/move_can_pot/MANIFEST.json",
+      "sha256": "b6cfa76b7a759730c1dcf7f1aabaa5f4de5c80282cada76745d2faf647beca93"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/campaign.json",
+      "sha256": "c01b78e7b6b3b950cacc2a5e7c49d9cb5987e8d0ac58e53167f393527acceba6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/final_report.json",
+      "sha256": "bf229a887c0e9c2850e1f493fade98b3ed22118e91f2aa8024aad55aae1e6549"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/phase0_summary.json",
+      "sha256": "46814ace888e32429ad756d5d12f78d5da8ccd7306ae270fba572a63ef3986b0"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/results/caller_check.json",
+      "sha256": "8d925be917e7bec6027b6af92f0f454fd774803877dcf5c8b95239fbb4581132"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/results/episodes.jsonl",
+      "sha256": "ddcb3a307d8f41ea38117dd9292036e0ed9e23ea150a247311d40029d57452be"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/results/measurement_draws.jsonl",
+      "sha256": "10b56a9c852afeac6f7825d1885d8ee7deb4e24fa987c87430b3fa49bf19e5c9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/results/measurement_replacements.jsonl",
+      "sha256": "9d82b012d90d736f908a7501fe4b1edb53bbb0a276d31710a9a275ea6d419714"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/results/r2_gate_spec.json",
+      "sha256": "ef480399c6c85840602a123b746946ad0965c6fa69c2aaad71cf401057ca2f0c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/state.json",
+      "sha256": "514fcf24d081319110e2cb58b2938536b8da87a878ae186a13c8e30fb94eef4d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261001T222511Z_move_can_pot-clutter_claude_code_5a37ce/summary.json",
+      "sha256": "5b54877c4316d4d2c4c4ed3b4cc93fddeab9239f4adced38cb9c774bd29c61ec"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/campaign.json",
+      "sha256": "b18ce4109bd72b651dc01b03b5d371b0ca045b64cf3e89494598dbc09387428e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/final_report.json",
+      "sha256": "67fa334de59fdbe2d221ed6e23fad81d0033e2dc5c1d5f5cf3ee8c32d14b9bd2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/held_out_heldout_all.json",
+      "sha256": "8cf744fb84b01e3a17d5549e0743e8a3dee0298997d918280225278f1e09391a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/isolation_events.json",
+      "sha256": "68b492130e5ad94306d027220190c13f2205ac697eb80ca1f115aef212809512"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/phase0_summary.json",
+      "sha256": "4eb72818f98272f7e67ae07ffcbd059d6a0f804f256f25876d1c970e3fed494f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/results/episodes.jsonl",
+      "sha256": "c9baac5325cea0f75c659324f0ba1d1159a309723b60bb6283abc3d8abbbb4e7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/results/measurement_draws.jsonl",
+      "sha256": "24bf2cd4b6638fa3589ac4e5d9ffb4b60616e4f806670f4e736355f1ac58afd5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/results/measurement_replacements.jsonl",
+      "sha256": "d9c96b5d364453ca0f34af9d5dbd687eb1b1da93040cf577c83b7944f64ee1df"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/results/r2_gate_spec.json",
+      "sha256": "b93140ea068b3e3e41037e1e8428e26753899b7bcff7f1afd1af729a0b2d1c10"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/state.json",
+      "sha256": "89711f8694210b17e18f489a3abc772ffe99c22240f7516bda5538970d6a2765"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090905Z_stack_bowls_three-clutter_claude_code_c7a1f0/summary.json",
+      "sha256": "e15cdfe273d24eec6927cd3ca863dc2f9f530749b807ebde6507e346aee7b92c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/campaign.json",
+      "sha256": "83f101c03ca89e9699808a884cfd965a0f31b017a05f89927fe17cba4a56c1f1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/final_report.json",
+      "sha256": "d3fc2e23033d7ce1302a5d0f832cbc9122967f3cacb9016d5ecbac4aa8722e10"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/held_out_heldout_all.json",
+      "sha256": "6468d1f0a3b64b32121f055106bce40e8c97d9150ec512c2e8d2c0597a60bb1b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/phase0_summary.json",
+      "sha256": "2124b803e20511cac8d8fd64d0c029d5c6446abd02c11bcc456ffbd7b3ae6443"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/results/episodes.jsonl",
+      "sha256": "8212d457288568f2a0fd1c1aaeeba703b0aac8520a01796234e0f74914a8e13e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/results/measurement_draws.jsonl",
+      "sha256": "ab9ee174172944455eb35c692b7a47c6cb5fbe4e063002106990dff7fcb7d2fe"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/results/measurement_replacements.jsonl",
+      "sha256": "53770e507233da38317e6c8651760629076f5c1cf084e9e7619707dd453f31c5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/results/r2_gate_spec.json",
+      "sha256": "447edef3feafa4d85bac611f0ee43d9ab58049e2d156009420dc2190b42270da"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/state.json",
+      "sha256": "0620a3d8b61279de13dc51b96e98d5884d45cc04e4022add2e5f136c26d5872d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090910Z_stack_bowls_three-clutter_claude_code_ef1eb1/summary.json",
+      "sha256": "8ee59e61d1f1761783ceaa22bfb163f1ec8386760124f5786d81a9360cb53489"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/FrozenSkill/place_phone_stand/MANIFEST.json",
+      "sha256": "53b246db695627c9a224dacb7766fa2b6393de0e830a3f1599a14af7326d18eb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/campaign.json",
+      "sha256": "c960cd4fcb8cf44ed193e816ef8d27d4c91098bb9df9d0f27cabe942333b7070"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/final_report.json",
+      "sha256": "b915325e3dcd7434c3e5d2b1902dab7713709dce7e0327fa5c97528ecc149f65"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/held_out_heldout_all.json",
+      "sha256": "645dc5895d0cbd44db1e091459f04ac123fe99fa26c5360feec443bc1c868a6e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/phase0_summary.json",
+      "sha256": "e819b36909a444f96a94d1a6d54d783a6a015ca9ffcd4098f1500c310cc7b94e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/results/caller_check.json",
+      "sha256": "20d173a0809f6ac6afe92eb094fcdbe3926e8762b22a36325e9fb865af882810"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/results/episodes.jsonl",
+      "sha256": "5c919dbe2804463617f50ec2491a05ce7838f7c71fcb194563bb82be91d9b72a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/results/measurement_draws.jsonl",
+      "sha256": "4ed8bc31955dc4054a9c915fdfb8d59e5baa8edd18717c4694686c878ff7fc01"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/results/measurement_replacements.jsonl",
+      "sha256": "088763abcb1bcc1ae7e909bfa91c6158561065f72e5b21fc7bd5ea9b15c278ad"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/results/r2_gate_spec.json",
+      "sha256": "53d02ff759f6cbf5e1033e180e65f6c0a2ee366f44ded38c4275e92b834d603c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/state.json",
+      "sha256": "4de3436b7c6ec9d7c958c1005503e851fcc05988621972b769be83bec859aacb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T090916Z_place_phone_stand-clutter_claude_code_4161b3/summary.json",
+      "sha256": "1d4cb6f9890b67a97165e22ae61aae2a76b261736763a17f012e0811983a9dfc"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/campaign.json",
+      "sha256": "b57038bb083b0b6b2f455c87f759b3e59a9d9c89e621239f2202d9c873b480a3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/final_report.json",
+      "sha256": "c737ee95681bc6c0942fe58171c98c84b58e984c5d86093ba21b405a4034329c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/held_out_heldout_all.json",
+      "sha256": "27cdc33f20e4d4eba17786239f70879cbf59555fe2a26b49b55d24a0394442bc"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/phase0_summary.json",
+      "sha256": "2b8b80f456129e527078e61c9e3b3aaf9a410c714d69d04cff5488801133e140"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/results/episodes.jsonl",
+      "sha256": "efb65ab6000b8280f9b6f0fd528a0a6f342b25915abc8936b3880a8ba7eeb7c9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/results/measurement_draws.jsonl",
+      "sha256": "b621f95d6ed6b94ebd5619d9d490667cc17e580697b6d400ae7250cead6881f0"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/results/measurement_replacements.jsonl",
+      "sha256": "5f5b1761bd187b89099b81be5254a322afb4dd2850589440b6a692ca98db564f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/results/r2_gate_spec.json",
+      "sha256": "ad8a585e50b715da06e7eda6f44fc1bb23cd6e21a232beef2455934284280181"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/state.json",
+      "sha256": "f34e9612cef82fdfa5c7fb9dcf68dcbef48185dab58a3be532f48bb1300afcea"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T221125Z_stack_bowls_two-clutter_claude_code_102fc5/summary.json",
+      "sha256": "de0b668de52471462ffb1855e8f7eab427f13dbcdb7f5189fc29c58a9dc3c69b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/FrozenSkill/move_can_pot/MANIFEST.json",
+      "sha256": "befa6228b80173d9d8fb0090cb1197baf25a2134888ddd2b1ea1489685780b52"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/campaign.json",
+      "sha256": "67ecd65f6ef4af95daf8a85eca3b7454cef0b039e050996ca2dfee9b39e78d84"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/final_report.json",
+      "sha256": "dec93c03bc48fa82e8e88d626cad1e7230e0e6354f86d51cb2bf353d24265f3c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/phase0_summary.json",
+      "sha256": "da7277dd1f8eb85a20f4b796ec94e0fdac078f5670daef0f1c0b18fd0d37dc10"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/results/caller_check.json",
+      "sha256": "aad9b3a3c96697fe47a876b8e81258f73ba9ace6135801b3f6b0d88bc3d64a50"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/results/episodes.jsonl",
+      "sha256": "a3f348b878c306907d7c27339ca547b38f7aceacaced368687e7da095a7ecc26"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/results/measurement_draws.jsonl",
+      "sha256": "38d20aee5c7bf28fb0deb0a654191240df5f942f8b22405a7f6a4f11de5a3ae1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/results/measurement_replacements.jsonl",
+      "sha256": "4d7a56ce5d4c639860b6d18929e87a87143635da12c5b3a56512b25a6618a373"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/results/r2_gate_spec.json",
+      "sha256": "1445eed7a11cb10ce5cfd8c3cfe984aaf31e626cc7b3d0ba4ecfeef8dc0a14d5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/state.json",
+      "sha256": "314cf9014282e0320c5f9435ab278e58d56035e8680103eabf09f996ff323822"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261002T234351Z_move_can_pot-clutter_claude_code_85b558/summary.json",
+      "sha256": "ef10d4a4e93b9868bc6fc6103660e651b1a2bf33ec4312f500489d1a07c4a818"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/campaign.json",
+      "sha256": "4db9365b0e1910c0e2b82c2352bfe619408c0b2696779cfa008fcbee11a8fb66"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/final_report.json",
+      "sha256": "aa18e0ef0537c35fc96af4783f7fc6227f51c6854d75a77dc8a00b316cb6faf8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/phase0_summary.json",
+      "sha256": "872ae3e7f27b8fd11ba98510aa9571cab27c36f1d8954e226b0630228977c0cf"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/results/episodes.jsonl",
+      "sha256": "a8583ba14c0e48c76f6e22f5546f8f2cd183f7c40269cbd37f9ce8f01529e4d8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/results/measurement_draws.jsonl",
+      "sha256": "bcd58543d96a5c8019b3049e4cb6d01d84c683dbe9f4145d932fb0bcb785349e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/results/measurement_replacements.jsonl",
+      "sha256": "5b0e0a628f7ed3c6221498b2904b4c823b1d589b5dd647819efd8e7bf696d4d7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/results/r2_gate_spec.json",
+      "sha256": "d5f4d9b6d8ac123130a22025b331006ee0ed5734c530ee8d141d39f847c03a78"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/state.json",
+      "sha256": "e0ff952e2cf89feef031bb3555dc64cd8b3094adc8dbf979c52bc31912f3104d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T044657Z_stack_bowls_three-clutter_claude_code_04c7c1/summary.json",
+      "sha256": "d77fe58322d76909042f8272665b36bf69a3059d7900c89eca30b3c66aee99e2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/campaign.json",
+      "sha256": "26148e03860ff067b7eb88c47c602d531e8e1edde2822b6de46b5e8dfdf421e8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/final_report.json",
+      "sha256": "5a3df32a74e588e1186d381a4f277f857b617e2017601726d0594308820314eb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/phase0_summary.json",
+      "sha256": "239f91acc7c84b63a5674ca818b7618b2f7225c90f995e260618065e164167ae"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/results/episodes.jsonl",
+      "sha256": "199b030039850beaacd303517b97ef5b4149913e92131e20b14cabe61b759f29"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/results/measurement_draws.jsonl",
+      "sha256": "941649e6ab245dee2aec9c71607382bb8e45e24ac59bc232385594e9d356577d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/results/measurement_replacements.jsonl",
+      "sha256": "6fce32cc6089158f85a52f3ba66be709546be1911bd243299fd8519ccb2967f7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/results/r2_gate_spec.json",
+      "sha256": "72736231e3845544c9e7b444e16bd74c583f491e51f93153f7aecdcf7982ed67"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/state.json",
+      "sha256": "764ac9901e1d1c56cccb41f95968d8d708cde9e0c741b4be69f9674680358b21"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T062723Z_place_phone_stand-clutter_claude_code_15ccb2/summary.json",
+      "sha256": "2a6cb4ec9dd222aa12cc34338db354f2dd2cf077dd148a5c5f30036ab2818ef4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/campaign.json",
+      "sha256": "d3975539f78d0fd2635fae56e179bbac55438618ef79e93a185f90ab27a40349"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/final_report.json",
+      "sha256": "457659c3e894a40196d5f0fd7a57e04ea27d75cd1099bfad2726b62f64c911e1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/phase0_summary.json",
+      "sha256": "5e560cd2d3454de7c5cd3f465a759aa6eb66284684b56d54212126d685749d1c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/results/episodes.jsonl",
+      "sha256": "4f6967b208914ed0bc7e764578f0387fef644ae7720b0977425126ef40ba2f42"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/results/measurement_draws.jsonl",
+      "sha256": "ae141329fe109aca4db82a65ca7a718f69f656495eed5db77bfb06d80759b251"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/results/measurement_replacements.jsonl",
+      "sha256": "71e3ea6362b67c22bf294bcad8b1296931173b12ed04e55121e4a555ca720ed1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/results/r2_gate_spec.json",
+      "sha256": "1409a56844ce5f492c58303a922e6d7e0c20f136a6533830e337eae50542568d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/state.json",
+      "sha256": "3919c45367473fd0cddd0329024e3bf516447baaffb161b70ec757879de263e6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T074540Z_stack_bowls_two-clutter_claude_code_92b15f/summary.json",
+      "sha256": "afa2b252cd1fe7203a53086b80c246ca09de578ac33b3f8d573c6613b9e07c39"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/FrozenSkill/move_can_pot/MANIFEST.json",
+      "sha256": "031aae7abaef11c991b3f57b6f8174c57fefb88114047a852d6e42cde4b4c809"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/campaign.json",
+      "sha256": "b2891a33c6ef758da32c5dcef03a6007244cf9c61c56313690a1026bda52cdf1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/final_report.json",
+      "sha256": "4d018a5cd6cfd84f04251910fd12408be304ce2ce3c3fd5eeba154a5625efac1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/phase0_summary.json",
+      "sha256": "c565a00e2621144ddcaeb121a3a81890e12614a012b6d0a7731cfe2f815a8517"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/results/caller_check.json",
+      "sha256": "4b219c3886a3fc7e191c55028bbe6190d7d6b9a8d646ad0c166b2de63331f036"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/results/episodes.jsonl",
+      "sha256": "edc7c15b41b7f6fec560aeca7e5d0fe1017dcf8dd63dbeab554c5f72ef654678"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/results/measurement_draws.jsonl",
+      "sha256": "86508e0201b29a6c68009822a77ce09e6b80feb6ae2d2d8de7821c731fd3c2ec"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/results/measurement_replacements.jsonl",
+      "sha256": "e7fa48ffda4c922658d530910995d0b40c52258bcf73192ab3c76164e311f787"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/results/r2_gate_spec.json",
+      "sha256": "bffeba04d508c665e9156ede4bd378ccffd1bf20b0c31d1582b5c0ec26f62a71"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/state.json",
+      "sha256": "e587f5d2cef85f9b4867ab1e70641413f597bf2d14f86437dc635774710baaf4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T121728Z_move_can_pot-clutter_claude_code_d885e5/summary.json",
+      "sha256": "2a574b82ade0360c36aa183582becdd55ccc7df5d3b14e89ba99d9c712bb1675"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/campaign.json",
+      "sha256": "6c9591d7835f95bb71fc3be6c8e705bf27960a5e91e3d965b5d09b4c524298ca"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/final_report.json",
+      "sha256": "d483a6821fd363ce8a812e54723ed1e630668d710603d6ef39427b66348e968e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/phase0_summary.json",
+      "sha256": "79dd6ca59e1f97182909e504e62b58edc7efac38c3d645c2cbc998fd738f3943"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/results/episodes.jsonl",
+      "sha256": "93652636a1fd97597f2740a279f63186d45210c5f6abb9ec6adc53825196ac77"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/results/measurement_draws.jsonl",
+      "sha256": "ca44fa8ba513342c344fdc9e666031eb40eaadf3364e5112aa5223148cf59ccf"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/results/measurement_replacements.jsonl",
+      "sha256": "3ec169024b6f5d8295827afd8bd4e7b67d00a4c836ca3e287cc21e933f4609db"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/results/r2_gate_spec.json",
+      "sha256": "c3a126b57c97c8414f34cd4ca4a3fedcfc167ab91c4769ee1bfeb0916256eb0e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/state.json",
+      "sha256": "341c912da712799f4e80abe0bc4cf5301c0492a2c87a4e627ee6f6031beee723"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T190030Z_hanging_mug-clutter_claude_code_f2fd01/summary.json",
+      "sha256": "57ef3470615f937b015be09a666412e71d41bd49de7b71696514778a49c0d776"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/FrozenSkill/place_burger_fries/MANIFEST.json",
+      "sha256": "33ffc87a19cc8e97002387fcb888b4aee38aa4d7bceeb0db64a44a31ea840cc5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/campaign.json",
+      "sha256": "4fcdf24fbf49d3742952006d448d20decb553182262a90d8aea06b83b1a63d5d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/final_report.json",
+      "sha256": "7ae4bba984ceeddc3f384d26e93287d0560084ea3c1619e446e34dcaf413e0a8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/phase0_summary.json",
+      "sha256": "bf3b3f049db7756dc66fb79eb8ac2bc3b48d74ec4c8740dcf9c27030a9362e42"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/results/caller_check.json",
+      "sha256": "76595e25624858bbd1c35f6e5c00f6f19e5330a7f10cf4ab7702225af404455e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/results/episodes.jsonl",
+      "sha256": "b85d162a165b5b113be851f6117a46f70a1852fca04458835a3816edac596748"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/results/measurement_draws.jsonl",
+      "sha256": "6e9431e319e8188848636a9cbf1556c5aab076831a22791c6019c35021e420a3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/results/measurement_replacements.jsonl",
+      "sha256": "e113f39eea2158651c81852343393164e303e515a0749cc9b53261bd0af4a97d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/results/r2_gate_spec.json",
+      "sha256": "2f4364a485017114f58199e181ecccd58476930a7022670119e3f47ce18571f4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/state.json",
+      "sha256": "0a8b819714d8c07e0b8620ad1ee6ec9d3dfd19a182939cff046ba89c4c1b91c1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261003T214556Z_place_burger_fries-clutter_claude_code_d3b046/summary.json",
+      "sha256": "dfc83b764d7dc7aa3a323a0aafc13f9a336a800da038a05d447f471f1238bae6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/campaign.json",
+      "sha256": "0f844e1f50b1af9420e38f1e17f846ff454af2c589c6c59f0692d2ffa40d318d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/phase0_summary.json",
+      "sha256": "6cf2c0a700730769b90f3c503fe7d794518f0717277c11654e83f9d060612518"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/pilot_summary.json",
+      "sha256": "e0b28797e572865fc8ba31ebfc7176a8adca051177749903898f71ef9de14110"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/results/episodes.jsonl",
+      "sha256": "632d3829e13506a1d2a1c95629643b9522942401883b0c80541f3e97f1ad888b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/results/r2_gate_spec.json",
+      "sha256": "3f32bd075aab35d7e2d2d41675faeb38aaef208409d205e40755729362425efb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083504Z_place_phone_stand-randomized_claude_code_8cb03e/state.json",
+      "sha256": "30de6d708bfac0bbc1c1c8afb54b83b8219f7ff45e3890522f1bb93bc404b4f8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/campaign.json",
+      "sha256": "d9f7441aa2cd202445ed25571c8fd3d8f8be1655ba9e45aff96f3f886b710031"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/phase0_summary.json",
+      "sha256": "ae76aa36fef4b45751cded8a093db11aba62e51fb21ffdb086e8b1a06dfd78cc"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/pilot_summary.json",
+      "sha256": "8087ac759aaa4b8843ebff9f01206939e18d007c6fe91c3149d8ced0464d9191"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/results/episodes.jsonl",
+      "sha256": "c4ef96dc030b3987d6e43e3c728c1a6da95816bce852290e782b7fb613554a17"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/results/r2_gate_spec.json",
+      "sha256": "98907c2327a3fd39c185d9cc5a64965ac79192b5f2acb0f59e1a94b8a8d8fbb3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083509Z_stack_bowls_two-randomized_claude_code_465e36/state.json",
+      "sha256": "ca7ebe98e3e6eb939147a283c3863e6df3b538f6615e45ad7999e7d74945a1ee"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/campaign.json",
+      "sha256": "9e0d14e79dd2d2fc96df88fe78ef07278a8f0e2b4c70c37c1420a5ec2df58e1f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/isolation_events.json",
+      "sha256": "00dbb4b30f8e8c7fd75ae3db950ee4c8f1b2c68239e509393b132c0b759a0195"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/phase0_summary.json",
+      "sha256": "58efb089613790618cd336b28561bb88ef538aaa22d69f58117747613607702e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/pilot_summary.json",
+      "sha256": "43a101a1503c3186d5b07163497893f9669144ee6ec9686285725b806ad121d4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/results/episodes.jsonl",
+      "sha256": "677b03ad364a7f2fda57ec5abb37a0097ef073f73d8b3c36a45cb1a52dd95acb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/results/r2_gate_spec.json",
+      "sha256": "b5118c358469f30389ba113b603b11d36132b6b1f5aaf8957877ac37ddad052a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T083511Z_move_can_pot-randomized_claude_code_4c26d1/state.json",
+      "sha256": "689868aa31b48a782b50e2dd00fa71f212ed58586c3cee5bc012b4a82e5699c1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/campaign.json",
+      "sha256": "56e13140ce496d2a9abb9260824af944c0878ca42261d76649935cc7cb05775b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/phase0_summary.json",
+      "sha256": "f6216ea538eaa4e377ad2c7fe570d4853e6b6d8e016f49113a6460f258924c5e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/pilot_summary.json",
+      "sha256": "940cb45c148193419df1c9a612f2c842ed4fdd6f00b5c64e6e7ef6367abed0b5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/results/episodes.jsonl",
+      "sha256": "446e57cd8267a4406377b676f818fa4dd598bb3ef95df36f0f739e51c3c9c9ac"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/results/r2_gate_spec.json",
+      "sha256": "184467bea36a7c6da3d2d30a845721600900a1ce0a48b1a414e6ba0f28b34f24"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T113803Z_hanging_mug-randomized_claude_code_07edff/state.json",
+      "sha256": "33893851e945a3c40f7de89582890a46d36e8efa7eb118ea945c6cdb96f3e3b5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/campaign.json",
+      "sha256": "e09c96922affe30b27843a4f50f917b3548064b2be81153f646f5426b295a788"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/phase0_summary.json",
+      "sha256": "5ee0184daed056873a7ceb8f1a8a5e60c0b57875997ebd5c36b042deb7f49026"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/pilot_summary.json",
+      "sha256": "c48b8601bea602e4ac04e715126520eadbb5a6ecca1ed600c9e9825fe89f3ad8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/results/episodes.jsonl",
+      "sha256": "95007db591fad2dd0dfdc52ac2716f5f63365b9364e678822bd310df5e802ca7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/results/r2_gate_spec.json",
+      "sha256": "cb49e44e64c75a8043063b70a51db1b3dc9290efba257d9976ca8d94ef14551f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T121516Z_place_phone_stand-clutter_claude_code_faef22/state.json",
+      "sha256": "d232d1395d8e81ae99ad3f2950d37103173e4d74205c4bb605dd6fade762e3e1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/campaign.json",
+      "sha256": "f947215ae76a67f85d0c5ad96d06b61650047eff83e238f961f9c04ffac49fc3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/phase0_summary.json",
+      "sha256": "0f209fcab450cb01813c738ca4102dbb49a3a45213d4238d68634fa68402a75f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/pilot_summary.json",
+      "sha256": "5557fda8330ad39cad1385ba6a492dd21d9653872c8fc2b873077d0fe02d5a9f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/results/episodes.jsonl",
+      "sha256": "696a98bb96814579d3dd500bcb149dff21259ce5231e928941ca47feb234ae61"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/results/r2_gate_spec.json",
+      "sha256": "8ea1b8a0aa4a47358d8dd42cf6baa2fea5c1a27507f1bb57accd88e196963117"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T122123Z_stack_bowls_two-clutter_claude_code_ee88e5/state.json",
+      "sha256": "21816d95616f47bf9041cf05d606a2b0d6090f7471b186c7f67c3ac5bcca5e82"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/campaign.json",
+      "sha256": "20d0c45a0e792a401c35fe87942ec3f483bc037d87b933e79481e579a2cd7325"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/phase0_summary.json",
+      "sha256": "2c2bcda696e2e5c3c24c4db29297991b501189d6e5f04c22bbe6d598aadfbbd5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/pilot_summary.json",
+      "sha256": "3fc43a4e13a0db57418c8324503107a7ec4bd0393059d4b581afd94d5f4bef62"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/results/episodes.jsonl",
+      "sha256": "22eb47b8733309c5322bdf112b9b2581832865c85d605f5a36e21c095c652120"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/results/r2_gate_spec.json",
+      "sha256": "ad6637aadac8bf57fcbfedf0711f169c08abbe2439ab88c66be590d0b4c6bf41"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T145900Z_move_can_pot-clutter_claude_code_b6efce/state.json",
+      "sha256": "a03d44c273bff4495ad02251719d3b8b0ab64d1550267058ff64a9c2e1b45281"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/campaign.json",
+      "sha256": "4f3bca62716d697f66d5ed052de4555137141518c51662a76e106cf805d8db34"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/phase0_summary.json",
+      "sha256": "a05f1c4012fde9f0a86d69dc97821fddb35c071b02244caa796c53430088d5e4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/pilot_summary.json",
+      "sha256": "b715aadc3bccdadb98c25bec2e85a4cc95b21cce895a080b7c15be80482aeb51"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/results/episodes.jsonl",
+      "sha256": "4569631efc1efdedc0f0e85359d87bc3de1128c3ea96d0b8a81f87e5b0370151"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/results/r2_gate_spec.json",
+      "sha256": "ec9a14e70ff2699af8b9b550ee95dc09b576736fa0e5c649de94a184bf605e3b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T151409Z_hanging_mug-clutter_claude_code_596393/state.json",
+      "sha256": "19bf5f918abf3c20e7ce36b9992c36bdc86bf823b47afa01c375b9ec25cf7c92"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/campaign.json",
+      "sha256": "79a8b9e30f5ce735c336496954fdc5713d174a3eb866de7414809e4519299421"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/phase0_summary.json",
+      "sha256": "cb7d6f5093fbe775069d3cf295becd41c3e508a3b48d3123f51f12c02d1c9365"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/pilot_summary.json",
+      "sha256": "f51446c68dfc8f6feef3f473235bc5e0b1afd323ad894dfd54497141b9c58d71"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/results/episodes.jsonl",
+      "sha256": "0579e80ba48304dae1f8f248ed194e97216aae8d3d36d40cc925681f4f0cad99"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/results/r2_gate_spec.json",
+      "sha256": "cf20e5aef7d285f1085f54cf7d36a4bbd51f472bc7b7da5c1726fedcff4a716a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T155820Z_place_phone_stand-clutter_claude_code_06f80d/state.json",
+      "sha256": "43885a449df335c7bcbd5805aea7b51fcaacad97d66be6589fb49423e945a1d7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/campaign.json",
+      "sha256": "b32e1f85599da90bb82dcc5c5e337bbe4ccd3301f62adad3bb7556e9629e0031"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/phase0_summary.json",
+      "sha256": "bd4de984af18d1306e9f368585a6361b6b7bbbb1e8028e954699a9c14e8217b9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/pilot_summary.json",
+      "sha256": "1cff55f7281f228d440cd7fc9f2651c32f61f467e3e319a3487aba81827014f4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/results/episodes.jsonl",
+      "sha256": "02089c08b736eb0e4335298bba7d2ed0a0e7b98fa1440367ba6ec9bc8f3dd399"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/results/r2_gate_spec.json",
+      "sha256": "02d14ab7148e2c0d61c64e8adb1091bb3a388427d0b0503d8419bf5bce8f29b4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T181748Z_stack_bowls_two-clutter_claude_code_4a15f4/state.json",
+      "sha256": "cbd5b6e1173f3220d5cc92f2de5a8eb0a53115c1c035e139832263280de1c4df"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/campaign.json",
+      "sha256": "f89923f50ba179eeb236064140efc67113570b5b4e189be715b19453e6cfbadb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/phase0_summary.json",
+      "sha256": "06371e5e34a27da5b90dd3ada367cd9c26df9980c396ab7cdbe8b77ec852ad24"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/pilot_summary.json",
+      "sha256": "1fd9321c3a9b271e171443a3e120d1213dc9899046ff5e81019f0f423f6dc387"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/results/episodes.jsonl",
+      "sha256": "3240855c6bca9ea2176134925919cd230ae68d3cbe3b6ee305e8f361f545dbd0"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/results/r2_gate_spec.json",
+      "sha256": "8ba61f786ec6a94a6e28d3708fcd36aa7eb6389c2ffcc7b1462017ccf31b5bb8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T183957Z_move_can_pot-clutter_claude_code_49c1d9/state.json",
+      "sha256": "c1c0b4d0355a32a147b7192c616eeef25b0a85d1430e4039689617909aa07ffe"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/campaign.json",
+      "sha256": "bb41aa12e08fb028360d1d73d5d6a3aee0f0d70a5a724c30679202af28fa6223"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/phase0_summary.json",
+      "sha256": "0d7cf469271280aabdfee86a8b0aefaebef2fb2b717279073aa8572b03ad398d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/pilot_summary.json",
+      "sha256": "9a7d179b19d9aad18af74c6bbe07e5bb0505354d9155ccb51c72375fed69bb9e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/results/episodes.jsonl",
+      "sha256": "87f159f7b986a29a654c9c2b6198e56e3cefb6f150c5e9b843ac3891451694f1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/results/r2_gate_spec.json",
+      "sha256": "752577ece52785b4aad77c72c5b63a65d34785db29d3ca6b23f88d178bb1850a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T184802Z_hanging_mug-clutter_claude_code_21ccb1/state.json",
+      "sha256": "62149600c16d14e2f31f692b81342cfb6497319a6686afd44e1b4b3e6c3f6289"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/campaign.json",
+      "sha256": "19d50916a0ba4a438742c89982a8d6f2c4c998d299a097aacb497ae9158b3c8b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/phase0_summary.json",
+      "sha256": "6e7e39dbda4739306b8d5e31c4c593ad7da4ad45b07b31d1ea799e77a2f43912"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/pilot_summary.json",
+      "sha256": "2e6ebfdf3eb2ecb708bcbd1b21bf12c0879f2c016123b5dd02eb63550912434f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/results/episodes.jsonl",
+      "sha256": "4f2b24e9cdd995730aab95c60c52f5a7155c610e178ea18bb38373307f415aa7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/results/r2_gate_spec.json",
+      "sha256": "b28fc26d8a559f58f5c0c2220bc7473feeaf232dd1848aebbdd4c057b06cbff9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T215435Z_blocks_ranking_rgb-clutter_claude_code_f0739a/state.json",
+      "sha256": "a64bc598fa3af79217be6f5d2e37608b678ec6ba36d503414d1b8a1895383c55"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/campaign.json",
+      "sha256": "2a0a300edcf83cbffea58b2f3f6bd69fe9cccd63e95356460e0c375ea9b95aef"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/phase0_summary.json",
+      "sha256": "465cbe266d37328ef0028c2a9cf2be619971fb3510c0496db8c191f16ac3482a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/pilot_summary.json",
+      "sha256": "0459c67b591fee69d1f3e276ecf927e9113a0b13356bc6fbbffce693099b6439"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/results/episodes.jsonl",
+      "sha256": "bc15069a4b39e1121aa064da6de71bf687ef6603d65b8c9fb7ebf0e6abbb97c8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/results/r2_gate_spec.json",
+      "sha256": "b92384ffa738df65dcf78660746a038080d6345d7e492939d14047d56f7a67a5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261005T220742Z_place_dual_shoes-clutter_claude_code_1c6d34/state.json",
+      "sha256": "43f0e975b274afd0cf542a2da998b42148928f6a6c48b2e08ce22599fa219be6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/campaign.json",
+      "sha256": "9c06705af99e40ff304f37b11eacf6bf1fedd80757a4bc76767dcb37515de011"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/final_report.json",
+      "sha256": "c53a704a879bdb8213b065394be002df1be07858e1e7b4a58421771eb1a84e66"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/held_out_heldout_all.json",
+      "sha256": "6df1e6a79299ead7b83b47adf9d34f5fee08b135a329ed51a07acd342cf12432"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/phase0_summary.json",
+      "sha256": "0ed967656cb503419050ec5a34348e219b4eba3a023a55847364cfd39825350f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/results/episodes.jsonl",
+      "sha256": "37bcc415314876bd27d8723b7edcf10e3f34a222e1b720a16da9dd9885e8c01d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/results/measurement_draws.jsonl",
+      "sha256": "24197d99087718f43459ed6f2ae62693ba592468f59b26b6eb417bce6d9960a8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/results/measurement_replacements.jsonl",
+      "sha256": "72c952c726232850f6362fc9b50f1a23448fd8796a39e54289fcfe163f96e664"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/results/r2_gate_spec.json",
+      "sha256": "cfa649132984f99bd214c35284620bf3662645cde8abb4c918b2af554bf9b7aa"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/state.json",
+      "sha256": "e746eeb8d29a7d8d78d3a54c4cb375f7a3ba73b9a44cba4f6d3d7d7841eb0a23"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064826Z_stack_bowls_three-clutter_claude_code_451bca/summary.json",
+      "sha256": "17f79789cacc33ecbaa034709d2cde82abe43cf509c0278c97ed777cb93bef45"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/campaign.json",
+      "sha256": "898099d5f31675291b1bc4d07d4f5b23615b071f72226015ea058b0da9811239"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/final_report.json",
+      "sha256": "f0645fdb64c56ce64a4d3f67ec57a178b16dbc89f4557d5a0def9a89cae6d408"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/held_out_heldout_all.json",
+      "sha256": "6c86b68e51ee95a4a8b9e50f5f887a302ec0b19dbd6818943aef0dc9dad37eb2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/held_out_heldout_smoke.json",
+      "sha256": "f2c52502aca395079a043c7ae1884aa51800c747340cb7c5a5d134e88f5a9d65"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/phase0_summary.json",
+      "sha256": "be8046bbec4cf4ef930886df27a88bcb81e0bd6ceadf31229de3133463061fdd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/results/episodes.jsonl",
+      "sha256": "a15bbf7f0c3b8503c6d36cb5b14c5843a2701bd5791cef21508db8889b58a76b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/results/measurement_draws.jsonl",
+      "sha256": "b8d8d989f88822b1603443ec49a11b191292615e9d517e25c11a1a9819b78d28"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/results/measurement_replacements.jsonl",
+      "sha256": "cb6d273a6bddb1bacfd59eaa895ceec25fda0d1ec2cfcfee3edcc6969681639b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/results/r2_gate_spec.json",
+      "sha256": "8e1e10acee22d9dead6ec19d11e97bf83534ac0cd878627e9c58293279f3f3b4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/state.json",
+      "sha256": "4229eaf888e2bf80170e2aa6b42a8f8ab833dcbdfe2d9a5db9891fd701edd26c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064828Z_place_dual_shoes-clutter_claude_code_320e4b/summary.json",
+      "sha256": "63f78f8c845ba2109158fbad2838373ced048767a42334c17ddc82a248f6d024"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/campaign.json",
+      "sha256": "d8c464d5cab1f641c3c1120e5ce7e46d78fe11b62e80d7c2eeb32cf97e034db9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/final_report.json",
+      "sha256": "d0cf6cb1ea438a94e2540ca2afc197b6959394c7f75084913414a078264af9e6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/held_out_heldout_all.json",
+      "sha256": "8629343b33c493122a30e7d3ffc5afbcee9ce97067b3b58f2907bc63e6908462"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/held_out_heldout_all_c.json",
+      "sha256": "d1b750cce56b475146a0512bb06ce25aae4dd7e5ee38b25929c8e293acc6d121"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/isolation_events.json",
+      "sha256": "611fac3fe5d079784db0be0f21bba3aee71769606702bcc64a89cbebfefe4a1a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/phase0_summary.json",
+      "sha256": "a34c9b75353e6a296c168cd069304f74d19e2214f13b0ae1d829a8e76f18f686"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/results/episodes.jsonl",
+      "sha256": "cac58b503d250f3016b446fffc977f852669bb54a411228d382aeb789bc94d89"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/results/measurement_draws.jsonl",
+      "sha256": "f97f8bf43d79e127d3791db9350cc105b55c24995e37e3623fbccda4fecccd9d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/results/measurement_replacements.jsonl",
+      "sha256": "624532ada30de5e1679699e5255d11a476612a40e5733e0c25dfda6b570d7b2a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/results/r2_gate_spec.json",
+      "sha256": "cbf9f6516d5f10625910dcd2b6bca8c18b3dc469ef6f18e5cbc156bb2881c385"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/state.json",
+      "sha256": "e01cb5a44b66c8aaba68e338473d151ba6b322ec4abf82957ee4887493f60c1f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T064834Z_stack_bowls_three-clutter_claude_code_1cad2d/summary.json",
+      "sha256": "d07c673a7d281a1cc7f93803a381d582b34d478b19528d8ce0d0cd7345ea79d1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/campaign.json",
+      "sha256": "1a730356ab515497712a92fe3c02fc253711e781799356d995ef1299262c8471"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/final_report.json",
+      "sha256": "4343640f5dd11d47f6ace545d8043533762a0f31616a39db70ec5ce5387bbf8d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/held_out_heldout_all.json",
+      "sha256": "6bdd2b58f10358f5f84ef7237a56b9e4d704790c3d7a8cd7cc4c49fb666d9564"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/phase0_summary.json",
+      "sha256": "85f4da55cac250e57536dcfcc0a5023239fa991536f29e101e079e842314bca4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/results/episodes.jsonl",
+      "sha256": "86aa33c4feb98a74821e88c1963c7c466aa04a8fe7eb4f37b41293e80c0ef846"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/results/measurement_draws.jsonl",
+      "sha256": "06064cdd5014dae34935769e7d3670b05c7c07da35137f55002faaec484f782e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/results/measurement_replacements.jsonl",
+      "sha256": "7c5f5aa5ddfc571e73d8922b377e9de0597d4dd7f55582dcd03abaedd951201f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/results/r2_gate_spec.json",
+      "sha256": "a9bd85aa8d2d5911296139ba7f6fa5a272945273cabda24edcfb54f839d9bfb9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/state.json",
+      "sha256": "13920f8eb77cfb28ad6f981c199ed44b67f0d8f6af0cf51364bd1d55ed35815b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261006T215403Z_place_dual_shoes-clutter_claude_code_4e70ca/summary.json",
+      "sha256": "91298f58f5ce81cc9082c3782fb268ad3b77dcfecbadf8147402b5db3228fd4e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/campaign.json",
+      "sha256": "2b56f354dc7077bc424927b5932fec519c66ec733df93a56bbf71785aeec66c7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/final_report.json",
+      "sha256": "c2ffbbe107ee76972ef8bb0174a015368734525a8bc72859e762d0f3cf36775b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/isolation_events.json",
+      "sha256": "8215f3d2459408d0da8c0afeab293a1d023981a5d29485767411382f83ec895a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/phase0_summary.json",
+      "sha256": "efd1796828e0c94c45553dc38c35ab6099a5fed9106bd552897f09ebe3a98d19"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/results/episodes.jsonl",
+      "sha256": "5d1e9d4970f8ba83e923deb0a4fcdaf8a5fb0358deeed6870120d20a07177df8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/results/measurement_draws.jsonl",
+      "sha256": "a265557958f19070993db87f72933773dc0c979ce0cfee41a8b63efbb4f1a8c1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/results/measurement_replacements.jsonl",
+      "sha256": "274da43ed0e7f7894399f8cf407bb0ebacf7884402cb893071616c1c603fcb67"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/results/r2_gate_spec.json",
+      "sha256": "05a11d902007885dace999519be022dd9fb9608489aaf1c6e6a6a7d2dc5dd9c2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/state.json",
+      "sha256": "25a6da6be2e5a2cf8de0097c419deea53be93aa281bedb64c600c747797e7ee0"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T054617Z_stack_bowls_three-clutter_claude_code_af4823/summary.json",
+      "sha256": "a062cca9064513dfe1fb93060be0795b94fc44e21a71f8e42a4a273cdb78b8ab"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/campaign.json",
+      "sha256": "6feac6919d60edbe677ae5a3e95aa91d2c586701b3633a262cd5dcae24537814"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/final_report.json",
+      "sha256": "a809035f4cab368d0ee65c44feba1d87aaafb106c6b23cc096035f32b62d381e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/phase0_summary.json",
+      "sha256": "76d01848b49745c52c335e7b328f4b528ffc51a8a15face0e834e53dcaeb1cf7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/results/episodes.jsonl",
+      "sha256": "79cb8962508dc90a2376d5722b91d09b15063a75641900c63d06a32626e5ce18"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/results/measurement_draws.jsonl",
+      "sha256": "92d99869f157f65f7f44195308cfbfa8e055ef8065712d4eb92527e16fcfefc4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/results/measurement_replacements.jsonl",
+      "sha256": "3dbd4779e2cb92f28fc2e2858807015136375b74668609813910ce6cda3b9436"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/results/r2_gate_spec.json",
+      "sha256": "2d50fb4127140d1dee8c1d07ed696d8b2902452455a2f26c4c075df52561bdf7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/state.json",
+      "sha256": "e11760a176ecb3d0eef720cf275e26991e1a858356ba9eb735af2ea1f20cda71"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T113608Z_place_dual_shoes-clutter_claude_code_2599d9/summary.json",
+      "sha256": "f1b08c655a254721873d6b9eba316d5bd107e9ed4d2c93493cc96573b20e550d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/campaign.json",
+      "sha256": "6f2343b8899e4e35e7a1f0965fb7083e3ba2afeb1ce6e566eb7b5b04d5f6664a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/final_report.json",
+      "sha256": "2eff8223a5904df398162ce774ea2593ef094b9e0c99bafda4173a9589f7ed3f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/phase0_summary.json",
+      "sha256": "4d97e315d5c2559dec8e10ad00d47b0db3230e6dd7809a3cc5288d08d88dc716"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/results/episodes.jsonl",
+      "sha256": "1e10c90c816442603fa06e9ea7e033ecf97cd4e79d47ba4777f7f68b052cba35"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/results/measurement_draws.jsonl",
+      "sha256": "56da2708878c93f51e898ab892d28fc9ce1d0d16e61271f1539f5a6687ba3fd8"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/results/measurement_replacements.jsonl",
+      "sha256": "3cc3697d08913d2131097183cc77db5f59d0c345d74376d4f34d08e255f36a50"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/results/r2_gate_spec.json",
+      "sha256": "44b7fb79dd1a0cce3b56e6c2a0e010af15d9a4e3abb636b40a0de9b2563b2313"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/state.json",
+      "sha256": "26745eab6b504515b44c2d6e9f4c185aad6b0f50b9cc05d732a36359f2f9aeb9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261007T204751Z_hanging_mug-clutter_codex_gpt6_e77c91/summary.json",
+      "sha256": "8dece1e11ff39ee2c70dd715da3930397f18642886b9e65474e016ca711e2f3e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/campaign.json",
+      "sha256": "a7c083ea48b99d9367074afa3124e099b78e3f82c29873e2c3238c9d88b77466"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/phase0_summary.json",
+      "sha256": "f4b827830f7a1f8064b64250b94f44ad465c42f99e7c8ff79a53534752fd7fa2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/pilot_summary.json",
+      "sha256": "7d00b72648fb347e7b94acaa660f7ccc6c74e2c46661e1eea9e505a1718fec6e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/results/episodes.jsonl",
+      "sha256": "6d1954ef7ec76abad45b2056e71fd292859cde5c7360e997b6e61f3600d5e865"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/results/r2_gate_spec.json",
+      "sha256": "cda82eecab4e6680c2f67401e33996c100d4f363a2046a6269f88dbc7c83b745"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094324Z_place_phone_stand-clutter_claude_code_f06930/state.json",
+      "sha256": "2a6cee45af86247d1a54204b7857cb21e26ae15cdbb28a983dee08bff76cf378"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/campaign.json",
+      "sha256": "49b13dbc8a095a030ea7b18946b08a82d98eb8f757e6473b4f4836d4943c3991"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/phase0_summary.json",
+      "sha256": "14f82e0ba1d0541333e0e437191e7447607017586ef48e000605535a4a325770"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/pilot_summary.json",
+      "sha256": "3eff93321054da1103b53a864aabee2b9160465a7254db2436155f77c1261e6b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/results/episodes.jsonl",
+      "sha256": "a7f0f226a4e59098893da80590642a92cb5b227d7c45f1976a7ecbdc64df4e1b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/results/r2_gate_spec.json",
+      "sha256": "d81c2fea4820bc0eaad708782b3fca1591c85f1171ad1ac6a488a3005e04c9a7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094329Z_stack_bowls_two-clutter_claude_code_ee5e37/state.json",
+      "sha256": "27a5c61f699a2683a355df6bb012d04fe20ac1fa2b95ed9158a762ed167f2782"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/campaign.json",
+      "sha256": "84e53bde165b66f8cdfa9abd6502c139618d5cca31e206171184d7635b97b566"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/phase0_summary.json",
+      "sha256": "e9968f8ab1c9d8cc8558892728f751aa653e553eed32390baa7834bb9fd19521"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/pilot_summary.json",
+      "sha256": "2a0428ae09083be9a7c1a310327625a3a30508b2c2b7e40ba6a6bafc37ef5162"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/results/episodes.jsonl",
+      "sha256": "faf116a2da91b191142fab680fe4f481750901f7fe122b4121710499b6723367"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/results/r2_gate_spec.json",
+      "sha256": "1b1ddd1572037cc457bd500ee91cfbdf3c6ea1dd0f5c526c8334be3f653eebfb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T094334Z_move_can_pot-clutter_claude_code_592651/state.json",
+      "sha256": "c728f6e3274bb09a73c6a9b14a100ec01659bb28ef749d6fbf66e82e39382434"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/campaign.json",
+      "sha256": "ce633d06fe2e9ecd5d1c27808e6d3ec54bde3e9e06bbe64c05b2ec8b79d9640a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/final_report.json",
+      "sha256": "6b303824b9cd75918a7228f72b86339a667b2c2e8e8fab2767c09d20c8b9436f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/phase0_summary.json",
+      "sha256": "71b722010c38b1e2736fd351e0a412e4940d13addfa3b9f82a69b89d8e3203d7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/results/episodes.jsonl",
+      "sha256": "a5b772da6bc73f0d9d4fe5b7ecfc0bc7b274dbc7b3c1bee4570a0c686a7a13ae"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/results/measurement_draws.jsonl",
+      "sha256": "3b11d2a80c77316580516827e07c1131aaf06d37d1bd217987d28889f0e1cb19"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/results/measurement_replacements.jsonl",
+      "sha256": "afbd2924df4d8238715b353bd651b57d12b4526c19709cca68db9e46f0cafd83"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/results/r2_gate_spec.json",
+      "sha256": "0aebdb281164678e7ece05634ee528163075681e2ac7eb9c96a838d821c7b384"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/state.json",
+      "sha256": "299dab911bfe33ec92cd71bb6eef5ba5ee590a6b5b1e4024dd4f8e70b79d3b11"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T121317Z_stack_bowls_three-clutter_codex_gpt6_e2f01e/summary.json",
+      "sha256": "1b8a0bf1d2549df4fc92f6c865e523d70831a132be938fbc4f142c59725c9ad4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/campaign.json",
+      "sha256": "8ca13363c12d6b9bff1945a772e00685b959515bfef31ec283ccea280a0ed9bb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/phase0_summary.json",
+      "sha256": "bce00cca956507fe618c655605c45d467f08da41de9e8e2ea1003d9b5f3f21ff"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/pilot_summary.json",
+      "sha256": "572073502e9ebfa1ee8e8f1732da742f5a88caaa2841f4dccd2c6e39b0186070"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/results/episodes.jsonl",
+      "sha256": "e3ae0f3a7f9e6495810151e348c63517ec745a22f5ce18ad1a1a291d3f912c2b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/results/r2_gate_spec.json",
+      "sha256": "77c82e0630c8bb905322ee5a9a3fb77963105d3c71407f1cfcfddfa1d6ebd23c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T122930Z_hanging_mug-clutter_claude_code_c6f6e5/state.json",
+      "sha256": "a472914d4df47100ff33d656ce21305fc9a350ad4f276dd1423eebf8eab4b233"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/campaign.json",
+      "sha256": "d593c167448689e68840bd02a629a5f1beb0a221eebe5817871ad8de4cac8601"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/phase0_summary.json",
+      "sha256": "ca435b28fb6b673aaeb5d01aa1a7839a4476e892732a2b3395e73f47a25d2b08"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/pilot_summary.json",
+      "sha256": "d4b75cd246bba56ceb1a2f6a1faa1ae6279929bdb93e6e7890efc1b27c3eccc4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/results/episodes.jsonl",
+      "sha256": "a14d852dea054c85779aeaaa67cf7ea1e317071ea27301745f97cd7b502ab57d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/results/r2_gate_spec.json",
+      "sha256": "bd92e5beaf9dd3dc2a69c02e4fdfcd57dacb851adc05865895bb23d24616b54b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T125802Z_stack_bowls_three-clutter_claude_code_d9b298/state.json",
+      "sha256": "a81763caf885292e18f6add2dc906f00e5c61cca8b885e389d845c105f92496a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/campaign.json",
+      "sha256": "fa96f7aa9371f97c7c19dbece028893296dd598444ab297926f48c0e300f8efb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/phase0_summary.json",
+      "sha256": "7bb3b68ccda356e859eb9ba496184f603b6f8b10959ef80068b0e1653420c3ce"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/pilot_summary.json",
+      "sha256": "e8293e6b2028f9936eddb4a91eeb11025faf96d17ad797e43c92e2fab7726382"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/results/episodes.jsonl",
+      "sha256": "4f332ab4f49bf6fdef016f719648bae1c528941ebe2b6aa188a1ae09f052403b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/results/r2_gate_spec.json",
+      "sha256": "e159893828bb3297140649a9222e756f9f5127f83841995645d616db770b188c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T152852Z_place_dual_shoes-clutter_claude_code_78c62b/state.json",
+      "sha256": "0ae86ff3f9efcacc08ce2475eec107053bb2db23105ebe90d48b85725134435a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/campaign.json",
+      "sha256": "06b769054068287f903ebf260eafdcae626545ea46a333b15b444344664f2905"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/final_report.json",
+      "sha256": "d4b4f2a08e293e8c6939cce97bf208bf14945e31758b7656d4f82a630a84521c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/phase0_summary.json",
+      "sha256": "6884f03f3f5c93c1321268c9110f33b264be03925b82730bd2b7e3a6c5becac3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/results/episodes.jsonl",
+      "sha256": "850365b7430d1ef1eb6f54f25a1b5e6602a31a37e1cca3bb72dab4b7f6333e17"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/results/measurement_draws.jsonl",
+      "sha256": "e5b23954838a8e5f67af2fe71ead5a3ed8d719bd71a06fe2293d771c0ea41564"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/results/measurement_replacements.jsonl",
+      "sha256": "0ff54923eca4c104a2ec9e1b9e608afe2c1fc372632f8ed94821539962990e23"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/results/r2_gate_spec.json",
+      "sha256": "2bd7898356025c5445c66c62c19be59c8f071e2d09e9c769f5ee8687868926f6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/state.json",
+      "sha256": "4af8395ea3fa69637dd885f9cf56d66f7eda2c80dcda7a7ef212c68d71997c5f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T163844Z_place_dual_shoes-clutter_codex_gpt6_e4611e/summary.json",
+      "sha256": "f46b40c0be4ac24174662dcd9ff0da150982f202c9966d80b21ce9aee1447175"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/campaign.json",
+      "sha256": "d37b01730417fb87e9b0a7f48e29ec3e8743728d98d36f0ca38dce970deff57a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/final_report.json",
+      "sha256": "c379074b5b6c788c0259721549de15cd35274766dd8c740e2fdc1581a7033ea6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/phase0_summary.json",
+      "sha256": "6385bc0a25dd4588ee99175152f8d3afd6875102cbc1ad4a09b1122b6829e2d1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/results/episodes.jsonl",
+      "sha256": "56fc967ac1a5c2321b2c3482af164cffe93486daa9bcd4045836d800a7c6c902"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/results/measurement_draws.jsonl",
+      "sha256": "05777080209c04cf3cb8253ee6eded829052328006528be4c7ea53f399008e0f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/results/measurement_replacements.jsonl",
+      "sha256": "099f749368c921643e99a604eb18b721748a110f118e802fadcac69cd6092bd4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/results/r2_gate_spec.json",
+      "sha256": "6400e2dda754e4649606cd1c817f97af3cf061872120b6d982469bc678b3e475"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/state.json",
+      "sha256": "07f9f82764eb0d96670eae47c46e68221e60a64312ecda12b394dec68ff1dc9b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261008T190616Z_stack_bowls_three-clutter_codex_gpt6_31e908/summary.json",
+      "sha256": "5ef2f88ef59f3edc3c70e5b68c36600af49117a5a8f3e9416055d41b1346147f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/campaign.json",
+      "sha256": "e923865cc3b6b0807c38cc586a9180ce318f1c7be058677548625961c6349b18"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/final_report.json",
+      "sha256": "40350d39550ab1f11a581f117c7e75d07fe1f3c69a890365c7ba554e44196388"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/phase0_summary.json",
+      "sha256": "5454a319754946bab657b59fc05079c0f2274ff073b16774bd6749c6be32da82"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/results/episodes.jsonl",
+      "sha256": "7d4674689b1d57cb91ab2ebd5ca10b48b80a6f7ebfab72ba7a834e678d31131b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/results/measurement_draws.jsonl",
+      "sha256": "388b5c227845458e85699730bc5bf38641ec0ed601c35581b90a4309ad670135"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/results/measurement_replacements.jsonl",
+      "sha256": "4380ec035fed5f49154230b93b0616342612bb8dbcbd63e24aaa26a8749e4953"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/results/r2_gate_spec.json",
+      "sha256": "ffaa20dba70698acad41ba6c04d109c461b5b0a90fd8d566a2e868cdf96ee1d3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/state.json",
+      "sha256": "5671da28e414f31fdf7683c39fd6156336769a8262544f41e8da0d7660fa6448"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261009T023521Z_place_dual_shoes-clutter_codex_gpt6_f4a826/summary.json",
+      "sha256": "6445b4047a3ae8bc1a25435dbf1795981f5b8f06b295fa28afe189e547455fe6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/campaign.json",
+      "sha256": "8289b8689b6fcfa4d21714058ddac92de6eec6d17bb402927d4e6b51b5cff3d2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/final_report.json",
+      "sha256": "bc9c27b95d1d77593364d477d40008aff35e6d9f25c6bbcfeb59d09f0d00d549"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/held_out_heldout_all.json",
+      "sha256": "702b60d6912148502ea915560215308384530511d337c7e0bdacbd41ebd34700"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/phase0_summary.json",
+      "sha256": "b079405e98e0cfd9b86d208e0929862a4583983df454b63020c7672b834ad03e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/results/episodes.jsonl",
+      "sha256": "d15f6e969530e95414588ac42cd36cd541bc2d9c46c7052304f5505f66daa48a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/results/measurement_draws.jsonl",
+      "sha256": "303dbaa40dc4c8301b75354cff3ded66879b6cfea8d735b526eec98e0a1d0f28"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/results/measurement_replacements.jsonl",
+      "sha256": "7d46cd273f847c70a96d9ee93eef838698cae53010413a76630bf97e64e3ff91"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/results/r2_gate_spec.json",
+      "sha256": "e37c62eac82d854f9744e464ab2e3b38cff7c6b6c9a57ccaff7cf1a2a641d672"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/state.json",
+      "sha256": "13bf8d897d9e5a47f08496572c0787c6f4e723d55ac57543cf4137cfd8c4bff5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230850Z_stack_bowls_three-clutter_claude_code_0aab4d/summary.json",
+      "sha256": "9730eed80612dd7e7a36c8e8a2a3eb344dbc226bb1b8bf33848d2f0841d08d2c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/campaign.json",
+      "sha256": "7e1809246ce177d4fad55b6fa4b12aad1e3be65065f2e113d98a0d0cd14cb32b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/final_report.json",
+      "sha256": "3295a65c097f9b57303abdae77c5fe0b9c3601532edb91a460ed97ea921d956b"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/held_out_heldout_all.json",
+      "sha256": "eaf4dc8f8122e90fef3afd708da2771375c12225637d1d48753d9283c8ba1ddd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/isolation_events.json",
+      "sha256": "c5554b035f0c2e3f31487ccd488d528f3bde2e8edac03c786c9410bc85d76557"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/phase0_summary.json",
+      "sha256": "fca16910f63871cd53a6a6addb8575d32438b558931111c4f281baff0abb7d89"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/results/episodes.jsonl",
+      "sha256": "c54002ed4967d4bc79f9fccc97c6727aaa5357460366619c92fa3d03fad295dd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/results/measurement_draws.jsonl",
+      "sha256": "330db12152a080ede0564be9560a69a72ad5d71fc075e2b73438ac1d645d8b6a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/results/measurement_replacements.jsonl",
+      "sha256": "2a1e707a437c51062fd4b51ec5d351c5765c747b219b0981c75db3133df97a9c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/results/r2_gate_spec.json",
+      "sha256": "d378403cefc96f33e61b62343cebca7c929ac0221884b95b7d7f15e0f18cc322"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/state.json",
+      "sha256": "fff9f98bf33ec392c09a3ff2d49949e327cca2bde68373063e03a144560a25ce"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230855Z_stack_bowls_three-clutter_claude_code_51fcf8/summary.json",
+      "sha256": "550d3411c5b7995e84d1b6a59921f5e2ec2729c725fee79e34697718aef00e01"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/campaign.json",
+      "sha256": "a70d4c5d30e5bcda5f2b78a19035517bddf2d54d29749b4c7c92cbd0beee888d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/final_report.json",
+      "sha256": "a9fc6ea98a8fa3d3e0681fe16bdc18c4cc1ae2e618cecbc23105278cd385192a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/held_out_heldout_all.json",
+      "sha256": "61dd248794ca8913566cde512de4eaf947b879a98fff2cabb3aeeab2db29066e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/isolation_events.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/phase0_summary.json",
+      "sha256": "82ec36506f692561860817e554d42b74eac819672e5e5cf02c2e2d94e0ad559d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/results/episodes.jsonl",
+      "sha256": "c765188be56b43c68bf49c0aeca3e14d9d38f19cbbb9c82d33031eb9f2e3d9da"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/results/measurement_draws.jsonl",
+      "sha256": "c86698a3feceb7e9891b9ad2942820bc45a4739ddb1ad6d2192b7f905a3550cf"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/results/measurement_replacements.jsonl",
+      "sha256": "12e03be79ccb81abc9f727653cfb06d9a2a44f15f8041ca7d935e9b88b215e6a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/results/r2_gate_spec.json",
+      "sha256": "8e687782bfbec3213290570a9f70cc7cdea004335857d57f33474fe119d2bc59"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/state.json",
+      "sha256": "7648ab2323c0e29fcae3b47e8c312dea0483d8f389d0cf497eac8aad57e92d64"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_A/20261010T230900Z_stack_bowls_three-clutter_claude_code_5d33c6/summary.json",
+      "sha256": "06b2906f3c3ac5a696bb06e5ffa8d3f87a8ad57d3316c2c2b13ff4ca145ee646"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/deepseek_flash_adapter_config.json",
+      "sha256": "98563ffdc9973601678ea62095b4043344d7dd16a3bc800ebfa9737eb3c7032d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/campaign.json",
+      "sha256": "32ea28bb5c535913467a69d0ebac66dd06264477cdc238dcbfe698551adb5269"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/decisions.jsonl",
+      "sha256": "65d1012b3ca8ac6d22934e2adb95e00b7491115af872728a81d7ebad2ff8812e"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/results/episodes.jsonl",
+      "sha256": "94a5afd70f7bebb23ef9fd49f407ff55a9bc4139afc1cc63483c34e5b6f26ae3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/results/measurement_draws.jsonl",
+      "sha256": "0a3f94342e9e26a8bd052e5cdadefa8f993f49b4f3e225ff8efe0a3fa2241158"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/results/reuse_exclude_seeds.json",
+      "sha256": "b68e92b6315cbde9a78ff1976f0b1132fecf138cc355b932a4fe87281154fd7f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/reuse_summary.json",
+      "sha256": "134b3f1d4f172a718107f181b2b5353a626d95c4cedaded2923fae30f4c6b8b7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T193915Z_move_can_pot-clutter_claude_code_df36d2/state.json",
+      "sha256": "6046f4799735541d928bca61228cc23786def9123ac533d2841ef44171575325"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/campaign.json",
+      "sha256": "03aa0c1b05f177b2b8990536c39707fa3f333fba088392c1d997ff6d1689cd19"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/decisions.jsonl",
+      "sha256": "9b98ccfa9435a3ea6be75dd9693d142516522d264c91ab9168f153365c21fc70"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/results/episodes.jsonl",
+      "sha256": "ade45b06e34a73867ed3e84217ab0e81ec37c2df19967a4451021b6e477754cd"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/results/measurement_draws.jsonl",
+      "sha256": "66763b442b41700b93f0994e88e7af68dae9f5398d3e67f0b7cc4370c164c8ac"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/results/reuse_exclude_seeds.json",
+      "sha256": "b68e92b6315cbde9a78ff1976f0b1132fecf138cc355b932a4fe87281154fd7f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/reuse_summary.json",
+      "sha256": "8edc96db3f2c1713c2c320c80102b72495b02909c78c66052cf31360bba3823d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261008T221053Z_move_can_pot-clutter_claude_code_77aab6/state.json",
+      "sha256": "6b415f6c63a78dd4f107dd04cf0eebdce825bc55de709813fd25e79ffbe07a75"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/campaign.json",
+      "sha256": "266324f6bc1abc835713fb10ff0edcd00227e68593f275b61fbe666121bd8a00"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/decisions.jsonl",
+      "sha256": "6c74636fa8e668f5a2a084fd13bbdc2286e8014a706b73b69679c473a9887dee"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/results/episodes.jsonl",
+      "sha256": "740d52e2e1e37af3ce6eb350ba520f06a2c290b6c9b868526c5281da0a0dd9d5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/results/measurement_draws.jsonl",
+      "sha256": "11b5f88dcd1715df89bc8f34b27eaa974289c1b776638f7730f33084b5ae1f59"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/results/reuse_exclude_seeds.json",
+      "sha256": "b68e92b6315cbde9a78ff1976f0b1132fecf138cc355b932a4fe87281154fd7f"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/reuse_summary.json",
+      "sha256": "fb11b3092163c98932ab9d7b532ce938f3a2a4aa69bdfb8ba2024a9a2bd8bde1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_move_can_pot-clutter_claude_code_4e5a4f/state.json",
+      "sha256": "57b59b2f4eb757801697f6245dad631703466d70128b2e07cd2c79b21c092138"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/campaign.json",
+      "sha256": "0c7143a7a170311246c170e6eca452fffd8e4f4cb527b9d1a5d6905107196cbc"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/decisions.jsonl",
+      "sha256": "1cb8701e31f407b88eb7a326769cbae9db93703b0a6282e1d5acde63413440e1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/results/episodes.jsonl",
+      "sha256": "11e8a93a0d5b3e34f990c9dcb96f2bccdb8e7a469f4f6f59b688f050316023de"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/results/measurement_draws.jsonl",
+      "sha256": "cc06b8de7b5bb708f0d0e70dad2783ca51fd5cd5441d6c5641ca7a580e433ced"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/results/reuse_exclude_seeds.json",
+      "sha256": "b9f8e1dee453e104075704794e516fe2ac979d8c5c5b5163b5ec200c77b33232"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/reuse_summary.json",
+      "sha256": "88dfef1d4c52fb62b6a4a043e926869a54a951bc2ef1dfdb2d46731bdcb20616"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_place_phone_stand-clutter_claude_code_5bf5fc/state.json",
+      "sha256": "9e837b4b470b13fee81d0363ea90d60f24b1f4e02eb664ea03d8df7459af309c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/campaign.json",
+      "sha256": "b44dac83defc0f49096b92255ad485b6170560e26eba33a4563897ec55d4ced2"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/decisions.jsonl",
+      "sha256": "19d1b2faf4292852e7acb7486bbcbfc89664d99acccc1a67c7dfdcf05f7f896d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/results/episodes.jsonl",
+      "sha256": "32d8074000dbdad38830ab2a240bd0c202e89db97e3e406792324356474e19ee"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/results/measurement_draws.jsonl",
+      "sha256": "f7a0bc03089a47d21342aa10ff28c3ae0f79114d97803f31638dafc924641b79"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/results/reuse_exclude_seeds.json",
+      "sha256": "a5a71e607bb6379c8de74bacdc1f2c03e865ad4b5fd8c8eb64af6f569caf4ea3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/reuse_summary.json",
+      "sha256": "7322b5bace11ad302e209b3eb0e3dd80dcb568a474bc07c0eeaa4a20f2c112ea"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/protocol_B/reuse_20261009T084750Z_stack_bowls_two-clutter_claude_code_2aeeed/state.json",
+      "sha256": "7eed4085f715d292aefed5603c77b8698f5386360042843fd5fe146ec1095fc3"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/data/provenance/queue.json",
+      "sha256": "75aca6992cf27fdf1e1cfa3aa172e5d14a01716478b08757ef4fb33486edc84c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/move_can_pot_5a37ce/MANIFEST.json",
+      "sha256": "b6cfa76b7a759730c1dcf7f1aabaa5f4de5c80282cada76745d2faf647beca93"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/move_can_pot_85b558/MANIFEST.json",
+      "sha256": "befa6228b80173d9d8fb0090cb1197baf25a2134888ddd2b1ea1489685780b52"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/move_can_pot_d885e5/MANIFEST.json",
+      "sha256": "031aae7abaef11c991b3f57b6f8174c57fefb88114047a852d6e42cde4b4c809"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/place_burger_fries_d3b046/MANIFEST.json",
+      "sha256": "33ffc87a19cc8e97002387fcb888b4aee38aa4d7bceeb0db64a44a31ea840cc5"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/place_phone_stand_10bbaf/MANIFEST.json",
+      "sha256": "c04ed706c099aa6eb63f029daea9a8c0031b8405dfa05b92a8703de29d68d82c"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/place_phone_stand_4161b3/MANIFEST.json",
+      "sha256": "53b246db695627c9a224dacb7766fa2b6393de0e830a3f1599a14af7326d18eb"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/frozen_skills/stack_bowls_two_79dfa1/MANIFEST.json",
+      "sha256": "ac65dd1ec3aa60aaef3ac7cfef351ee764db8bbcaf4202fe20ad3f665ee8e03d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/ops/queue.example.json",
+      "sha256": "d84255a36f5e5f463a403ab8fd1c67a8aa12c7ee5769fa7980a420f9c8c51cf6"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/MANIFEST.json",
+      "sha256": "f265cdcd8e1524027d1032c158234e1dbae6eea2664e6e6f75d1426e43b0df2a"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/adapters/configs/claude_code_cli.json",
+      "sha256": "6a18087232e1c400d5a6d98c3bfb26856f284d1f329b08c94189cc19efd17346"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/adapters/configs/codex_gpt6.json",
+      "sha256": "f5471d274218f0a8ed77800096fa1ea4b145889baf57382e8bd0cc3d50c118d1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/adapters/configs/deepseek_flash.json",
+      "sha256": "98563ffdc9973601678ea62095b4043344d7dd16a3bc800ebfa9737eb3c7032d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/nvidia_egl_icd.json",
+      "sha256": "ba3a74b27959d375b3843f61125f9f9e54d995347c98accb70ebf64207f74737"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/runtime/site.example.json",
+      "sha256": "f2883fded92a66650e695371c76384fe6c9a0e823a94f4e0d587b1180a6369a1"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/blocks_ranking_size.json",
+      "sha256": "5affe2b9beb49d82f85fe669b3b9926f4de44db074c4bb9eb0614a035c82d292"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/hanging_mug.json",
+      "sha256": "e342c898f2e4b413166bfdf1b70859f925f760935675402c3bfb2319a8e32ca9"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/move_can_pot.json",
+      "sha256": "6b2eaa9e77e84860d05e266dd6c6d8d1ef7693cc5875ad5b4d680589b84f80af"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/place_burger_fries.json",
+      "sha256": "bf40d60d386391a444251dd3084e6936e827c894220062f7c68d726e26bbd0c4"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/place_dual_shoes.json",
+      "sha256": "9f27777aee896ff9c41abd680859ea638cd1280e7e4fc7b935065ec1b813c6e7"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/place_phone_stand.json",
+      "sha256": "573517576035ad4dc57f08a820d8b30e76b0a5aa24816b7901beb0cafbe9ad2d"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/stack_bowls_three.json",
+      "sha256": "e0e5177a79b1916cbf9fdc59eb3a8cd7df78e5ba518e824bd390fa008dc56bea"
+    },
+    {
+      "path": "embodied-skill-rsi-3483ea128ba432730f135aac326da1b768b671e4/tasks/stack_bowls_two.json",
+      "sha256": "3cf4b22e5683e05bcbc4536975cbd7c35106bd1158def33a93fc45c28f6adc12"
+    }
+  ],
+  "excluded_numeric_values_count": 157150,
+  "sealed_excluded": [
+    100006,
+    100015
+  ],
+  "no_outcome_selection": true
+}

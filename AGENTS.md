@@ -39,3 +39,5 @@
 - Deployment301 current: read docs/deploy-lzgpu301-20261105.md. OnlyGPU2/3 are candidates;0/1busy. Originalcaller main hardcodes0/1, DO NOT run it on301. Newwrapper/draft notrunnable untilmigrationfreeze. Downloadsactive, no model/robotcall.
 
 - User Nov5 explicitly approved approximately11GiB temporary executable environment on301 while migration frees disk. Models/assets stage on tmpfs, never sole evidence. See docs/deploy-lzgpu301-20261105.md.
+
+- User2026-11-08 explicitly authorizes shared DeepSeek API baseline alignment with TOTAL USD10 first-phase cap, honest temporary nonadaptation/results then bounded innovation validation. This supersedes original-model-only waiting and no-paid restriction only within this cap. Read docs/deepseek-alignment-20261108.md and current progress; active bmin30 SHA cc29fd2e/owner605269 start2010121295 onGPU3 must be checked before any launch. Prior pilot and ALL historical budgets remain CLOSED, no Coder14B download, no generatedPython without native execution qualification. Do not label reduced reuse/partial components complete paper or RSI.
