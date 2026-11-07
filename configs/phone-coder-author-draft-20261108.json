@@ -1,0 +1,48 @@
+{
+  "status": "DRAFT_NOT_RUNNABLE",
+  "selected_author": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "task": "place_phone_stand",
+  "classification": "independent complete-artifact author reproduction feasibility, not claimed RSI improvement",
+  "comparisons": [
+    "from_scratch_initial_files",
+    "public_package_initialization"
+  ],
+  "shared": [
+    "public goal and API contract",
+    "approved development observations, without scorer/layout",
+    "four output names and static validation",
+    "same model/context/output limits and total cost accounting"
+  ],
+  "treatment_difference": "initial package source intentionally differs; do not claim identical information or a controlled method win from two outputs. Full published A/B and same-library caller remain strong controls.",
+  "proposal_limit": {
+    "responses_per_condition": 1,
+    "total_responses": 2,
+    "context_tokens": 32768,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 8192,
+    "retry": 0,
+    "followup_repair": 0,
+    "truncated_output": "record and reject, no repair/replay/refill"
+  },
+  "outputs": [
+    "SKILL.md",
+    "skills.py",
+    "perception.py",
+    "rationale.md"
+  ],
+  "stop": "model/deployment/transport failure ends allocation; invalid complete artifact retained as rejection; never execute generated source here",
+  "download_authorized": false,
+  "model_loading_authorized": false,
+  "rollout_authorized": false,
+  "resources_draft": {
+    "weights_bytes": 29540133960,
+    "placement": "301 RSI tmpfs only, exact existing official manifest verification; original assets retained",
+    "new_durable_output_estimate_bytes": 33554432,
+    "GPU": "one genuinely idle GPU2 or3, recheck, not fixed idle claim",
+    "memory_note": "weight bytes not peak VRAM; loading/generation fit must be budgeted before freezing; no existing live service assumption"
+  },
+  "inputs_pending": "prepare exact source/allowed-observation manifests and source-hash pin; no evaluator/oldpartial/sealed input; code author text-only input must not be called image understanding",
+  "not_a_continuation_of": "closed Qwen30B32K1024 three-bowl allocations",
+  "not_accepted_H": true
+}
